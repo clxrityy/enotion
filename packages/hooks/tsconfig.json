@@ -1,9 +1,8 @@
 {
-  "extends": "@enotion/typescript-config/react-library.json",
+  "extends": "@enotion/config/typescript/react-library.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "composite": true
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": [
