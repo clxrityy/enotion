@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - (config) Initialized config package (for configurations throughout the entire repo)
 - (hooks) Set up test environment with jest
 - (hooks) Added `useContextFactory()` hook
+- (hooks) Added `useFetch()` hook
 
 ### Changed
 - (config) Moved typescript-config into a config package (@enotion/config/typescript)
