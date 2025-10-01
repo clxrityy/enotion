@@ -28,6 +28,24 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ],
+      "inputs": [
+        "src/**",
+        "tests/**",
+        "!**/node_modules/**",
+        "!**/dist/**",
+        "!**/.next/**",
+        "!**/build/**",
+        "!**/coverage/**",
+        "package.json",
+        "turbo.json",
+        "tsconfig.json",
+        "jest.config.js"
+      ]
     }
   }
 }
