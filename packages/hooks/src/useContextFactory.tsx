@@ -14,6 +14,11 @@ export type ContextFactory = <T>(
  * @param useContextState - A hook that returns the current state of the context
  * @returns An object containing the `Consumer`, `Provider`, and `useContext` hook for the context
  *
+ * @description
+ * The `useContextFactory` function is a utility for creating a React context along with its provider and a custom hook to access the context value.
+ * It takes an initial state and a hook that provides the current state of the context.
+ * The function returns an object containing the `Consumer`, `Provider`, and a `useContext` hook for easy access to the context value within functional components.
+ *
  * @example
  * ```tsx
  * const { Provider, useContext } = useContextFactory(initialState, useCustomHook);
