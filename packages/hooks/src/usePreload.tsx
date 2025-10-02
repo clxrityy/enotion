@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, MouseEventHandler } from "react";
 
-
 /**
  *
  * @param callback A function that returns a promise to be executed on hover.
@@ -25,7 +24,7 @@ import { useState, useRef, useCallback, MouseEventHandler } from "react";
  * ```
  */
 export const usePreload = (
-  callback: () => Promise<unknown>
+  callback: () => Promise<unknown>,
 ): {
   onMouseOverCapture?: MouseEventHandler<HTMLElement>;
 } => {
@@ -41,4 +40,4 @@ export const usePreload = (
   }, [callback]);
 
   return preloaded ? {} : { onMouseOverCapture: preload };
-}
+};

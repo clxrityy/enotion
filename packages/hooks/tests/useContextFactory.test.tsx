@@ -9,7 +9,7 @@ describe("useContextFactory", () => {
 
     const { Provider, useContext } = useContextFactory(
       initialState,
-      useContextState
+      useContextState,
     );
 
     const TestComponent = () => {

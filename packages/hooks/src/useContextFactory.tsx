@@ -2,12 +2,12 @@ import { Consumer, createContext, FC, ReactNode, useContext } from "react";
 
 export type ContextFactory = <T>(
   initialContextState: T,
-  useContextState: () => T
+  useContextState: () => T,
 ) => {
   Consumer: Consumer<T>;
   Provider: FC<Readonly<{ children: ReactNode }>>;
   useContext: () => T;
-}
+};
 
 /**
  * @param initialContextState - The initial state of the context
@@ -26,7 +26,7 @@ export type ContextFactory = <T>(
  */
 export const useContextFactory: ContextFactory = (
   initialContextState,
-  useContextState
+  useContextState,
 ) => {
   const Context = createContext(initialContextState);
 
@@ -38,6 +38,6 @@ export const useContextFactory: ContextFactory = (
   return {
     Consumer: Context.Consumer,
     Provider: ProviderWrapper,
-    useContext: () => useContext(Context)
-  }
-}
+    useContext: () => useContext(Context),
+  };
+};

@@ -15,8 +15,8 @@ describe("usePreload", () => {
       expect(preloadComponent).toBeDefined();
       expect(typeof preloadComponent.onMouseOverCapture).toBe("function");
 
-      return (<button {...preloadComponent}>Preload</button>);
-    }
+      return <button {...preloadComponent}>Preload</button>;
+    };
 
     expect(Component).toBeDefined(); // Just to get rid of unused variable warning
   });
@@ -30,9 +30,9 @@ describe("usePreload", () => {
       expect(preloadComponent).toBeDefined();
       expect(typeof preloadComponent.onMouseOverCapture).toBe("function");
 
-      return (<button {...preloadComponent}>Preload</button>);
-    }
+      return <button {...preloadComponent}>Preload</button>;
+    };
 
     expect(Component2).toBeDefined(); // Just to get rid of unused variable warning
   });
-})
+});

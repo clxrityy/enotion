@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
-export type Fetcher = <T = unknown>(url: string, init?: RequestInit) => {
+export type Fetcher = <T = unknown>(
+  url: string,
+  init?: RequestInit,
+) => {
   data: T;
   loading: boolean;
   error: Error | null;
@@ -56,6 +59,6 @@ export const useFetch: Fetcher = (url: string, init?: RequestInit) => {
   return {
     data,
     loading,
-    error
-  }
-}
+    error,
+  };
+};
