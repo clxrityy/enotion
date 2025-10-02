@@ -12,6 +12,10 @@ export type Fetcher = <T = unknown>(url: string, init?: RequestInit) => {
  * @param init Optional fetch initialization parameters
  * @returns An object containing the fetched data, loading state, and error state
  *
+ * @description
+ * The `useFetch` hook is a custom React hook that simplifies the process of fetching data from an API endpoint.
+ * It takes a URL and optional fetch initialization parameters as arguments and returns an object containing the fetched data, loading state, and error state.
+ *
  * @example
  * ```tsx
  * const { data, loading, error } = useFetch<MyDataType>("https://api.example.com/data", {
