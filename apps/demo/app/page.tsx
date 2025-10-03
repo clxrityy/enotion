@@ -1,28 +1,21 @@
 "use client";
 import { JSX } from "react";
 import styles from "./page.module.css";
-import { useContextFactory } from "@enotion/hooks";
+import {
+  usePreload
+} from "@enotion/hooks";
 
-const TestComponent = ({ context }: { context: { value: string } }) => {
-  return <div>{context.value}</div>;
-};
+const providerImport = () => import("../components/Test");
 
 export default function Home(): JSX.Element {
-  const initialState = { value: "initial" };
-  const useContextState = () => initialState;
 
-  const { Provider, useContext } = useContextFactory(
-    initialState,
-    useContextState,
-  );
+  const preloadProvider = usePreload(providerImport);
 
   return (
-    <Provider>
-      <div className={styles.page}>
-        <main className={styles.main}>
-          <TestComponent context={useContext()} />
-        </main>
-      </div>
-    </Provider>
+    <div className={styles.page} {...preloadProvider}>
+      <main className={styles.main}>
+        this page should preload the provider on hover
+      </main>
+    </div>
   );
 }
