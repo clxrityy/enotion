@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
 - (hooks) Added `useContextFactory()` hook
 - (hooks) Added `useFetch()` hook
 - (hooks) Added `usePreload()` hook
+- (hooks) Added `useLocalStorage()` hook
+- (hooks) Added `@testing-library/react` dev dependency for testing React hooks
 
 ### Changed
 
