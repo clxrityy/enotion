@@ -1,35 +1,32 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState } from "react";
 
 type DispatchAction<T> = T | ((prevState: T) => T);
 
-type ErrorDispatch = Dispatch<SetStateAction<Error | null>>
+type ErrorDispatch = Dispatch<SetStateAction<Error | null>>;
 
 function setItem(key: string, value: unknown, setError: ErrorDispatch): void {
   try {
-    window.localStorage.setItem(key, JSON.stringify(value))
+    window.localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     setError(error as Error);
-    console.error(error)
   }
 }
 
 function getItem<T>(key: string, setError: ErrorDispatch): T | undefined {
   try {
-    const data = window.localStorage.getItem(key)
-    return data ? (JSON.parse(data) as T) : undefined
+    const data = window.localStorage.getItem(key);
+    return data ? (JSON.parse(data) as T) : undefined;
   } catch (error) {
     setError(error as Error);
-    console.error(error);
-    return undefined
+    return undefined;
   }
 }
 
 function removeItem(key: string, setError: ErrorDispatch): void {
   try {
-    window.localStorage.removeItem(key)
+    window.localStorage.removeItem(key);
   } catch (error) {
     setError(error as Error);
-    console.error(error)
   }
 }
 
@@ -47,22 +44,21 @@ export function useLocalStorage<T>(key: string, initialValue?: T) {
   const [value, setValue] = useState<T>(() => {
     const data = getItem<T>(key, setError);
 
-    return (data ?? initialValue) as T
+    return (data ?? initialValue) as T;
   });
 
-
   function handleDispatch(action: DispatchAction<T>) {
-    if (typeof action === 'function') {
+    if (typeof action === "function") {
       setValue((prevState) => {
-        const newValue = (action as (prevState: T) => T)(prevState)
+        const newValue = (action as (prevState: T) => T)(prevState);
         setItem(key, newValue, setError);
-        return newValue
+        return newValue;
       });
     } else {
       setValue(action);
       setItem(key, action, setError);
     }
-  };
+  }
 
   function handleRemove() {
     setValue(undefined as T);

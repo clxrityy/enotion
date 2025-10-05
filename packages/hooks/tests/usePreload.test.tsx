@@ -1,12 +1,12 @@
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { usePreload } from "../src/usePreload";
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 
 describe("usePreload", () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  it("should preload resources successfully", async () => {
+  it("should preload resources successfully", () => {
     const importComponent = () => import("./mocks/TestComponent");
 
     const Component = () => {
@@ -21,7 +21,7 @@ describe("usePreload", () => {
     expect(Component).toBeDefined(); // Just to get rid of unused variable warning
   });
 
-  it("should handle preload error", async () => {
+  it("should handle preload error", () => {
     const importComponent = () => Promise.reject(new Error("Failed to load"));
 
     const Component2 = () => {

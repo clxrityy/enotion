@@ -9,5 +9,5 @@ export default function PreloadTestPage() {
       preload-test page
       <Test context={context} />
     </div>
-  )
+  );
 }

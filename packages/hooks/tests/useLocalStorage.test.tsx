@@ -1,6 +1,13 @@
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
+import { act, renderHook } from "@testing-library/react";
 import { useLocalStorage } from "../src/useLocalStorage";
-import { describe, expect, it, beforeEach, afterEach, jest } from "@jest/globals";
-import { renderHook, act } from "@testing-library/react";
 
 describe("useLocalStorage", () => {
   beforeEach(() => {
@@ -23,7 +30,9 @@ describe("useLocalStorage", () => {
 
   it("should initialize with initial value when localStorage is empty", () => {
     window.localStorage.clear();
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [value, , , error] = result.current;
 
@@ -35,7 +44,9 @@ describe("useLocalStorage", () => {
     window.localStorage.clear();
     window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [value, , , error] = result.current;
 
@@ -45,7 +56,9 @@ describe("useLocalStorage", () => {
 
   it("should update localStorage when setter is called", () => {
     window.localStorage.clear();
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [, setValue, , error] = result.current;
 
@@ -56,7 +69,9 @@ describe("useLocalStorage", () => {
     const [value] = result.current;
 
     expect(value).toBe("newValue");
-    expect(window.localStorage.getItem("testKey")).toBe(JSON.stringify("newValue"));
+    expect(window.localStorage.getItem("testKey")).toBe(
+      JSON.stringify("newValue"),
+    );
     expect(error).toBeNull();
   });
 
@@ -64,7 +79,9 @@ describe("useLocalStorage", () => {
     window.localStorage.clear();
     window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [, , removeValue, error] = result.current;
 
@@ -80,7 +97,9 @@ describe("useLocalStorage", () => {
     window.localStorage.clear();
     window.localStorage.setItem("testKey", "invalid JSON");
 
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [value, , , error] = result.current;
 
@@ -90,9 +109,11 @@ describe("useLocalStorage", () => {
 
   it("should handle localStorage setItem error gracefully", () => {
     window.localStorage.clear();
-    mockStorageMethod('setItem', 'setItem error');
+    mockStorageMethod("setItem", "setItem error");
 
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     const [initialValue, setValue, , initialError] = result.current;
     expect(initialValue).toBe("initialValue");
@@ -115,10 +136,14 @@ describe("useLocalStorage", () => {
     window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
     // Verify localStorage actually has the value
-    expect(window.localStorage.getItem("testKey")).toBe(JSON.stringify("storedValue"));
+    expect(window.localStorage.getItem("testKey")).toBe(
+      JSON.stringify("storedValue"),
+    );
 
     // First render the hook to get the stored value
-    const { result } = renderHook(() => useLocalStorage<string>("testKey", "initialValue"));
+    const { result } = renderHook(() =>
+      useLocalStorage<string>("testKey", "initialValue"),
+    );
 
     // Verify initial state
     const [initialValue, , removeValue, initialError] = result.current;
@@ -126,7 +151,7 @@ describe("useLocalStorage", () => {
     expect(initialError).toBeNull();
 
     // Now mock removeItem to throw an error
-    mockStorageMethod('removeItem', 'removeItem error');
+    mockStorageMethod("removeItem", "removeItem error");
 
     act(() => {
       removeValue();

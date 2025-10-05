@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type Fetcher = <T = unknown>(
+export type Fetcher = <T>(
   url: string,
   init?: RequestInit,
 ) => {

@@ -1,7 +1,6 @@
-import { useFetch } from "../src/useFetch";
-
-import { describe, expect, it, beforeEach, jest } from "@jest/globals";
+import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, render, screen } from "@testing-library/react";
+import { useFetch } from "../src/useFetch";
 
 describe("useFetch", () => {
   const mockSuccessResponse = { message: "Success" };

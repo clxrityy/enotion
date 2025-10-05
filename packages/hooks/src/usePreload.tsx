@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, MouseEventHandler } from "react";
+import { type MouseEventHandler, useCallback, useRef, useState } from "react";
 
 /**
  *

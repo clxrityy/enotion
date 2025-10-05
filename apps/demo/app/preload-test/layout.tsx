@@ -1,13 +1,9 @@
-import { ContextProvider } from "@/components/ContextProvider"
+import { ContextProvider } from "@/components/ContextProvider";
 
 export default function PreloadLayout({
-  children
+  children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-  return (
-    <ContextProvider>
-      {children}
-    </ContextProvider>
-  )
+  return <ContextProvider>{children}</ContextProvider>;
 }

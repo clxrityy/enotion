@@ -1,10 +1,9 @@
 export const Test = ({
-  context
+  context,
 }: {
   context: {
-    value: string
-  }
+    value: string;
+  };
 }) => {
-
   return <div>test {context.value}</div>;
-}
+};
