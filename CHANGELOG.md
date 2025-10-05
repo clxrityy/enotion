@@ -11,11 +11,13 @@ All notable changes to this project will be documented in this file.
 - (global) Biome configurations
 - (config) Initialized config package (for configurations throughout the entire repo)
 - (hooks) Set up test environment with jest
-- (hooks) Added `useContextFactory()` hook
+- (hooks) Added `createContextFactory()` hook
 - (hooks) Added `useFetch()` hook
 - (hooks) Added `usePreload()` hook
 - (hooks) Added `useLocalStorage()` hook
 - (hooks) Added `@testing-library/react` dev dependency for testing React hooks
+- (hooks) Added `useEventListener()` hook
+- (global) Adjusted some linting rules
 
 ### Changed
 
