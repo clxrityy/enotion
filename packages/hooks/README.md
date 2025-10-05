@@ -15,6 +15,7 @@ pnpm add @enotion/hooks
 - [`useContextFactory()`](#usecontextfactory)
 - [`useFetch()`](#usefetch)
 - [`usePreload()`](#usepreload)
+- [`useLocalStorage()`](#uselocalstorage)
 
 ### `useContextFactory()`
 
@@ -78,5 +79,30 @@ const Component = () => {
   const preloaded = usePreload(importComponent);
 
   return <div {...preloaded}>Hover to preload component</div>;
+};
+```
+
+### `useLocalStorage()`
+
+A React hook that synchronizes a state variable with localStorage, allowing you to persist state across page reloads.
+
+```tsx
+"use client";
+import { useLocalStorage } from "@enotion/hooks";
+
+const Component = () => {
+  const [value, setValue, removeValue, error] = useLocalStorage(
+    "myKey",
+    "initialValue",
+  );
+
+  return (
+    <div>
+      <div>Value: {value}</div>
+      <button onClick={() => setValue("newValue")}>Set Value</button>
+      <button onClick={removeValue}>Remove Value</button>
+      {error && <div>Error: {error.message}</div>}
+    </div>
+  );
 };
 ```
