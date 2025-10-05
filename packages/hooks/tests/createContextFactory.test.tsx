@@ -1,13 +1,12 @@
-import { useContextFactory } from "../src/useContextFactory";
-
 import { describe, expect, it } from "@jest/globals";
+import { createContextFactory } from "../src/createContextFactory";
 
 describe("useContextFactory", () => {
   it("should create a context with the initial state", () => {
     const initialState = { value: "initial" };
     const useContextState = () => initialState;
 
-    const { Provider, useContext } = useContextFactory(
+    const { Provider, useContext } = createContextFactory(
       initialState,
       useContextState,
     );
