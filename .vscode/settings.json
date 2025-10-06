@@ -1,3 +1,13 @@
 {
-  "testing.automaticallyOpenTestResults": "neverOpen"
+  "testing.automaticallyOpenTestResults": "neverOpen",
+  "folder-color.pathColors": [
+    {
+      "folderPath": "enotion/packages/",
+      "color": "foldercolorizer.color_6699ff"
+    },
+    {
+      "folderPath": "enotion/apps/demo/",
+      "color": "foldercolorizer.color_669999"
+    }
+  ]
 }
