@@ -1,0 +1,12 @@
+{
+  "testing.automaticallyOpenTestResults": "neverOpen",
+  "jest.outputConfig": {
+    "revealOn": "demand",
+    "revealWithFocus": "none",
+    "clearOnRun": "none",
+    "showMessageOnStart": false,
+    "showMessageOnSuccess": false,
+    "showMessageOnFailure": true,
+    "showMessageOnNoTests": false
+  }
+}
