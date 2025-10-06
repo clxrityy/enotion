@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - (global) Added log script to simplify command line changes with autochange
 - (hooks) Added `useTheme()` hook
 - (hooks) Added `useScript()` hook
+- (hooks) Added `useVisibility()` hook
 
 ### Changed
 - (config) Moved typescript-config into a config package (@enotion/config/typescript)
