@@ -6,6 +6,19 @@ import {
   useContext,
 } from "react";
 
+/**
+ * ContextFactory - A type definition for a function that creates a context factory.
+ * @template T - The type of the context state.
+ * @param initialContextState - The initial state of the context.
+ * @param useContextState - A hook that returns the current state of the context.
+ * @returns An object containing the `Consumer`, `Provider`, and `useContext` hook for the context.
+ *
+ * @see {@link https://reactjs.org/docs/context.html|React Context}
+ * @see {@link https://reactjs.org/docs/hooks-reference.html#usecontext|React useContext}
+ * @see {@link https://reactjs.org/docs/components-and-props.html|React Components and Props}
+ *
+ * @module ContextFactory
+ */
 export type ContextFactory = <T>(
   initialContextState: T,
   useContextState: () => T,
@@ -29,6 +42,8 @@ export type ContextFactory = <T>(
  * ```tsx
  * const { Provider, useContext } = useContextFactory(initialState, useCustomHook);
  * ```
+ *
+ * @module createContextFactory
  */
 export const createContextFactory: ContextFactory = (
   initialContextState,

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+/** EventName type representing valid event names for event listeners */
 export type EventName = keyof GlobalEventHandlersEventMap;
 
 /** * useEventListener hook
@@ -23,6 +24,12 @@ export type EventName = keyof GlobalEventHandlersEventMap;
  *  useEventListener('resize', handleResize);
  * }
  * ```
+ *
+ * @see {@link https://reactjs.org/docs/hooks-effect.html|React useEffect}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener|addEventListener}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener|removeEventListener}
+ *
+ * @module useEventListener
  */
 export function useEventListener(
   eventName: EventName,

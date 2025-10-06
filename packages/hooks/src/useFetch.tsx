@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+/** Fetcher type representing the useFetch hook */
 export type Fetcher = <T>(
   url: string,
   init?: RequestInit,
@@ -29,6 +30,11 @@ export type Fetcher = <T>(
  *  } // Optional fetch init options
  * });
  * ```
+ *
+ * @see {@link https://reactjs.org/docs/hooks-effect.html|React useEffect}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API|Fetch API}
+ *
+ * @module useFetch
  */
 export const useFetch: Fetcher = (url: string, init?: RequestInit) => {
   const [data, setData] = useState<any>(null);
