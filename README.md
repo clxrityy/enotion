@@ -1,6 +1,6 @@
 # enotion
 
-A flexible and user-friendly utility package for developing web applications with React and/or Next.js. It offers a suite of tools and components designed to streamline the development process, enhance productivity, and improve code quality.
+A turborepo containing a collection of React hooks and shared configurations.
 
 - [Changelog](./CHANGELOG.md)
 
