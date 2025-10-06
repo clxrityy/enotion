@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - (hooks) Added `useEventListener()` hook
 - (global) Added log script to simplify command line changes with autochange
 - (hooks) Added `useTheme()` hook
+- (hooks) Added `useScript()` hook
 
 ### Changed
 - (config) Moved typescript-config into a config package (@enotion/config/typescript)
