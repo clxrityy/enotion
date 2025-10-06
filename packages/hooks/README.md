@@ -3,21 +3,24 @@
 ## Installation
 
 ```bash
+# npm
 npm install @enotion/hooks
-# or
+# yarn
 yarn add @enotion/hooks
-# or
+# pnpm
 pnpm add @enotion/hooks
 ```
 
 ## Hooks
 
-- [`useContextFactory()`](#usecontextfactory)
+- [`crateContextFactory()`](#usecontextfactory)
 - [`useFetch()`](#usefetch)
 - [`usePreload()`](#usepreload)
 - [`useLocalStorage()`](#uselocalstorage)
+- [`useTheme()`](#usetheme)
+- [`useScript()`](#usescript)
 
-### `useContextFactory()`
+### `createContextFactory()`
 
 Creates a context provider and a hook to consume the context.
 
@@ -93,7 +96,7 @@ import { useLocalStorage } from "@enotion/hooks";
 const Component = () => {
   const [value, setValue, removeValue, error] = useLocalStorage(
     "myKey",
-    "initialValue",
+    "initialValue"
   );
 
   return (
@@ -104,5 +107,82 @@ const Component = () => {
       {error && <div>Error: {error.message}</div>}
     </div>
   );
+};
+```
+
+### `useTheme()`
+
+A React hook that manages theme state (system/light/dark) and persists the preference in localStorage.
+
+```tsx
+// Provider.tsx
+"use client";
+import { ThemeProvider } from "@enotion/hooks";
+
+export const Provider = ({ children }: { children: React.ReactNode }) => {
+  return <ThemeProvider attribute="class">{children}</ThemeProvider>;
+};
+```
+
+```tsx
+// layout.tsx
+import { Provider } from "./Provider";
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <Provider>{children}</Provider>
+      </body>
+    </html>
+  );
+}
+```
+
+```tsx
+// Component.tsx
+"use client";
+import { useTheme } from "@enotion/hooks";
+
+export const Component = () => {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div>
+      <div>Current Theme: {theme}</div>
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+      <button onClick={() => setTheme("system")}>System Mode</button>
+    </div>
+  );
+};
+```
+
+### `useScript()`
+
+A React hook that dynamically loads an external script and provides loading and error states.
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+
+const Component = () => {
+  const onLoad = () => {
+    console.log("Script loaded successfully");
+  };
+
+  const onError = () => {
+    console.log("Error loading script");
+  };
+
+  const loaded = useScript("https://example.com/some-script.js", {
+    onLoad, // optional callback when script loads
+    onError, // optional callback when script fails to load
+  });
+
+  return <div>Script loaded: {loaded ? "Yes" : "No"}</div>;
 };
 ```
