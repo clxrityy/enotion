@@ -8,7 +8,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "build": "tsup"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "react",
