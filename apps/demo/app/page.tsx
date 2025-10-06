@@ -9,8 +9,8 @@ export default function Home(): JSX.Element {
   const preloadProvider = usePreload(providerImport);
 
   return (
-    <div class={styles.page} {...preloadProvider}>
-      <main class={styles.main}>
+    <div className={styles.page} {...preloadProvider}>
+      <main className={styles.main}>
         this page should preload the provider on hover
       </main>
     </div>
