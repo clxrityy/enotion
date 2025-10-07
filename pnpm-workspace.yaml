@@ -4,5 +4,6 @@ packages:
 
 onlyBuiltDependencies:
   - esbuild
+  - nx
   - sharp
   - unrs-resolver
