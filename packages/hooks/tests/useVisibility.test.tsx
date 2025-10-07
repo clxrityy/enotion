@@ -22,7 +22,7 @@ describe("useVisibility", () => {
     const mockDisconnect = jest.fn();
 
     class MockIntersectionObserver {
-      constructor(private callback: IntersectionObserverCallback) {}
+      constructor(private callback: IntersectionObserverCallback) { }
 
       observe = mockObserve;
       unobserve = mockUnobserve;
@@ -55,7 +55,7 @@ describe("useVisibility", () => {
   });
 
   it("should return false when element is not visible", () => {
-    const NotVisibleComponent = () => {
+    const Invisible = () => {
       const elementRef = useRef<HTMLDivElement>(null);
       const isVisible = useVisibility({
         elementRef,
@@ -67,13 +67,13 @@ describe("useVisibility", () => {
       );
     };
 
-    render(<NotVisibleComponent />);
+    render(<Invisible />);
 
     expect(screen.getByTestId("visibility").textContent).toBe("false");
   });
 
   it("should return true when element is always visible", () => {
-    const Component2 = () => {
+    const AlwaysVisible = () => {
       const elementRef = useRef<HTMLDivElement>(null);
       const isVisible = useVisibility({
         elementRef,
@@ -87,7 +87,7 @@ describe("useVisibility", () => {
       );
     };
 
-    render(<Component2 />);
+    render(<AlwaysVisible />);
     expect(screen.getByTestId("visibility").textContent).toBe("true");
   });
 
@@ -118,7 +118,7 @@ describe("useVisibility", () => {
       disconnect = jest.fn();
     };
 
-    const VisibleComponent = () => {
+    const Visible = () => {
       const elementRef = useRef<HTMLDivElement>(null);
       const isVisible = useVisibility({
         elementRef,
@@ -131,7 +131,7 @@ describe("useVisibility", () => {
       );
     };
 
-    render(<VisibleComponent />);
+    render(<Visible />);
 
     // Initially should be false
     expect(screen.getByTestId("visibility").textContent).toBe("false");
