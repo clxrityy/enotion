@@ -41,7 +41,8 @@
         "useImportType": "off"
       },
       "correctness": {
-        "useJsxKeyInIterable": "error"
+        "useJsxKeyInIterable": "error",
+        "useExhaustiveDependencies": "off"
       }
     }
   },
