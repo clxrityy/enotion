@@ -22,6 +22,7 @@ pnpm add @enotion/hooks
 - [`useScript()`](#usescript)
 - [`useVisibility()`](#usevisibility)
 - [`useOutsideClick()`](#useoutsideclick)
+- [`useScreenSize()`](#usescreensize)
 
 ---
 
@@ -295,6 +296,29 @@ const Component = () => {
           Click outside this box to close it.
         </div>
       )}
+    </div>
+  );
+};
+```
+
+---
+
+### `useScreenSize()`
+
+A React hook that provides the current screen size (width and height), screen properties (such as isMobile, isTablet, isDesktop, etc.), and updates on window resize events.
+
+```tsx
+"use client";
+import { useScreenSize } from "@enotion/hooks";
+const Component = () => {
+  const { width, height } = useScreenSize();
+
+  return (
+    <div>
+      <h1>Screen Size</h1>
+      <p>
+        Width: {width}px, Height: {height}px
+      </p>
     </div>
   );
 };

@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - (hooks) Added `useScript()` hook
 - (hooks) Added `useVisibility()` hook
 - (hooks) Added `useOutsideClick()` hook
+- (hooks) Added `useScreenSize()` hook
 
 ### Changed
 - (config) Moved typescript-config into a config package (@enotion/config/typescript)
