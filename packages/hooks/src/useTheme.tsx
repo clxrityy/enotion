@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { createContextFactory } from "./createContextFactory.js";
 import { useLocalStorage } from "./useLocalStorage.js";
 
@@ -9,6 +9,7 @@ export type Theme = "system" | "light" | "dark";
  * ThemeContext - The context interface for theme management.
  * @property theme - The current theme, which can be "system", "light", or "dark".
  * @property setTheme - A function to update the current theme.
+ * @property toggle - A function to toggle between "light" and "dark" themes.
  *
  * @description
  * The `ThemeContext` interface defines the structure of the context used for managing theme preferences in a React application.
@@ -22,18 +23,25 @@ export type Theme = "system" | "light" | "dark";
 export interface ThemeContext {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  toggle: () => void;
 }
 
 const initialThemeContext: ThemeContext = {
   theme: "system",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => {},
+  setTheme: () => { },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  toggle: () => { },
 };
 
 const useThemeContext = () => {
   const [theme, setTheme] = useState<Theme>(initialThemeContext.theme);
 
   const [_, setStoredTheme] = useLocalStorage<Theme>("theme", theme);
+
+  useEffect(() => {
+
+  }, []);
 
   const updateTheme = (newTheme: Theme) => {
     setTheme(newTheme);
@@ -43,6 +51,7 @@ const useThemeContext = () => {
   return {
     theme: theme,
     setTheme: updateTheme,
+    toggle: () => updateTheme(theme === "dark" ? "light" : "dark"),
   };
 };
 
@@ -61,6 +70,7 @@ const { Provider, useContext } = createContextFactory<ThemeContext>(
  * It leverages the `useThemeContext` hook to handle the state and logic for theme management, including persistence in localStorage.
  * This provider should wrap the part of the application where theme context is needed, allowing any nested components to access and modify the theme.
  * It supports three themes: "system", "light", and "dark".
+ * - "system": Adapts to the user's system theme preference.
  *
  * @example
  * ```tsx
@@ -77,7 +87,43 @@ const { Provider, useContext } = createContextFactory<ThemeContext>(
  * @see {@link createContextFactory} - A utility for creating context providers and hooks.
  * @module ThemeProvider
  */
-export const ThemeProvider = Provider;
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [storedTheme, setStoredTheme] = useLocalStorage<Theme>("theme", "system");
+
+  useEffect(() => {
+
+    let cleanup: (() => void) | undefined;
+
+    // Check if matchMedia is available (it might not be in test environments)
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mql = window.matchMedia("(prefers-color-scheme: dark)");
+
+      // Set initial theme based on system preference
+      const systemTheme: Theme = mql.matches ? "dark" : "light";
+      if (systemTheme !== storedTheme) setStoredTheme(systemTheme);
+
+      const listernr = (e: MediaQueryListEvent) => setStoredTheme(e.matches ? "dark" : "light");
+      mql.addEventListener("change", listernr);
+
+      cleanup = () => mql.removeEventListener("change", listernr);
+    }
+
+    return () => {
+      cleanup?.();
+    }
+
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", storedTheme);
+  }, [storedTheme]);
+
+  const value = useMemo(() => ({ theme: storedTheme, toggle: () => setStoredTheme(storedTheme === "dark" ? "light" : "dark"), setTheme: setStoredTheme }), [storedTheme]);
+
+  return <Provider {...value}>
+    {children}
+  </Provider>;
+}
 
 /**
  * useTheme - A custom React hook for accessing and manipulating theme context.
