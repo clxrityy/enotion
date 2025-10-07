@@ -6,3 +6,4 @@ export * from "./usePreload.js";
 export * from "./useScript.js";
 export * from "./useTheme.js";
 export * from "./useVisibility.js";
+export * from "./useOutsideClick.js";
