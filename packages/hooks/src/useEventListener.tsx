@@ -3,6 +3,9 @@ import { useEffect, useRef } from "react";
 /** EventName type representing valid event names for event listeners */
 export type EventName = keyof GlobalEventHandlersEventMap;
 
+/** EventType union type representing various event types */
+export type EventType = Omit<Event | MouseEvent | TouchEvent | KeyboardEvent | FocusEvent | UIEvent | PointerEvent | WheelEvent | AnimationEvent | TransitionEvent | CompositionEvent | InputEvent | DragEvent | ClipboardEvent | MediaQueryListEvent | MessageEvent | PopStateEvent | StorageEvent | HashChangeEvent | ProgressEvent | ErrorEvent, never>;
+
 /** * useEventListener hook
  *
  * @param eventName - Name of the event to listen for (e.g., 'click', 'resize')
@@ -33,12 +36,12 @@ export type EventName = keyof GlobalEventHandlersEventMap;
  */
 export function useEventListener(
   eventName: EventName,
-  handler: (event: Event) => void,
+  handler: (event: EventType) => void,
   element: HTMLElement | Window | Document = window,
   options?: boolean | AddEventListenerOptions,
 ) {
   // Create a ref that stores handler
-  const savedHandler = useRef<(event: Event) => void>(handler);
+  const savedHandler = useRef<(event: EventType) => void>(handler);
 
   // Update ref.current value if handler changes.
   // This allows our effect below to always get latest handler
