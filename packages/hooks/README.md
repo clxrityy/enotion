@@ -20,6 +20,10 @@ pnpm add @enotion/hooks
 - [`useEventListener()`](#useeventlistener)
 - [`useTheme()`](#usetheme)
 - [`useScript()`](#usescript)
+- [`useVisibility()`](#usevisibility)
+- [`useOutsideClick()`](#useoutsideclick)
+
+---
 
 ### `createContextFactory()`
 
@@ -46,6 +50,8 @@ export default function Page() {
 }
 ```
 
+---
+
 ### `useFetch()`
 
 Fetches data from a given URL (and optional [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/RequestInit) options) and returns the response data, loading state, and error state.
@@ -69,6 +75,8 @@ const Component = () => {
 };
 ```
 
+---
+
 ### `usePreload()`
 
 Designed to facilitate the preloading of data or resources before they are needed in your application. This hook can be particularly useful for improving user experience by ensuring that necessary data is available when a component mounts.
@@ -85,6 +93,8 @@ const Component = () => {
   return <div {...preloaded}>Hover to preload component</div>;
 };
 ```
+
+---
 
 ### `useLocalStorage()`
 
@@ -111,6 +121,8 @@ const Component = () => {
 };
 ```
 
+---
+
 ### `useEventListener()`
 
 A React hook that adds an event listener to a specified target (default is `window`) and cleans up the listener on unmount.
@@ -129,6 +141,8 @@ const Component = () => {
   return <div>Resize the window and check the console</div>;
 };
 ```
+
+---
 
 ### `useTheme()`
 
@@ -162,6 +176,8 @@ export default function RootLayout({
 }
 ```
 
+---
+
 ```tsx
 // Component.tsx
 "use client";
@@ -180,6 +196,8 @@ export const Component = () => {
   );
 };
 ```
+
+---
 
 ### `useScript()`
 
@@ -204,5 +222,80 @@ const Component = () => {
   });
 
   return <div>Script loaded: {loaded ? "Yes" : "No"}</div>;
+};
+```
+
+---
+
+### `useVisibility()`
+
+A React hook that tracks the visibility state of a DOM element using the Intersection Observer API.
+
+```tsx
+"use client";
+import { useRef } from "react";
+import { useVisibility } from "@enotion/hooks";
+
+const Component = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useVisibility(ref, { threshold: 0.1 });
+
+  return (
+    <div>
+      <div style={{ height: "150vh" }}>Scroll down to see the box</div>
+      <div
+        ref={ref}
+        style={{
+          height: "100px",
+          backgroundColor: isVisible ? "green" : "red",
+          transition: "background-color 0.3s",
+        }}
+      >
+        {isVisible ? "I'm visible!" : "I'm not visible"}
+      </div>
+      <div style={{ height: "150vh" }}></div>
+    </div>
+  );
+};
+```
+
+---
+
+### `useOutsideClick()`
+
+A React hook that detects clicks outside of a specified element and triggers a callback.
+
+```tsx
+"use client";
+import { useRef, useState } from "react";
+import { useOutsideClick } from "@enotion/hooks";
+
+const Component = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useOutsideClick(ref, () => setIsOpen((prev) => !prev));
+
+  return (
+    <div>
+      <button onClick={() => setIsOpen(!isOpen)}>Toggle Menu</button>
+      {isOpen && (
+        <div
+          ref={ref}
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "0",
+            width: "200px",
+            padding: "10px",
+            backgroundColor: "lightgray",
+            border: "1px solid #ccc",
+          }}
+        >
+          Click outside this box to close it.
+        </div>
+      )}
+    </div>
+  );
 };
 ```
