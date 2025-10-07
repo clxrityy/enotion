@@ -56,5 +56,6 @@
         "coverage/**"
       ]
     }
-  }
+  },
+  "daemon": true
 }
