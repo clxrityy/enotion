@@ -26,7 +26,7 @@ export type ContextFactory = <T>(
   Consumer: Consumer<T>;
   Provider: FC<Readonly<{ children: ReactNode }>>;
   useContext: () => T;
-};
+}
 
 /**
  * @param initialContextState - The initial state of the context
@@ -51,9 +51,14 @@ export const createContextFactory: ContextFactory = (
 ) => {
   const Context = createContext(initialContextState);
 
-  const ProviderWrapper = ({ children }: Readonly<{ children: ReactNode }>) => {
-    const context = useContextState();
-    return <Context.Provider value={context}>{children}</Context.Provider>;
+  const ProviderWrapper = ({ children, context }: Readonly<{ children: ReactNode; context?: {} }>) => {
+    const ctx = useContextState();
+
+    const fullContext = Object.defineProperties(ctx, {
+      ...context ? { context: { ...context, writable: false } } : {},
+    });
+
+    return <Context.Provider value={fullContext}>{children}</Context.Provider>;
   };
 
   return {
