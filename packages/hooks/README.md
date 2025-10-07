@@ -17,6 +17,7 @@ pnpm add @enotion/hooks
 - [`useFetch()`](#usefetch)
 - [`usePreload()`](#usepreload)
 - [`useLocalStorage()`](#uselocalstorage)
+- [`useEventListener()`](#useeventlistener)
 - [`useTheme()`](#usetheme)
 - [`useScript()`](#usescript)
 
@@ -107,6 +108,25 @@ const Component = () => {
       {error && <div>Error: {error.message}</div>}
     </div>
   );
+};
+```
+
+### `useEventListener()`
+
+A React hook that adds an event listener to a specified target (default is `window`) and cleans up the listener on unmount.
+
+```tsx
+"use client";
+import { useEventListener } from "@enotion/hooks";
+
+const Component = () => {
+  const handleResize = (event: Event) => {
+    console.log("Window resized:", event);
+  };
+
+  useEventListener("resize", handleResize);
+
+  return <div>Resize the window and check the console</div>;
 };
 ```
 
