@@ -22,7 +22,7 @@ describe("useVisibility", () => {
     const mockDisconnect = jest.fn();
 
     class MockIntersectionObserver {
-      constructor(private callback: IntersectionObserverCallback) { }
+      constructor(private callback: IntersectionObserverCallback) {}
 
       observe = mockObserve;
       unobserve = mockUnobserve;
@@ -138,7 +138,7 @@ describe("useVisibility", () => {
 
     // Simulate the element becoming visible
     act(() => {
-      triggerIntersect!(true);
+      triggerIntersect?.(true);
     });
 
     // Wait for the component to re-render with the new state

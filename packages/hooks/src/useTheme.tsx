@@ -29,9 +29,9 @@ export interface ThemeContext {
 const initialThemeContext: ThemeContext = {
   theme: "system",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => { },
+  setTheme: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => { },
+  toggle: () => {},
 };
 
 const useThemeContext = () => {
@@ -39,9 +39,7 @@ const useThemeContext = () => {
 
   const [_, setStoredTheme] = useLocalStorage<Theme>("theme", theme);
 
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const updateTheme = (newTheme: Theme) => {
     setTheme(newTheme);
@@ -88,21 +86,24 @@ const { Provider, useContext } = createContextFactory<ThemeContext>(
  * @module ThemeProvider
  */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [storedTheme, setStoredTheme] = useLocalStorage<Theme>("theme", "system");
+  const [storedTheme, setStoredTheme] = useLocalStorage<Theme>(
+    "theme",
+    "system",
+  );
 
   useEffect(() => {
-
     let cleanup: (() => void) | undefined;
 
     // Check if matchMedia is available (it might not be in test environments)
-    if (typeof window !== 'undefined' && window.matchMedia) {
+    if (typeof window !== "undefined" && window.matchMedia) {
       const mql = window.matchMedia("(prefers-color-scheme: dark)");
 
       // Set initial theme based on system preference
       const systemTheme: Theme = mql.matches ? "dark" : "light";
       if (systemTheme !== storedTheme) setStoredTheme(systemTheme);
 
-      const listernr = (e: MediaQueryListEvent) => setStoredTheme(e.matches ? "dark" : "light");
+      const listernr = (e: MediaQueryListEvent) =>
+        setStoredTheme(e.matches ? "dark" : "light");
       mql.addEventListener("change", listernr);
 
       cleanup = () => mql.removeEventListener("change", listernr);
@@ -110,20 +111,24 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     return () => {
       cleanup?.();
-    }
-
-  }, []);
+    };
+  }, [storedTheme, setStoredTheme]);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", storedTheme);
   }, [storedTheme]);
 
-  const value = useMemo(() => ({ theme: storedTheme, toggle: () => setStoredTheme(storedTheme === "dark" ? "light" : "dark"), setTheme: setStoredTheme }), [storedTheme]);
+  const value = useMemo(
+    () => ({
+      theme: storedTheme,
+      toggle: () => setStoredTheme(storedTheme === "dark" ? "light" : "dark"),
+      setTheme: setStoredTheme,
+    }),
+    [storedTheme, setStoredTheme],
+  );
 
-  return <Provider {...value}>
-    {children}
-  </Provider>;
-}
+  return <Provider {...value}>{children}</Provider>;
+};
 
 /**
  * useTheme - A custom React hook for accessing and manipulating theme context.

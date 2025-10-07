@@ -1,8 +1,14 @@
-import { jest, describe, beforeEach, afterEach, it, expect } from "@jest/globals";
+import {
+  jest,
+  describe,
+  beforeEach,
+  afterEach,
+  it,
+  expect,
+} from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import { useEffect } from "react";
 import { useTheme, ThemeProvider } from "../src/useTheme";
-
 
 // Mock matchMedia before any tests run
 const mockMatchMedia = jest.fn((query: string) => ({
@@ -16,7 +22,7 @@ const mockMatchMedia = jest.fn((query: string) => ({
   dispatchEvent: jest.fn(),
 }));
 
-Object.defineProperty(window, 'matchMedia', {
+Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: mockMatchMedia,
 });
@@ -46,7 +52,7 @@ describe("useTheme", () => {
     render(
       <ThemeProvider>
         <Component />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     expect(screen.getByTestId("theme").textContent).toBe("system");

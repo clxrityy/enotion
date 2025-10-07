@@ -4,7 +4,30 @@ import { useEffect, useRef } from "react";
 export type EventName = keyof GlobalEventHandlersEventMap;
 
 /** EventType union type representing various event types */
-export type EventType = Omit<Event | MouseEvent | TouchEvent | KeyboardEvent | FocusEvent | UIEvent | PointerEvent | WheelEvent | AnimationEvent | TransitionEvent | CompositionEvent | InputEvent | DragEvent | ClipboardEvent | MediaQueryListEvent | MessageEvent | PopStateEvent | StorageEvent | HashChangeEvent | ProgressEvent | ErrorEvent, never>;
+export type EventType = Omit<
+  | Event
+  | MouseEvent
+  | TouchEvent
+  | KeyboardEvent
+  | FocusEvent
+  | UIEvent
+  | PointerEvent
+  | WheelEvent
+  | AnimationEvent
+  | TransitionEvent
+  | CompositionEvent
+  | InputEvent
+  | DragEvent
+  | ClipboardEvent
+  | MediaQueryListEvent
+  | MessageEvent
+  | PopStateEvent
+  | StorageEvent
+  | HashChangeEvent
+  | ProgressEvent
+  | ErrorEvent,
+  never
+>;
 
 /** * useEventListener hook
  *

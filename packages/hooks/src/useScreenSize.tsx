@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from "react";
 
 export interface DefaultScreenSize {
   initialWidth?: number;
@@ -35,23 +35,31 @@ export interface DefaultScreenSize {
  * ```
  */
 export const useScreenSize = (defaultSize?: DefaultScreenSize) => {
-  const [screenSize, setScreenSize] = useState<{ width: number; height: number }>({ width: defaultSize?.initialWidth ?? 1024, height: defaultSize?.initialHeight ?? 768 });
+  const [screenSize, setScreenSize] = useState<{
+    width: number;
+    height: number;
+  }>({
+    width: defaultSize?.initialWidth ?? 1024,
+    height: defaultSize?.initialHeight ?? 768,
+  });
 
   useEffect(() => {
     if (!defaultSize) return;
     if (defaultSize.initialWidth && defaultSize.initialHeight) {
-      setScreenSize({ width: defaultSize.initialWidth, height: defaultSize.initialHeight });
+      setScreenSize({
+        width: defaultSize.initialWidth,
+        height: defaultSize.initialHeight,
+      });
     }
   }, []);
 
-  const handleSize = () => {
+  const handleSize = () =>
     setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-  }
 
   useLayoutEffect(() => {
     handleSize();
-    window.addEventListener('resize', handleSize);
-    return () => window.removeEventListener('resize', handleSize);
+    window.addEventListener("resize", handleSize);
+    return () => window.removeEventListener("resize", handleSize);
   }, []);
 
   return {
@@ -64,4 +72,4 @@ export const useScreenSize = (defaultSize?: DefaultScreenSize) => {
     isPortrait: screenSize.height >= screenSize.width,
     isLandscape: screenSize.width > screenSize.height,
   };
-}
+};

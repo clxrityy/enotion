@@ -26,7 +26,10 @@ export interface UseOutsideClickOptions {
  * }
  * ```
  */
-export function useOutsideClick({ ref, callback }: UseOutsideClickOptions): void {
+export function useOutsideClick({
+  ref,
+  callback,
+}: UseOutsideClickOptions): void {
   const savedCallback = useRef(callback);
 
   useEffect(() => {
@@ -41,13 +44,13 @@ export function useOutsideClick({ ref, callback }: UseOutsideClickOptions): void
     }
 
     // Add event listeners to document
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
 
     // Cleanup function to remove event listeners
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
     };
   }, [ref]);
 }
