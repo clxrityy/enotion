@@ -23,6 +23,7 @@ pnpm add @enotion/hooks
 - [`useVisibility()`](#usevisibility)
 - [`useOutsideClick()`](#useoutsideclick)
 - [`useScreenSize()`](#usescreensize)
+- [`useElementSize()`](#useelementsize)
 
 ---
 
@@ -316,6 +317,44 @@ const Component = () => {
   return (
     <div>
       <h1>Screen Size</h1>
+      <p>
+        Width: {width}px, Height: {height}px
+      </p>
+    </div>
+  );
+};
+```
+
+---
+
+### `useElementSize()`
+
+A React hook that tracks the size (width and height) of a DOM element and updates the size when the element is resized.
+
+```tsx
+"use client";
+import { useRef } from "react";
+import { useElementSize } from "@enotion/hooks";
+
+const Component = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { width, height } = useElementSize(ref);
+
+  return (
+    <div>
+      <div
+        ref={ref}
+        style={{
+          resize: "both",
+          overflow: "auto",
+          padding: "20px",
+          border: "1px solid black",
+          width: "200px",
+          height: "200px",
+        }}
+      >
+        Resize me!
+      </div>
       <p>
         Width: {width}px, Height: {height}px
       </p>
