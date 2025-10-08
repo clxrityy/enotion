@@ -3,7 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased - UNRELEASED
+
 ### Added
+
 - (global) Initialized project
 - (hooks) Initialized package
 - (global) Biome configurations
@@ -21,8 +23,12 @@ All notable changes to this project will be documented in this file.
 - (hooks) Added `useVisibility()` hook
 - (hooks) Added `useOutsideClick()` hook
 - (hooks) Added `useScreenSize()` hook
+- (hooks) Added `useElementSize()` hook
+- (components) Initialized package
+- (components) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
 
 ### Changed
+
 - (config) Moved typescript-config into a config package (@enotion/config/typescript)
 - (config) Moved jest-config into a config package (@enotion/config/jest)
 - (config) Added tsup-config into a config package (@enotion/config/tsup)
@@ -31,5 +37,6 @@ All notable changes to this project will be documented in this file.
 - (hooks) More extensive and concise JSDoc comments for usage
 
 ### Removed
+
 - (global) Prettier
 - (global) ESLint
