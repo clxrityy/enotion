@@ -1,5 +1,5 @@
 import { useScreenSize } from "../src/useScreenSize";
-import { renderHook, screen, render } from "@testing-library/react";
+import { renderHook, screen, render, act } from "@testing-library/react";
 import { describe, expect, it, jest, afterEach } from "@jest/globals";
 
 describe("useScreenSize", () => {
@@ -18,8 +18,10 @@ describe("useScreenSize", () => {
     expect(result.current.isMobile).toBe(false);
 
     // Simulate tablet size
-    window.innerWidth = 800;
-    window.dispatchEvent(new Event("resize"));
+    act(() => {
+      window.innerWidth = 800;
+      window.dispatchEvent(new Event("resize"));
+    });
     rerender();
     expect(result.current.width).toBe(800);
     expect(result.current.isDesktop).toBe(false);
@@ -27,8 +29,10 @@ describe("useScreenSize", () => {
     expect(result.current.isMobile).toBe(false);
 
     // Simulate mobile size
-    window.innerWidth = 500;
-    window.dispatchEvent(new Event("resize"));
+    act(() => {
+      window.innerWidth = 500;
+      window.dispatchEvent(new Event("resize"));
+    });
     rerender();
     expect(result.current.width).toBe(500);
     expect(result.current.isDesktop).toBe(false);
@@ -41,8 +45,10 @@ describe("useScreenSize", () => {
     rerender();
     expect(result.current.width).toBe(1024);
     // Simulate window resize
-    window.innerWidth = 600;
-    window.dispatchEvent(new Event("resize"));
+    act(() => {
+      window.innerWidth = 600;
+      window.dispatchEvent(new Event("resize"));
+    });
     rerender(); // Re-render to capture the updated state
     expect(result.current.width).toBe(600);
     expect(result.current.isMobile).toBe(true);
@@ -72,8 +78,10 @@ describe("useScreenSize", () => {
     expect(result.current.isLargeDesktop).toBe(false);
 
     // Simulate large desktop size
-    window.innerWidth = 1600;
-    window.dispatchEvent(new Event("resize"));
+    act(() => {
+      window.innerWidth = 1600;
+      window.dispatchEvent(new Event("resize"));
+    });
     rerender();
     expect(result.current.width).toBe(1600);
     expect(result.current.isLargeDesktop).toBe(true);
@@ -85,17 +93,19 @@ describe("useScreenSize", () => {
     expect(result.current.isPortrait).toBe(false);
 
     // Simulate portrait orientation
-    Object.defineProperty(window, "innerWidth", {
-      writable: true,
-      configurable: true,
-      value: 600,
+    act(() => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 600,
+      });
+      Object.defineProperty(window, "innerHeight", {
+        writable: true,
+        configurable: true,
+        value: 800,
+      });
+      window.dispatchEvent(new Event("resize"));
     });
-    Object.defineProperty(window, "innerHeight", {
-      writable: true,
-      configurable: true,
-      value: 800,
-    });
-    window.dispatchEvent(new Event("resize"));
     rerender();
     expect(result.current.width).toBe(600);
     expect(result.current.height).toBe(800);
