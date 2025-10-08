@@ -1,0 +1,71 @@
+{
+  "name": "@enotion/components",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "A collection of reusable React components to simplify your development process, and ease common tasks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "components",
+    "typescript",
+    "frontend",
+    "ui",
+    "design-system",
+    "component-library",
+    "reusable-components",
+    "custom-components",
+    "buttons",
+    "modals",
+    "forms",
+    "cards",
+    "navigation",
+    "layout",
+    "theming",
+    "responsive",
+    "accessibility"
+  ],
+  "author": {
+    "name": "MJ Anglin",
+    "email": "contact@mjanglin.com",
+    "url": "https://mjanglin.com"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.17.1",
+  "dependencies": {
+    "@enotion/config": "workspace:*",
+    "@enotion/hooks": "workspace:*"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@tailwindcss/postcss": "^4.1.14",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "jest": "^30.2.0",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.14",
+    "terser": "^5.44.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.3.4"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
