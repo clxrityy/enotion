@@ -17,6 +17,7 @@ module.exports = {
   },
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
+    "\\.(css|less|sass|scss)$": "<rootDir>/tests/styleMock.cjs",
   },
   testMatch: ["**/__tests__/**/*.(ts|tsx)", "**/?(*.)+(spec|test).(ts|tsx)"],
 };
