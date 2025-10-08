@@ -5,9 +5,15 @@ class ResizeObserverMock {
     this.callback = callback;
     ResizeObserverMock.instances.push(this);
   }
-  observe(_target: Element) { /* no-op */ }
-  unobserve(_target: Element) { /* no-op */ }
-  disconnect() { /* no-op */ }
+  observe(_target: Element) {
+    /* no-op */
+  }
+  unobserve(_target: Element) {
+    /* no-op */
+  }
+  disconnect() {
+    /* no-op */
+  }
   public static readonly instances: ResizeObserverMock[] = [];
   static invokeAll() {
     for (const inst of ResizeObserverMock.instances) {
@@ -20,7 +26,14 @@ global.ResizeObserver = ResizeObserverMock as any;
 import { useElementSize } from "../src/useElementSize";
 import { render, act, waitFor } from "@testing-library/react";
 import { useRef, useEffect } from "react";
-import { describe, it, expect, beforeEach, afterEach, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  beforeEach,
+  afterEach,
+  jest,
+} from "@jest/globals";
 
 describe("useElementSize", () => {
   let originalOffsetWidth: any;
@@ -29,8 +42,14 @@ describe("useElementSize", () => {
 
   beforeEach(() => {
     // Mock offsetWidth/offsetHeight
-    originalOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetWidth");
-    originalOffsetHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetHeight");
+    originalOffsetWidth = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetWidth",
+    );
+    originalOffsetHeight = Object.getOwnPropertyDescriptor(
+      HTMLElement.prototype,
+      "offsetHeight",
+    );
     Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
       configurable: true,
       get: () => 123,
@@ -41,21 +60,32 @@ describe("useElementSize", () => {
     });
     // Mock getComputedStyle
     originalGetComputedStyle = window.getComputedStyle;
-    window.getComputedStyle = jest.fn((_elt: Element, _pseudoElt?: string | null): CSSStyleDeclaration => {
-      return {
-        borderRadius: "8px",
-        getPropertyValue: (prop: string) => (prop === "borderRadius" ? "8px" : ""),
-      } as Partial<CSSStyleDeclaration> as CSSStyleDeclaration;
-    }) as typeof window.getComputedStyle;
+    window.getComputedStyle = jest.fn(
+      (_elt: Element, _pseudoElt?: string | null): CSSStyleDeclaration => {
+        return {
+          borderRadius: "8px",
+          getPropertyValue: (prop: string) =>
+            prop === "borderRadius" ? "8px" : "",
+        } as Partial<CSSStyleDeclaration> as CSSStyleDeclaration;
+      },
+    ) as typeof window.getComputedStyle;
   });
 
   afterEach(() => {
     // Restore mocks
     if (originalOffsetWidth) {
-      Object.defineProperty(HTMLElement.prototype, "offsetWidth", originalOffsetWidth);
+      Object.defineProperty(
+        HTMLElement.prototype,
+        "offsetWidth",
+        originalOffsetWidth,
+      );
     }
     if (originalOffsetHeight) {
-      Object.defineProperty(HTMLElement.prototype, "offsetHeight", originalOffsetHeight);
+      Object.defineProperty(
+        HTMLElement.prototype,
+        "offsetHeight",
+        originalOffsetHeight,
+      );
     }
     window.getComputedStyle = originalGetComputedStyle;
   });
@@ -64,7 +94,11 @@ describe("useElementSize", () => {
     function TestComponent() {
       const ref = useRef<HTMLDivElement>(null);
       const size = useElementSize(ref);
-      return <div ref={ref} data-testid="target">{JSON.stringify(size)}</div>;
+      return (
+        <div ref={ref} data-testid="target">
+          {JSON.stringify(size)}
+        </div>
+      );
     }
     const { getByTestId } = render(<TestComponent />);
     const sizeObj = JSON.parse(getByTestId("target").textContent!);
@@ -81,7 +115,11 @@ describe("useElementSize", () => {
       useEffect(() => {
         refEl = ref.current;
       }, []);
-      return <div ref={ref} data-testid="target">{JSON.stringify(size)}</div>;
+      return (
+        <div ref={ref} data-testid="target">
+          {JSON.stringify(size)}
+        </div>
+      );
     }
     const { getByTestId } = render(<TestComponent />);
     // Wait until refEl is set by effect

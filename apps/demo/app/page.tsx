@@ -18,24 +18,32 @@ export default function Home(): JSX.Element {
   }, []);
 
   return (
-    <SkeletonWrapper isLoading={loading} skeleton={<Skeleton
-      className={styles.main}
-      style={{
-        width: "100%",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    />}>
+    <SkeletonWrapper
+      isLoading={loading}
+      skeleton={
+        <Skeleton
+          className={styles.main}
+          style={{
+            width: "100%",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+      }
+    >
       <div className={styles.page} {...preloadProvider}>
         <main className={styles.main}>
           this page should preload the provider on hover
           <div>
-            <Link href={"/preload-test"} style={{
-              color: "#0070f3ff",
-              textDecoration: "underline",
-            }}>
+            <Link
+              href={"/preload-test"}
+              style={{
+                color: "#0070f3ff",
+                textDecoration: "underline",
+              }}
+            >
               Go to preload test to view preloaded context value
             </Link>
           </div>

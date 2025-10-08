@@ -22,7 +22,7 @@ describe("useVisibility", () => {
     const mockDisconnect = jest.fn();
 
     class MockIntersectionObserver {
-      constructor(private callback: IntersectionObserverCallback) { }
+      constructor(private callback: IntersectionObserverCallback) {}
 
       observe = mockObserve;
       unobserve = mockUnobserve;

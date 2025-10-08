@@ -19,7 +19,11 @@ import { RefObject, useEffect, useState } from "react";
  * @returns An object containing the width, height, and borderRadius of the referenced element.
  */
 export function useElementSize(ref: RefObject<HTMLElement | null>) {
-  const [size, setSize] = useState<{ width: number; height: number, borderRadius: string }>({ width: 0, height: 0, borderRadius: "0px" });
+  const [size, setSize] = useState<{
+    width: number;
+    height: number;
+    borderRadius: string;
+  }>({ width: 0, height: 0, borderRadius: "0px" });
 
   useEffect(() => {
     if (!ref.current) return;

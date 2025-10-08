@@ -107,7 +107,10 @@ export function SkeletonWrapper({
   }
 
   // Auto-generate skeleton from children
-  const renderSkeletonFromChild = (child: ReactNode, index: number): ReactNode => {
+  const renderSkeletonFromChild = (
+    child: ReactNode,
+    index: number,
+  ): ReactNode => {
     if (!isValidElement(child)) {
       // For text nodes, create a simple skeleton span
       return (
@@ -126,14 +129,17 @@ export function SkeletonWrapper({
 
     // Clone the element and apply skeleton styles
     const originalClassName = (child.props as any).className || "";
-    const skeletonClass = `${originalClassName} ${skeletonClassName}${animate ? " skeleton-animate" : ""
-      }`.trim();
+    const skeletonClass = `${originalClassName} ${skeletonClassName}${
+      animate ? " skeleton-animate" : ""
+    }`.trim();
 
     // Recursively process children
     const processedChildren = (child.props as any).children
-      ? Children.map((child.props as any).children, (nestedChild: ReactNode, nestedIndex: number) =>
-        renderSkeletonFromChild(nestedChild, nestedIndex)
-      )
+      ? Children.map(
+          (child.props as any).children,
+          (nestedChild: ReactNode, nestedIndex: number) =>
+            renderSkeletonFromChild(nestedChild, nestedIndex),
+        )
       : undefined;
 
     return cloneElement(child as any, {
@@ -145,7 +151,7 @@ export function SkeletonWrapper({
   };
 
   const skeletonContent = Children.map(children, (child, index) =>
-    renderSkeletonFromChild(child, index)
+    renderSkeletonFromChild(child, index),
   );
 
   return (

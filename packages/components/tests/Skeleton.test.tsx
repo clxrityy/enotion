@@ -1,5 +1,12 @@
 import { render, screen, act } from "@testing-library/react";
-import { describe, it, expect, afterEach, beforeAll, jest } from "@jest/globals";
+import {
+  describe,
+  it,
+  expect,
+  afterEach,
+  beforeAll,
+  jest,
+} from "@jest/globals";
 
 import { SkeletonWrapper, Skeleton } from "../src/Skeleton";
 
@@ -12,9 +19,9 @@ class ResizeObserverMock {
     ResizeObserverMock.instances.push(this);
   }
 
-  observe(): void { }
-  unobserve(): void { }
-  disconnect(): void { }
+  observe(): void {}
+  unobserve(): void {}
+  disconnect(): void {}
 
   static invokeAll(entries: ResizeObserverEntry[] = []): void {
     for (const instance of ResizeObserverMock.instances) {
@@ -24,7 +31,7 @@ class ResizeObserverMock {
 }
 
 beforeAll(() => {
-  // @ts-ignore Assign mock to global for tests
+  // @ts-expect-error Assign mock to global for tests
   global.ResizeObserver = ResizeObserverMock;
 });
 
@@ -38,7 +45,7 @@ describe("SkeletonWrapper", () => {
     render(
       <SkeletonWrapper isLoading={false}>
         <div data-testid="content">Loaded content</div>
-      </SkeletonWrapper>
+      </SkeletonWrapper>,
     );
 
     const content = screen.queryByTestId("content");
@@ -52,7 +59,7 @@ describe("SkeletonWrapper", () => {
         <div className="box">
           <span>Inner text</span>
         </div>
-      </SkeletonWrapper>
+      </SkeletonWrapper>,
     );
 
     const skeletonNodes = container.querySelectorAll(".skeleton");
@@ -68,7 +75,7 @@ describe("SkeletonWrapper", () => {
         skeleton={<div data-testid="custom-skeleton">Custom</div>}
       >
         <div>Actual content</div>
-      </SkeletonWrapper>
+      </SkeletonWrapper>,
     );
 
     const custom = screen.queryByTestId("custom-skeleton");
@@ -80,7 +87,7 @@ describe("SkeletonWrapper", () => {
 describe("Skeleton", () => {
   it("uses fallback dimensions when no reference provided", () => {
     const { container } = render(
-      <Skeleton width={200} height={40} animate={false} className="extra" />
+      <Skeleton width={200} height={40} animate={false} className="extra" />,
     );
 
     const skeleton = container.firstElementChild as HTMLElement;
