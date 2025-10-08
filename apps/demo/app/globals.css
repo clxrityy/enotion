@@ -1,3 +1,5 @@
+@import "@enotion/components/dist/index.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

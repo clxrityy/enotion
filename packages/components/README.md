@@ -11,6 +11,20 @@ yarn add @enotion/components
 pnpm add @enotion/components
 ```
 
+## Inherit Styles (Optional)
+
+To inherit the global styles, import the package CSS in your main application file (e.g., `index.tsx`, `App.tsx`, or `globals.css` for Next.js):
+
+```tsx
+// In a React/Next.js component file:
+import "@enotion/components/index.css";
+```
+
+```css
+/* In a global CSS file (e.g., globals.css for Next.js): */
+@import "@enotion/components/index.css";
+```
+
 ## Components
 
 - [Skeleton](#skeleton)
