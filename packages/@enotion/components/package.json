@@ -67,5 +67,14 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/clxrityy/enotion/issues",
+    "email": "contact@mjanglin.com"
+  },
+  "homepage": "https://github.com/clxrityy/enotion/tree/main/packages/%40enotion/components#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clxrityy/enotion.git"
   }
 }

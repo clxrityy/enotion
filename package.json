@@ -43,5 +43,10 @@
   "lint-staged": {
     "*.ts": "biome check --write",
     "*.{ts,css,md,js}": "biome format --write"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/clxrityy/enotion/issues",
+    "email": "contact@mjanglin.com"
+  },
+  "homepage": "https://github.com/clxrityy/enotion#readme"
 }
