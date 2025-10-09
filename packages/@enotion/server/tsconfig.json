@@ -1,0 +1,16 @@
+{
+  "extends": "@enotion/config/typescript/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "esModuleInterop": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "example",
+    "scripts",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

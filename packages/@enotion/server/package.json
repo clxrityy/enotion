@@ -1,0 +1,57 @@
+{
+  "name": "@enotion/server",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Backend services and APIs for accessing and managing server-side functionalities",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "typescript",
+    "backend",
+    "api",
+    "server",
+    "rest",
+    "nextjs",
+    "child-process",
+    "server-side",
+    "util",
+    "os",
+    "file-system",
+    "fs",
+    "path",
+    "http",
+    "https",
+    "middleware",
+    "routing"
+  ],
+  "author": {
+    "name": "MJ Anglin",
+    "email": "contact@mjanglin.com",
+    "url": "https://mjanglin.com"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.18.1",
+  "dependencies": {
+    "@enotion/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.3.4",
+    "jest": "^30.2.0",
+    "@types/node": "^24.7.0",
+    "@types/jest": "^30.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
