@@ -25,7 +25,7 @@ describe("System Module", () => {
       }),
     }));
 
-    const { getSystemSnapshot } = await import("../src/system");
+    const getSystemSnapshot = (await import("../src/system")).default;
     const snapshot = await getSystemSnapshot();
     expect(snapshot).toBeDefined();
     expect(typeof snapshot.cpu.usage).toBe("number");
