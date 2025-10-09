@@ -59,7 +59,16 @@ export async function diskUsage(path = "/"): Promise<DiskInfo> {
   usagePercent = Number.parseFloat(usePercent.replace("%", ""));
   mountedOn = tokens.slice(5).join(" "); // join rest to support spaces in mountpoint
 
-  return { filesystem, size, used, free, usagePercent, available, usePercent, mountedOn };
+  return {
+    filesystem,
+    size,
+    used,
+    free,
+    usagePercent,
+    available,
+    usePercent,
+    mountedOn,
+  };
 
   // Note: Sizes are in bytes, usagePercent is a number (e.g., 75.5 for 75.5%)
   // Free and Available are treated the same here for simplicity

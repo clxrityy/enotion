@@ -1,92 +1,76 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "test @enotion/server package",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "re-run test @enotion/server package",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "re-run tests after isolation fix",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "re-run @enotion/server tests final",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "run tests after parser extract",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "re-run @enotion/server tests parsing-only import",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "test"
-		},
-		{
-			"label": "run demo dev and hit stats route",
-			"type": "shell",
-			"command": "pnpm -w --filter demo dev",
-			"isBackground": true,
-			"group": "none"
-		},
-		{
-			"label": "run server tests after disk parsing fix",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$jest-stylish"
-			],
-			"group": "test"
-		},
-		{
-			"label": "run server tests after snapshot fallback",
-			"type": "shell",
-			"command": "pnpm -w --filter @enotion/server test",
-			"isBackground": false,
-			"problemMatcher": [
-				"$jest-stylish"
-			],
-			"group": "test"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "test @enotion/server package",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "re-run test @enotion/server package",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "re-run tests after isolation fix",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "re-run @enotion/server tests final",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "run tests after parser extract",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "re-run @enotion/server tests parsing-only import",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "run demo dev and hit stats route",
+      "type": "shell",
+      "command": "pnpm -w --filter demo dev",
+      "isBackground": true,
+      "group": "none"
+    },
+    {
+      "label": "run server tests after disk parsing fix",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$jest-stylish"],
+      "group": "test"
+    },
+    {
+      "label": "run server tests after snapshot fallback",
+      "type": "shell",
+      "command": "pnpm -w --filter @enotion/server test",
+      "isBackground": false,
+      "problemMatcher": ["$jest-stylish"],
+      "group": "test"
+    }
+  ]
 }

@@ -62,7 +62,7 @@ describe("System Module", () => {
   it("should parse macOS top output format", async () => {
     const { parseIdleFromTopOutput } = await import("../src/util/parsers");
     const idle = parseIdleFromTopOutput(
-      "CPU usage: 7.59% user, 6.45% sys, 85.96% idle\n"
+      "CPU usage: 7.59% user, 6.45% sys, 85.96% idle\n",
     );
     expect(idle).toBeCloseTo(85.96, 2);
   });

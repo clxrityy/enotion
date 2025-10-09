@@ -37,7 +37,8 @@ export async function parseCpuUsage(): Promise<string> {
   const platform = process.platform;
 
   // Helper to parse either Linux `top` or macOS `top` output lines
-  const parseIdleFromTop = (out: string): number | null => parseIdleFromTopOutput(out);
+  const parseIdleFromTop = (out: string): number | null =>
+    parseIdleFromTopOutput(out);
 
   // Attempt platform command
   let cmd = "";

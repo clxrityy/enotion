@@ -36,15 +36,17 @@ export default function Home(): JSX.Element {
       <div className={styles.page} {...preloadProvider}>
         <main className={styles.main}>
           this page should preload the provider on hover
-          <div style={{
-            marginTop: "20px",
-            fontSize: "14px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            gap: "10px",
-          }}>
+          <div
+            style={{
+              marginTop: "20px",
+              fontSize: "14px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
             <Link
               href={"/preload-test"}
               style={{
