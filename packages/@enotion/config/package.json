@@ -4,13 +4,14 @@
   "description": "",
   "private": true,
   "exports": {
-    "./typescript/base.json": "./typescript/base.json",
-    "./typescript/nextjs.json": "./typescript/nextjs.json",
-    "./typescript/react-library.json": "./typescript/react-library.json",
-    "./jest/jest.config.cjs": "./jest/jest.config.cjs",
-    "./jest/jest.server.config.cjs": "./jest/jest.server.config.cjs",
-    "./tsup/tsup.config.ts": "./tsup/tsup.config.ts",
-    "./tsup/tsup.entry.config.ts": "./tsup/tsup.entry.config.ts"
+    "./typescript/base": "./typescript/base.json",
+    "./typescript/nextjs": "./typescript/nextjs.json",
+    "./typescript/react-library": "./typescript/react-library.json",
+    "./jest/jest.config": "./jest/jest.config.cjs",
+    "./jest/jest.server.config": "./jest/jest.server.config.cjs",
+    "./tsup/tsup.config": "./tsup/tsup.config.ts",
+    "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts",
+    "./constants": "./constants/index.ts"
   },
   "license": "MIT",
   "devDependencies": {
@@ -27,8 +28,5 @@
   "peerDependencies": {
     "@types/node": "^24.6.1",
     "typescript": "5.9.3"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
