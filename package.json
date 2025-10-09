@@ -8,7 +8,7 @@
     "format": "biome format --write",
     "check-types": "turbo run check-types",
     "test": "turbo run test",
-    "clean:install": "turbo run clean && rm -rf node_modules && rm -rf packages/*/node_modules && rm -rf pnpm-lock.yaml && pnpm install",
+    "clean:install": "turbo run clean && rm -rf node_modules && rm -rf packages/**/node_modules && rm -rf pnpm-lock.yaml && pnpm install",
     "clean": "turbo run clean",
     "log": "chmod +x ./scripts/log.sh && ./scripts/log.sh"
   },

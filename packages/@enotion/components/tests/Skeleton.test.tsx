@@ -19,9 +19,9 @@ class ResizeObserverMock {
     ResizeObserverMock.instances.push(this);
   }
 
-  observe(): void {}
-  unobserve(): void {}
-  disconnect(): void {}
+  observe(): void { }
+  unobserve(): void { }
+  disconnect(): void { }
 
   static invokeAll(entries: ResizeObserverEntry[] = []): void {
     for (const instance of ResizeObserverMock.instances) {
@@ -31,7 +31,6 @@ class ResizeObserverMock {
 }
 
 beforeAll(() => {
-  // @ts-expect-error Assign mock to global for tests
   global.ResizeObserver = ResizeObserverMock;
 });
 

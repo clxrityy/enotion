@@ -39,7 +39,7 @@
     "url": "https://mjanglin.com"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.18.1",
   "dependencies": {
     "@enotion/config": "workspace:*",
     "@enotion/hooks": "workspace:*"

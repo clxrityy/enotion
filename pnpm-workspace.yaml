@@ -1,9 +1,9 @@
 packages:
   - apps/*
-  - packages/*
+  - packages/**/*
 
 onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
+  - "@tailwindcss/oxide"
   - esbuild
   - sharp
   - unrs-resolver
