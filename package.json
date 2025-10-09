@@ -1,6 +1,7 @@
 {
   "name": "enotion",
   "private": true,
+  "version": "0.1.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -10,7 +11,7 @@
     "test": "turbo run test",
     "clean:install": "turbo run clean && rm -rf node_modules && rm -rf packages/**/node_modules && rm -rf pnpm-lock.yaml && pnpm install",
     "clean": "turbo run clean",
-    "log": "chmod +x ./scripts/log.sh && ./scripts/log.sh",
+    "versions": "chmod +x ./scripts/version.sh && ./scripts/version.sh",
     "start": "turbo run start"
   },
   "author": {

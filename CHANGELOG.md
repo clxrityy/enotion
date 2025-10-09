@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added log script to simplify command line changes with autochange
 - (**changed**) Replaced Prettier & ESLint with Biome
 - (**changed**) Adjusted some linting rules
+- (**changed**) Replaced log script with new version script to automate versioning across all packages
 
 ##### Config
 
