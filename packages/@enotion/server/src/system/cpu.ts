@@ -1,6 +1,5 @@
 import { cpus } from "os";
-import { execAsync } from "../util/index.js";
-import { parseIdleFromTopOutput } from "./parsers.js";
+import { execAsync, parseIdleFromTopOutput } from "../util/index.js";
 
 /**
  * Get CPU usage information.
