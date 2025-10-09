@@ -7,7 +7,7 @@ import {
   Children,
 } from "react";
 import { useElementSize } from "@enotion/hooks";
-import "./skeleton.css";
+import "./styles/skeleton.css";
 
 export interface SkeletonWrapperProps extends ComponentPropsWithoutRef<"div"> {
   /**
