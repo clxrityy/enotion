@@ -45,12 +45,13 @@ export async function parseCpuUsage(): Promise<string> {
  * @returns The first valid temperature as a string, or "N/A" if none found.
  */
 export function parseCpuTemperature(output: string[]): string {
-
-  return output.reduce((acc, temp) => {
-    const parsed = parseFloat(temp);
-    if (!isNaN(parsed)) {
-      acc.push(parsed.toFixed(1));
-    }
-    return acc;
-  }, [] as string[])[0] || "N/A";
+  return (
+    output.reduce((acc, temp) => {
+      const parsed = parseFloat(temp);
+      if (!isNaN(parsed)) {
+        acc.push(parsed.toFixed(1));
+      }
+      return acc;
+    }, [] as string[])[0] || "N/A"
+  );
 }
