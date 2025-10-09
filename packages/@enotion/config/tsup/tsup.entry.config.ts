@@ -7,7 +7,7 @@ export default function defineConfig(entry: Record<string, string>) {
       terserOptions: {
         compress: {
           defaults: true,
-        }
+        },
       },
       outDir: "dist",
       format: ["esm"],
