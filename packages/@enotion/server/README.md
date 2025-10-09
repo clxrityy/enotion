@@ -32,6 +32,11 @@ pnpm add @enotion/server
 - `getSystemSnapshot()`: A function that returns a promise resolving to a snapshot of the system's current state, including CPU, memory, OS, and performance metrics.
 
 ```ts
+// System snapshot is the default export of the system module
+import getSystemSnapshot from "@enotion/server/system";
+// or
+import { getSystemSnapshot } from "@enotion/server/system";
+// or
 import { getSystemSnapshot } from "@enotion/server";
 
 const snapshot = await getSystemSnapshot();
@@ -86,7 +91,7 @@ const firstValidTemp = parseCpuTemperature(temperature); // e.g., 45.0
 - `memoryUsage()`: A function that returns a promise resolving to an object containing memory usage statistics, including total, free, used memory in GB, and usage percentage.
 
 ```ts
-import { memoryUsage } from "@enotion/server";
+import { memoryUsage } from "@enotion/server/system";
 
 const memUsage = memoryUsage();
 console.log(memUsage);
@@ -107,7 +112,7 @@ console.log(memUsage);
 - `os()`: A function that returns an object containing OS type, platform, architecture, and version.
 
 ```ts
-import { os } from "@enotion/server";
+import { os } from "@enotion/server/system";
 
 const systemInfo = os();
 console.log(systemInfo);
@@ -129,7 +134,7 @@ console.log(systemInfo);
 - `performance()`: A function that returns an object containing system performance metrics such as uptime and load average.
 
 ```ts
-import { performance } from "@enotion/server";
+import { performance } from "@enotion/server/system";
 
 const perfMetrics = performance();
 console.log(perfMetrics);
@@ -148,7 +153,7 @@ console.log(perfMetrics);
 - `diskUsage(path: string)`: A function that returns a promise resolving to an object containing disk usage statistics for the specified path, including total, used, free space in GB, and usage percentage.
 
 ```ts
-import { diskUsage, type DiskInfo } from "@enotion/server";
+import { diskUsage, type DiskInfo } from "@enotion/server/system";
 
 const usage = await diskUsage("/");
 console.log(usage);
@@ -175,7 +180,7 @@ console.log(usage);
 - `getLocalIps()`: A function that returns an array of local IP addresses.
 
 ```ts
-import { getLocalIps } from "@enotion/server";
+import { getLocalIps } from "@enotion/server/network";
 
 const localIps = getLocalIps();
 console.log(localIps);
@@ -191,7 +196,7 @@ console.log(localIps);
 - `getHostname()`: A function that returns the system's hostname as a string.
 
 ```ts
-import { getHostname } from "@enotion/server";
+import { getHostname } from "@enotion/server/network";
 
 const hostname = getHostname();
 console.log(hostname); // e.g., "my-computer"
@@ -200,7 +205,7 @@ console.log(hostname); // e.g., "my-computer"
 - `isPortOpen(port: number, host?: string)`: A function that checks if a specific port is open on the given host (defaults to localhost). Returns a promise resolving to a boolean.
 
 ```ts
-import { isPortOpen } from "@enotion/server";
+import { isPortOpen } from "@enotion/server/network";
 
 const portStatus = await isPortOpen(8080);
 console.log(portStatus); // true or false
@@ -209,7 +214,7 @@ console.log(portStatus); // true or false
 - `findAvailablePort(startPort: number, endPort: number)`: A function that finds an available port within the specified range. Returns a promise resolving to the available port number or `null` if none found.
 
 ```ts
-import { findAvailablePort } from "@enotion/server";
+import { findAvailablePort } from "@enotion/server/network";
 
 const availablePort = await findAvailablePort(8000, 8100);
 console.log(availablePort); // e.g., 8001 or null

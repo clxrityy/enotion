@@ -6,6 +6,20 @@
   "description": "Backend services and APIs for accessing and managing server-side functionalities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./system": {
+      "import": "./dist/system.js",
+      "types": "./dist/system.d.ts"
+    },
+    "./network": {
+      "import": "./dist/network.js",
+      "types": "./dist/network.d.ts"
+    }
+  },
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "build": "tsup",

@@ -4,6 +4,9 @@
     "outDir": "dist",
     "esModuleInterop": true
   },
+  // Need to export from src/system and src/network
+  "files": ["src/index.ts", "src/system/index.ts", "src/network/index.ts"],
+
   "include": ["src"],
   "exclude": [
     "node_modules",

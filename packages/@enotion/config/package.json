@@ -9,7 +9,8 @@
     "./typescript/react-library.json": "./typescript/react-library.json",
     "./jest/jest.config.cjs": "./jest/jest.config.cjs",
     "./jest/jest.server.config.cjs": "./jest/jest.server.config.cjs",
-    "./tsup/tsup.config.ts": "./tsup/tsup.config.ts"
+    "./tsup/tsup.config.ts": "./tsup/tsup.config.ts",
+    "./tsup/tsup.entry.config.ts": "./tsup/tsup.entry.config.ts"
   },
   "license": "MIT",
   "devDependencies": {

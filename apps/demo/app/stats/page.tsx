@@ -1,7 +1,9 @@
 export const dynamic = "force-dynamic";
 
 export default async function StatesPage() {
-  const { getSystemSnapshot } = await import("@enotion/server");
+  const getSystemSnapshot = await import("@enotion/server/system").then(
+    (mod) => mod.default,
+  );
 
   const snapshot = await getSystemSnapshot();
 
