@@ -32,6 +32,9 @@ importers:
       '@enotion/hooks':
         specifier: workspace:*
         version: link:../../packages/@enotion/hooks
+      '@enotion/server':
+        specifier: workspace:*
+        version: link:../../packages/@enotion/server
       next:
         specifier: 15.5.4
         version: 15.5.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
