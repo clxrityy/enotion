@@ -57,6 +57,18 @@
         "build/**",
         "coverage/**"
       ]
+    },
+    "start": {
+      "dependsOn": [
+        "build"
+      ],
+      "inputs": [
+        "dist/**",
+        ".next/**",
+        "build/**"
+      ],
+      "cache": false,
+      "persistent": true
     }
   }
 }
