@@ -6,10 +6,10 @@ A turborepo containing a collection of React hooks and shared configurations.
 
 ## Public packages
 
-- [`@enotion/hooks`](./packages/hooks/README.md) - A collection of custom hooks to simplify common tasks in React applications.
-- [`@enotion/components`](./packages/components/README.md) - A set of reusable and customizable React components for building user interfaces.
-- [`@enotion/server`](./packages/server/README.md) - A set of server-side utilities, functions, types, and APIs.
+- [`@enotion/hooks`](./packages/@enotion/hooks/README.md) - A collection of custom hooks to simplify common tasks in React applications.
+- [`@enotion/components`](./packages/@enotion/components/README.md) - A set of reusable and customizable React components for building user interfaces.
+- [`@enotion/server`](./packages/@enotion/server/README.md) - A set of server-side utilities, functions, types, and APIs.
 
 ## Private packages
 
-- [`@enotion/config`](./packages/config/README.md) - Private global configuration for enotion packages.
+- [`@enotion/config`](./packages/@enotion/config/README.md) - Private global configuration for enotion packages.
