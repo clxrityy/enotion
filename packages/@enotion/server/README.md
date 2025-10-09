@@ -20,6 +20,7 @@ pnpm add @enotion/server
   - [Memory](#memory)
   - [OS](#os)
   - [Performance](#performance)
+  - [Disk](#disk)
 - [Network](#network)
 
 ---
@@ -136,6 +137,31 @@ console.log(perfMetrics);
 {
   uptime: '2h 30m 15s',
   loadAverage: '0.6',
+}
+*/
+```
+
+---
+
+#### Disk
+
+- `diskUsage(path: string)`: A function that returns a promise resolving to an object containing disk usage statistics for the specified path, including total, used, free space in GB, and usage percentage.
+
+```ts
+import { diskUsage, type DiskInfo } from "@enotion/server";
+
+const usage = await diskUsage("/");
+console.log(usage);
+/*
+{
+  filesystem: '/dev/sda1',
+  size: "482797652",
+  used: 123456789,
+  free: 359340863,
+  useagePercent: 25,
+  available: 359340863,
+  usePercent: "25%",
+  mount: '/',
 }
 */
 ```

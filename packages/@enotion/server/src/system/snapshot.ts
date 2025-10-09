@@ -4,6 +4,7 @@ import { os } from "./os.js";
 import { bytesToGB } from "../util/bytes.js";
 import { performance } from "./performance.js";
 import { uptime } from "./uptime.js";
+import { diskUsage, type DiskInfo } from "./disk.js";
 
 /**
  * Interface representing a snapshot of the system's current state.
@@ -32,17 +33,25 @@ export interface SystemSnapshot {
     arch?: string;
   };
   performance?: { uptime: string; loadAverage: string };
+  disk?: DiskInfo;
 }
 
 /**
  * Get a snapshot of the current system information.
- * @returns An object containing CPU, memory, uptime, timestamp, and system info.
+ * @param path The filesystem path to check disk usage (default is root '/')
+ * @returns An object containing CPU, memory, uptime, timestamp, OS info, and disk usage.
+ *
+ * @example
+ * const snapshot = await getSystemSnapshot();
+ * console.log(snapshot);
  */
-export async function getSystemSnapshot(): Promise<SystemSnapshot> {
-  const [cpuTemp, memUsage, sysInfo] = await Promise.all([
+export async function getSystemSnapshot(path = "/"): Promise<SystemSnapshot> {
+  const [cpuTemp, memUsage, sysInfo, diskInfo] = await Promise.all([
     cpuTemperature().then((output) => parseCpuTemperature(output)),
     memoryUsage(),
     os(),
+    // Make disk usage resilient: if it fails, return undefined so snapshot still works
+    diskUsage(path).catch(() => undefined as unknown as DiskInfo),
   ]);
 
   const parsedCpuUsage = await parseCpuUsage();
@@ -70,5 +79,6 @@ export async function getSystemSnapshot(): Promise<SystemSnapshot> {
       arch: sysInfo.architecture,
     },
     performance: performance(),
+    disk: diskInfo,
   };
 }
