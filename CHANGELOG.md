@@ -52,6 +52,7 @@ All notable changes to this project will be documented in this file.
 
 - (**added**) Initialized package
 - (**added**) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
+- (**added**) Added `<Button />` component
 
 ##### Server
 

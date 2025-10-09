@@ -1,14 +1,17 @@
 "use client";
 import { usePreload } from "@enotion/hooks";
-import { Skeleton, SkeletonWrapper } from "@enotion/components";
+import { Skeleton, SkeletonWrapper, Button } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import Link from "next/link";
+
 
 const providerImport = () => import("../components/Test");
 
 export default function Home(): JSX.Element {
   const preloadProvider = usePreload(providerImport);
+
+  const { push } = useRouter();
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -47,24 +50,17 @@ export default function Home(): JSX.Element {
               gap: "10px",
             }}
           >
-            <Link
-              href={"/preload-test"}
-              style={{
-                color: "#0070f3ff",
-                textDecoration: "underline",
-              }}
+            <Button
+              onClick={() => push("/preload-test")}
             >
               Go to preload test to view preloaded context value
-            </Link>
-            <Link
-              href={"/stats"}
-              style={{
-                color: "#0070f3ff",
-                textDecoration: "underline",
-              }}
+            </Button>
+            <Button
+              onClick={() => push("/stats")}
+
             >
               Go to stats page to view server module data fetching
-            </Link>
+            </Button>
           </div>
         </main>
       </div>
