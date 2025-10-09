@@ -1,5 +1,5 @@
 {
-  "extends": "@enotion/config/typescript/base.json",
+  "extends": "@enotion/config/typescript/base",
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true

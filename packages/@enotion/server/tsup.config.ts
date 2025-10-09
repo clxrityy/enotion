@@ -1,4 +1,4 @@
-import config from "@enotion/config/tsup/tsup.entry.config.ts";
+import config from "@enotion/config/tsup/tsup.entry.config";
 
 export default config({
   index: "src/index.ts",

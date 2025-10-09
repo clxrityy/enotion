@@ -1,4 +1,4 @@
-import config from "@enotion/config/jest/jest.config.cjs";
+import config from "@enotion/config/jest/jest.config";
 import type { Config } from "jest";
 
 const jestConfig: Config = {

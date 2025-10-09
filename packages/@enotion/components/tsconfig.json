@@ -1,5 +1,5 @@
 {
-  "extends": "@enotion/config/typescript/react-library.json",
+  "extends": "@enotion/config/typescript/react-library",
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true

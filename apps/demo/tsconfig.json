@@ -1,5 +1,5 @@
 {
-  "extends": "@enotion/config/typescript/nextjs.json",
+  "extends": "@enotion/config/typescript/nextjs",
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
