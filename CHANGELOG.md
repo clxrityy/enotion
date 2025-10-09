@@ -26,6 +26,20 @@ All notable changes to this project will be documented in this file.
 - (hooks) Added `useElementSize()` hook
 - (components) Initialized package
 - (components) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
+- (server) Initialized package
+- (server) Added `getSystemSnapshot()` function to get a snapshot of the system information
+  - (server) Added system information utilities
+  - (server) Added CPU information utilities
+  - (server) Added Memory information utilities
+  - (server) Added OS information utilities
+  - (server) Added Performance information utilities
+- (server) Added network utilities
+  - (server) Added `getLocalIps()` function to get local IP addresses
+  - (server) Added `getHostname()` function to get the system hostname
+  - (server) Added `isPortAvailable()` function to check if a port is available
+  - (server) Added `findAvailablePort()` function to find an available port
+- (server) Added `execAsync()` utility to execute shell commands asynchronously
+- (server) Added `bytesToGB()` utility to convert bytes to gigabytes
 
 ### Changed
 
