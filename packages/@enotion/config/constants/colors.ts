@@ -163,4 +163,4 @@ export const ColorPalettes: Record<string, ColorPalleteColors> = {
   },
 };
 
-export type ColorPalette = keyof typeof ColorPalettes;
+export type ColorPaletteType = keyof typeof ColorPalettes;
