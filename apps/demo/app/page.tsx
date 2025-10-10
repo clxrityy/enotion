@@ -5,7 +5,6 @@ import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 
-
 const providerImport = () => import("../components/Test");
 
 export default function Home(): JSX.Element {
@@ -50,15 +49,10 @@ export default function Home(): JSX.Element {
               gap: "10px",
             }}
           >
-            <Button
-              onClick={() => push("/preload-test")}
-            >
+            <Button onClick={() => push("/preload-test")}>
               Go to preload test to view preloaded context value
             </Button>
-            <Button
-              onClick={() => push("/stats")}
-
-            >
+            <Button onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching
             </Button>
           </div>
