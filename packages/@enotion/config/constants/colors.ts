@@ -44,6 +44,14 @@ export function parseColor(color: Color): string {
 
 /**
  * A collection of predefined color palettes.
+ * Each palette includes colors for various UI elements.
+ * - `default`: A clean and modern palette with blue accents.
+ * - `dark`: A dark theme with vibrant accent colors.
+ * - `solarized`: A balanced palette based on the Solarized color scheme.
+ * - `warmSpring`: A soft and warm palette with pastel tones.
+ * - `trustInBlue`: A professional palette with shades of blue and gray.
+ * - `contemporaryCollegiate`: A fresh palette with collegiate-inspired colors.
+ * - `moodyRose`: A sophisticated palette with rose and muted tones.
  * @see https://augustash.com/blog/website-ux-design/25-amazing-website-color-schemes
  */
 
