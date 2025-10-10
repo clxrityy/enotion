@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
+  },
   "exports": {
     "./typescript/base": "./typescript/base.json",
     "./typescript/nextjs": "./typescript/nextjs.json",
@@ -11,7 +16,10 @@
     "./jest/jest.server.config": "./jest/jest.server.config.cjs",
     "./tsup/tsup.config": "./tsup/tsup.config.ts",
     "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts",
-    "./constants": "./constants/index.ts"
+    "./constants": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts"
+    }
   },
   "license": "MIT",
   "devDependencies": {
