@@ -1,11 +1,13 @@
 import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from "react";
-import { ColorPalettes, ColorPalette } from "@enotion/config/constants";
+import { ColorPalettes, type ColorPalette } from "@enotion/config/constants";
 import "./styles/button.css";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
   colorPalette?: ColorPalette;
 }
+
+const palletes = ColorPalettes;
 
 /**
  * A simple Button component.
@@ -16,7 +18,7 @@ export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
  * ```
  */
 export function Button({ children, colorPalette, ...rest }: ButtonProps) {
-  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
+  const palette = colorPalette ? palletes[colorPalette] : null;
 
   return (
     <button
@@ -24,14 +26,14 @@ export function Button({ children, colorPalette, ...rest }: ButtonProps) {
       style={{
         ...(palette
           ? ({
-              backgroundColor: palette.primary,
-              color: palette.foreground,
-              borderColor: palette.border,
-              ...(rest.style ? rest.style : {}),
-            } as CSSProperties)
+            backgroundColor: palette.primary,
+            color: palette.foreground,
+            borderColor: palette.border,
+            ...(rest.style ? rest.style : {}),
+          } as CSSProperties)
           : {
-              ...(rest.style as CSSProperties),
-            }),
+            ...(rest.style as CSSProperties),
+          }),
       }}
       {...rest}
     >
