@@ -1,20 +1,22 @@
 import { ComponentPropsWithoutRef, CSSProperties, ReactNode } from "react";
-import { ColorPalettes, type ColorPalette } from "@enotion/config/constants";
+import { ColorPalettes, type ColorPaletteType } from "@enotion/config/constants";
 import "./styles/button.css";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
-  colorPalette?: ColorPalette;
+  colorPalette?: ColorPaletteType;
 }
 
 const palletes = ColorPalettes;
 
 /**
- * A simple Button component.
+ * A customizable Button component with optional color palette support.
+ * @param {ColorPaletteType} [colorPalette] - Optional color palette to style the button.
+ * @param {ComponentPropsWithoutRef<"button">} rest - Other standard button attributes.
  *
  * @example
  * ```tsx
- * <Button onClick={() => alert('Clicked!')}>Click Me</Button>
+ * <Button onClick={() => alert('Clicked!')} colorPalette="dark">Click Me</Button>
  * ```
  */
 export function Button({ children, colorPalette, ...rest }: ButtonProps) {
