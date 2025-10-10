@@ -27,8 +27,10 @@ All notable changes to this project will be documented in this file.
 - (**changed**) Moved jest-config into a config package (@enotion/config/jest)
 - (**changed**) Added tsup-config into a config package (@enotion/config/tsup)
 - (**added**) Added constants into a config package (@enotion/config/constants)
+  - (**added**) Added color constants
 - (**changed**) Updated package.json exports to reflect neater import paths
 - (**changed**) Updated TypeScript `base` config to include ESNext in library target
+- (**changed**) Updated tsup config to build .mts files for ESM support
 
 ##### Hooks
 
@@ -53,6 +55,7 @@ All notable changes to this project will be documented in this file.
 - (**added**) Initialized package
 - (**added**) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
 - (**added**) Added `<Button />` component
+- (**added**) Added `<Input />` component
 
 ##### Server
 
