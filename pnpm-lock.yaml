@@ -24,17 +24,17 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
-  apps/demo:
+  apps/demos/nextjs:
     dependencies:
       '@enotion/components':
         specifier: workspace:*
-        version: link:../../packages/@enotion/components
+        version: link:../../../packages/@enotion/components
       '@enotion/hooks':
         specifier: workspace:*
-        version: link:../../packages/@enotion/hooks
+        version: link:../../../packages/@enotion/hooks
       '@enotion/server':
         specifier: workspace:*
-        version: link:../../packages/@enotion/server
+        version: link:../../../packages/@enotion/server
       next:
         specifier: 15.5.4
         version: 15.5.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -47,7 +47,7 @@ importers:
     devDependencies:
       '@enotion/config':
         specifier: workspace:*
-        version: link:../../packages/@enotion/config
+        version: link:../../../packages/@enotion/config
       '@types/node':
         specifier: ^24.7.0
         version: 24.7.0
