@@ -19,7 +19,9 @@
 .skeleton * {
   color: transparent !important;
   text-shadow: none !important;
+  -webkit-background-clip: padding-box !important;
   background-clip: padding-box !important;
+  width: 100%;
 }
 
 /* Animation for skeleton */
