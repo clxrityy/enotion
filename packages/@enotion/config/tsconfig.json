@@ -1,0 +1,7 @@
+{
+  "extends": "./typescript/base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowArbitraryExtensions": true
+  }
+}
