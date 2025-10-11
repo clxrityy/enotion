@@ -25,7 +25,7 @@ export function Input({ colorPallete, ...rest }: InputProps) {
       <input
         style={
           {
-            "--input-border-color": palette.accent,
+            "--input-border-color": palette.border,
             "--input-focus-border-color": palette.primary,
             "--input-background-color": palette.background,
             "--input-text-color": palette.foreground,
