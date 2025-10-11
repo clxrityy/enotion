@@ -1,11 +1,10 @@
+import config from "./tsup/tsup.config";
 import { defineConfig } from "tsup";
 
 export default defineConfig({
+  ...config,
   entry: ["constants/index.ts"],
-  format: ["esm"],
   dts: true,
-  clean: true,
-  outDir: "dist",
   outExtension() {
     return {
       js: ".js",
