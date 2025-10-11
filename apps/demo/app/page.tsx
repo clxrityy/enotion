@@ -1,6 +1,6 @@
 "use client";
 import { usePreload } from "@enotion/hooks";
-import { Skeleton, SkeletonWrapper, Button } from "@enotion/components";
+import { Skeleton, SkeletonWrapper, Button, Input } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -49,12 +49,20 @@ export default function Home(): JSX.Element {
               gap: "10px",
             }}
           >
-            <Button onClick={() => push("/preload-test")}>
+            <Button
+              colorPalette="warmSpring"
+              onClick={() => push("/preload-test")}
+            >
               Go to preload test to view preloaded context value
             </Button>
-            <Button onClick={() => push("/stats")}>
+            <Button colorPalette="dark" onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching
             </Button>
+            <Input
+              placeholder="Test Input"
+              colorPallete="dark"
+              onChange={(e) => console.log(e.target.value)}
+            />
           </div>
         </main>
       </div>

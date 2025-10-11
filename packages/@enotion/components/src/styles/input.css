@@ -1,22 +1,22 @@
-.input {
+input {
   border: 1px solid var(--input-border-color);
   background-color: var(--input-background-color);
   color: var(--input-text-color);
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   transition: border-color 0.2s ease;
 }
 
-.input:focus {
+input:focus {
   outline: none;
   border-color: var(--input-focus-border-color);
 }
 
-.input::placeholder {
+input::placeholder {
   color: var(--input-placeholder-color);
 }
 
-.input:disabled {
+input:disabled {
   background-color: var(--input-disabled-background-color);
   cursor: not-allowed;
 }

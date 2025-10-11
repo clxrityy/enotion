@@ -1,9 +1,12 @@
 import { InputHTMLAttributes } from "react";
-import { type ColorPaletteType, ColorPalettes } from "@enotion/config/constants";
+import {
+  type ColorPaletteType,
+  ColorPalettes,
+} from "@enotion/config/constants";
 import "./styles/input.css";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  colorPallete?: ColorPaletteType
+  colorPallete?: ColorPaletteType;
 }
 
 /**
@@ -15,21 +18,22 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * ```
  */
 export function Input({ colorPallete, ...rest }: InputProps) {
-
   const palette = colorPallete ? ColorPalettes[colorPallete] : null;
 
   if (palette) {
     return (
       <input
-        style={{
-          '--input-border-color': palette.accent,
-          '--input-focus-border-color': palette.primary,
-          '--input-background-color': palette.background,
-          '--input-text-color': palette.foreground,
-          '--input-placeholder-color': palette.muted,
-          '--input-disabled-background-color': palette.muted,
-          ...rest.style
-        } as React.CSSProperties}
+        style={
+          {
+            "--input-border-color": palette.accent,
+            "--input-focus-border-color": palette.primary,
+            "--input-background-color": palette.background,
+            "--input-text-color": palette.foreground,
+            "--input-placeholder-color": palette.muted,
+            "--input-disabled-background-color": palette.muted,
+            ...rest.style,
+          } as React.CSSProperties
+        }
         {...rest}
       />
     );
