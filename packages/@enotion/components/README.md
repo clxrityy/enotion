@@ -1,5 +1,10 @@
 # `@enotion/components`
 
+- [Installation](#installation)
+- [Inherit Styles](#inherit-styles-optional)
+- [Customize Styles](#customize-syles)
+- [Components](#components)
+
 ## Installation
 
 ```bash
@@ -11,7 +16,7 @@ yarn add @enotion/components
 pnpm add @enotion/components
 ```
 
-## Inherit Styles (Optional)
+## Inherit styles (Optional)
 
 To inherit the global styles, import the package CSS in your main application file (e.g., `index.tsx`, `App.tsx`, or `globals.css` for Next.js):
 
@@ -25,11 +30,17 @@ import "@enotion/components/index.css";
 @import "@enotion/components/index.css";
 ```
 
+## Customize styles
+
+Most components accept a `colorPalette` prop to customize their color. [See available color palettes here.](https://github.com/clxrityy/enotion/blob/main/packages/%40enotion/config/constants/colors.ts)
+
 ## Components
 
 - [Skeleton](#skeleton)
   - [`<Skeleton />`](#skeleton-)
   - [`<SkeletonWrapper />`](#skeletonwrapper-)
+- `<Button />`
+- `<Input />`
 
 ---
 
@@ -84,3 +95,5 @@ import { SkeletonWrapper, Skeleton } from "@enotion/components";
   <p>Paragraph 2</p>
 </SkeletonWrapper>;
 ```
+
+---
