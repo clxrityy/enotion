@@ -1,6 +1,6 @@
 packages:
   - apps/*
-  - packages/**/*
+  - packages/@enotion/*
 
 onlyBuiltDependencies:
   - "@tailwindcss/oxide"
