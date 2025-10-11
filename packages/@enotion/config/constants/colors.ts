@@ -88,9 +88,9 @@ export const ColorPalettes: Record<string, ColorPalleteColors> = {
   },
   solarized: {
     background: "#fdf6e3",
-    foreground: "#657b83",
+    foreground: "#997766",
     border: "#eee8d5",
-    primary: "#268bd2",
+    primary: "#2bdfff",
     secondary: "#d33682",
     tertiary: "#2aa198",
     accent: "#6c71c4",
