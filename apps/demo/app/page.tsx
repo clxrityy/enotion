@@ -23,9 +23,7 @@ export default function Home(): JSX.Element {
     <div className={styles.page} {...preloadProvider}>
       <main className={styles.main}>
         this page should preload the provider on hover
-        <SkeletonWrapper
-          isLoading={loading}
-        >
+        <SkeletonWrapper isLoading={loading}>
           <div
             style={{
               marginTop: "20px",
@@ -42,18 +40,48 @@ export default function Home(): JSX.Element {
               onClick={() => push("/preload-test")}
             >
               Go to preload test to view preloaded context value <br />
-              <span style={{ fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center", gap: "5px", marginTop: "5px" }}>
-                <pre style={{
-                  fontWeight: 700
-                }}>trustInBlue</pre> color palette
+              <span
+                style={{
+                  fontSize: "12px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "5px",
+                  marginTop: "5px",
+                }}
+              >
+                <pre
+                  style={{
+                    fontWeight: 700,
+                  }}
+                >
+                  trustInBlue
+                </pre>{" "}
+                color palette
               </span>
             </Button>
             <Button colorPalette="dark" onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching
               <br />
-              <span style={{ fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center", gap: "5px", marginTop: "5px" }}><pre style={{
-                fontWeight: 700,
-              }}>dark</pre> color palette</span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "5px",
+                  marginTop: "5px",
+                }}
+              >
+                <pre
+                  style={{
+                    fontWeight: 700,
+                  }}
+                >
+                  dark
+                </pre>{" "}
+                color palette
+              </span>
             </Button>
             <Input
               placeholder="Dark color palette input"
