@@ -1,6 +1,6 @@
 "use client";
 import { usePreload } from "@enotion/hooks";
-import { Skeleton, SkeletonWrapper, Button, Input } from "@enotion/components";
+import { SkeletonWrapper, Button, Input } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -20,24 +20,12 @@ export default function Home(): JSX.Element {
   }, []);
 
   return (
-    <SkeletonWrapper
-      isLoading={loading}
-      skeleton={
-        <Skeleton
-          className={styles.main}
-          style={{
-            width: "100%",
-            height: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        />
-      }
-    >
-      <div className={styles.page} {...preloadProvider}>
-        <main className={styles.main}>
-          this page should preload the provider on hover
+    <div className={styles.page} {...preloadProvider}>
+      <main className={styles.main}>
+        this page should preload the provider on hover
+        <SkeletonWrapper
+          isLoading={loading}
+        >
           <div
             style={{
               marginTop: "20px",
@@ -50,22 +38,31 @@ export default function Home(): JSX.Element {
             }}
           >
             <Button
-              colorPalette="warmSpring"
+              colorPalette="trustInBlue"
               onClick={() => push("/preload-test")}
             >
-              Go to preload test to view preloaded context value
+              Go to preload test to view preloaded context value <br />
+              <span style={{ fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center", gap: "5px", marginTop: "5px" }}>
+                <pre style={{
+                  fontWeight: 700
+                }}>trustInBlue</pre> color palette
+              </span>
             </Button>
             <Button colorPalette="dark" onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching
+              <br />
+              <span style={{ fontSize: "12px", display: "flex", justifyContent: "center", alignItems: "center", gap: "5px", marginTop: "5px" }}><pre style={{
+                fontWeight: 700,
+              }}>dark</pre> color palette</span>
             </Button>
             <Input
-              placeholder="Test Input"
+              placeholder="Dark color palette input"
               colorPallete="dark"
               onChange={(e) => console.log(e.target.value)}
             />
           </div>
-        </main>
-      </div>
-    </SkeletonWrapper>
+        </SkeletonWrapper>
+      </main>
+    </div>
   );
 }
