@@ -4,7 +4,7 @@ export type Color =
   | [number, number, number]
   | [number, number, number, number];
 
-export type ColorPalleteColors = {
+export type ColorPallete = {
   background: Color;
   foreground: Color;
   border: Color;
@@ -52,10 +52,9 @@ export function parseColor(color: Color): string {
  * - `trustInBlue`: A professional palette with shades of blue and gray.
  * - `contemporaryCollegiate`: A fresh palette with collegiate-inspired colors.
  * - `moodyRose`: A sophisticated palette with rose and muted tones.
- * @see https://augustash.com/blog/website-ux-design/25-amazing-website-color-schemes
  */
 
-export const ColorPalettes: Record<string, ColorPalleteColors> = {
+export const ColorPalettes: Record<string, ColorPallete> = {
   default: {
     background: "#ffffff",
     foreground: "#000000",
@@ -161,6 +160,25 @@ export const ColorPalettes: Record<string, ColorPalleteColors> = {
     error: "#f44747",
     info: "#569cd6",
   },
+  monochrome: {
+    background: "#ffffff",
+    foreground: "#000000",
+    border: "#cccccc",
+    primary: "#666666",
+    secondary: "#999999",
+    tertiary: "#333333",
+    accent: "#000000",
+    highlight: "#f0f0f0",
+    muted: "#e0e0e0",
+    success: "#28a745",
+    warning: "#ffc107",
+    error: "#dc3545",
+    info: "#17a2b8",
+  },
 };
 
+/**
+ * Type representing the keys of the ColorPalettes object.
+ * @see {@link ColorPalettes}
+ */
 export type ColorPaletteType = keyof typeof ColorPalettes;
