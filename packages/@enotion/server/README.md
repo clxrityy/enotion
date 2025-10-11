@@ -15,17 +15,17 @@ pnpm add @enotion/server
 
 ## Modules
 
-- [System](#system)
+- [`@enotion/server/system`](#system)
   - [CPU](#cpu)
   - [Memory](#memory)
   - [OS](#os)
   - [Performance](#performance)
   - [Disk](#disk)
-- [Network](#network)
+- [`@enotion/server/network`](#enotionservernetwork)
 
 ---
 
-### System
+### `@enotion/server/system`
 
 > A collection of utilities to retrieve system information such as CPU, memory, OS, and performance metrics.
 
@@ -173,7 +173,7 @@ console.log(usage);
 
 ---
 
-### Network
+### `@enotion/server/network`
 
 > A collection of utilities to retrieve network information such as IP addresses and network interfaces.
 
