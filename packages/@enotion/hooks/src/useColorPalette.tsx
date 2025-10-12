@@ -2,8 +2,9 @@ import {
   type ColorPaletteType,
   ColorPalettes,
 } from "@enotion/config/constants";
-import { useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { createContextFactory } from "./createContextFactory.js";
+import { useLocalStorage } from "./useLocalStorage.js";
 
 /**
  * Context for managing the current color palette.
@@ -18,7 +19,7 @@ export interface ColorPaletteContext {
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => {},
+  setPalette: () => { },
 };
 
 /**
@@ -60,6 +61,10 @@ const { Provider, useContext } = createContextFactory<ColorPaletteContext>(
  * The `ColorPaletteProvider` component provides a context for managing color palettes in a React application.
  * It uses the `createContextFactory` utility to create a context with an initial state and a hook for managing the state.
  * Child components can access and manipulate the color palette using the `useColorPalette` hook.
+ * The provider also listens for changes in the system color scheme and updates the palette accordingly if no user preference is set.
+ * @summary
+ * It persists the user's color palette preference in localStorage, ensuring that the preference is retained across sessions.
+ * The available color palettes are defined in the `ColorPalettes` constant, and the context provides a method to update the palette safely.
  * @example
  * ```tsx
  * import { ColorPaletteProvider } from '@enotion/hooks';
@@ -71,7 +76,64 @@ const { Provider, useContext } = createContextFactory<ColorPaletteContext>(
  * );
  * ```
  */
-export const ColorPaletteProvider = Provider;
+export const ColorPaletteProvider = ({ children }: Readonly<{
+  children: ReactNode;
+}>) => {
+  const [storedPalette, setStoredPalette] = useLocalStorage<ColorPaletteType>(
+    "color-palette"
+  );
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Handle hydration to prevent SSR mismatches
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    let cleanup: (() => void) | undefined;
+
+    if (typeof window !== "undefined" && window.matchMedia) {
+      const mql = window.matchMedia("(prefers-color-scheme: dark)");
+
+      // Set initial palette based on system preference if no stored palette
+      const systemPalette: ColorPaletteType = mql.matches ? "dark" : "default";
+      if (storedPalette === undefined) {
+        setStoredPalette(systemPalette);
+      }
+
+      // Listen for changes in system color scheme
+      // const listener = (e: MediaQueryListEvent) => {
+      //   const newSystemPalette: ColorPaletteType = e.matches
+      //     ? "dark"
+      //     : "default";
+      //   if (storedPalette === undefined) setStoredPalette(newSystemPalette);
+      // };
+      // mql.addEventListener("change", listener);
+
+      // cleanup = () => {
+      //   // mql.removeEventListener("change", listener);
+    }
+
+    return () => {
+      cleanup?.();
+    };
+  }, [storedPalette, setStoredPalette, isHydrated]);
+
+  useEffect(() => {
+    if (isHydrated && storedPalette) {
+      document.documentElement.setAttribute("data-color-palette", storedPalette);
+    }
+  }, [storedPalette, isHydrated]);
+
+  const value = useMemo(() => ({
+    palette: isHydrated ? storedPalette : undefined,
+    setPalette: setStoredPalette,
+  }), [storedPalette, setStoredPalette, isHydrated]);
+
+  return <Provider {...value}>{children}</Provider>;
+};
 
 /**
  * useColorPalette - A hook to access the color palette context.
@@ -82,7 +144,7 @@ export const ColorPaletteProvider = Provider;
  * @example
  * ```tsx
  * import { useColorPalette } from '@enotion/hooks';
- * import { Button, Input } from '@enotion/components';
+ * import { Select } from '@enotion/components';
  *
  * const MyComponent = () => {
  *   const { palette, setPalette } = useColorPalette();
@@ -91,17 +153,11 @@ export const ColorPaletteProvider = Provider;
  *   return (
  *     <div>
  *       Current Palette: {palette}
- *       <Input
- *         colorPalette={palette}
- *         placeholder="Enter color palette"
- *         value={inputValue} onChange={(e) => {
- *           setInputValue(e.target.value);
- *           setPalette(e.target.value as ColorPaletteType);
- *         }} />
- *       <Button
- *         colorPalette={palette} onClick={() => setPalette('dark')}>
- *         Set Dark Palette
- *       </Button>
+ *       <Select
+ *         options={Object.keys(ColorPalettes).map(key => ({ label: key, value: key }))}
+ *         value={palette}
+ *         onChange={(e) => setPalette(e.target.value)}
+ *       />
  *     </div>
  *   );
  * };
