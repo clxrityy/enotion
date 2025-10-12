@@ -42,13 +42,14 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `useLocalStorage()` hook
 - (**added**) Added `@testing-library/react` dev dependency for testing React hooks
 - (**added**) Added `useEventListener()` hook
-- (**added**) Added `useTheme()` hook
+- (**added**) Added `useTheme()` hook & `<ThemeProvider />` for managing themes
 - (**added**) Added `useScript()` hook
 - (**added**) Added `useVisibility()` hook
 - (**added**) Added `useOutsideClick()` hook
 - (**added**) Added `useScreenSize()` hook
 - (**added**) Added `useElementSize()` hook
 - (**changed**) More extensive and concise JSDoc comments for usage
+- (**added**) Added `useColorPalette()` hook & `<ColorPaletteProvider />` for managing color palettes
 
 ##### Components
 
@@ -56,6 +57,7 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
 - (**added**) Added `<Button />` component
 - (**added**) Added `<Input />` component
+- (**added**) Added `<Link />` component
 
 ##### Server
 
