@@ -6,7 +6,7 @@ import {
 import "./styles/input.css";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  colorPallete?: ColorPaletteType;
+  colorPalette?: ColorPaletteType;
 }
 
 /**
@@ -17,8 +17,8 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * <Input placeholder="Enter text" colorPallete="dark" />
  * ```
  */
-export function Input({ colorPallete, ...rest }: InputProps) {
-  const palette = colorPallete ? ColorPalettes[colorPallete] : null;
+export function Input({ colorPalette, ...rest }: InputProps) {
+  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
 
   if (palette) {
     return (
