@@ -1,7 +1,9 @@
-import { type ColorPaletteType, ColorPalettes } from "@enotion/config/constants";
+import {
+  type ColorPaletteType,
+  ColorPalettes,
+} from "@enotion/config/constants";
 import { useState } from "react";
 import { createContextFactory } from "./createContextFactory.js";
-
 
 /**
  * Context for managing the current color palette.
@@ -16,20 +18,24 @@ export interface ColorPaletteContext {
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => { },
-}
+  setPalette: () => {},
+};
 
 /**
  *
  */
 const useColorPaletteContext = () => {
-  const [palette, setPalette] = useState<ColorPaletteType | undefined>(initialColorPaletteContext.palette);
+  const [palette, setPalette] = useState<ColorPaletteType | undefined>(
+    initialColorPaletteContext.palette,
+  );
 
   const updatePalette = (newPalette: ColorPaletteType) => {
     if (ColorPalettes[newPalette]) {
       setPalette(newPalette);
     } else {
-      console.warn(`Invalid color palette: ${newPalette}. Falling back to undefined.`);
+      console.warn(
+        `Invalid color palette: ${newPalette}. Falling back to undefined.`,
+      );
       setPalette(undefined);
     }
   };
@@ -38,7 +44,7 @@ const useColorPaletteContext = () => {
     palette,
     setPalette: updatePalette,
   };
-}
+};
 
 const { Provider, useContext } = createContextFactory<ColorPaletteContext>(
   initialColorPaletteContext,
