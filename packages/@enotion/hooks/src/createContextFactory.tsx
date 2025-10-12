@@ -24,7 +24,7 @@ export type ContextFactory = <T>(
   useContextState: () => T,
 ) => {
   Consumer: Consumer<T>;
-  Provider: FC<Readonly<{ children: ReactNode }>>;
+  Provider: FC<Readonly<{ children: ReactNode; context?: {} }>>;
   useContext: () => T;
 };
 
