@@ -1,4 +1,4 @@
-import { type Dispatch, type SetStateAction, useState } from "react";
+import { type Dispatch, type SetStateAction, useState, useEffect, useCallback } from "react";
 
 type DispatchAction<T> = T | ((prevState: T) => T);
 
@@ -6,7 +6,9 @@ type ErrorDispatch = Dispatch<SetStateAction<Error | null>>;
 
 function setItem(key: string, value: unknown, setError: ErrorDispatch): void {
   try {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    }
   } catch (error) {
     setError(error as Error);
   }
@@ -14,8 +16,11 @@ function setItem(key: string, value: unknown, setError: ErrorDispatch): void {
 
 function getItem<T>(key: string, setError: ErrorDispatch): T | undefined {
   try {
-    const data = window.localStorage.getItem(key);
-    return data ? (JSON.parse(data) as T) : undefined;
+    if (typeof window !== "undefined") {
+      const data = window.localStorage.getItem(key);
+      return data ? (JSON.parse(data) as T) : undefined;
+    }
+    return undefined;
   } catch (error) {
     setError(error as Error);
     return undefined;
@@ -24,7 +29,9 @@ function getItem<T>(key: string, setError: ErrorDispatch): T | undefined {
 
 function removeItem(key: string, setError: ErrorDispatch): void {
   try {
-    window.localStorage.removeItem(key);
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(key);
+    }
   } catch (error) {
     setError(error as Error);
   }
@@ -58,13 +65,17 @@ function removeItem(key: string, setError: ErrorDispatch): void {
  */
 export function useLocalStorage<T>(key: string, initialValue?: T) {
   const [error, setError] = useState<Error | null>(null);
-  const [value, setValue] = useState<T>(() => {
+  const [value, setValue] = useState<T>(initialValue as T);
+
+  // Initialize from localStorage after hydration
+  useEffect(() => {
     const data = getItem<T>(key, setError);
+    if (data !== undefined) {
+      setValue(data);
+    }
+  }, [key]);
 
-    return (data ?? initialValue) as T;
-  });
-
-  function handleDispatch(action: DispatchAction<T>) {
+  const handleDispatch = useCallback((action: DispatchAction<T>) => {
     if (typeof action === "function") {
       setValue((prevState) => {
         const newValue = (action as (prevState: T) => T)(prevState);
@@ -75,12 +86,12 @@ export function useLocalStorage<T>(key: string, initialValue?: T) {
       setValue(action);
       setItem(key, action, setError);
     }
-  }
+  }, [key]);
 
-  function handleRemove() {
+  const handleRemove = useCallback(() => {
     setValue(undefined as T);
     removeItem(key, setError);
-  }
+  }, [key]);
 
   return [value, handleDispatch, handleRemove, error] as const;
 }
