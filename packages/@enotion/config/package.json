@@ -18,9 +18,16 @@
     "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts",
     "./constants": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+      "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "index.d.ts",
+    "typescript/**/*",
+    "jest/**/*",
+    "tsup/**/*",
+    "dist/**/*"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^30.0.0",
