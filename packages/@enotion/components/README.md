@@ -41,6 +41,8 @@ Most components accept a `colorPalette` prop to customize their color. [See avai
   - [`<SkeletonWrapper />`](#skeletonwrapper-)
 - `<Button />`
 - `<Input />`
+- `<Link />`
+- `<Select />`
 
 ---
 
