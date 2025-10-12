@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { CSSProperties, InputHTMLAttributes } from "react";
 import {
   type ColorPaletteType,
   ColorPalettes,
@@ -32,7 +32,7 @@ export function Input({ colorPalette, ...rest }: InputProps) {
             "--input-placeholder-color": palette.muted,
             "--input-disabled-background-color": palette.muted,
             ...rest.style,
-          } as React.CSSProperties
+          } as CSSProperties
         }
         {...rest}
       />
