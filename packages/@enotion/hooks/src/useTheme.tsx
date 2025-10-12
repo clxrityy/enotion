@@ -1,4 +1,12 @@
-import { ReactNode, useEffect, useMemo, useState, useCallback, createContext, useContext } from "react";
+import {
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+  createContext,
+  useContext,
+} from "react";
 import { useLocalStorage } from "./useLocalStorage.js";
 
 /** Theme type representing the possible theme values */
@@ -28,9 +36,9 @@ export interface ThemeContext {
 const initialThemeContext: ThemeContext = {
   theme: "system",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => { },
+  setTheme: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => { },
+  toggle: () => {},
 };
 
 // Create a simple context without the factory pattern
@@ -112,19 +120,26 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     if (isHydrated) {
       if (storedTheme === "system") {
         // Determine actual system theme
-        const systemIsDark = typeof window !== "undefined" &&
+        const systemIsDark =
+          typeof window !== "undefined" &&
           window.matchMedia &&
           window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute("data-theme", systemIsDark ? "dark" : "light");
+        document.documentElement.setAttribute(
+          "data-theme",
+          systemIsDark ? "dark" : "light",
+        );
       } else {
         document.documentElement.setAttribute("data-theme", storedTheme);
       }
     }
   }, [storedTheme, isHydrated]);
 
-  const setThemeCallback = useCallback((theme: Theme) => {
-    setStoredTheme(theme);
-  }, [setStoredTheme]);
+  const setThemeCallback = useCallback(
+    (theme: Theme) => {
+      setStoredTheme(theme);
+    },
+    [setStoredTheme],
+  );
 
   const toggleCallback = useCallback(() => {
     setStoredTheme(storedTheme === "dark" ? "light" : "dark");

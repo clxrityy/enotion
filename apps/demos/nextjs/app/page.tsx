@@ -22,7 +22,6 @@ export default function Home(): JSX.Element {
     return () => clearTimeout(timer);
   }, []);
 
-
   return (
     <div className={styles.page} {...preloadProvider}>
       <main className={styles.main}>
@@ -44,7 +43,6 @@ export default function Home(): JSX.Element {
               onClick={() => push("/preload-test")}
             >
               Go to preload test to view preloaded context value <br />
-
             </Button>
             <Button colorPalette={palette} onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching

@@ -5,7 +5,6 @@ import "./styles/select.css";
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: { value: string; label: string }[];
   colorPalette?: ColorPaletteType;
-
 }
 
 /**

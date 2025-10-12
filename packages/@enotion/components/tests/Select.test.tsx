@@ -13,9 +13,7 @@ describe("Select", () => {
       { value: "option2", label: "Option 2" },
     ];
 
-    render(
-      <Select options={options} />
-    );
+    render(<Select options={options} />);
     const select = screen.getByRole("combobox");
     expect(select).toBeDefined();
   });
@@ -26,9 +24,7 @@ describe("Select", () => {
       { value: "option2", label: "Option 2" },
     ];
 
-    render(
-      <Select options={options} colorPalette="dark" />
-    );
+    render(<Select options={options} colorPalette="dark" />);
     const select = screen.getByRole("combobox");
     expect(select).toBeDefined();
   });
@@ -40,9 +36,7 @@ describe("Select", () => {
       { value: "option3", label: "Option 3" },
     ];
 
-    render(
-      <Select options={options} />
-    );
+    render(<Select options={options} />);
     const select = screen.getByRole("combobox");
     expect(select.children.length).toBe(3);
   });

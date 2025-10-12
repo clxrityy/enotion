@@ -19,7 +19,7 @@ export interface ColorPaletteContext {
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => { },
+  setPalette: () => {},
 };
 
 /**
@@ -76,12 +76,13 @@ const { Provider, useContext } = createContextFactory<ColorPaletteContext>(
  * );
  * ```
  */
-export const ColorPaletteProvider = ({ children }: Readonly<{
+export const ColorPaletteProvider = ({
+  children,
+}: Readonly<{
   children: ReactNode;
 }>) => {
-  const [storedPalette, setStoredPalette] = useLocalStorage<ColorPaletteType>(
-    "color-palette"
-  );
+  const [storedPalette, setStoredPalette] =
+    useLocalStorage<ColorPaletteType>("color-palette");
   const [isHydrated, setIsHydrated] = useState(false);
 
   // Handle hydration to prevent SSR mismatches
@@ -123,14 +124,20 @@ export const ColorPaletteProvider = ({ children }: Readonly<{
 
   useEffect(() => {
     if (isHydrated && storedPalette) {
-      document.documentElement.setAttribute("data-color-palette", storedPalette);
+      document.documentElement.setAttribute(
+        "data-color-palette",
+        storedPalette,
+      );
     }
   }, [storedPalette, isHydrated]);
 
-  const value = useMemo(() => ({
-    palette: isHydrated ? storedPalette : undefined,
-    setPalette: setStoredPalette,
-  }), [storedPalette, setStoredPalette, isHydrated]);
+  const value = useMemo(
+    () => ({
+      palette: isHydrated ? storedPalette : undefined,
+      setPalette: setStoredPalette,
+    }),
+    [storedPalette, setStoredPalette, isHydrated],
+  );
 
   return <Provider {...value}>{children}</Provider>;
 };

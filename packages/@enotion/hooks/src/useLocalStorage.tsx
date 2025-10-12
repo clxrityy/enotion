@@ -1,4 +1,10 @@
-import { type Dispatch, type SetStateAction, useState, useEffect, useCallback } from "react";
+import {
+  type Dispatch,
+  type SetStateAction,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 
 type DispatchAction<T> = T | ((prevState: T) => T);
 
@@ -75,18 +81,21 @@ export function useLocalStorage<T>(key: string, initialValue?: T) {
     }
   }, [key]);
 
-  const handleDispatch = useCallback((action: DispatchAction<T>) => {
-    if (typeof action === "function") {
-      setValue((prevState) => {
-        const newValue = (action as (prevState: T) => T)(prevState);
-        setItem(key, newValue, setError);
-        return newValue;
-      });
-    } else {
-      setValue(action);
-      setItem(key, action, setError);
-    }
-  }, [key]);
+  const handleDispatch = useCallback(
+    (action: DispatchAction<T>) => {
+      if (typeof action === "function") {
+        setValue((prevState) => {
+          const newValue = (action as (prevState: T) => T)(prevState);
+          setItem(key, newValue, setError);
+          return newValue;
+        });
+      } else {
+        setValue(action);
+        setItem(key, action, setError);
+      }
+    },
+    [key],
+  );
 
   const handleRemove = useCallback(() => {
     setValue(undefined as T);
