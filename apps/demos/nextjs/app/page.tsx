@@ -85,7 +85,7 @@ export default function Home(): JSX.Element {
             </Button>
             <Input
               placeholder="Dark color palette input"
-              colorPallete="dark"
+              colorPalette="dark"
               onChange={(e) => console.log(e.target.value)}
             />
           </div>
