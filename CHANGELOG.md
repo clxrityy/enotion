@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 - (**changed**) Adjusted some linting rules
 - (**changed**) Replaced log script with new version script to automate versioning across all packages
 
-##### Config
+##### Config (`@enotion/config`)
 
 - (**added**) Initialized config package (for configurations throughout the entire repo)
 - (**changed**) Moved typescript-config into a config package (@enotion/config/typescript)
@@ -32,7 +32,7 @@ All notable changes to this project will be documented in this file.
 - (**changed**) Updated TypeScript `base` config to include ESNext in library target
 - (**changed**) Updated tsup config to build .mts files for ESM support
 
-##### Hooks
+##### Hooks (`@enotion/hooks`)
 
 - (**added**) Initialized package
 - (**added**) Set up test environment with jest
@@ -51,7 +51,7 @@ All notable changes to this project will be documented in this file.
 - (**changed**) More extensive and concise JSDoc comments for usage
 - (**added**) Added `useColorPalette()` hook & `<ColorPaletteProvider />` for managing color palettes
 
-##### Components
+##### Components (`@enotion/components`)
 
 - (**added**) Initialized package
 - (**added**) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
@@ -59,7 +59,7 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `<Input />` component
 - (**added**) Added `<Link />` component
 
-##### Server
+##### Server (`@enotion/server`)
 
 - (**added**) Initialized package
 - (**added**) Added `getSystemSnapshot()` function to get a snapshot of the system information
