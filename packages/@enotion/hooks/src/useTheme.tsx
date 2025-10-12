@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { createContextFactory } from "./createContextFactory.js";
+import { ReactNode, useEffect, useMemo, useState, useCallback, createContext, useContext } from "react";
 import { useLocalStorage } from "./useLocalStorage.js";
 
 /** Theme type representing the possible theme values */
@@ -29,34 +28,13 @@ export interface ThemeContext {
 const initialThemeContext: ThemeContext = {
   theme: "system",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => {},
+  setTheme: () => { },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => {},
+  toggle: () => { },
 };
 
-const useThemeContext = () => {
-  const [theme, setTheme] = useState<Theme>(initialThemeContext.theme);
-
-  const [_, setStoredTheme] = useLocalStorage<Theme>("theme", theme);
-
-  useEffect(() => {}, []);
-
-  const updateTheme = (newTheme: Theme) => {
-    setTheme(newTheme);
-    setStoredTheme(newTheme);
-  };
-
-  return {
-    theme: theme,
-    setTheme: updateTheme,
-    toggle: () => updateTheme(theme === "dark" ? "light" : "dark"),
-  };
-};
-
-const { Provider, useContext } = createContextFactory<ThemeContext>(
-  initialThemeContext,
-  useThemeContext,
-);
+// Create a simple context without the factory pattern
+const Context = createContext<ThemeContext>(initialThemeContext);
 
 /**
  * ThemeProvider - A context provider component for the theme context.
@@ -90,44 +68,78 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     "theme",
     "system",
   );
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Handle hydration to prevent SSR mismatches
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
+    if (!isHydrated) return;
+
     let cleanup: (() => void) | undefined;
 
     // Check if matchMedia is available (it might not be in test environments)
     if (typeof window !== "undefined" && window.matchMedia) {
       const mql = window.matchMedia("(prefers-color-scheme: dark)");
 
-      // Set initial theme based on system preference
-      const systemTheme: Theme = mql.matches ? "dark" : "light";
-      if (systemTheme !== storedTheme) setStoredTheme(systemTheme);
+      // Only auto-set system preference if user hasn't explicitly chosen a theme
+      if (storedTheme === "system") {
+        const systemTheme: Theme = mql.matches ? "dark" : "light";
+        // Apply system theme to DOM but keep stored theme as "system"
+        document.documentElement.setAttribute("data-theme", systemTheme);
+      }
 
-      const listernr = (e: MediaQueryListEvent) =>
-        setStoredTheme(e.matches ? "dark" : "light");
-      mql.addEventListener("change", listernr);
+      const listener = (e: MediaQueryListEvent) => {
+        // Only respond to system changes if user has "system" preference
+        if (storedTheme === "system") {
+          const newSystemTheme: Theme = e.matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", newSystemTheme);
+        }
+      };
+      mql.addEventListener("change", listener);
 
-      cleanup = () => mql.removeEventListener("change", listernr);
+      cleanup = () => mql.removeEventListener("change", listener);
     }
 
     return () => {
       cleanup?.();
     };
-  }, [storedTheme, setStoredTheme]);
+  }, [storedTheme, isHydrated]);
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", storedTheme);
-  }, [storedTheme]);
+    if (isHydrated) {
+      if (storedTheme === "system") {
+        // Determine actual system theme
+        const systemIsDark = typeof window !== "undefined" &&
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", systemIsDark ? "dark" : "light");
+      } else {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+      }
+    }
+  }, [storedTheme, isHydrated]);
+
+  const setThemeCallback = useCallback((theme: Theme) => {
+    setStoredTheme(theme);
+  }, [setStoredTheme]);
+
+  const toggleCallback = useCallback(() => {
+    setStoredTheme(storedTheme === "dark" ? "light" : "dark");
+  }, [storedTheme, setStoredTheme]);
 
   const value = useMemo(
     () => ({
-      theme: storedTheme,
-      toggle: () => setStoredTheme(storedTheme === "dark" ? "light" : "dark"),
-      setTheme: setStoredTheme,
+      theme: isHydrated ? storedTheme : "system",
+      toggle: toggleCallback,
+      setTheme: setThemeCallback,
     }),
-    [storedTheme, setStoredTheme],
+    [storedTheme, isHydrated, setThemeCallback, toggleCallback],
   );
 
-  return <Provider {...value}>{children}</Provider>;
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
 /**
@@ -159,4 +171,4 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
  * @see {@link createContextFactory} - A utility for creating context providers and hooks.
  * @module useTheme
  */
-export const useTheme = useContext;
+export const useTheme = () => useContext(Context);

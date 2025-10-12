@@ -6,8 +6,7 @@ import {
   it,
   expect,
 } from "@jest/globals";
-import { render, screen } from "@testing-library/react";
-import { useEffect } from "react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { useTheme, ThemeProvider } from "../src/useTheme";
 
 // Mock matchMedia before any tests run
@@ -59,22 +58,40 @@ describe("useTheme", () => {
     expect(screen.getByTestId("setTheme").textContent).toBe("function");
   });
 
-  it("should update theme to 'light'", () => {
+  it("should update theme to 'light'", async () => {
     const Component = () => {
       const { theme, setTheme } = useTheme();
 
-      // Set theme to 'light' for testing
-      useEffect(() => {
-        setTheme("light");
-      }, [setTheme]);
-      return <div data-testid="theme">{theme}</div>;
+      return (
+        <>
+          <div data-testid="theme">{theme}</div>
+          <button
+            type="button"
+            data-testid="set-light-button"
+            onClick={() => setTheme("light")}
+          >
+            Set Light
+          </button>
+        </>
+      );
     };
+
     render(
       <ThemeProvider>
         <Component />
       </ThemeProvider>,
     );
 
-    expect(screen.getByText("light")).toBeDefined();
+    // Initially should be system
+    expect(screen.getByTestId("theme").textContent).toBe("system");
+
+    // Click to set theme to light
+    const button = screen.getByTestId("set-light-button");
+    fireEvent.click(button);
+
+    // Wait for theme update
+    await waitFor(() => {
+      expect(screen.getByTestId("theme").textContent).toBe("light");
+    });
   });
 });

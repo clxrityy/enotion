@@ -1,6 +1,6 @@
 "use client";
-import { usePreload } from "@enotion/hooks";
-import { SkeletonWrapper, Button, Input } from "@enotion/components";
+import { usePreload, useTheme } from "@enotion/hooks";
+import { SkeletonWrapper, Button } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -13,11 +13,15 @@ export default function Home(): JSX.Element {
   const { push } = useRouter();
 
   const [loading, setLoading] = useState<boolean>(true);
+  const { theme, toggle } = useTheme();
+
+  const palette = theme === "dark" ? "dark" : "default";
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <div className={styles.page} {...preloadProvider}>
@@ -36,58 +40,32 @@ export default function Home(): JSX.Element {
             }}
           >
             <Button
-              colorPalette="trustInBlue"
+              colorPalette={palette}
               onClick={() => push("/preload-test")}
             >
               Go to preload test to view preloaded context value <br />
-              <span
-                style={{
-                  fontSize: "12px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "5px",
-                  marginTop: "5px",
-                }}
-              >
-                <pre
-                  style={{
-                    fontWeight: 700,
-                  }}
-                >
-                  trustInBlue
-                </pre>{" "}
-                color palette
-              </span>
+
             </Button>
-            <Button colorPalette="dark" onClick={() => push("/stats")}>
+            <Button colorPalette={palette} onClick={() => push("/stats")}>
               Go to stats page to view server module data fetching
-              <br />
-              <span
-                style={{
-                  fontSize: "12px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "5px",
-                  marginTop: "5px",
-                }}
-              >
-                <pre
-                  style={{
-                    fontWeight: 700,
-                  }}
-                >
-                  dark
-                </pre>{" "}
-                color palette
-              </span>
             </Button>
-            <Input
-              placeholder="Dark color palette input"
-              colorPalette="dark"
-              onChange={(e) => console.log(e.target.value)}
-            />
+          </div>
+
+          <div
+            style={{
+              marginTop: "20px",
+              fontSize: "14px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "10px",
+            }}
+          >
+            <div>Current theme: {theme}</div>
+            <Button colorPalette={palette} onClick={toggle}>
+              Toggle Theme
+            </Button>
           </div>
         </SkeletonWrapper>
       </main>
