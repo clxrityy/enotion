@@ -10,7 +10,7 @@ export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   colorPalette?: ColorPaletteType;
 }
 
-const palletes = ColorPalettes;
+const palettes = ColorPalettes;
 
 /**
  * A customizable Button component with optional color palette support.
@@ -23,7 +23,7 @@ const palletes = ColorPalettes;
  * ```
  */
 export function Button({ children, colorPalette, ...rest }: ButtonProps) {
-  const palette = colorPalette ? palletes[colorPalette] : null;
+  const palette = colorPalette ? palettes[colorPalette] : null;
 
   return (
     <button
@@ -31,21 +31,21 @@ export function Button({ children, colorPalette, ...rest }: ButtonProps) {
       style={{
         ...(palette
           ? ({
-              backgroundColor: palette.primary,
-              color: palette.foreground,
-              borderColor: palette.border,
-              "--button-hover-background-color": palette.accent,
-              "--button-active-background-color": palette.primary,
-              "--button-disabled-background-color": palette.muted,
-              "--button-disabled-text-color": palette.background,
-              "--button-hover-box-shadow": `0 0 0 3px ${palette.accent}33`,
-              "--button-focus-ring-color": palette.accent,
-              "--button-backdrop-background-color": palette.muted,
-              ...rest.style,
-            } as CSSProperties)
+            backgroundColor: palette.primary,
+            color: palette.foreground,
+            borderColor: palette.border,
+            "--button-hover-background-color": palette.accent,
+            "--button-active-background-color": palette.primary,
+            "--button-disabled-background-color": palette.muted,
+            "--button-disabled-text-color": palette.background,
+            "--button-hover-box-shadow": `0 0 0 3px ${palette.accent}33`,
+            "--button-focus-ring-color": palette.accent,
+            "--button-backdrop-background-color": palette.muted,
+            ...rest.style,
+          } as CSSProperties)
           : {
-              ...(rest.style as CSSProperties),
-            }),
+            ...(rest.style as CSSProperties),
+          }),
       }}
       {...rest}
     >
