@@ -8,7 +8,7 @@ import {
   isValidHexColor,
   blendHexColors,
   parseColor,
-} from "../utils/colors.js";
+} from "../utils/colors";
 import { describe, expect, it } from "@jest/globals";
 
 describe("Color Utilities", () => {
