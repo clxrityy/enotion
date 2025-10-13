@@ -1,5 +1,4 @@
 declare module "@enotion/config";
-// declare module "@enotion/config/constants";
 declare module "@enotion/config/tsup/tsup.config";
 declare module "@enotion/config/tsup/tsup.entry.config";
 declare module "@enotion/config/jest/jest.config";
