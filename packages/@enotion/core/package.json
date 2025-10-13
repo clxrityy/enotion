@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Core package for enotion",
   "private": false,
-  "type": "module",
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
