@@ -4,5 +4,9 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   ...config,
   entry: ["constants/index.ts", "utils/index.ts"],
-  dts: true,
+  dts: {
+    entry: ["constants/index.ts", "utils/index.ts"],
+  },
+  clean: true,
+  outDir: "dist",
 });
