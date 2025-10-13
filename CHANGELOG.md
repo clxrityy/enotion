@@ -65,6 +65,7 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `<Card />` component
 - (**added**) Added CSS files for each component in a `styles/` folder
 - (**added**) Added `colorPalette` prop to components for easy color customization
+- (**added**) Added `<Search />` component for searching through data
 
 ##### Server (`@enotion/server`)
 

@@ -44,6 +44,7 @@ Most components accept a `colorPalette` prop to customize their color. [See avai
 - `<Link />`
 - `<Select />`
 - `<Card />`
+- `<Search />`
 
 ---
 
