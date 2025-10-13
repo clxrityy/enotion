@@ -51,5 +51,6 @@
   "homepage": "https://github.com/clxrityy/enotion#readme",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packageManager": "pnpm@10.18.2"
 }

@@ -47,5 +47,6 @@
   "peerDependencies": {
     "@types/node": "^24.6.1",
     "typescript": "5.9.3"
-  }
+  },
+  "packageManager": "pnpm@10.18.2"
 }
