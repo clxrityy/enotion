@@ -44,16 +44,23 @@ export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
  * };
  * ```
  */
-export const Search = <T,>({ data, searchKey, render, colorPalette, placeholder, ...props }: SearchProps<T>) => {
-
+export const Search = <T,>({
+  data,
+  searchKey,
+  render,
+  colorPalette,
+  placeholder,
+  ...props
+}: SearchProps<T>) => {
   const { query, setQuery, filteredData } = useSearch<T>(data, searchKey);
 
-  const dataWithId = filteredData.map(item => ({ ...item, id: (item as any).id ?? (crypto.randomUUID() as UUID) }));
+  const dataWithId = filteredData.map((item) => ({
+    ...item,
+    id: (item as any).id ?? (crypto.randomUUID() as UUID),
+  }));
 
   return (
-    <div
-      {...props}
-    >
+    <div {...props}>
       <Input
         placeholder={placeholder || "Search..."}
         colorPalette={colorPalette}
@@ -67,4 +74,4 @@ export const Search = <T,>({ data, searchKey, render, colorPalette, placeholder,
       ))}
     </div>
   );
-}
+};

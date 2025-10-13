@@ -20,7 +20,7 @@ describe("Search", () => {
         data={data}
         searchKey="name"
         render={(item) => <div>{item.name}</div>}
-      />
+      />,
     );
     const input = screen.getByPlaceholderText("Search...");
     expect(input).toBeDefined();
@@ -33,7 +33,7 @@ describe("Search", () => {
         searchKey="name"
         colorPalette="dark"
         render={(item) => <div>{item.name}</div>}
-      />
+      />,
     );
     const input = screen.getByPlaceholderText("Search...");
     expect(input).toBeDefined();
@@ -45,7 +45,7 @@ describe("Search", () => {
         data={data}
         searchKey="name"
         render={(item) => <div>{item.name}</div>}
-      />
+      />,
     );
     const input = screen.getByPlaceholderText("Search...");
 

@@ -58,4 +58,4 @@ export const useSearch = <T,>(data: T[], searchKey: keyof T | (keyof T)[]) => {
   });
 
   return { query, setQuery, filteredData };
-}
+};
