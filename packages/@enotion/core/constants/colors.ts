@@ -1,26 +1,4 @@
-import { parseColor } from "../utils/colors.js";
-
-export type Color =
-  | number
-  | string
-  | [number, number, number]
-  | [number, number, number, number];
-
-export type ColorPalette = {
-  background: Color;
-  foreground: Color;
-  border: Color;
-  primary: Color;
-  secondary: Color;
-  tertiary: Color;
-  accent: Color;
-  highlight: Color;
-  muted: Color;
-  success: Color;
-  warning: Color;
-  error: Color;
-  info: Color;
-};
+import type { ColorPalette } from "../types/colors.js";
 
 /**
  * A collection of predefined color palettes.
@@ -31,123 +9,123 @@ export type ColorPalette = {
 export const ColorPalettes: Record<string, ColorPalette> = {
   default: {
     background: "#ffffff",
-    foreground: "#000000",
-    border: "#e0e0e0",
-    primary: "#1e90ff",
-    secondary: "#ff6347",
-    tertiary: "#32cd32",
-    accent: "#ff69b4",
-    highlight: "#ffff00",
-    muted: "#f0f0f0",
-    success: "#28a745",
-    warning: "#ffc107",
-    error: "#dc3545",
-    info: "#17a2b8",
+    foreground: "#1a1a1a", // Improved contrast while softer than pure black
+    border: "#e5e7eb", // More neutral gray
+    primary: "#2563eb", // Modern blue with better contrast
+    secondary: "#7c3aed", // Complementary purple for better harmony
+    tertiary: "#059669", // Balanced green
+    accent: "#dc2626", // Strong red for accents
+    highlight: "#fef3c7", // Soft yellow background for highlights
+    muted: "#f8fafc", // Slightly warmer neutral
+    success: "#10b981", // Modern green with good contrast
+    warning: "#f59e0b", // Amber for better readability
+    error: "#ef4444", // Modern red with proper contrast
+    info: "#3b82f6", // Clear blue for information
   },
   dark: {
-    background: "#121212",
-    foreground: "#ffffff",
-    border: "#333333",
-    primary: "#1e90ff",
-    secondary: "#1f7f7f",
-    tertiary: "#865777",
-    accent: "#ff69b4",
-    highlight: "#ffff00",
-    muted: "#2c2c2c",
-    success: "#28a745",
-    warning: "#ffc107",
-    error: "#dc3545",
-    info: "#17a2b8",
+    background: "#0f172a", // Deep blue-gray for reduced eye strain
+    foreground: "#f1f5f9", // Soft white for better readability
+    border: "#334155", // Subtle border that's visible but not harsh
+    primary: "#60a5fa", // Bright blue that works well on dark backgrounds
+    secondary: "#a78bfa", // Light purple for good contrast
+    tertiary: "#34d399", // Bright green that pops on dark
+    accent: "#fb7185", // Soft pink-red for accents
+    highlight: "#1e293b", // Darker highlight for selection
+    muted: "#1e293b", // Consistent muted background
+    success: "#22c55e", // Vibrant but not harsh green
+    warning: "#fbbf24", // Warm yellow for warnings
+    error: "#f87171", // Soft red that's not too aggressive
+    info: "#38bdf8", // Cyan-blue for information
   },
   solarized: {
-    background: "#fdf6e3",
-    foreground: "#997766",
-    border: "#eee8d5",
-    primary: "#2bdfff",
-    secondary: "#d33682",
-    tertiary: "#2aa198",
-    accent: "#6c71c4",
-    highlight: "#b58900",
-    muted: "#eee8d5",
-    success: "#859900",
-    warning: "#cb4b16",
-    error: "#dc322f",
-    info: "#6c71c4",
+    background: "#fdf6e3", // Classic solarized light background
+    foreground: "#586e75", // Improved contrast from original solarized
+    border: "#e3dcc9", // Warmer border tone
+    primary: "#268bd2", // Classic solarized blue
+    secondary: "#d33682", // Solarized magenta
+    tertiary: "#2aa198", // Solarized cyan
+    accent: "#6c71c4", // Solarized violet
+    highlight: "#eee8d5", // Subtle highlight
+    muted: "#f7f1e8", // Slightly warmer muted tone
+    success: "#859900", // Solarized green
+    warning: "#b58900", // Solarized yellow
+    error: "#dc322f", // Solarized red
+    info: "#268bd2", // Consistent with primary for clarity
   },
   warmSpring: {
-    background: "#f0efeb",
-    foreground: parseColor([15, 14, 15]),
-    primary: "#b294a0",
-    secondary: "#7c8d7d",
-    tertiary: "#d9966e",
-    accent: "#c2ccd6",
-    border: "#e6e2e0",
-    highlight: "#f2d5cf",
-    muted: "#e6e2e0",
-    success: "#a6d189",
-    warning: "#e6c384",
-    error: "#ea6962",
-    info: "#89b4fa",
+    background: "#fefbf7", // Warmer, softer white
+    foreground: "#4a4543", // Better contrast than original parseColor result
+    primary: "#c084a1", // Enhanced pink-purple for better visibility
+    secondary: "#8ba688", // Improved sage green
+    tertiary: "#e6a574", // Warmer terracotta
+    accent: "#b4c4d1", // Soft blue-gray
+    border: "#ede8e5", // Warm neutral border
+    highlight: "#f9ede6", // Subtle peach highlight
+    muted: "#f4ede9", // Warm muted background
+    success: "#7fb069", // Earthy green success
+    warning: "#d4a574", // Warm amber warning
+    error: "#d67570", // Soft coral error
+    info: "#7ba3d4", // Muted blue information
   },
   trustInBlue: {
-    background: "#e9e9e9",
-    foreground: "#1c2127",
-    primary: "#3148f6",
-    secondary: "#1c4b8f",
-    tertiary: "#4ea1f7",
-    accent: "#1c2127",
-    border: "#d0d0d0",
-    highlight: "#f0f8ff",
-    muted: "#d0d0d0",
-    success: "#28a745",
-    warning: "#ffc107",
-    error: "#dc3545",
-    info: "#17a2b8",
+    background: "#f8fafc", // Softer background with blue undertones
+    foreground: "#1e293b", // Professional dark gray-blue
+    primary: "#1d4ed8", // Strong, professional blue
+    secondary: "#1e40af", // Deeper blue for hierarchy
+    tertiary: "#3b82f6", // Brighter accent blue
+    accent: "#0f172a", // Deep contrast for emphasis
+    border: "#cbd5e1", // Blue-tinted border
+    highlight: "#eff6ff", // Light blue highlight
+    muted: "#f1f5f9", // Subtle blue-gray background
+    success: "#059669", // Professional green
+    warning: "#d97706", // Professional amber
+    error: "#dc2626", // Clean red
+    info: "#0284c7", // Information blue that fits theme
   },
   contemporaryCollegiate: {
-    background: "#f5f5f5",
-    foreground: parseColor([43, 45, 46]),
-    primary: "#296273",
-    secondary: "#a8d6f7",
-    tertiary: "#442e6f",
-    accent: "#f7f3f3",
-    border: "#e0e0e0",
-    highlight: "#fff5e1",
-    muted: "#e0e0e0",
-    success: "#49a07d",
-    warning: "#ee7e32",
-    error: "#f44336",
-    info: "#2196f3",
+    background: "#ffffff", // Clean white for modern feel
+    foreground: "#374151", // Improved contrast over parseColor result
+    primary: "#065f46", // Deep forest green (collegiate)
+    secondary: "#0ea5e9", // Bright sky blue
+    tertiary: "#7c2d12", // Rich burgundy
+    accent: "#f97316", // Vibrant orange accent
+    border: "#d1d5db", // Neutral gray border
+    highlight: "#fef3c7", // Warm yellow highlight
+    muted: "#f9fafb", // Very light gray background
+    success: "#047857", // Deep green success
+    warning: "#ea580c", // Bright orange warning
+    error: "#dc2626", // Strong red error
+    info: "#0284c7", // Professional blue info
   },
   moodyRose: {
-    background: "#24222d",
-    foreground: "#a59a7e",
-    primary: "#7b3947",
-    secondary: "#9c7379",
-    tertiary: parseColor([156, 145, 165]),
-    accent: "#3a2e39",
-    border: "#3a2e39",
-    highlight: "#5a4e4d",
-    muted: "#3a2e39",
-    success: "#6a9955",
-    warning: "#d7ba7d",
-    error: "#f44747",
-    info: "#569cd6",
+    background: "#1c1917", // Warmer dark brown-black
+    foreground: "#d6d3d1", // Soft warm white for readability
+    primary: "#be185d", // Vibrant rose primary
+    secondary: "#a21caf", // Deep magenta secondary
+    tertiary: "#7c3aed", // Purple tertiary for harmony
+    accent: "#f59e0b", // Warm golden accent
+    border: "#44403c", // Subtle warm border
+    highlight: "#292524", // Dark highlight for selections
+    muted: "#262626", // Consistent dark background
+    success: "#84cc16", // Bright lime green for visibility
+    warning: "#eab308", // Golden yellow warning
+    error: "#ef4444", // Bright red that works on dark
+    info: "#06b6d4", // Cyan info color for contrast
   },
   monochrome: {
     background: "#ffffff",
-    foreground: "#000000",
-    border: "#cccccc",
-    primary: "#666666",
-    secondary: "#999999",
-    tertiary: "#333333",
-    accent: "#000000",
-    highlight: "#f0f0f0",
-    muted: "#e0e0e0",
-    success: "#28a745",
-    warning: "#ffc107",
-    error: "#dc3545",
-    info: "#17a2b8",
+    foreground: "#1f2937", // Softer than pure black
+    border: "#9ca3af", // More visible border
+    primary: "#4b5563", // Medium gray with good contrast
+    secondary: "#6b7280", // Slightly lighter gray
+    tertiary: "#374151", // Darker gray for hierarchy
+    accent: "#111827", // Very dark gray instead of pure black
+    highlight: "#f3f4f6", // Subtle gray highlight
+    muted: "#f9fafb", // Very light gray background
+    success: "#10b981", // Keep colorful status indicators
+    warning: "#f59e0b", // Keep colorful status indicators
+    error: "#ef4444", // Keep colorful status indicators
+    info: "#3b82f6", // Keep colorful status indicators
   },
 };
 
