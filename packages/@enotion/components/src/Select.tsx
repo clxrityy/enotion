@@ -40,6 +40,13 @@ export function Select({ options, colorPalette, ...rest }: SelectProps) {
             "--select-disabled-borer-color": palette.muted,
             "--select-option-selected-background-color": palette.primary,
             "--select-option-selected-text-color": palette.background,
+            "--select-hover-border-color": palette.muted,
+            "--select-invalid-border-color": palette.warning,
+            "--select-invalid-focus-ring-color": palette.warning,
+            "--select-option-background-color": palette.background,
+            "--select-option-text-color": palette.foreground,
+            "--select-option-disabled-background-color": palette.muted,
+            "--select-option-disabled-text-color": palette.background,
             ...rest.style,
           } as CSSProperties
         }
