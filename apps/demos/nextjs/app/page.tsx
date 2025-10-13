@@ -1,9 +1,10 @@
 "use client";
 import { usePreload, useTheme } from "@enotion/hooks";
-import { SkeletonWrapper, Button } from "@enotion/components";
+import { SkeletonWrapper, Button, Card } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import { ColorPaletteType } from "@enotion/config/constants";
 
 const providerImport = () => import("../components/Test");
 
@@ -15,7 +16,8 @@ export default function Home(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
   const { theme, toggle } = useTheme();
 
-  const palette = theme === "dark" ? "dark" : "default";
+  const palette: ColorPaletteType = "dark"
+  // theme === "dark" ? "dark" : "default";
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 500);
@@ -29,6 +31,7 @@ export default function Home(): JSX.Element {
         <SkeletonWrapper isLoading={loading}>
           <div
             style={{
+              width: "100%",
               marginTop: "20px",
               fontSize: "14px",
               display: "flex",
@@ -51,6 +54,7 @@ export default function Home(): JSX.Element {
 
           <div
             style={{
+              width: "100%",
               marginTop: "20px",
               fontSize: "14px",
               display: "flex",
@@ -64,6 +68,20 @@ export default function Home(): JSX.Element {
             <Button colorPalette={palette} onClick={toggle}>
               Toggle Theme
             </Button>
+            {/* <Select
+              colorPalette={palette}
+              options={[
+                {
+                  value: "1",
+                  label: "one"
+                },
+                {
+                  value: "2",
+                  label: "two"
+                },
+              ]}
+            /> */}
+            <Card colorPalette={palette}>This is a card component</Card>
           </div>
         </SkeletonWrapper>
       </main>
