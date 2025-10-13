@@ -1,0 +1,73 @@
+.enotion-card {
+  border-radius: 8px;
+  padding: 16px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--card-background-color);
+  box-shadow: var(--card-box-shadow);
+  border: 1px solid var(--card-border-color);
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+  box-sizing: border-box;
+  min-height: 100px;
+  position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enotion-card {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .enotion-card {
+    padding: 12px;
+    margin: 6px 0;
+    min-height: 80px;
+    max-width: 100%;
+  }
+}
+
+
+.enotion-card:hover {
+  background-color: var(--card-hover-background-color);
+  box-shadow: var(--card-hover-box-shadow);
+  border-color: var(--card-hover-border-color);
+  transform: translateY(-1px);
+}
+
+.enotion-card:active {
+  background-color: var(--card-active-background-color);
+  box-shadow: var(--card-active-box-shadow);
+  border-color: var(--card-active-border-color);
+  transform: translateY(0);
+}
+
+.enotion-card::backdrop {
+  background-color: var(--card-backdrop-background-color);
+  -webkit-backdrop-filter: var(--card-backdrop-filter);
+  backdrop-filter: blur(10px);
+}
+
+.enotion-card::backdrop:hover {
+  background-color: var(--card-backdrop-hover-background-color);
+  -webkit-backdrop-filter: var(--card-backdrop-hover-filter);
+  backdrop-filter: blur(12px);
+}
+
+.enotion-card::backdrop:active {
+  background-color: var(--card-backdrop-active-background-color);
+  -webkit-backdrop-filter: var(--card-backdrop-active-filter);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--card-backdrop-active-box-shadow);
+}
+
+.enotion-card::before,
+.enotion-card::after {
+  content: '';
+  position: absolute;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: all 0.3s;
+}
