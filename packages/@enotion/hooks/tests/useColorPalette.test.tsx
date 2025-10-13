@@ -9,7 +9,7 @@ import {
 import { render, screen } from "@testing-library/react";
 import { useEffect } from "react";
 import { useColorPalette, ColorPaletteProvider } from "../src/useColorPalette";
-import { ColorPaletteType } from "@enotion/config/constants";
+import { ColorPaletteType } from "@enotion/core/constants";
 
 describe("useColorPalette", () => {
   beforeEach(() => {

@@ -4,7 +4,7 @@ import { SkeletonWrapper, Button, Card } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
-import { ColorPaletteType } from "@enotion/config/constants";
+import { ColorPaletteType } from "@enotion/core/constants";
 
 const providerImport = () => import("../components/Test");
 

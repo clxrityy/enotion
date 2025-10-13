@@ -4,10 +4,11 @@ All notable changes to this project will be documented in this file.
 
 - [0.1.0](#0.1.0)
   - [Global](#global)
-  - [Config](#config)
-  - [Hooks](#hooks)
-  - [Components](#components)
-  - [Server](#server)
+  - [Config](#config-enotionconfig)
+  - [Hooks](#hooks-enotionhooks)
+  - [Components](#components-enotioncomponents)
+  - [Server](#server-enotionserver)
+  - [Core](#core-enotioncore)
 
 ## 0.1.0
 
@@ -31,6 +32,7 @@ All notable changes to this project will be documented in this file.
 - (**changed**) Updated package.json exports to reflect neater import paths
 - (**changed**) Updated TypeScript `base` config to include ESNext in library target
 - (**changed**) Updated tsup config to build .mts files for ESM support
+- (**changed**) Moved constants/utils to new package (`@enotion/core`)
 
 ##### Hooks (`@enotion/hooks`)
 
@@ -58,6 +60,10 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `<Button />` component
 - (**added**) Added `<Input />` component
 - (**added**) Added `<Link />` component
+- (**added**) Added `<Select />` component
+- (**added**) Added `<Card />` component
+- (**added**) Added CSS files for each component in a `styles/` folder
+- (**added**) Added `colorPalette` prop to components for easy color customization
 
 ##### Server (`@enotion/server`)
 
@@ -76,3 +82,7 @@ All notable changes to this project will be documented in this file.
   - (**added**) Added `findAvailablePort()` function to find an available port
 - (**added**) Added `execAsync()` utility to execute shell commands asynchronously
 - (**added**) Added `bytesToGB()` utility to convert bytes to gigabytes
+
+##### Core (`@enotion/core`)
+
+- (**added**) Initialized package (for core utilities and constants shared across other packages)

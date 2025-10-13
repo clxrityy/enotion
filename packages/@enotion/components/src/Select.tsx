@@ -1,4 +1,4 @@
-import { ColorPalettes, ColorPaletteType } from "@enotion/config/constants";
+import { ColorPalettes, ColorPaletteType } from "@enotion/core/constants";
 import { CSSProperties, SelectHTMLAttributes } from "react";
 import "./styles/select.css";
 

@@ -3,12 +3,6 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   ...config,
-  entry: ["constants/index.ts"],
+  entry: ["src/index.ts"],
   dts: true,
-  outExtension() {
-    return {
-      js: ".js",
-      dts: ".d.ts",
-    };
-  },
 });

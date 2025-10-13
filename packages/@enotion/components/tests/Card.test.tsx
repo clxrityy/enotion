@@ -1,8 +1,8 @@
 import { Card } from "../src/Card.js";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "@jest/globals";
-import { ColorPalettes } from "@enotion/config/constants";
-import { getRGBfromHex, convertRGBtoString } from "@enotion/config/utils";
+import { ColorPalettes } from "@enotion/core/constants";
+import { getRGBfromHex, convertRGBtoString } from "@enotion/core/utils";
 
 describe("Card Component", () => {
   it("renders children correctly", () => {

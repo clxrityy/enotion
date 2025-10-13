@@ -16,11 +16,12 @@
     "./jest/jest.server.config": "./jest/jest.server.config.cjs",
     "./tsup/tsup.config": "./tsup/tsup.config.ts",
     "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts",
-    "./constants": {
+    ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
+  "types": "index.d.ts",
   "files": [
     "index.d.ts",
     "typescript/**/*",

@@ -1,7 +1,7 @@
 import {
   type ColorPaletteType,
   ColorPalettes,
-} from "@enotion/config/constants";
+} from "@enotion/core/constants";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { createContextFactory } from "./createContextFactory.js";
 import { useLocalStorage } from "./useLocalStorage.js";
@@ -19,7 +19,7 @@ export interface ColorPaletteContext {
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => {},
+  setPalette: () => { },
 };
 
 /**

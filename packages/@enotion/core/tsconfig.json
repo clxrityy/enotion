@@ -1,0 +1,7 @@
+{
+  "extends": "@enotion/config/typescript/base",
+  "compilerOptions": {
+    "outDir": "dist",
+    "allowArbitraryExtensions": true
+  }
+}
