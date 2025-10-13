@@ -12,6 +12,5 @@ Private global configuration for enotion packages.
 - **jest** configuration (`@enotion/config/jest`)
   - [`jest.config.cjs`](./jest/jest.config.cjs) - Base configuration for testing packages with Jest
   - [`jest.server.config.cjs`](./jest/jest.server.config.cjs) - Base configuration for testing server packages with Jest
-- **constants** (`@enotion/config/constants`)
-  - [`colors.ts`](./constants/colors.ts) - Color constants used across packages
-  - [`index.ts`](./constants/index.ts) - Exports all constants
+- **OTHER** configurations (`@enotion/config`)
+  - [`env`](./src/env/index.ts) - Environment validation.
