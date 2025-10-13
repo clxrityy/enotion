@@ -24,6 +24,7 @@ pnpm add @enotion/hooks
 - [`useOutsideClick()`](#useoutsideclick)
 - [`useScreenSize()`](#usescreensize)
 - [`useElementSize()`](#useelementsize)
+- [`useSearch()`](#usesearch)
 
 ---
 
@@ -358,6 +359,44 @@ const Component = () => {
       <p>
         Width: {width}px, Height: {height}px
       </p>
+    </div>
+  );
+};
+```
+
+---
+
+### `useSearch()`
+
+A React hook that provides search functionality over a dataset based on a query and specified search keys.
+
+```tsx
+"use client";
+import { useSearch } from "@enotion/hooks";
+import { Input, Card } from "@enotion/components";
+
+const Component = () => {
+  const data = [
+    { id: 1, name: "Apple", category: "Fruit" },
+    { id: 2, name: "Banana", category: "Fruit" },
+    { id: 3, name: "Carrot", category: "Vegetable" },
+    { id: 4, name: "Broccoli", category: "Vegetable" },
+  ];
+
+  const { query, setQuery, filteredData } = useSearch(data, ["name", "category"]);
+
+  return (
+    <div>
+      <Input
+        placeholder="Search..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      {filteredData.map((item) => (
+        <Card key={item.id}>
+          {item.name} - {item.category}
+        </Card>
+      ))}
     </div>
   );
 };
