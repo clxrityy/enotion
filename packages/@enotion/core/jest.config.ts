@@ -5,9 +5,7 @@ const jestConfig: Config = {
   testEnvironment: "jsdom",
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   rootDir: ".",
-  testMatch: [
-    "<rootDir>/tests/**/*.{test,spec}.{ts,tsx}",
-  ],
+  testMatch: ["<rootDir>/tests/**/*.{test,spec}.{ts,tsx}"],
   transform: {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",
