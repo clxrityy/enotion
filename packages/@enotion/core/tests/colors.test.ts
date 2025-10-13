@@ -8,7 +8,7 @@ import {
   isValidHexColor,
   blendHexColors,
   parseColor,
-} from "../utils/colors.js"
+} from "../utils/colors.js";
 import { describe, expect, it } from "@jest/globals";
 
 describe("Color Utilities", () => {
@@ -40,11 +40,11 @@ describe("Color Utilities", () => {
   });
   describe("getRGBfromHex", () => {
     it("should convert hex string to RGB array", () => {
-      expect(getRGBfromHex("#ff0000")).toEqual({ "b": 0, "g": 0, "r": 255 });
-      expect(getRGBfromHex("#00ff00")).toEqual({ "b": 0, "g": 255, "r": 0 });
-      expect(getRGBfromHex("#0000ff")).toEqual({ "b": 255, "g": 0, "r": 0 });
-      expect(getRGBfromHex("#ffffff")).toEqual({ "b": 255, "g": 255, "r": 255 });
-      expect(getRGBfromHex("#000000")).toEqual({ "b": 0, "g": 0, "r": 0 });
+      expect(getRGBfromHex("#ff0000")).toEqual({ b: 0, g: 0, r: 255 });
+      expect(getRGBfromHex("#00ff00")).toEqual({ b: 0, g: 255, r: 0 });
+      expect(getRGBfromHex("#0000ff")).toEqual({ b: 255, g: 0, r: 0 });
+      expect(getRGBfromHex("#ffffff")).toEqual({ b: 255, g: 255, r: 255 });
+      expect(getRGBfromHex("#000000")).toEqual({ b: 0, g: 0, r: 0 });
     });
   });
   describe("darkenHexColor", () => {

@@ -4,4 +4,4 @@ export const ICONS = {
   MENU: MdMenu,
   MENU_OPEN: MdMenuOpen,
   CLOSE: MdClose,
-}
+};
