@@ -1,4 +1,4 @@
-import { parseColor } from "../utils/colors";
+import { parseColor } from "../utils/colors.js";
 
 export type Color =
   | number
