@@ -1,10 +1,12 @@
+import { parseColor } from "../utils/colors";
+
 export type Color =
   | number
   | string
   | [number, number, number]
   | [number, number, number, number];
 
-export type ColorPallete = {
+export type ColorPalette = {
   background: Color;
   foreground: Color;
   border: Color;
@@ -20,35 +22,13 @@ export type ColorPallete = {
   info: Color;
 };
 
-export function parseColor(color: Color): string {
-  if (typeof color === "number") {
-    // Convert number to hex string
-    return `#${color.toString(16).padStart(6, "0")}`;
-  } else if (typeof color === "string") {
-    return color;
-  } else if (Array.isArray(color)) {
-    // convert rgb or rgba array to hex string
-    if (color.length === 3) {
-      const [r, g, b] = color;
-      return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-    } else if (color.length === 4) {
-      const [r, g, b, a] = color;
-      const alpha = Math.round(a * 255);
-      return `#${((1 << 24) + (r << 16) + (g << 8) + b)
-        .toString(16)
-        .slice(1)}${alpha.toString(16).padStart(2, "0")}`;
-    }
-  }
-  return String(color);
-}
-
 /**
  * A collection of predefined color palettes.
  * Each palette includes colors for various UI elements.
  * @see {@link ColorPaletteType}
  */
 
-export const ColorPalettes: Record<string, ColorPallete> = {
+export const ColorPalettes: Record<string, ColorPalette> = {
   default: {
     background: "#ffffff",
     foreground: "#000000",
