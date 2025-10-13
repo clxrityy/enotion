@@ -1,4 +1,6 @@
-export function getRGBfromHex(hex: string): { r: number; g: number; b: number } | null {
+export function getRGBfromHex(
+  hex: string,
+): { r: number; g: number; b: number } | null {
   // Remove the leading '#' if present
   if (hex.startsWith("#")) {
     hex = hex.slice(1);
@@ -52,7 +54,10 @@ export function darkenHexColor(hex: string, amount: number): string | null {
   return lightenHexColor(hex, -amount);
 }
 
-export function adjustHexColorOpacity(hex: string, opacity: number): string | null {
+export function adjustHexColorOpacity(
+  hex: string,
+  opacity: number,
+): string | null {
   const rgb = getRGBfromHex(hex);
   if (!rgb) return null;
 
@@ -71,7 +76,11 @@ export function isValidHexColor(hex: string): boolean {
   return /^[0-9A-Fa-f]{3}$|^[0-9A-Fa-f]{6}$/.test(hex);
 }
 
-export function blendHexColors(hex1: string, hex2: string, ratio: number): string | null {
+export function blendHexColors(
+  hex1: string,
+  hex2: string,
+  ratio: number,
+): string | null {
   const rgb1 = getRGBfromHex(hex1);
   const rgb2 = getRGBfromHex(hex2);
   if (!rgb1 || !rgb2) return null;

@@ -11,7 +11,6 @@ describe("Card Component", () => {
   });
 
   it("applies color palette styles when colorPalette prop is provided", () => {
-
     // Using the "dark" palette for testing
     const palette = ColorPalettes["dark"];
 
@@ -25,16 +24,32 @@ describe("Card Component", () => {
     // Check text color
     // Convert hex to rgb string for comparison
     const rgbTextColorValues = getRGBfromHex(palette.foreground as string);
-    const textColor = rgbTextColorValues ? convertRGBtoString(rgbTextColorValues.r, rgbTextColorValues.g, rgbTextColorValues.b) : '';
+    const textColor = rgbTextColorValues
+      ? convertRGBtoString(
+          rgbTextColorValues.r,
+          rgbTextColorValues.g,
+          rgbTextColorValues.b,
+        )
+      : "";
 
     expect(styles.color).toBe(textColor);
     // Check border color
-    expect(styles.getPropertyValue("--card-border-color").trim()).toBe(palette.border as string);
+    expect(styles.getPropertyValue("--card-border-color").trim()).toBe(
+      palette.border as string,
+    );
 
     // Check background color
     // Convert hex to rgb string for comparison
-    const rgbBackgroundColorValues = getRGBfromHex(palette.background as string);
-    const backgroundColor = rgbBackgroundColorValues ? convertRGBtoString(rgbBackgroundColorValues.r, rgbBackgroundColorValues.g, rgbBackgroundColorValues.b) : '';
+    const rgbBackgroundColorValues = getRGBfromHex(
+      palette.background as string,
+    );
+    const backgroundColor = rgbBackgroundColorValues
+      ? convertRGBtoString(
+          rgbBackgroundColorValues.r,
+          rgbBackgroundColorValues.g,
+          rgbBackgroundColorValues.b,
+        )
+      : "";
 
     expect(styles.backgroundColor).toBe(backgroundColor);
   });

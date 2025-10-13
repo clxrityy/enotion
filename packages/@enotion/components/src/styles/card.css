@@ -7,7 +7,11 @@
   background-color: var(--card-background-color);
   box-shadow: var(--card-box-shadow);
   border: 1px solid var(--card-border-color);
-  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s,
+    border-color 0.2s,
+    transform 0.2s;
   cursor: pointer;
   box-sizing: border-box;
   min-height: 100px;
@@ -28,7 +32,6 @@
     max-width: 100%;
   }
 }
-
 
 .enotion-card:hover {
   background-color: var(--card-hover-background-color);
@@ -65,7 +68,7 @@
 
 .enotion-card::before,
 .enotion-card::after {
-  content: '';
+  content: "";
   position: absolute;
   border-radius: 8px;
   pointer-events: none;

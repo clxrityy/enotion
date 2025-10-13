@@ -32,11 +32,11 @@ export function Link({ colorPalette, href, children, ...rest }: LinkProps) {
       style={
         palette
           ? ({
-            "--link-color": palette.primary,
-            "--link-hover-color": palette.accent,
-            "--link-visited-color": palette.secondary,
-            ...rest.style,
-          } as React.CSSProperties)
+              "--link-color": palette.primary,
+              "--link-hover-color": palette.accent,
+              "--link-visited-color": palette.secondary,
+              ...rest.style,
+            } as React.CSSProperties)
           : rest.style
       }
       {...rest}

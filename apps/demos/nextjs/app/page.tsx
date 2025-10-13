@@ -16,7 +16,7 @@ export default function Home(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
   const { theme, toggle } = useTheme();
 
-  const palette: ColorPaletteType = "dark"
+  const palette: ColorPaletteType = "dark";
   // theme === "dark" ? "dark" : "default";
 
   useEffect(() => {

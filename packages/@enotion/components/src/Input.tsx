@@ -1,8 +1,5 @@
 import { CSSProperties, InputHTMLAttributes } from "react";
-import {
-  type ColorPaletteType,
-  ColorPalettes,
-} from "@enotion/core/constants";
+import { type ColorPaletteType, ColorPalettes } from "@enotion/core/constants";
 import "./styles/input.css";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
