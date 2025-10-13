@@ -51,7 +51,8 @@ All notable changes to this project will be documented in this file.
 - (**added**) Added `useScreenSize()` hook
 - (**added**) Added `useElementSize()` hook
 - (**changed**) More extensive and concise JSDoc comments for usage
-- (**added**) Added `useColorPalette()` hook & `<ColorPaletteProvider />` for managing color palettes
+- (**added**) Added `useColorPalette()` hook & `<ColorPaletteProvider />` for managing color palettes (temporary disabled)
+- (**added**) Added `useSearch()` hook for managing search functionality
 
 ##### Components (`@enotion/components`)
 
