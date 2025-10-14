@@ -1,4 +1,4 @@
-import { cpus } from "os";
+import { cpus } from "node:os";
 import { execAsync, parseIdleFromTopOutput } from "../util/index.js";
 
 /**
@@ -96,7 +96,7 @@ export function parseCpuTemperature(output: string[]): string {
   return (
     output.reduce((acc, temp) => {
       const parsed = parseFloat(temp);
-      if (!isNaN(parsed)) {
+      if (!Number.isNaN(parsed)) {
         acc.push(parsed.toFixed(1));
       }
       return acc;

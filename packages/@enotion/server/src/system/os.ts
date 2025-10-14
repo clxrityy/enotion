@@ -1,4 +1,4 @@
-import { version, arch, type, platform, release } from "os";
+import { version, arch, type, platform, release } from "node:os";
 
 /**
  * Get basic system information.

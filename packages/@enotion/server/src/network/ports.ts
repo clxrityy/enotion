@@ -1,4 +1,4 @@
-import { Socket } from "net";
+import { Socket } from "node:net";
 
 /**
  * Check if a port is open on the specified host.

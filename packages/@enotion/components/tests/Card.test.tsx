@@ -12,7 +12,7 @@ describe("Card Component", () => {
 
   it("applies color palette styles when colorPalette prop is provided", () => {
     // Using the "dark" palette for testing
-    const palette = ColorPalettes["dark"];
+    const palette = ColorPalettes.dark;
 
     // Render the Card with the dark color palette
     render(<Card colorPalette="dark">Styled Card</Card>);

@@ -10,13 +10,27 @@ function NotifyTestComponent() {
 
   return (
     <div>
-      <button onClick={() => notify("Default notification")}>Notify</button>
-      <button onClick={() => success("Success message")}>Success</button>
-      <button onClick={() => error("Error message")}>Error</button>
-      <button onClick={() => info("Info message")}>Info</button>
-      <button onClick={() => warning("Warning message")}>Warning</button>
-      <button onClick={() => loading("Loading message")}>Loading</button>
-      <button onClick={dismissAll}>Dismiss All</button>
+      <button type="button" onClick={() => notify("Default notification")}>
+        Notify
+      </button>
+      <button type="button" onClick={() => success("Success message")}>
+        Success
+      </button>
+      <button type="button" onClick={() => error("Error message")}>
+        Error
+      </button>
+      <button type="button" onClick={() => info("Info message")}>
+        Info
+      </button>
+      <button type="button" onClick={() => warning("Warning message")}>
+        Warning
+      </button>
+      <button type="button" onClick={() => loading("Loading message")}>
+        Loading
+      </button>
+      <button type="button" onClick={dismissAll}>
+        Dismiss All
+      </button>
     </div>
   );
 }
@@ -50,8 +64,12 @@ function PromiseTestComponent() {
 
   return (
     <div>
-      <button onClick={handleSuccess}>Promise Success</button>
-      <button onClick={handleError}>Promise Error</button>
+      <button type="button" onClick={handleSuccess}>
+        Promise Success
+      </button>
+      <button type="button" onClick={handleError}>
+        Promise Error
+      </button>
     </div>
   );
 }
@@ -68,7 +86,9 @@ function UpdateTestComponent() {
 
   return (
     <div>
-      <button onClick={handleUpdate}>Update Toast</button>
+      <button type="button" onClick={handleUpdate}>
+        Update Toast
+      </button>
     </div>
   );
 }
@@ -254,6 +274,7 @@ describe("useNotify", () => {
       return (
         <div>
           <button
+            type="button"
             onClick={() => {
               const ref = success("Dismissible message", { duration: 10000 });
               setToastRef(ref);
@@ -262,6 +283,7 @@ describe("useNotify", () => {
             Create
           </button>
           <button
+            type="button"
             onClick={() => {
               if (toastRef) {
                 toastRef.dismiss();

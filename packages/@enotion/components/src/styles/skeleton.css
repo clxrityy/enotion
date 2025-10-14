@@ -17,10 +17,10 @@
 /* Prevent text from showing in skeleton */
 .skeleton,
 .skeleton * {
-  color: transparent !important;
-  text-shadow: none !important;
-  -webkit-background-clip: padding-box !important;
-  background-clip: padding-box !important;
+  color: transparent;
+  text-shadow: none;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   width: 100%;
 }
 

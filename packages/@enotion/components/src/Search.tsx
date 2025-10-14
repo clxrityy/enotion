@@ -2,7 +2,7 @@ import { useSearch } from "@enotion/hooks";
 import { Input } from "./Input.js";
 import { Card } from "./Card.js";
 import { HTMLAttributes } from "react";
-import { randomUUID, UUID } from "crypto";
+import { randomUUID, UUID } from "node:crypto";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {

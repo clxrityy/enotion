@@ -18,6 +18,7 @@ function TestComponent() {
     <div>
       <div data-testid="count">{state.notifications.length}</div>
       <button
+        type="button"
         onClick={() => {
           addNotification({
             message: "Test notification",
@@ -30,6 +31,7 @@ function TestComponent() {
         Add Notification
       </button>
       <button
+        type="button"
         onClick={() => {
           const id = addNotification({
             message: "Notification to update",
@@ -45,6 +47,7 @@ function TestComponent() {
         Add and Update
       </button>
       <button
+        type="button"
         onClick={() => {
           if (state.notifications.length > 0) {
             dismissNotification(state.notifications[0].id);
@@ -53,7 +56,9 @@ function TestComponent() {
       >
         Dismiss First
       </button>
-      <button onClick={dismissAll}>Dismiss All</button>
+      <button type="button" onClick={dismissAll}>
+        Dismiss All
+      </button>
     </div>
   );
 }

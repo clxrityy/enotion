@@ -173,7 +173,6 @@ export function NotificationItem({
       onMouseLeave={() => setIsPaused(false)}
       onClick={() => notification.dismissible && handleDismiss()}
       role="alert"
-      tabIndex={0}
       aria-live="polite"
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {

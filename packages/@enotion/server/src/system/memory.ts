@@ -1,4 +1,4 @@
-import { totalmem, freemem } from "os";
+import { totalmem, freemem } from "node:os";
 
 /**
  * Get memory usage information.

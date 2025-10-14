@@ -1,4 +1,4 @@
-import { networkInterfaces, hostname } from "os";
+import { networkInterfaces, hostname } from "node:os";
 
 /**
  * Get local IP addresses.

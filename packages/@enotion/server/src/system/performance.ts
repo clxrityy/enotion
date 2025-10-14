@@ -1,4 +1,4 @@
-import { uptime, loadavg } from "os";
+import { uptime, loadavg } from "node:os";
 
 /**
  * Get system performance information.
