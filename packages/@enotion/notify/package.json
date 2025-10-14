@@ -1,0 +1,69 @@
+{
+  "name": "@enotion/notify",
+  "description": "A React tool for notifications",
+  "version": "0.1.0",
+  "repository": "clxrityy/enotion",
+  "author": {
+    "name": "MJ Anglin",
+    "email": "contact@mjanglin.com",
+    "url": "https://www.mjanglin.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "notify",
+    "notifications",
+    "react",
+    "alert",
+    "alerts",
+    "popup"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "start": "tsup --watch",
+    "build": "tsup",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "dependencies": {
+    "@enotion/config": "workspace:*",
+    "@enotion/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.0",
+    "jest": "^30.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "ts-jest": "^29.4.4",
+    "tsup": "^8.5.0",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@10.18.2",
+  "homepage": "https://github.com/clxrityy/enotion/tree/main/packages/%40enotion/notify#readme"
+}

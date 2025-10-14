@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
   - [Components](#components-enotioncomponents)
   - [Server](#server-enotionserver)
   - [Core](#core-enotioncore)
+  - [Notify](#notify-enotionnotify)
 
 ## 0.1.0
 
@@ -88,3 +89,7 @@ All notable changes to this project will be documented in this file.
 ##### Core (`@enotion/core`)
 
 - (**added**) Initialized package (for core utilities and constants shared across other packages)
+
+#### Notify (`@enotion/notify`)
+
+- (**added**) Initialized package
