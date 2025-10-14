@@ -28,6 +28,6 @@ Element.prototype.getBoundingClientRect = jest.fn(() => {
     left: 0,
     bottom: 0,
     right: 0,
-    toJSON: () => '{}',
+    toJSON: () => "{}",
   };
 });

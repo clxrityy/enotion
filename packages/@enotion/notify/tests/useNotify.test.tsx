@@ -5,7 +5,8 @@ import { describe, it, expect } from "@jest/globals";
 import { useState } from "react";
 
 function NotifyTestComponent() {
-  const { notify, success, error, info, warning, loading, dismissAll } = useNotify();
+  const { notify, success, error, info, warning, loading, dismissAll } =
+    useNotify();
 
   return (
     <div>
@@ -77,7 +78,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Notify").click();
@@ -91,7 +92,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Success").click();
@@ -105,7 +106,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Error").click();
@@ -119,7 +120,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Info").click();
@@ -133,7 +134,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Warning").click();
@@ -147,7 +148,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Loading").click();
@@ -161,7 +162,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <NotifyTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Success").click();
@@ -187,7 +188,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <PromiseTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Promise Success").click();
@@ -200,7 +201,7 @@ describe("useNotify", () => {
       () => {
         expect(screen.getByText("Completed: Success data")).toBeDefined();
       },
-      { timeout: 500 }
+      { timeout: 500 },
     );
   });
 
@@ -208,7 +209,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <PromiseTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Promise Error").click();
@@ -221,7 +222,7 @@ describe("useNotify", () => {
       () => {
         expect(screen.getByText("Error: Failed operation")).toBeDefined();
       },
-      { timeout: 500 }
+      { timeout: 500 },
     );
   });
 
@@ -229,7 +230,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <UpdateTestComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Update Toast").click();
@@ -242,14 +243,15 @@ describe("useNotify", () => {
       () => {
         expect(screen.getByText("Updated message")).toBeDefined();
       },
-      { timeout: 300 }
+      { timeout: 300 },
     );
   });
 
   it("allows manual dismiss via returned object", async () => {
     const ManualDismissComponent = () => {
       const { success } = useNotify();
-      const [toastRef, setToastRef] = useState<any>(null); return (
+      const [toastRef, setToastRef] = useState<any>(null);
+      return (
         <div>
           <button
             onClick={() => {
@@ -275,7 +277,7 @@ describe("useNotify", () => {
     render(
       <NotificationProvider>
         <ManualDismissComponent />
-      </NotificationProvider>
+      </NotificationProvider>,
     );
 
     screen.getByText("Create").click();
@@ -290,7 +292,7 @@ describe("useNotify", () => {
       () => {
         expect(screen.queryByText("Dismissible message")).toBeNull();
       },
-      { timeout: 600 }
+      { timeout: 600 },
     );
   });
 });

@@ -54,7 +54,10 @@ export function NotificationItem({
 
     if (startTimeRef.current) {
       const elapsedTime = Date.now() - startTimeRef.current;
-      remainingTimeRef.current = Math.max(0, remainingTimeRef.current - elapsedTime);
+      remainingTimeRef.current = Math.max(
+        0,
+        remainingTimeRef.current - elapsedTime,
+      );
       clearTimeout(timerRef.current!);
     }
   };
@@ -105,13 +108,16 @@ export function NotificationItem({
 
   // Get animation classes based on position
   const getAnimationClass = () => {
-    const positionToAnimationMap: Record<Position, { enter: string; exit: string }> = {
-      'top-right': { enter: 'slide-in-right', exit: 'slide-out-right' },
-      'top-left': { enter: 'slide-in-left', exit: 'slide-out-left' },
-      'top-center': { enter: 'slide-in-down', exit: 'slide-out-up' },
-      'bottom-right': { enter: 'slide-in-right', exit: 'slide-out-right' },
-      'bottom-left': { enter: 'slide-in-left', exit: 'slide-out-left' },
-      'bottom-center': { enter: 'slide-in-up', exit: 'slide-out-down' },
+    const positionToAnimationMap: Record<
+      Position,
+      { enter: string; exit: string }
+    > = {
+      "top-right": { enter: "slide-in-right", exit: "slide-out-right" },
+      "top-left": { enter: "slide-in-left", exit: "slide-out-left" },
+      "top-center": { enter: "slide-in-down", exit: "slide-out-up" },
+      "bottom-right": { enter: "slide-in-right", exit: "slide-out-right" },
+      "bottom-left": { enter: "slide-in-left", exit: "slide-out-left" },
+      "bottom-center": { enter: "slide-in-up", exit: "slide-out-down" },
     };
 
     const animations = positionToAnimationMap[position];
@@ -122,18 +128,18 @@ export function NotificationItem({
     if (visible) {
       return animations.enter;
     }
-    return '';
-  }
+    return "";
+  };
 
   // Calculate theme-based styles
   const getStyles = () => {
     const baseTheme = {
-      success: { background: '#10B981', color: 'white' },
-      error: { background: '#EF4444', color: 'white' },
-      info: { background: '#3B82F6', color: 'white' },
-      warning: { background: '#F59E0B', color: 'white' },
-      loading: { background: '#6B7280', color: 'white' },
-      default: { background: 'white', color: 'black' },
+      success: { background: "#10B981", color: "white" },
+      error: { background: "#EF4444", color: "white" },
+      info: { background: "#3B82F6", color: "white" },
+      warning: { background: "#F59E0B", color: "white" },
+      loading: { background: "#6B7280", color: "white" },
+      default: { background: "white", color: "black" },
     };
 
     const typeTheme = baseTheme[notification.type] || baseTheme.default;
@@ -148,18 +154,19 @@ export function NotificationItem({
 
   return (
     <div
-      className={`enotion-notification ${notification.className || ''} ${getAnimationClass()}`}
+      className={`enotion-notification ${notification.className || ""} ${getAnimationClass()}`}
       style={{
         maxWidth: "350px",
         minWidth: "200px",
         margin: "0.5rem",
         padding: "0.75rem 1rem",
         borderRadius: "0.375rem",
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        display: 'flex',
-        alignItems: 'center',
+        boxShadow:
+          "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        display: "flex",
+        alignItems: "center",
         opacity: visible ? 1 : 0,
-        transition: 'all 0.3s ease',
+        transition: "all 0.3s ease",
         ...getStyles(),
       }}
       onMouseEnter={() => setIsPaused(true)}
@@ -169,22 +176,23 @@ export function NotificationItem({
       tabIndex={0}
       aria-live="polite"
       onKeyDown={(event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
+        if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           notification.dismissible && handleDismiss();
         }
       }}
     >
       {getIconComponent() && (
-        <div className="enotion-notification-icon" style={{
-          marginRight: "0.75rem"
-        }}>
+        <div
+          className="enotion-notification-icon"
+          style={{
+            marginRight: "0.75rem",
+          }}
+        >
           {getIconComponent()}
         </div>
       )}
-      <div className="enotion-notification-content">
-        {notification.message}
-      </div>
+      <div className="enotion-notification-content">{notification.message}</div>
       {notification.dismissible && (
         <button
           type="button"
@@ -196,12 +204,12 @@ export function NotificationItem({
             handleDismiss();
           }}
           style={{
-            background: 'transparent',
+            background: "transparent",
             border: "none",
             marginLeft: "auto",
             padding: "0.25rem",
             cursor: "pointer",
-            color: 'inherit',
+            color: "inherit",
             opacity: 0.7,
           }}
         >
@@ -209,5 +217,5 @@ export function NotificationItem({
         </button>
       )}
     </div>
-  )
+  );
 }

@@ -33,11 +33,13 @@ export function NotificationContainer({
     ...(position.includes("top") ? { top: "1rem" } : { bottom: "1rem" }),
     ...(position.includes("right") ? { right: "1rem" } : {}),
     ...(position.includes("left") ? { left: "1rem" } : {}),
-    ...(position.includes("center") ? {
-      left: "50%",
-      transform: "translateX(-50%)",
-      alignItems: "center",
-    } : {})
+    ...(position.includes("center")
+      ? {
+          left: "50%",
+          transform: "translateX(-50%)",
+          alignItems: "center",
+        }
+      : {}),
   };
 
   const container = (
@@ -62,7 +64,6 @@ export function NotificationContainer({
   return createPortal(container, document.body);
 }
 
-function getFlexDirection(position: Position): CSSProperties['flexDirection'] {
-  return position.includes('bottom') ? 'column-reverse' : 'column';
+function getFlexDirection(position: Position): CSSProperties["flexDirection"] {
+  return position.includes("bottom") ? "column-reverse" : "column";
 }
-

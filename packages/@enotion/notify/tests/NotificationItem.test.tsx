@@ -10,7 +10,7 @@ const baseNotification = {
   duration: 5000,
   dismissible: true,
   timestamp: Date.now(),
-}
+};
 
 describe("NotificationItem", () => {
   it("renders the notification message", () => {
@@ -20,7 +20,7 @@ describe("NotificationItem", () => {
         onDismiss={jest.fn()}
         position="top-right"
         pauseOnHover={true}
-      />
+      />,
     );
     expect(screen.getByText("Test message")).toBeDefined();
   });
@@ -33,14 +33,17 @@ describe("NotificationItem", () => {
         onDismiss={onDismiss}
         position="top-right"
         pauseOnHover={true}
-      />
+      />,
     );
     fireEvent.click(screen.getByTitle("dismiss"));
 
     // Wait for the 300ms animation delay
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled();
-    }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(onDismiss).toHaveBeenCalled();
+      },
+      { timeout: 500 },
+    );
   });
 
   it("is focusable and responds to keyboard", async () => {
@@ -51,16 +54,19 @@ describe("NotificationItem", () => {
         onDismiss={onDismiss}
         position="top-right"
         pauseOnHover={true}
-      />
+      />,
     );
     const item = screen.getByRole("alert");
     item.focus();
     fireEvent.click(item);
 
     // Wait for the 300ms animation delay
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled();
-    }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(onDismiss).toHaveBeenCalled();
+      },
+      { timeout: 500 },
+    );
   });
 
   it("responds to Enter key press", async () => {
@@ -71,16 +77,19 @@ describe("NotificationItem", () => {
         onDismiss={onDismiss}
         position="top-right"
         pauseOnHover={true}
-      />
+      />,
     );
     const item = screen.getByRole("alert");
     item.focus();
     fireEvent.keyDown(item, { key: "Enter" });
 
     // Wait for the 300ms animation delay
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled();
-    }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(onDismiss).toHaveBeenCalled();
+      },
+      { timeout: 500 },
+    );
   });
 
   it("responds to Space key press", async () => {
@@ -91,15 +100,18 @@ describe("NotificationItem", () => {
         onDismiss={onDismiss}
         position="top-right"
         pauseOnHover={true}
-      />
+      />,
     );
     const item = screen.getByRole("alert");
     item.focus();
     fireEvent.keyDown(item, { key: " " });
 
     // Wait for the 300ms animation delay
-    await waitFor(() => {
-      expect(onDismiss).toHaveBeenCalled();
-    }, { timeout: 500 });
+    await waitFor(
+      () => {
+        expect(onDismiss).toHaveBeenCalled();
+      },
+      { timeout: 500 },
+    );
   });
 });

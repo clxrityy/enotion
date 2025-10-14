@@ -1,4 +1,13 @@
-import { MdMenu, MdMenuOpen, MdClose, MdInfo, MdError, MdWarning, MdCheck, MdNotifications } from "react-icons/md";
+import {
+  MdMenu,
+  MdMenuOpen,
+  MdClose,
+  MdInfo,
+  MdError,
+  MdWarning,
+  MdCheck,
+  MdNotifications,
+} from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export const Icons = {

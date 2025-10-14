@@ -1,14 +1,20 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode } from "react";
 
-export type NotificationType = 'success' | 'error' | 'info' | 'warning' | 'loading' | 'default';
+export type NotificationType =
+  | "success"
+  | "error"
+  | "info"
+  | "warning"
+  | "loading"
+  | "default";
 
 export type Position =
-  | 'top-right'
-  | 'top-left'
-  | 'bottom-right'
-  | 'bottom-left'
-  | 'top-center'
-  | 'bottom-center';
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left"
+  | "top-center"
+  | "bottom-center";
 
 export interface Notification {
   id: string;
