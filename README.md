@@ -10,6 +10,7 @@ A turborepo containing a collection of React hooks and shared configurations.
 - [`@enotion/components`](./packages/@enotion/components/README.md) - A set of reusable and customizable React components for building user interfaces.
 - [`@enotion/server`](./packages/@enotion/server/README.md) - A set of server-side utilities, functions, types, and APIs.
 - [`@enotion/core`](./packages/@enotion/core/README.md) - Core utilities, constants, functions, and types for enotion.
+- [`@enotion/notify`](./packages/@enotion/notify/README.md) - A notification system for React applications.
 
 ## Private packages
 
