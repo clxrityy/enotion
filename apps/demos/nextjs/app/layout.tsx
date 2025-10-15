@@ -1,8 +1,7 @@
 "use client";
-import "./globals.css"
+import "./globals.css";
 import type { JSX } from "react";
 import { Provider } from "@/components/Provider";
-
 
 export default function RootLayout({
   children,
@@ -12,9 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Provider>
-        <body>
-          {children}
-        </body>
+        <body>{children}</body>
       </Provider>
     </html>
   );

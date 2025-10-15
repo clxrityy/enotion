@@ -13,7 +13,11 @@ export default function Home(): JSX.Element {
   const preloadProvider = usePreload(providerImport);
 
   const { success } = useNotify();
-  const { palette: currentPalette, setPalette, getAllPalettes } = useColorPalette();
+  const {
+    palette: currentPalette,
+    setPalette,
+    getAllPalettes,
+  } = useColorPalette();
   const { theme, setTheme } = useTheme();
 
   const { push } = useRouter();
@@ -29,15 +33,16 @@ export default function Home(): JSX.Element {
     return () => clearTimeout(timer);
   }, []);
 
-  const palettes = Object.keys(getAllPalettes()).map((key) => ({ label: key, value: key }));
+  const palettes = Object.keys(getAllPalettes()).map((key) => ({
+    label: key,
+    value: key,
+  }));
 
   return (
     <div className={styles.page} {...preloadProvider}>
       <main className={styles.main}>
         <Suspense fallback={<Skeleton style={{ width: 300, height: 200 }} />}>
-          <Card
-            colorPalette={currentPalette}
-          >
+          <Card colorPalette={currentPalette}>
             {isLoading ? (
               <Skeleton style={{ width: 200, height: 20 }} />
             ) : (
@@ -48,9 +53,7 @@ export default function Home(): JSX.Element {
                 <div>Current palette: {palette}</div>
                 <Button
                   colorPalette={currentPalette}
-                  onClick={() =>
-                    setTheme(theme === "dark" ? "light" : "dark")
-                  }
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 >
                   Toggle Theme
                 </Button>
@@ -69,12 +72,14 @@ export default function Home(): JSX.Element {
                 >
                   Show Notify
                 </Button>
-                <div style={{
-                  display: "flex",
-                  gap: 10,
-                  flexWrap: "wrap",
-                  marginTop: 10,
-                }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    flexWrap: "wrap",
+                    marginTop: 10,
+                  }}
+                >
                   <Button
                     colorPalette={currentPalette}
                     onClick={() => push("/stats")}

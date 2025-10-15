@@ -61,7 +61,6 @@ describe("useColorPalette", () => {
   });
 
   it("should not update palette when setPalette is called with an invalid palette", async () => {
-
     const Component = () => {
       const { palette, setPalette } = useColorPalette();
       // Attempt to set an invalid palette for testing
