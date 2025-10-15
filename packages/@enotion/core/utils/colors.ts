@@ -23,6 +23,9 @@ import type { Color } from "../types/colors.js";
 export function getRGBfromHex(
   hex: string,
 ): { r: number; g: number; b: number } | null {
+
+  if (!hex) return null;
+
   // Remove the leading '#' if present
   if (hex.startsWith("#")) {
     hex = hex.slice(1);
