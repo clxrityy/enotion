@@ -44,7 +44,7 @@
     "url": "https://mjanglin.com"
   },
   "license": "MIT",
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.18.3",
   "dependencies": {
     "@enotion/config": "workspace:*",
     "@enotion/core": "workspace:*"
@@ -53,9 +53,9 @@
     "@jest/globals": "^30.2.0",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.7.0",
+    "@types/node": "^24.7.2",
     "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.1",
+    "@types/react-dom": "^19.2.2",
     "jest": "^30.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
