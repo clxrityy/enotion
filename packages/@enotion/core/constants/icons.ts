@@ -9,6 +9,8 @@ import {
   MdNotifications,
 } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { LuCopy, LuCopyCheck } from "react-icons/lu";
+
 
 export const Icons = {
   Menu: MdMenu,
@@ -20,4 +22,6 @@ export const Icons = {
   Success: MdCheck,
   Loading: AiOutlineLoading3Quarters,
   Notifications: MdNotifications,
+  Copy: LuCopy,
+  Copied: LuCopyCheck,
 };
