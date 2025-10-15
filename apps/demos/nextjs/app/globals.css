@@ -1,4 +1,5 @@
-@import "@enotion/components/dist/index.css";
+@import "@enotion/components/index.css";
+@import "@enotion/notify/index.css";
 
 :root {
   --background: #ffffff;

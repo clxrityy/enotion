@@ -1,7 +1,7 @@
 "use client";
-import { usePreload } from "@enotion/hooks";
-import { SkeletonWrapper, Button, Card } from "@enotion/components";
-import { useEffect, useState, type JSX } from "react";
+import { useColorPalette, usePreload, useTheme } from "@enotion/hooks";
+import { Button, Card, Select, Skeleton } from "@enotion/components";
+import { Suspense, useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { ColorPaletteType } from "@enotion/core/constants";
@@ -13,13 +13,15 @@ export default function Home(): JSX.Element {
   const preloadProvider = usePreload(providerImport);
 
   const { success } = useNotify();
+  const { palette: currentPalette, setPalette, getAllPalettes } = useColorPalette();
+  const { theme, setTheme } = useTheme();
 
   const { push } = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   // const { theme, toggle } = useTheme();
 
-  const palette: ColorPaletteType = "dark";
+  const palette: ColorPaletteType = currentPalette || "dark";
   // theme === "dark" ? "dark" : "default";
 
   useEffect(() => {
@@ -27,67 +29,69 @@ export default function Home(): JSX.Element {
     return () => clearTimeout(timer);
   }, []);
 
+  const palettes = Object.keys(getAllPalettes()).map((key) => ({ label: key, value: key }));
+
   return (
     <div className={styles.page} {...preloadProvider}>
       <main className={styles.main}>
-        this page should preload the provider on hover
-        <SkeletonWrapper isLoading={isLoading}>
-          <div
-            style={{
-              width: "100%",
-              marginTop: "20px",
-              fontSize: "14px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              gap: "10px",
-            }}
+        <Suspense fallback={<Skeleton style={{ width: 300, height: 200 }} />}>
+          <Card
+            colorPalette={currentPalette}
           >
-            <Button
-              colorPalette={palette}
-              onClick={() => push("/preload-test")}
-            >
-              Go to preload test to view preloaded context value <br />
-            </Button>
-            <Button colorPalette={palette} onClick={() => push("/stats")}>
-              Go to stats page to view server module data fetching
-            </Button>
-          </div>
-
-          <div
-            style={{
-              width: "100%",
-              marginTop: "20px",
-              fontSize: "14px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            {/* <div>Current theme: {theme}</div>
-            <Button colorPalette={palette} onClick={toggle}>
-              Toggle Theme
-            </Button> */}
-            {/* <Select
-              colorPalette={palette}
-              options={[
-                {
-                  value: "1",
-                  label: "one"
-                },
-                {
-                  value: "2",
-                  label: "two"
-                },
-              ]}
-            /> */}
-            <Card colorPalette={palette}>This is a card component</Card>
-            <Button onClick={() => success("Success!")}>Notify me</Button>
-          </div>
-        </SkeletonWrapper>
+            {isLoading ? (
+              <Skeleton style={{ width: 200, height: 20 }} />
+            ) : (
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: 10 }}
+              >
+                <div>Current theme: {theme}</div>
+                <div>Current palette: {palette}</div>
+                <Button
+                  colorPalette={currentPalette}
+                  onClick={() =>
+                    setTheme(theme === "dark" ? "light" : "dark")
+                  }
+                >
+                  Toggle Theme
+                </Button>
+                <Select
+                  colorPalette={currentPalette}
+                  options={palettes}
+                  value={palette}
+                  onChange={(e) => setPalette(e.target.value)}
+                  aria-placeholder="Select a color palette"
+                />
+                <Button
+                  colorPalette={currentPalette}
+                  onClick={() => {
+                    success("This is a success message!");
+                  }}
+                >
+                  Show Notify
+                </Button>
+                <div style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                  marginTop: 10,
+                }}>
+                  <Button
+                    colorPalette={currentPalette}
+                    onClick={() => push("/stats")}
+                  >
+                    Go to Stats Page
+                  </Button>
+                  <Button
+                    colorPalette={currentPalette}
+                    onClick={() => push("/preloaded")}
+                  >
+                    Go to preloaded page
+                  </Button>
+                </div>
+              </div>
+            )}
+          </Card>
+        </Suspense>
       </main>
     </div>
   );
