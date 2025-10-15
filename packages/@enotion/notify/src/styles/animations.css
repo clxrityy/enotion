@@ -135,3 +135,16 @@
 .loading-spin {
   animation: spin 1s linear infinite;
 }
+
+.enotion-notification-dismiss {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.enotion-notification-dismiss:hover {
+  opacity: 0.7;
+}
+
+.enotion-notification-dismiss:focus {
+  transform: scale(0.95);
+}

@@ -183,7 +183,7 @@ export function NotificationItem({
     >
       {getIconComponent() && (
         <div
-          className="enotion-notification-icon"
+          className={`enotion-notification-icon ${notification.type === "loading" && "loading-spin"}`}
           style={{
             marginRight: "0.75rem",
           }}
