@@ -33,11 +33,11 @@
   }
 }
 
-.layout-container>* {
+.layout-container > * {
   width: 100%;
   max-width: 1200px;
 }
 
-.layout-container> :not(:last-child) {
+.layout-container > :not(:last-child) {
   margin-bottom: 1.5rem;
 }

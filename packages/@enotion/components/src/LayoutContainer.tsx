@@ -1,8 +1,13 @@
 import { ColorPalettes, ColorPaletteType } from "@enotion/core/constants";
-import { adjustHexColorOpacity, blendHexColors, cn, darkenHexColor } from "@enotion/core/utils";
+import {
+  adjustHexColorOpacity,
+  blendHexColors,
+  cn,
+  darkenHexColor,
+} from "@enotion/core/utils";
 import { HTMLAttributes, JSX, ReactNode } from "react";
 import { randomUUID } from "node:crypto";
-import './styles/layout-container.css';
+import "./styles/layout-container.css";
 
 /**
  * Props for the LayoutContainer component.
@@ -30,22 +35,26 @@ export const LayoutContainer = ({
   colorPalette,
   ...props
 }: LayoutContainerProps): JSX.Element => {
-
   const palette = colorPalette ? ColorPalettes[colorPalette] : null;
 
-  const darkenedBoxShadow = adjustHexColorOpacity(darkenHexColor(palette?.muted || '#000000', 20) || '#00000099', 0.2);
+  const darkenedBoxShadow = adjustHexColorOpacity(
+    darkenHexColor(palette?.muted || "#000000", 20) || "#00000099",
+    0.2,
+  );
 
   const mapPropsIntoChildren = () => {
-    if (typeof renderChildren === 'function') {
+    if (typeof renderChildren === "function") {
       const children = renderChildren();
       if (Array.isArray(children)) {
         return children.map((child) => {
-
-          if (typeof child === 'object' && child !== null && 'props' in child) {
-
+          if (typeof child === "object" && child !== null && "props" in child) {
             const rest = child.props as { [key: string]: any };
 
-            const childProps = { ...rest, colorPalette: colorPalette, key: randomUUID() };
+            const childProps = {
+              ...rest,
+              colorPalette: colorPalette,
+              key: randomUUID(),
+            };
 
             return {
               ...child,
@@ -56,8 +65,11 @@ export const LayoutContainer = ({
           }
           return child;
         });
-      } else if (typeof children === 'object' && children !== null && 'props' in children) {
-
+      } else if (
+        typeof children === "object" &&
+        children !== null &&
+        "props" in children
+      ) {
         const rest = children.props as { [key: string]: any };
         const childProps = { ...rest, colorPalette: colorPalette };
 
@@ -73,15 +85,25 @@ export const LayoutContainer = ({
     return renderChildren;
   };
 
-  const blendedColorTop = blendHexColors(palette?.background!, palette?.border!, 0.5);
-  const blendedColorBottom = blendHexColors(palette?.background!, palette?.border!, 0.8);
+  const blendedColorTop = blendHexColors(
+    palette?.background!,
+    palette?.border!,
+    0.5,
+  );
+  const blendedColorBottom = blendHexColors(
+    palette?.background!,
+    palette?.border!,
+    0.8,
+  );
 
   return (
     <div
       {...props}
       className={cn("layout-container", props.className)}
       style={{
-        backgroundColor: palette ? `linear-gradient(to bottom, ${blendedColorTop}, ${blendedColorBottom})` : undefined,
+        backgroundColor: palette
+          ? `linear-gradient(to bottom, ${blendedColorTop}, ${blendedColorBottom})`
+          : undefined,
         color: palette?.foreground,
         padding: "1rem",
         borderRadius: "0.5rem",
@@ -92,4 +114,4 @@ export const LayoutContainer = ({
       {mapPropsIntoChildren()}
     </div>
   );
-}
+};
