@@ -1,5 +1,5 @@
 {
-  "name": "demos-nextjs",
+  "name": "demo-nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "@enotion/components": "workspace:*",
     "@enotion/server": "workspace:*",
     "@enotion/core": "workspace:*",
+    "@enotion/notify": "workspace:*",
     "next": "15.5.4",
     "react": "19.2.0",
     "react-dom": "19.2.0"

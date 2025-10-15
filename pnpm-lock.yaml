@@ -35,6 +35,9 @@ importers:
       '@enotion/hooks':
         specifier: workspace:*
         version: link:../../../packages/@enotion/hooks
+      '@enotion/notify':
+        specifier: workspace:*
+        version: link:../../../packages/@enotion/notify
       '@enotion/server':
         specifier: workspace:*
         version: link:../../../packages/@enotion/server

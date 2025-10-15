@@ -1,26 +1,29 @@
 "use client";
-import { usePreload, useTheme } from "@enotion/hooks";
+import { usePreload } from "@enotion/hooks";
 import { SkeletonWrapper, Button, Card } from "@enotion/components";
 import { useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
 import { ColorPaletteType } from "@enotion/core/constants";
+import { useNotify } from "@enotion/notify";
 
 const providerImport = () => import("../components/Test");
 
 export default function Home(): JSX.Element {
   const preloadProvider = usePreload(providerImport);
 
+  const { success } = useNotify();
+
   const { push } = useRouter();
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const { theme, toggle } = useTheme();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // const { theme, toggle } = useTheme();
 
   const palette: ColorPaletteType = "dark";
   // theme === "dark" ? "dark" : "default";
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 500);
+    const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,7 +31,7 @@ export default function Home(): JSX.Element {
     <div className={styles.page} {...preloadProvider}>
       <main className={styles.main}>
         this page should preload the provider on hover
-        <SkeletonWrapper isLoading={loading}>
+        <SkeletonWrapper isLoading={isLoading}>
           <div
             style={{
               width: "100%",
@@ -64,10 +67,10 @@ export default function Home(): JSX.Element {
               gap: "10px",
             }}
           >
-            <div>Current theme: {theme}</div>
+            {/* <div>Current theme: {theme}</div>
             <Button colorPalette={palette} onClick={toggle}>
               Toggle Theme
-            </Button>
+            </Button> */}
             {/* <Select
               colorPalette={palette}
               options={[
@@ -82,6 +85,9 @@ export default function Home(): JSX.Element {
               ]}
             /> */}
             <Card colorPalette={palette}>This is a card component</Card>
+            <Button onClick={() => success("Success!")}>
+              Notify me
+            </Button>
           </div>
         </SkeletonWrapper>
       </main>

@@ -1,7 +1,8 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@enotion/hooks";
+import { NotificationProvider } from "@enotion/notify";
 import "./globals.css";
+import "@enotion/notify/index.css";
 import type { JSX } from "react";
 
 const geistSans = Geist({
@@ -22,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <NotificationProvider>{children}</NotificationProvider>
       </body>
     </html>
   );
