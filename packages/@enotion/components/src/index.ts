@@ -7,3 +7,4 @@ export * from "./Link.js";
 export * from "./Select.js";
 export * from "./Card.js";
 export * from "./Search.js";
+export * from "./CopyButton.js";

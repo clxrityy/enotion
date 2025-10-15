@@ -39,12 +39,13 @@ Most components accept a `colorPalette` prop to customize their color. [See avai
 - [Skeleton](#skeleton)
   - [`<Skeleton />`](#skeleton-)
   - [`<SkeletonWrapper />`](#skeletonwrapper-)
-- `<Button />`
-- `<Input />`
-- `<Link />`
-- `<Select />`
-- `<Card />`
-- `<Search />`
+- [`<Button />`](./src/Button.tsx)
+- [`<Input />`](./src/Input.tsx)
+- [`<Link />`](./src/Link.tsx)
+- [`<Select />`](./src/Select.tsx)
+- [`<Card />`](./src/Card.tsx)
+- [`<Search />`](./src/Search.tsx)
+- [`<CopyButton />`](./src/CopyButton.tsx)
 
 ---
 
