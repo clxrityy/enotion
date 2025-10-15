@@ -93,3 +93,8 @@ All notable changes to this project will be documented in this file.
 #### Notify (`@enotion/notify`)
 
 - (**added**) Initialized package
+- (**added**) Added `NotificationProvider` component to wrap the application
+- (**added**) Added `useNotify` hook for triggering notifications
+- (**added**) Supports different notification types (success, error, info, warning, loading)
+- (**added**) Customizable duration and styles
+- (**added**) Dismissible notifications
