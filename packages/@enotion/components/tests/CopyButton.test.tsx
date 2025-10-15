@@ -34,7 +34,12 @@ describe("CopyButton", () => {
   it("handles onCopyError prop when provided", async () => {
     const handleCopyError = jest.fn();
     Object.assign(navigator, { clipboard: undefined });
-    render(<CopyButton content="Sample text to copy" onCopyError={handleCopyError} />);
+    render(
+      <CopyButton
+        content="Sample text to copy"
+        onCopyError={handleCopyError}
+      />,
+    );
     const button = screen.getByRole("button", { name: /copy/i });
     button.click();
     await waitFor(() => {

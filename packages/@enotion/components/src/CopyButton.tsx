@@ -1,6 +1,10 @@
 import { ButtonHTMLAttributes } from "react";
 import { useClipboard } from "@enotion/hooks";
-import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core/constants";
+import {
+  ColorPalettes,
+  ColorPaletteType,
+  Icons,
+} from "@enotion/core/constants";
 
 /**
  * @description Props for the CopyButton component.
@@ -8,7 +12,8 @@ import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core/constants"
  * @extends ButtonHTMLAttributes<HTMLButtonElement>
  * @property `onCopy()` - Callback function invoked after a successful copy action.
  */
-export interface CopyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CopyButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   onCopied?: (text: string) => void;
   onCopyError?: (error: Error) => void;
   content: string;
@@ -55,5 +60,5 @@ export const CopyButton = ({
     >
       <Icon />
     </button>
-  )
-}
+  );
+};
