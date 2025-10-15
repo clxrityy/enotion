@@ -1,5 +1,5 @@
 import { type ColorPaletteType, ColorPalettes } from "@enotion/core/constants";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState, createContext, useContext } from "react";
 import { createContextFactory } from "./createContextFactory.js";
 import { useLocalStorage } from "./useLocalStorage.js";
 
@@ -11,42 +11,18 @@ import { useLocalStorage } from "./useLocalStorage.js";
 export interface ColorPaletteContext {
   palette: ColorPaletteType | undefined;
   setPalette: (palette: ColorPaletteType) => void;
+  getAllPalettes: () => typeof ColorPalettes;
 }
 
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => {},
+  setPalette: () => { },
+  getAllPalettes: () => ColorPalettes,
 };
 
-/**
- *
- */
-const useColorPaletteContext = () => {
-  const [palette, setPalette] = useState<ColorPaletteType | undefined>(
-    initialColorPaletteContext.palette,
-  );
-
-  const updatePalette = (newPalette: ColorPaletteType) => {
-    if (ColorPalettes[newPalette]) {
-      setPalette(newPalette);
-    } else {
-      console.warn(
-        `Invalid color palette: ${newPalette}. Falling back to undefined.`,
-      );
-      setPalette(undefined);
-    }
-  };
-
-  return {
-    palette,
-    setPalette: updatePalette,
-  };
-};
-
-const { Provider, useContext } = createContextFactory<ColorPaletteContext>(
+const Context = createContext<ColorPaletteContext>(
   initialColorPaletteContext,
-  useColorPaletteContext,
 );
 
 /**
@@ -132,11 +108,12 @@ export const ColorPaletteProvider = ({
     () => ({
       palette: isHydrated ? storedPalette : undefined,
       setPalette: setStoredPalette,
+      getAllPalettes: () => ColorPalettes,
     }),
     [storedPalette, setStoredPalette, isHydrated],
   );
 
-  return <Provider {...value}>{children}</Provider>;
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
 /**
@@ -151,14 +128,15 @@ export const ColorPaletteProvider = ({
  * import { Select } from '@enotion/components';
  *
  * const MyComponent = () => {
- *   const { palette, setPalette } = useColorPalette();
+ *   const { palette, setPalette, getAllPalettes } = useColorPalette();
  *   const [inputValue, setInputValue] = useState(palette || '');
+
  *
  *   return (
  *     <div>
  *       Current Palette: {palette}
  *       <Select
- *         options={Object.keys(ColorPalettes).map(key => ({ label: key, value: key }))}
+ *         options={Object.keys(getAllPalettes()).map(key => ({ label: key, value: key }))}
  *         value={palette}
  *         onChange={(e) => setPalette(e.target.value)}
  *       />
@@ -171,4 +149,4 @@ export const ColorPaletteProvider = ({
  * @see {@link ColorPaletteType} - Type representing the available color palettes.
  * @module useColorPalette
  */
-export const useColorPalette = useContext;
+export const useColorPalette = () => useContext(Context);

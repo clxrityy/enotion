@@ -8,5 +8,5 @@ export * from "./useTheme.js";
 export * from "./useVisibility.js";
 export * from "./useOutsideClick.js";
 export * from "./useElementSize.js";
-// export * from "./useColorPalette.js";
+export * from "./useColorPalette.js";
 export * from "./useSearch.js";
