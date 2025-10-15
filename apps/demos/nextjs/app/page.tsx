@@ -85,9 +85,7 @@ export default function Home(): JSX.Element {
               ]}
             /> */}
             <Card colorPalette={palette}>This is a card component</Card>
-            <Button onClick={() => success("Success!")}>
-              Notify me
-            </Button>
+            <Button onClick={() => success("Success!")}>Notify me</Button>
           </div>
         </SkeletonWrapper>
       </main>
