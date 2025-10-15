@@ -9,6 +9,11 @@ A simple and customizable notification system for React applications.
 - Customizable duration and styles
 - Dismissible notifications
 
+[![Image from Gyazo](https://i.gyazo.com/38449ac95e5017b7a3282044c9a6cdcc.png)](https://gyazo.com/38449ac95e5017b7a3282044c9a6cdcc)
+[![Image from Gyazo](https://i.gyazo.com/101c4bb842347a5dea36a772817e1e59.png)](https://gyazo.com/101c4bb842347a5dea36a772817e1e59)
+[![Image from Gyazo](https://i.gyazo.com/f09e3a385c9046dcbd3b61ba9f378e91.png)](https://gyazo.com/f09e3a385c9046dcbd3b61ba9f378e91)
+[![Image from Gyazo](https://i.gyazo.com/27e6a0cb4567802175cf31c9c9b35ca3.png)](https://gyazo.com/27e6a0cb4567802175cf31c9c9b35ca3)
+
 ## Installation
 
 ```bash
@@ -37,6 +42,7 @@ export default function App({ children }: { children: React.ReactNode }) {
 // page.tsx
 ("use client");
 import { useNotify } from "@enotion/notify";
+import "@enotion/notify/index.css"; // Import the CSS for notifications (optional)
 
 export default function Page() {
   const { notify, success, error, info, warning, loading, dismissAll } =
