@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import {
   NotificationProvider,
   useNotificationContext,
@@ -39,9 +39,11 @@ function TestComponent() {
             duration: 5000,
             timestamp: Date.now(),
           });
-          setTimeout(() => {
-            updateNotification(id, { message: "Updated notification" });
-          }, 100);
+          act(() => {
+            setTimeout(() => {
+              updateNotification(id, { message: "Updated notification" });
+            }, 100);
+          });
         }}
       >
         Add and Update
@@ -50,7 +52,9 @@ function TestComponent() {
         type="button"
         onClick={() => {
           if (state.notifications.length > 0) {
-            dismissNotification(state.notifications[0].id);
+            act(() => {
+              dismissNotification(state.notifications[0].id);
+            });
           }
         }}
       >

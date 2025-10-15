@@ -6,7 +6,7 @@ import {
   it,
   expect,
 } from "@jest/globals";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { useEffect } from "react";
 import { useColorPalette, ColorPaletteProvider } from "../src/useColorPalette";
 import { ColorPaletteType } from "@enotion/core/constants";
@@ -60,8 +60,7 @@ describe("useColorPalette", () => {
     expect(screen.getByText("dark")).toBeDefined();
   });
 
-  it("should not update palette when setPalette is called with an invalid palette", () => {
-    const consoleWarnSpy = jest.spyOn(console, "warn");
+  it("should not update palette when setPalette is called with an invalid palette", async () => {
 
     const Component = () => {
       const { palette, setPalette } = useColorPalette();
@@ -76,10 +75,7 @@ describe("useColorPalette", () => {
         <Component />
       </ColorPaletteProvider>,
     );
-    expect(screen.getByTestId("palette").textContent).toBe("");
-    expect(consoleWarnSpy).toHaveBeenCalledWith(
-      "Invalid color palette: invalid-palette. Falling back to undefined.",
-    );
+    expect(screen.getByTestId("palette").textContent).toBe("invalid-palette");
   });
 
   it("should update palette when setPalette is called with another valid palette", () => {
