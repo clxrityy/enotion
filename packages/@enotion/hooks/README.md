@@ -25,6 +25,7 @@ pnpm add @enotion/hooks
 - [`useScreenSize()`](#usescreensize)
 - [`useElementSize()`](#useelementsize)
 - [`useSearch()`](#usesearch)
+- [`useClipboard()`](#useclipboard)
 
 ---
 
@@ -383,7 +384,10 @@ const Component = () => {
     { id: 4, name: "Broccoli", category: "Vegetable" },
   ];
 
-  const { query, setQuery, filteredData } = useSearch(data, ["name", "category"]);
+  const { query, setQuery, filteredData } = useSearch(data, [
+    "name",
+    "category",
+  ]);
 
   return (
     <div>
@@ -397,6 +401,47 @@ const Component = () => {
           {item.name} - {item.category}
         </Card>
       ))}
+    </div>
+  );
+};
+```
+
+---
+
+### `useClipboard()`
+
+A React hook that provides clipboard functionality, allowing you to copy text to the clipboard and track the copy status.
+
+```tsx
+"use client";
+import { useState } from "react";
+import { useClipboard } from "@enotion/hooks";
+
+const Component = () => {
+  const [text, setText] = useState("Hello, World!");
+  const [error, setError] = useState<Error | null>(null);
+  const { isCopied, copy } = useClipboard({
+    onCopy: (txt) => console.log("Text copied to clipboard: ", txt),
+    onError: (err) => {
+      console.error("Failed to copy text: ", err);
+      setError(err);
+    },
+  });
+
+  const handleCopy = () => {
+    copy(text);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <button onClick={handleCopy}>Copy to Clipboard</button>
+      {isCopied && <span style={{ color: "green" }}>Copied!</span>}
+      {error && <span style={{ color: "red" }}>Error: {error.message}</span>}
     </div>
   );
 };
