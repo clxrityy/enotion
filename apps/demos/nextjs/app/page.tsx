@@ -1,6 +1,12 @@
 "use client";
 import { useColorPalette, usePreload, useTheme } from "@enotion/hooks";
-import { Button, Card, Select, Skeleton, CopyButton } from "@enotion/components";
+import {
+  Button,
+  Card,
+  Select,
+  Skeleton,
+  CopyButton,
+} from "@enotion/components";
 import { Suspense, useEffect, useState, type JSX } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
@@ -93,21 +99,20 @@ export default function Home(): JSX.Element {
                     Go to preloaded page
                   </Button>
                 </div>
-                <div style={{
-                  marginTop: 20,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                }}
+                <div
+                  style={{
+                    marginTop: 20,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                  }}
                 >
-                  <p>
-                    Copy this text
-                  </p>
+                  <p>Copy this text</p>
                   <CopyButton
                     onCopied={(text) => {
-                      success(`${text} copied!`)
+                      success(`${text} copied!`);
                     }}
                     colorPalette={currentPalette}
                     content="Copy this text"
