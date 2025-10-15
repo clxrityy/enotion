@@ -38,9 +38,11 @@ export default function App({ children }: { children: React.ReactNode }) {
     <NotificationProvider position="top-right">{children}</NotificationProvider>
   );
 }
+```
 
+```tsx
 // page.tsx
-("use client");
+"use client";
 import { useNotify } from "@enotion/notify";
 import "@enotion/notify/index.css"; // Import the CSS for notifications (optional)
 
