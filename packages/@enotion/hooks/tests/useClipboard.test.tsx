@@ -8,7 +8,7 @@ describe("useClipboard", () => {
   });
 
   it("should copy text to clipboard successfully", async () => {
-    const mockWriteText = jest.fn()
+    const mockWriteText = jest.fn();
     Object.assign(navigator, {
       clipboard: {
         writeText: mockWriteText,
@@ -23,7 +23,7 @@ describe("useClipboard", () => {
 
       return (
         <div>
-          <button onClick={() => copy("Hello, World!")}>
+          <button type="button" onClick={() => copy("Hello, World!")}>
             {isCopied ? "Copied!" : "Copy Text"}
           </button>
         </div>
@@ -44,7 +44,9 @@ describe("useClipboard", () => {
     // await act(() => new Promise((r) => setTimeout(r, 0)));
 
     expect(mockWriteText).toHaveBeenCalledWith("Hello, World!");
-    await waitFor(() => expect(screen.getByText("Copied!")).toBeDefined(), { timeout: 500 });
+    await waitFor(() => expect(screen.getByText("Copied!")).toBeDefined(), {
+      timeout: 500,
+    });
   });
 
   it("should handle clipboard API not supported", async () => {
@@ -52,7 +54,9 @@ describe("useClipboard", () => {
       clipboard: undefined,
     });
 
-    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => { });
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
 
     const Component = () => {
       const { isCopied, copy } = useClipboard({
@@ -62,7 +66,7 @@ describe("useClipboard", () => {
 
       return (
         <div>
-          <button onClick={() => copy("Hello, World!")}>
+          <button type="button" onClick={() => copy("Hello, World!")}>
             {isCopied ? "Copied!" : "Copy Text"}
           </button>
         </div>
@@ -83,7 +87,7 @@ describe("useClipboard", () => {
     await act(() => new Promise((r) => setTimeout(r, 0)));
 
     expect(consoleErrorSpy).toHaveBeenCalledWith(
-      "Copy failed: Clipboard API not supported"
+      "Copy failed: Clipboard API not supported",
     );
     expect(screen.getByText("Copy Text")).toBeDefined(); // isCopied should remain false
 

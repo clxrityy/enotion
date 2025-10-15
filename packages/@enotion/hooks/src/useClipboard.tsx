@@ -37,10 +37,7 @@ export interface UseClipboardProps {
  *
  * @module useClipboard
  */
-export const useClipboard = ({
-  onCopy,
-  onError
-}: UseClipboardProps) => {
+export const useClipboard = ({ onCopy, onError }: UseClipboardProps) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
   const copy = async (text: string) => {
