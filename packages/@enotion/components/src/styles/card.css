@@ -37,14 +37,12 @@
   background-color: var(--card-hover-background-color);
   box-shadow: var(--card-hover-box-shadow);
   border-color: var(--card-hover-border-color);
-  transform: translateY(-1px);
 }
 
 .enotion-card:active {
   background-color: var(--card-active-background-color);
   box-shadow: var(--card-active-box-shadow);
   border-color: var(--card-active-border-color);
-  transform: translateY(0);
 }
 
 .enotion-card::backdrop {
