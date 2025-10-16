@@ -47,6 +47,7 @@ Most components accept a `colorPalette` prop to customize their color. [See avai
 - [`<Search />`](./src/Search.tsx)
 - [`<CopyButton />`](./src/CopyButton.tsx)
 - [`<LayoutContainer />`](./src/LayoutContainer.tsx)
+- [`<Navbar />`](./src/Navbar.tsx)
 
 ---
 

@@ -9,3 +9,4 @@ export * from "./Card.js";
 export * from "./Search.js";
 export * from "./CopyButton.js";
 export * from "./LayoutContainer.js";
+export * from "./Navbar.js";
