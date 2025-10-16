@@ -4,7 +4,6 @@ import "./globals.css";
 import { AppProviders } from "@/components/app/AppProviders";
 import { AppLayout } from "@/components/app/AppLayout";
 import { Suspense } from "react";
-import { Navigation } from "@/components/layout/Navigation";
 
 const exo = Exo({
   variable: "--font-exo",
@@ -29,7 +28,9 @@ export default function RootLayout({
           className="w-screen h-screen animate-pulse"
         />}>
           <AppProviders>
-            {children}
+            <AppLayout>
+              {children}
+            </AppLayout>
           </AppProviders>
         </Suspense>
       </body>

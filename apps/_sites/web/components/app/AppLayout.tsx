@@ -1,7 +1,7 @@
 "use client";
 import { useTheme } from "@enotion/hooks";
 import { LayoutContainer } from "@enotion/components";
-import { useCallback, type ReactNode } from "react";
+import { useCallback, useEffect, type ReactNode } from "react";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 /**
@@ -10,24 +10,33 @@ import { ColorPaletteType } from "@enotion/core/constants";
  */
 export const AppLayout = ({ children, colorPalette }: { children: ReactNode; colorPalette?: ColorPaletteType }) => {
 
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
-  const determinePalette = useCallback(() => {
+  const determinePalette: (() => ColorPaletteType) = useCallback(() => {
     switch (theme) {
       case "dark":
         return "dark" as ColorPaletteType;
       case "light":
         return "default" as ColorPaletteType;
       default:
-        return "default" as ColorPaletteType;
+        return colorPalette as ColorPaletteType;
     }
-  }, [theme]);
+  }, [theme, colorPalette]);
+
+  // Ensure theme is set on mount
+  useEffect(() => {
+    if (!theme) {
+      setTheme("dark");
+    }
+  }, [theme, setTheme]);
 
   return (
-    <LayoutContainer
-      theme={theme}
-      colorPalette={colorPalette || determinePalette()}
-      renderChildren={children}
-    />
+    <div className="h-screen w-screen">
+      <LayoutContainer
+        theme={theme}
+        colorPalette={colorPalette ?? determinePalette()}
+        renderChildren={children}
+      />
+    </div>
   );
 }

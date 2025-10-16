@@ -2,21 +2,23 @@
 
 import { useTheme } from "@enotion/hooks";
 import { Button, Navbar } from "@enotion/components";
-import { ColorPaletteType, Icons } from "@enotion/core/constants";
+import { Icons } from "@enotion/core/constants";
 
-export const Navigation = ({ colorPalette }: { colorPalette?: ColorPaletteType }) => {
+export const Navigation = () => {
   const { theme, toggle } = useTheme();
 
   const { DarkMode, LightMode } = Icons;
 
   return (
-    <Navbar position="top" colorPalette={colorPalette ?? (theme === "dark" ? "dark" : "default")}>
-      <div className="flex flex-row justify-stretch w-full max-w-sm md:max-w-xl lg:max-w-4xl mx-auto relative h-fit">
-        hey
-        <div className="w-full flex items-center pr-4 justify-end">
-          <Button type="button" onClick={toggle} aria-label="Toggle theme">
-            {theme === "dark" ? <LightMode /> : <DarkMode />}
-          </Button>
+    <Navbar position="left">
+      <div className="grid w-full relative h-fit items-center">
+        <div className="flex flex-row justify-stretch w-full items-center">
+          hey
+          <div className="w-full flex items-center pr-4 justify-center">
+            <Button type="button" onClick={toggle} aria-label="Toggle theme">
+              {theme === "dark" ? <LightMode /> : <DarkMode />}
+            </Button>
+          </div>
         </div>
       </div>
     </Navbar>
