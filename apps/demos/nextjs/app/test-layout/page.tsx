@@ -3,7 +3,14 @@ import { LayoutContainer, Button, Card } from "@enotion/components";
 
 export default function TestLayoutPage() {
   return (
-    <div style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+    <div
+      style={{
+        padding: "2rem",
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.5rem",
+      }}
+    >
       <h1>LayoutContainer Test</h1>
 
       <h2>Test 1: Direct children with solarized palette</h2>
@@ -13,7 +20,10 @@ export default function TestLayoutPage() {
           <>
             <Card>
               <h3>Card inside LayoutContainer</h3>
-              <p>This card should have the solarized palette automatically injected</p>
+              <p>
+                This card should have the solarized palette automatically
+                injected
+              </p>
               <Button>Button inside Card</Button>
             </Card>
             <Button>Direct Button child</Button>

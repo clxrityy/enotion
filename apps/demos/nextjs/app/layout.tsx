@@ -16,9 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={telex.className}>
         <Provider>
-          <AppLayout>
-            {children}
-          </AppLayout>
+          <AppLayout>{children}</AppLayout>
         </Provider>
       </body>
     </html>

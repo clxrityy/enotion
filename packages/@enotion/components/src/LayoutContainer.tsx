@@ -11,7 +11,7 @@ import {
   ReactNode,
   Children,
   cloneElement,
-  isValidElement
+  isValidElement,
 } from "react";
 import "./styles/layout-container.css";
 
@@ -88,7 +88,7 @@ export const LayoutContainer = ({
 
       // Only inject colorPalette into custom components (not native DOM elements like div, span, etc.)
       // Native DOM elements have string types (e.g., "div"), custom components have function/object types
-      const isCustomComponent = typeof child.type !== 'string';
+      const isCustomComponent = typeof child.type !== "string";
 
       if (colorPalette && !existingProps.colorPalette && isCustomComponent) {
         childProps.colorPalette = colorPalette;
@@ -104,9 +104,10 @@ export const LayoutContainer = ({
     });
   };
 
-  const processedChildren = typeof renderChildren === "function"
-    ? injectColorPalette(renderChildren())
-    : injectColorPalette(renderChildren);
+  const processedChildren =
+    typeof renderChildren === "function"
+      ? injectColorPalette(renderChildren())
+      : injectColorPalette(renderChildren);
 
   const blendedColorTop = blendHexColors(
     palette?.background!,
@@ -134,9 +135,7 @@ export const LayoutContainer = ({
         ...props.style,
       }}
     >
-      <div className={`layout-container-inner`}>
-        {processedChildren}
-      </div>
+      <div className={`layout-container-inner`}>{processedChildren}</div>
     </div>
   );
 };

@@ -96,7 +96,9 @@ describe("LayoutContainer", () => {
     const Layout = () => (
       <LayoutContainer
         colorPalette="default"
-        renderChildren={() => <Button colorPalette="solarized">Button Child</Button>}
+        renderChildren={() => (
+          <Button colorPalette="solarized">Button Child</Button>
+        )}
       />
     );
 

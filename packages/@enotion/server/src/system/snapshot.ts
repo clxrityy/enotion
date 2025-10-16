@@ -67,7 +67,9 @@ export async function getSystemSnapshot(path = "/"): Promise<SystemSnapshot> {
       free: Number.parseFloat(memUsage.free),
       usedGB: Number.parseFloat(bytesToGB(Number.parseFloat(memUsage.used))),
       freeGB: Number.parseFloat(bytesToGB(Number.parseFloat(memUsage.free))),
-      usage: (Number.parseFloat(memUsage.used) / Number.parseFloat(memUsage.total)) * 100,
+      usage:
+        (Number.parseFloat(memUsage.used) / Number.parseFloat(memUsage.total)) *
+        100,
     },
     uptime: uptime(),
     timestamp: Date.now(),

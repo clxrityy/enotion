@@ -38,7 +38,7 @@ const initialThemeContext: ThemeContext = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => { },
+  toggle: () => {},
 };
 
 // Create a simple context without the factory pattern
@@ -121,10 +121,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       if (storedTheme === "system") {
         // Determine actual system theme
         const systemIsDark =
-          (globalThis.window !== undefined) &&
+          globalThis.window !== undefined &&
           globalThis.matchMedia &&
           globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = systemIsDark ? "dark" : "light";
+        document.documentElement.dataset.theme = systemIsDark
+          ? "dark"
+          : "light";
       } else {
         document.documentElement.dataset.theme = storedTheme;
       }

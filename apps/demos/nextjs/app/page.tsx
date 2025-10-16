@@ -45,54 +45,75 @@ export default function Home(): JSX.Element {
   }));
 
   return (
-    <div style={{
-      backgroundColor: theme === "dark" ? "#000000" : "#ffffff",
-      color: theme === "dark" ? "#eee" : "#111"
-    }} className={styles.page} {...preloadProvider}>
+    <div
+      style={{
+        backgroundColor: theme === "dark" ? "#000000" : "#ffffff",
+        color: theme === "dark" ? "#eee" : "#111",
+      }}
+      className={styles.page}
+      {...preloadProvider}
+    >
       <main className={styles.main}>
-        <Suspense fallback={<Skeleton style={{ width: "600px", height: "200px" }} />}>
+        <Suspense
+          fallback={<Skeleton style={{ width: "600px", height: "200px" }} />}
+        >
           <Card colorPalette={palette}>
             <h1>Welcome to the Enotion Next.js Demo!</h1>
           </Card>
         </Suspense>
-        {
-          isLoading ? (
-            <Skeleton style={{ width: "600px", height: "400px" }} />
-          ) : (
-            <Card colorPalette={palette} style={{ padding: "2rem", maxWidth: "600px", width: "100%" }}>
-              <p>
-                This demo showcases the Enotion component library integrated with Next.js.
-                Explore the features and components by interacting with the options below.
-              </p>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "1rem" }}>
-                <Button colorPalette={palette} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                  Toggle Theme (Current: {theme})
-                </Button>
-                <Select
-                  colorPalette={palette}
-                  options={palettes}
-                  value={currentPalette || ""}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    setPalette(value);
-                    success(`Color palette set to ${value}`);
-                  }}
-                  style={{ minWidth: "200px" }}
-                />
-                <CopyButton
-                  colorPalette={palette}
-                  content="npm install @enotion/components @enotion/hooks @enotion/core @enotion/notify"
-                  onCopy={() => success("Command copied to clipboard!")}
-                >
-                  Copy Install Command
-                </CopyButton>
-                <Button colorPalette={palette} onClick={() => push("/test-layout")}>
-                  Go to LayoutContainer Test Page
-                </Button>
-              </div>
-            </Card>
-          )
-        }
+        {isLoading ? (
+          <Skeleton style={{ width: "600px", height: "400px" }} />
+        ) : (
+          <Card
+            colorPalette={palette}
+            style={{ padding: "2rem", maxWidth: "600px", width: "100%" }}
+          >
+            <p>
+              This demo showcases the Enotion component library integrated with
+              Next.js. Explore the features and components by interacting with
+              the options below.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
+                marginTop: "1rem",
+              }}
+            >
+              <Button
+                colorPalette={palette}
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              >
+                Toggle Theme (Current: {theme})
+              </Button>
+              <Select
+                colorPalette={palette}
+                options={palettes}
+                value={currentPalette || ""}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setPalette(value);
+                  success(`Color palette set to ${value}`);
+                }}
+                style={{ minWidth: "200px" }}
+              />
+              <CopyButton
+                colorPalette={palette}
+                content="npm install @enotion/components @enotion/hooks @enotion/core @enotion/notify"
+                onCopy={() => success("Command copied to clipboard!")}
+              >
+                Copy Install Command
+              </CopyButton>
+              <Button
+                colorPalette={palette}
+                onClick={() => push("/test-layout")}
+              >
+                Go to LayoutContainer Test Page
+              </Button>
+            </div>
+          </Card>
+        )}
       </main>
     </div>
   );

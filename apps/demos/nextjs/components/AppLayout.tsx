@@ -17,7 +17,7 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
       renderChildren={children}
       style={{
         backgroundColor: theme === "dark" ? "#00000000" : "#ffffffee",
-        color: theme === "dark" ? "#eeeddddd" : "#11100000"
+        color: theme === "dark" ? "#eeeddddd" : "#11100000",
       }}
     />
   );
