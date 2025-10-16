@@ -65,9 +65,7 @@ describe("Navbar", () => {
 
   it("renders default position when none is provided", () => {
     const { container } = render(
-      <Navbar colorPalette="default">
-        Default Navbar
-      </Navbar>,
+      <Navbar colorPalette="default">Default Navbar</Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
     expect(navElement.className).toContain("navbar-top enotion-navbar");

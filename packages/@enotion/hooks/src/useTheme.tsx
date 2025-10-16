@@ -38,7 +38,7 @@ const initialThemeContext: ThemeContext = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => { },
+  toggle: () => {},
 };
 
 // Create a simple context without the factory pattern
@@ -72,10 +72,7 @@ const Context = createContext<ThemeContext>(initialThemeContext);
  * @module ThemeProvider
  */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [storedTheme, setStoredTheme] = useLocalStorage<Theme>(
-    "theme",
-    "dark",
-  );
+  const [storedTheme, setStoredTheme] = useLocalStorage<Theme>("theme", "dark");
   const [isHydrated, setIsHydrated] = useState(false);
 
   // Handle hydration to prevent SSR mismatches
@@ -98,14 +95,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       // Add the system theme as a data attribute on the document element
       document.documentElement.dataset.theme = systemTheme;
 
-
       const listener = (e: MediaQueryListEvent) => {
         // Only change theme if user hasn't explicitly chosen a theme
         if (storedTheme === "light" && e.matches) return;
 
         const newSystemTheme: Theme = e.matches ? "dark" : "light";
         document.documentElement.dataset.theme = newSystemTheme;
-
       };
       mql.addEventListener("change", listener);
 

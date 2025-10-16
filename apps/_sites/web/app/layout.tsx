@@ -21,16 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${exo.variable} antialiased`}
-      >
-        <Suspense fallback={<div
-          className="w-screen h-screen animate-pulse"
-        />}>
+      <body className={`${exo.variable} antialiased`}>
+        <Suspense
+          fallback={<div className="w-screen h-screen animate-pulse" />}
+        >
           <AppProviders>
-            <AppLayout>
-              {children}
-            </AppLayout>
+            <AppLayout>{children}</AppLayout>
           </AppProviders>
         </Suspense>
       </body>

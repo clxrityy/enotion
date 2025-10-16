@@ -6,9 +6,7 @@ import type { ReactNode } from "react";
 export const AppProviders = ({ children }: { children: ReactNode }) => (
   <ThemeProvider>
     <ColorPaletteProvider>
-      <NotificationProvider>
-        {children}
-      </NotificationProvider>
+      <NotificationProvider>{children}</NotificationProvider>
     </ColorPaletteProvider>
   </ThemeProvider>
 );

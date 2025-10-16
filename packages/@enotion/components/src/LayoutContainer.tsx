@@ -66,7 +66,8 @@ export const LayoutContainer = ({
   theme,
   ...props
 }: LayoutContainerProps): JSX.Element => {
-  const defaultPalette = theme === "dark" ? ColorPalettes.dark : ColorPalettes.default;
+  const defaultPalette =
+    theme === "dark" ? ColorPalettes.dark : ColorPalettes.default;
   const palette = colorPalette ? ColorPalettes[colorPalette] : defaultPalette;
 
   const darkenedBoxShadow = adjustHexColorOpacity(
@@ -130,18 +131,22 @@ export const LayoutContainer = ({
     <div
       {...props}
       className={cn("layout-container", props.className)}
-      style={{
-        backgroundColor: palette
-          ? `linear-gradient(to bottom, ${blendedColorTop}, ${blendedColorBottom})`
-          : undefined,
-        "--layout-background": palette ? palette.background : undefined,
-        "--layout-foreground": palette ? palette.foreground : undefined,
-        "--layout-border": palette ? lightenHexColor(palette.border, 0.4) : undefined,
-        padding: "1rem",
-        borderRadius: "0.5rem",
-        boxShadow: `0 4px 6px ${darkenedBoxShadow}`,
-        ...props.style,
-      } as CSSProperties}
+      style={
+        {
+          backgroundColor: palette
+            ? `linear-gradient(to bottom, ${blendedColorTop}, ${blendedColorBottom})`
+            : undefined,
+          "--layout-background": palette ? palette.background : undefined,
+          "--layout-foreground": palette ? palette.foreground : undefined,
+          "--layout-border": palette
+            ? lightenHexColor(palette.border, 0.4)
+            : undefined,
+          padding: "1rem",
+          borderRadius: "0.5rem",
+          boxShadow: `0 4px 6px ${darkenedBoxShadow}`,
+          ...props.style,
+        } as CSSProperties
+      }
     >
       <div className={`layout-container-inner`}>{processedChildren}</div>
     </div>

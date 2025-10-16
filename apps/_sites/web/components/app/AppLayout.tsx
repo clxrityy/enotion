@@ -8,11 +8,16 @@ import { ColorPaletteType } from "@enotion/core/constants";
  * AppLayout component that wraps children in LayoutContainer with the current color palette.
  * This must be used INSIDE the Provider to have access to the ColorPaletteProvider context.
  */
-export const AppLayout = ({ children, colorPalette }: { children: ReactNode; colorPalette?: ColorPaletteType }) => {
-
+export const AppLayout = ({
+  children,
+  colorPalette,
+}: {
+  children: ReactNode;
+  colorPalette?: ColorPaletteType;
+}) => {
   const { theme, setTheme } = useTheme();
 
-  const determinePalette: (() => ColorPaletteType) = useCallback(() => {
+  const determinePalette: () => ColorPaletteType = useCallback(() => {
     switch (theme) {
       case "dark":
         return "dark" as ColorPaletteType;
@@ -39,4 +44,4 @@ export const AppLayout = ({ children, colorPalette }: { children: ReactNode; col
       />
     </div>
   );
-}
+};
