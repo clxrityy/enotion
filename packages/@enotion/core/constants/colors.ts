@@ -23,15 +23,15 @@ export const ColorPalettes: Record<string, ColorPalette> = {
     info: "#3b82f6", // Clear blue for information
   },
   dark: {
-    background: "#0f172a", // Deep blue-gray for reduced eye strain
+    background: "#111100", // Deep blue-gray for reduced eye strain
     foreground: "#f1f5f9", // Soft white for better readability
-    border: "#334155", // Subtle border that's visible but not harsh
+    border: "#222", // Subtle border that's visible but not harsh
     primary: "#60a5fa", // Bright blue that works well on dark backgrounds
     secondary: "#a78bfa", // Light purple for good contrast
     tertiary: "#34d399", // Bright green that pops on dark
     accent: "#fb7185", // Soft pink-red for accents
     highlight: "#1e293b", // Darker highlight for selection
-    muted: "#1e293b", // Consistent muted background
+    muted: "#dddc", // Consistent muted background
     success: "#22c55e", // Vibrant but not harsh green
     warning: "#fbbf24", // Warm yellow for warnings
     error: "#f87171", // Soft red that's not too aggressive
@@ -69,11 +69,11 @@ export const ColorPalettes: Record<string, ColorPalette> = {
   },
   trustInBlue: {
     background: "#f8fafc", // Softer background with blue undertones
-    foreground: "#1e232b", // Professional dark gray-blue
+    foreground: "#64748b", // Professional neutral gray-blue
     primary: "#1d6ed1", // Strong, professional blue
     secondary: "#1e40af", // Deeper blue for hierarchy
     tertiary: "#3b82f1", // Brighter accent blue
-    accent: "#0f172a", // Deep contrast for emphasis
+    accent: "#0f172a", // Opaque slight blue-black
     border: "#cbd5e1", // Blue-tinted border
     highlight: "#eff6ff", // Light blue highlight
     muted: "#f1f5f9", // Subtle blue-gray background
