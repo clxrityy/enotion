@@ -7,6 +7,8 @@ import {
   MdWarning,
   MdCheck,
   MdNotifications,
+  MdDarkMode,
+  MdLightMode
 } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
@@ -23,4 +25,6 @@ export const Icons = {
   Notifications: MdNotifications,
   Copy: LuCopy,
   Copied: LuCopyCheck,
+  DarkMode: MdDarkMode,
+  LightMode: MdLightMode
 };
