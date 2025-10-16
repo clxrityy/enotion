@@ -52,7 +52,8 @@
   "packageManager": "pnpm@10.18.3",
   "dependencies": {
     "@enotion/config": "workspace:*",
-    "@enotion/core": "workspace:*"
+    "@enotion/core": "workspace:*",
+    "@enotion/hooks": "workspace:*"
   },
   "devDependencies": {
     "@jest/globals": "^30.2.0",
@@ -69,8 +70,7 @@
     "tailwindcss": "^4.1.14",
     "terser": "^5.44.0",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.3",
-    "@enotion/hooks": "workspace:*"
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
     "react": "^19.2.0",
