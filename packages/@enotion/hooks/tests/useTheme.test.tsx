@@ -21,14 +21,14 @@ const mockMatchMedia = jest.fn((query: string) => ({
   dispatchEvent: jest.fn(),
 }));
 
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(globalThis, "matchMedia", {
   writable: true,
   value: mockMatchMedia,
 });
 
 describe("useTheme", () => {
   beforeEach(() => {
-    window.localStorage.clear();
+    globalThis.localStorage.clear();
     jest.clearAllMocks();
     mockMatchMedia.mockClear();
   });

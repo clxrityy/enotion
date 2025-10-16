@@ -58,16 +58,16 @@ export async function getSystemSnapshot(path = "/"): Promise<SystemSnapshot> {
 
   return {
     cpu: {
-      usage: parseFloat(parsedCpuUsage),
-      temperature: parseFloat(cpuTemp),
+      usage: Number.parseFloat(parsedCpuUsage),
+      temperature: Number.parseFloat(cpuTemp),
     },
     memory: {
-      total: parseFloat(memUsage.total),
-      used: parseFloat(memUsage.used),
-      free: parseFloat(memUsage.free),
-      usedGB: parseFloat(bytesToGB(parseFloat(memUsage.used))),
-      freeGB: parseFloat(bytesToGB(parseFloat(memUsage.free))),
-      usage: (parseFloat(memUsage.used) / parseFloat(memUsage.total)) * 100,
+      total: Number.parseFloat(memUsage.total),
+      used: Number.parseFloat(memUsage.used),
+      free: Number.parseFloat(memUsage.free),
+      usedGB: Number.parseFloat(bytesToGB(Number.parseFloat(memUsage.used))),
+      freeGB: Number.parseFloat(bytesToGB(Number.parseFloat(memUsage.free))),
+      usage: (Number.parseFloat(memUsage.used) / Number.parseFloat(memUsage.total)) * 100,
     },
     uptime: uptime(),
     timestamp: Date.now(),

@@ -29,16 +29,16 @@ export type Theme = "system" | "light" | "dark";
  */
 export interface ThemeContext {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  setTheme: (theme: Theme) => Theme;
   toggle: () => void;
 }
 
 const initialThemeContext: ThemeContext = {
   theme: "system",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setTheme: () => {},
+  setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => {},
+  toggle: () => { },
 };
 
 // Create a simple context without the factory pattern
@@ -89,21 +89,21 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     let cleanup: (() => void) | undefined;
 
     // Check if matchMedia is available (it might not be in test environments)
-    if (typeof window !== "undefined" && window.matchMedia) {
-      const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    if (globalThis.window !== undefined) {
+      const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
 
       // Only auto-set system preference if user hasn't explicitly chosen a theme
       if (storedTheme === "system") {
         const systemTheme: Theme = mql.matches ? "dark" : "light";
         // Apply system theme to DOM but keep stored theme as "system"
-        document.documentElement.setAttribute("data-theme", systemTheme);
+        document.documentElement.dataset.theme = systemTheme;
       }
 
       const listener = (e: MediaQueryListEvent) => {
         // Only respond to system changes if user has "system" preference
         if (storedTheme === "system") {
           const newSystemTheme: Theme = e.matches ? "dark" : "light";
-          document.documentElement.setAttribute("data-theme", newSystemTheme);
+          document.documentElement.dataset.theme = newSystemTheme;
         }
       };
       mql.addEventListener("change", listener);
@@ -121,15 +121,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       if (storedTheme === "system") {
         // Determine actual system theme
         const systemIsDark =
-          typeof window !== "undefined" &&
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.setAttribute(
-          "data-theme",
-          systemIsDark ? "dark" : "light",
-        );
+          (globalThis.window !== undefined) &&
+          globalThis.matchMedia &&
+          globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = systemIsDark ? "dark" : "light";
       } else {
-        document.documentElement.setAttribute("data-theme", storedTheme);
+        document.documentElement.dataset.theme = storedTheme;
       }
     }
   }, [storedTheme, isHydrated]);
@@ -137,6 +134,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const setThemeCallback = useCallback(
     (theme: Theme) => {
       setStoredTheme(theme);
+      return theme;
     },
     [setStoredTheme],
   );

@@ -12,8 +12,8 @@ type ErrorDispatch = Dispatch<SetStateAction<Error | null>>;
 
 function setItem(key: string, value: unknown, setError: ErrorDispatch): void {
   try {
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(key, JSON.stringify(value));
+    if (globalThis.window !== undefined) {
+      globalThis.localStorage.setItem(key, JSON.stringify(value));
     }
   } catch (error) {
     setError(error as Error);
@@ -22,8 +22,8 @@ function setItem(key: string, value: unknown, setError: ErrorDispatch): void {
 
 function getItem<T>(key: string, setError: ErrorDispatch): T | undefined {
   try {
-    if (typeof window !== "undefined") {
-      const data = window.localStorage.getItem(key);
+    if (globalThis.window !== undefined) {
+      const data = globalThis.localStorage.getItem(key);
       return data ? (JSON.parse(data) as T) : undefined;
     }
     return undefined;
@@ -35,8 +35,8 @@ function getItem<T>(key: string, setError: ErrorDispatch): T | undefined {
 
 function removeItem(key: string, setError: ErrorDispatch): void {
   try {
-    if (typeof window !== "undefined") {
-      window.localStorage.removeItem(key);
+    if (globalThis.window !== undefined) {
+      globalThis.localStorage.removeItem(key);
     }
   } catch (error) {
     setError(error as Error);

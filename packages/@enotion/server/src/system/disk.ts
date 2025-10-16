@@ -29,7 +29,7 @@ export async function diskUsage(path = "/"): Promise<DiskInfo> {
   if (platform === "linux" || platform === "darwin") {
     cmd = `df -P -k "${path}" | tail -1`;
   } else {
-    return Promise.reject(new Error("Unsupported platform"));
+    throw new Error("Unsupported platform");
   }
 
   const { stdout } = await execAsync(cmd);

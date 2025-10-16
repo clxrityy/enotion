@@ -20,7 +20,7 @@ export function cpuUsage(): string[] {
 export async function cpuTemperature(): Promise<string[]> {
   try {
     const { stdout } = await execAsync("vcgencmd measure_temp");
-    return parseFloat(stdout.replace("temp=", "").replace("'C\n", ""))
+    return Number.parseFloat(stdout.replace("temp=", "").replace("'C\n", ""))
       .toFixed(1)
       .split("\n");
   } catch {
@@ -86,8 +86,6 @@ export async function parseCpuUsage(): Promise<string> {
   return sample();
 }
 
-export { parseIdleFromTopOutput };
-
 /** Parse CPU temperature output.
  * @param output An array of strings representing CPU temperatures.
  * @returns The first valid temperature as a string, or "N/A" if none found.
@@ -95,7 +93,7 @@ export { parseIdleFromTopOutput };
 export function parseCpuTemperature(output: string[]): string {
   return (
     output.reduce((acc, temp) => {
-      const parsed = parseFloat(temp);
+      const parsed = Number.parseFloat(temp);
       if (!Number.isNaN(parsed)) {
         acc.push(parsed.toFixed(1));
       }
