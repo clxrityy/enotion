@@ -14,6 +14,7 @@ import {
   isValidElement,
 } from "react";
 import "./styles/layout-container.css";
+import { Theme } from "@enotion/hooks";
 
 /**
  * Props for the LayoutContainer component.
@@ -25,6 +26,7 @@ import "./styles/layout-container.css";
 export interface LayoutContainerProps extends HTMLAttributes<HTMLDivElement> {
   colorPalette?: ColorPaletteType;
   renderChildren: (() => ReactNode[] | ReactNode) | ReactNode;
+  theme?: Theme;
 }
 
 /**
@@ -59,9 +61,11 @@ export interface LayoutContainerProps extends HTMLAttributes<HTMLDivElement> {
 export const LayoutContainer = ({
   renderChildren,
   colorPalette,
+  theme,
   ...props
 }: LayoutContainerProps): JSX.Element => {
-  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
+  const defaultPalette = theme === "dark" ? ColorPalettes.dark : ColorPalettes.default;
+  const palette = colorPalette ? ColorPalettes[colorPalette] : defaultPalette;
 
   const darkenedBoxShadow = adjustHexColorOpacity(
     darkenHexColor(palette?.muted || "#000000", 20) || "#00000099",

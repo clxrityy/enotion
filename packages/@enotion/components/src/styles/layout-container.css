@@ -9,6 +9,8 @@
   box-sizing: border-box;
   overflow-x: hidden;
   margin: 0 auto;
+  color: var(--foreground);
+  background-color: var(--background);
 }
 
 .layout-container-inner {
@@ -21,7 +23,7 @@
   gap: 16px;
 }
 
-.layout-container-inner > * {
+.layout-container-inner>* {
   width: auto;
   max-width: 100%;
   margin: 8px 4px;
@@ -53,11 +55,11 @@
   }
 }
 
-.layout-container > * {
+.layout-container>* {
   width: 100%;
   max-width: calc(100vw - 2.5rem);
 }
 
-.layout-container > :not(:last-child) {
+.layout-container> :not(:last-child) {
   margin-bottom: 1.5rem;
 }
