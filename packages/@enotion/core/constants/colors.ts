@@ -9,9 +9,9 @@ import type { ColorPalette } from "../types/colors.js";
 export const ColorPalettes: Record<string, ColorPalette> = {
   default: {
     background: "#ffffff",
-    foreground: "#1a1a1a", // Improved contrast while softer than pure black
+    foreground: "#123", // Improved contrast while softer than pure black
     border: "#e5e7eb", // More neutral gray
-    primary: "#2563eb", // Modern blue with better contrast
+    primary: "#2563ff", // Modern blue with better contrast
     secondary: "#7c3aed", // Complementary purple for better harmony
     tertiary: "#059669", // Balanced green
     accent: "#dc2626", // Strong red for accents
@@ -39,7 +39,7 @@ export const ColorPalettes: Record<string, ColorPalette> = {
   },
   solarized: {
     background: "#fdf6e3", // Classic solarized light background
-    foreground: "#586e75", // Improved contrast from original solarized
+    foreground: "#333", // Improved contrast from original solarized
     border: "#e3dcc9", // Warmer border tone
     primary: "#268bd2", // Classic solarized blue
     secondary: "#d33682", // Solarized magenta
@@ -69,10 +69,10 @@ export const ColorPalettes: Record<string, ColorPalette> = {
   },
   trustInBlue: {
     background: "#f8fafc", // Softer background with blue undertones
-    foreground: "#1e293b", // Professional dark gray-blue
-    primary: "#1d4ed8", // Strong, professional blue
+    foreground: "#1e232b", // Professional dark gray-blue
+    primary: "#1d6ed1", // Strong, professional blue
     secondary: "#1e40af", // Deeper blue for hierarchy
-    tertiary: "#3b82f6", // Brighter accent blue
+    tertiary: "#3b82f1", // Brighter accent blue
     accent: "#0f172a", // Deep contrast for emphasis
     border: "#cbd5e1", // Blue-tinted border
     highlight: "#eff6ff", // Light blue highlight
