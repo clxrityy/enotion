@@ -4,13 +4,18 @@
   align-items: start;
   justify-content: center;
   width: 100%;
+  max-width: 1200px;
   min-height: 100%;
+  max-height: 100vh;
   padding: 1rem;
   box-sizing: border-box;
   overflow-x: hidden;
   margin: 0 auto;
-  color: var(--foreground);
-  background-color: var(--background);
+  color: var(--layout-foreground);
+  background-color: var(--layout-background);
+  border: 5px solid var(--layout-border);
+  transition: width 0.3s ease, padding 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  position: relative;
 }
 
 .layout-container-inner {
@@ -38,20 +43,20 @@
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
   .layout-container {
-    padding: 1rem 1rem;
+    padding: 2rem 4rem;
     align-items: center;
   }
 }
 
 @media screen and (min-width: 1025px) {
   .layout-container {
-    padding: 1rem 1.5rem;
+    padding: 2rem 6rem;
   }
 }
 
 @media screen and (min-width: 1441px) {
   .layout-container {
-    padding: 1rem 2rem;
+    padding: 2.25rem 8rem;
   }
 }
 

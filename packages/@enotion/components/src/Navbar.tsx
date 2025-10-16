@@ -26,7 +26,7 @@ const TopNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
       style={{
         borderBottom: palette ? `1px solid ${palette.border}` : undefined,
         backgroundColor: palette ? palette.background : undefined,
-        color: palette ? palette.foreground : undefined,
+        color: palette ? palette.foreground : "inherit",
         ...props.style,
       }}
       {...props}
@@ -46,7 +46,7 @@ const BottomNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
       style={{
         borderTop: palette ? `1px solid ${palette.border}` : undefined,
         backgroundColor: palette ? palette.background : undefined,
-        color: palette ? palette.foreground : undefined,
+        color: palette ? palette.foreground : "inherit",
         ...props.style,
       }}
       {...props}
@@ -66,7 +66,7 @@ const LeftNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
       style={{
         borderRight: palette ? `1px solid ${palette.border}` : undefined,
         backgroundColor: palette ? palette.background : undefined,
-        color: palette ? palette.foreground : undefined,
+        color: palette ? palette.foreground : "inherit",
         ...props.style,
       }}
       {...props}
@@ -86,7 +86,7 @@ const RightNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
       style={{
         borderLeft: palette ? `1px solid ${palette.border}` : undefined,
         backgroundColor: palette ? palette.background : undefined,
-        color: palette ? palette.foreground : undefined,
+        color: palette ? palette.foreground : "inherit",
         ...props.style,
       }}
       {...props}
@@ -106,7 +106,7 @@ const NavbarContainer = ({ position = "top", children, colorPalette, ...props }:
     "--navbar-before-bg-color-start": palette ? palette.accent : undefined,
     "--navbar-before-bg-color-end": palette ? palette.background : undefined,
     "--navbar-after-bg-color": palette ? palette.background : undefined,
-    color: palette ? palette.foreground : undefined,
+    color: palette ? palette.foreground : "inherit",
     ...props.style
   } as CSSProperties;
 
@@ -121,7 +121,7 @@ const NavbarContainer = ({ position = "top", children, colorPalette, ...props }:
       case "right":
         return <RightNavbar style={style} colorPalette={colorPalette} {...props}>{children}</RightNavbar>;
       default:
-        return null;
+        return <TopNavbar style={style} colorPalette={colorPalette} {...props}>{children}</TopNavbar>;
     }
   };
 

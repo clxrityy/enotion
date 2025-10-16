@@ -4,6 +4,7 @@ import {
   blendHexColors,
   cn,
   darkenHexColor,
+  lightenHexColor,
 } from "@enotion/core/utils";
 import {
   HTMLAttributes,
@@ -12,6 +13,7 @@ import {
   Children,
   cloneElement,
   isValidElement,
+  CSSProperties,
 } from "react";
 import "./styles/layout-container.css";
 import { Theme } from "@enotion/hooks";
@@ -132,12 +134,14 @@ export const LayoutContainer = ({
         backgroundColor: palette
           ? `linear-gradient(to bottom, ${blendedColorTop}, ${blendedColorBottom})`
           : undefined,
-        color: palette?.foreground,
+        "--layout-background": palette ? palette.background : undefined,
+        "--layout-foreground": palette ? palette.foreground : undefined,
+        "--layout-border": palette ? lightenHexColor(palette.border, 0.4) : undefined,
         padding: "1rem",
         borderRadius: "0.5rem",
         boxShadow: `0 4px 6px ${darkenedBoxShadow}`,
         ...props.style,
-      }}
+      } as CSSProperties}
     >
       <div className={`layout-container-inner`}>{processedChildren}</div>
     </div>
