@@ -1,6 +1,7 @@
 import { ColorPalettes, ColorPaletteType } from "@enotion/core/constants";
 import { CSSProperties, HTMLAttributes, ReactNode } from "react";
 import "./styles/card.css";
+import { cn } from "@enotion/core/utils";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -13,7 +14,7 @@ export const Card = ({ children, colorPalette, ...props }: CardProps) => {
   return (
     <div
       {...props}
-      className={`enotion-card ${props.className || ""}`}
+      className={cn("enotion-card", props.className)}
       style={{
         ...(palette
           ? ({

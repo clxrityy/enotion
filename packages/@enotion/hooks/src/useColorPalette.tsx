@@ -24,7 +24,7 @@ export interface ColorPaletteContext {
 const initialColorPaletteContext: ColorPaletteContext = {
   palette: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setPalette: () => {},
+  setPalette: (palette: ColorPaletteType) => palette,
   getAllPalettes: () => ColorPalettes,
 };
 
@@ -73,8 +73,8 @@ export const ColorPaletteProvider = ({
 
     let cleanup: (() => void) | undefined;
 
-    if (typeof window !== "undefined" && window.matchMedia) {
-      const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    if (globalThis.window !== undefined && globalThis.matchMedia) {
+      const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
 
       // Set initial palette based on system preference if no stored palette
       const systemPalette: ColorPaletteType = mql.matches ? "dark" : "default";
@@ -102,10 +102,11 @@ export const ColorPaletteProvider = ({
 
   useEffect(() => {
     if (isHydrated && storedPalette) {
-      document.documentElement.setAttribute(
-        "data-color-palette",
-        storedPalette,
-      );
+      document.documentElement.dataset.palette = storedPalette;
+      // document.documentElement.setAttribute(
+      //   "data-color-palette",
+      //   storedPalette,
+      // );
     }
   }, [storedPalette, isHydrated]);
 
