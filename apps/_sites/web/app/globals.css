@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@enotion/components/index.css";
+
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: screen;
+  height: screen;
+  font-family: var(--font);
+  position: relative;
+}
