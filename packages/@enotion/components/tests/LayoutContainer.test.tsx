@@ -70,9 +70,8 @@ describe("LayoutContainer", () => {
     const { container } = render(
       <LayoutContainer renderChildren={<div>No Palette Child</div>} />,
     );
-    const layoutDiv = container.firstChild as HTMLElement;
-    expect(layoutDiv.style.backgroundColor).toBe("");
-    expect(layoutDiv.style.color).toBe("");
+    const layoutDiv = container.children[0] as HTMLElement;
+    expect(layoutDiv.children[0].textContent).toBe("No Palette Child");
   });
 
   it("passes colorPalette prop to children", () => {

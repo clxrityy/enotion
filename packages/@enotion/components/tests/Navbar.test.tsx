@@ -30,7 +30,7 @@ describe("Navbar", () => {
       </Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
-    expect(navElement.className).toContain("enotion-navbar-top");
+    expect(navElement.className).toContain("navbar-top enotion-navbar");
   });
 
   it("renders with bottom position", () => {
@@ -40,7 +40,7 @@ describe("Navbar", () => {
       </Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
-    expect(navElement.className).toContain("enotion-navbar-bottom");
+    expect(navElement.className).toContain("navbar-bottom enotion-navbar");
   });
 
   it("renders with left position", () => {
@@ -50,7 +50,7 @@ describe("Navbar", () => {
       </Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
-    expect(navElement.className).toContain("enotion-navbar-left");
+    expect(navElement.className).toContain("navbar-left enotion-navbar");
   });
 
   it("renders with right position", () => {
@@ -60,7 +60,7 @@ describe("Navbar", () => {
       </Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
-    expect(navElement.className).toContain("enotion-navbar-right");
+    expect(navElement.className).toContain("navbar-right enotion-navbar");
   });
 
   it("renders default position when none is provided", () => {
@@ -70,6 +70,6 @@ describe("Navbar", () => {
       </Navbar>,
     );
     const navElement = container.querySelector("nav") as HTMLElement;
-    expect(navElement.className).toContain("enotion-navbar-top");
+    expect(navElement.className).toContain("navbar-top enotion-navbar");
   });
 });

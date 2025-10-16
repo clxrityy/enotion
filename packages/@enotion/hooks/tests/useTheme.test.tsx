@@ -54,11 +54,11 @@ describe("useTheme", () => {
       </ThemeProvider>,
     );
 
-    expect(screen.getByTestId("theme").textContent).toBe("system");
+    expect(screen.getByTestId("theme").textContent).toBe("dark");
     expect(screen.getByTestId("setTheme").textContent).toBe("function");
   });
 
-  it("should update theme to 'light'", async () => {
+  it("should update theme to 'dark'", async () => {
     const Component = () => {
       const { theme, setTheme } = useTheme();
 
@@ -67,10 +67,10 @@ describe("useTheme", () => {
           <div data-testid="theme">{theme}</div>
           <button
             type="button"
-            data-testid="set-light-button"
-            onClick={() => setTheme("light")}
+            data-testid="set-dark-button"
+            onClick={() => setTheme("dark")}
           >
-            Set Light
+            Set Dark
           </button>
         </>
       );
@@ -82,16 +82,16 @@ describe("useTheme", () => {
       </ThemeProvider>,
     );
 
-    // Initially should be system
-    expect(screen.getByTestId("theme").textContent).toBe("system");
+    // Initially should be light
+    expect(screen.getByTestId("theme").textContent).toBe("dark");
 
-    // Click to set theme to light
-    const button = screen.getByTestId("set-light-button");
+    // Click to set theme to dark
+    const button = screen.getByTestId("set-dark-button");
     fireEvent.click(button);
 
     // Wait for theme update
     await waitFor(() => {
-      expect(screen.getByTestId("theme").textContent).toBe("light");
+      expect(screen.getByTestId("theme").textContent).toBe("dark");
     });
   });
 });

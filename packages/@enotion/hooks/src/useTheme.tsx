@@ -10,7 +10,7 @@ import {
 import { useLocalStorage } from "./useLocalStorage.js";
 
 /** Theme type representing the possible theme values */
-export type Theme = "system" | "light" | "dark";
+export type Theme = "light" | "dark";
 
 /**
  * ThemeContext - The context interface for theme management.
@@ -34,11 +34,11 @@ export interface ThemeContext {
 }
 
 const initialThemeContext: ThemeContext = {
-  theme: "system",
+  theme: "light",
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => {},
+  toggle: () => { },
 };
 
 // Create a simple context without the factory pattern
@@ -74,7 +74,7 @@ const Context = createContext<ThemeContext>(initialThemeContext);
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [storedTheme, setStoredTheme] = useLocalStorage<Theme>(
     "theme",
-    "system",
+    "dark",
   );
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -93,18 +93,19 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
 
       // Only auto-set system preference if user hasn't explicitly chosen a theme
-      if (storedTheme === "system") {
-        const systemTheme: Theme = mql.matches ? "dark" : "light";
-        // Apply system theme to DOM but keep stored theme as "system"
-        document.documentElement.dataset.theme = systemTheme;
-      }
+
+      const systemTheme: Theme = mql.matches ? "dark" : "light";
+      // Add the system theme as a data attribute on the document element
+      document.documentElement.dataset.theme = systemTheme;
+
 
       const listener = (e: MediaQueryListEvent) => {
-        // Only respond to system changes if user has "system" preference
-        if (storedTheme === "system") {
-          const newSystemTheme: Theme = e.matches ? "dark" : "light";
-          document.documentElement.dataset.theme = newSystemTheme;
-        }
+        // Only change theme if user hasn't explicitly chosen a theme
+        if (storedTheme === "light" && e.matches) return;
+
+        const newSystemTheme: Theme = e.matches ? "dark" : "light";
+        document.documentElement.dataset.theme = newSystemTheme;
+
       };
       mql.addEventListener("change", listener);
 
@@ -118,18 +119,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isHydrated) {
-      if (storedTheme === "system") {
-        // Determine actual system theme
-        const systemIsDark =
-          globalThis.window !== undefined &&
-          globalThis.matchMedia &&
-          globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = systemIsDark
-          ? "dark"
-          : "light";
-      } else {
-        document.documentElement.dataset.theme = storedTheme;
-      }
+      document.documentElement.dataset.theme = storedTheme;
     }
   }, [storedTheme, isHydrated]);
 
@@ -147,7 +137,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const value = useMemo(
     () => ({
-      theme: isHydrated ? storedTheme : "system",
+      theme: isHydrated ? storedTheme : "light",
       toggle: toggleCallback,
       setTheme: setThemeCallback,
     }),
