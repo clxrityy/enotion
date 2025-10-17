@@ -17,8 +17,17 @@
     "./constants": {
       "import": "./dist/constants/index.js",
       "types": "./dist/constants/index.d.ts"
+    },
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@jest/globals": "^30.2.0",
