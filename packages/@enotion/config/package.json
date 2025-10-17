@@ -4,8 +4,6 @@
   "description": "",
   "private": true,
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
     "clean": "rm -rf dist && rm -rf .turbo && rm -rf node_modules"
   },
   "exports": {
@@ -18,19 +16,14 @@
     },
     "./jest/jest.server.config": "./jest/jest.server.config.cjs",
     "./tsup/tsup.config": "./tsup/tsup.config.ts",
-    "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts",
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
+    "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts"
   },
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
     "typescript/**/*",
     "jest/**/*",
-    "tsup/**/*",
-    "dist/**/*"
+    "tsup/**/*"
   ],
   "license": "MIT",
   "devDependencies": {
