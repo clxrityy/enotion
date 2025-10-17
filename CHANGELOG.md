@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
   - [Server](#server-enotionserver)
   - [Core](#core-enotioncore)
   - [Notify](#notify-enotionnotify)
+  - [API](#api-enotionapi)
 
 ## 0.1.0
 
@@ -34,39 +35,51 @@ All notable changes to this project will be documented in this file.
 - (**changed**) Updated TypeScript `base` config to include ESNext in library target
 - (**changed**) Updated tsup config to build .mts files for ESM support
 - (**changed**) Moved constants/utils to new package (`@enotion/core`)
+- (**removed**) Removed build environment
+  - (**removed**) Removed `@enotion/config/env`
+  - (**removed**) `tsup.config.ts` no longer builds `src/env/index.ts`
+- (**changed**) Added `resolvePackageJsonImports` & `resolvePackageJsonImports` to `@enotion/config/typescript/base`
+  - (**changed**) This allows for all modules to export their properties for the [`@enotion/api`](#api-enotionapi) package to dynamically import and use.
 
 ##### Hooks (`@enotion/hooks`)
 
 - (**added**) Initialized package
 - (**added**) Set up test environment with jest
-- (**added**) Added `createContextFactory()` hook
-- (**added**) Added `useFetch()` hook
-- (**added**) Added `usePreload()` hook
-- (**added**) Added `useLocalStorage()` hook
+- (**added**) current hooks:
+  - `useFetch()`
+  - `usePreload()`
+  - `useLocalStorage()`
+  - `useEventListener()`
+  - `useTheme()` & `<ThemeProvider />`
+  - `useScript()`
+  - `useVisibility()`
+  - `useOutsideClick()`
+  - `useScreenSize()`
+  - `useElementSize()`
+  - `useColorPalette()` & `<ColorPaletteProvider />`
+  - `useSearch()`
+  - `useClipboard()`
+- (**added**) Added `createContextFactory()` utility for creating context with ease
 - (**added**) Added `@testing-library/react` dev dependency for testing React hooks
-- (**added**) Added `useEventListener()` hook
-- (**added**) Added `useTheme()` hook & `<ThemeProvider />` for managing themes
-- (**added**) Added `useScript()` hook
-- (**added**) Added `useVisibility()` hook
-- (**added**) Added `useOutsideClick()` hook
-- (**added**) Added `useScreenSize()` hook
-- (**added**) Added `useElementSize()` hook
 - (**changed**) More extensive and concise JSDoc comments for usage
-- (**added**) Added `useColorPalette()` hook & `<ColorPaletteProvider />` for managing color palettes (temporary disabled)
-- (**added**) Added `useSearch()` hook for managing search functionality
 
 ##### Components (`@enotion/components`)
 
 - (**added**) Initialized package
-- (**added**) Added `<Skeleton />` & `<SkeletonWrapper />` component(s)
-- (**added**) Added `<Button />` component
-- (**added**) Added `<Input />` component
-- (**added**) Added `<Link />` component
-- (**added**) Added `<Select />` component
-- (**added**) Added `<Card />` component
+- (**added**)
+- (**added**) current components:
+  - `<Skeleton />` & `<SkeletonWrapper />`
+  - `<Button />`
+  - `<Input />`
+  - `<Link />`
+  - `<Select />`
+  - `<Card />`
+  - `<Search />`
+  - `<LayoutContainer />`
+  - `<CopyButton />`
+  - `<Navbar />`
 - (**added**) Added CSS files for each component in a `styles/` folder
 - (**added**) Added `colorPalette` prop to components for easy color customization
-- (**added**) Added `<Search />` component for searching through data
 
 ##### Server (`@enotion/server`)
 
