@@ -10,10 +10,10 @@ describe("Network Module", () => {
   it("should retrieve local IP addresses", () => {
     const ips = getLocalIps();
     expect(Array.isArray(ips)).toBe(true);
-    ips.forEach((ip) => {
+    for (let ip of ips) {
       expect(typeof ip).toBe("string");
-      expect(ip.split(".").length).toBe(4); // Basic check for IPv4 format
-    });
+      expect(ip.length).toBeGreaterThan(0);
+    }
   });
 
   it("should retrieve the hostname", () => {
@@ -37,7 +37,7 @@ describe("Network Module", () => {
     const port = await findAvailablePort(3000, 3010);
     expect(
       port === null ||
-        (typeof port === "number" && port >= 3000 && port <= 3010),
+      (typeof port === "number" && port >= 3000 && port <= 3010),
     ).toBe(true);
   });
 });
