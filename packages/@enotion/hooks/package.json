@@ -18,6 +18,11 @@
     "dev": "tsup --watch",
     "clean": "rm -rf dist"
   },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [
     "react",
     "nextjs",

@@ -1,25 +1,28 @@
 {
   "name": "@enotion/server",
   "version": "0.0.0",
-  "private": false,
   "type": "module",
+  "private": false,
   "description": "Backend services and APIs for accessing and managing server-side functionalities",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     },
     "./system": {
-      "import": "./dist/system.js",
-      "types": "./dist/system.d.ts"
+      "import": "./dist/system.mjs",
+      "types": "./dist/system.d.mts"
     },
     "./network": {
-      "import": "./dist/network.js",
-      "types": "./dist/network.d.ts"
+      "import": "./dist/network.mjs",
+      "types": "./dist/network.d.mts"
     }
   },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "build": "tsup",
