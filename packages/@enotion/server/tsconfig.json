@@ -8,12 +8,5 @@
   "files": ["src/index.ts", "src/system/index.ts", "src/network/index.ts"],
 
   "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "example",
-    "scripts",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "exclude": ["node_modules", "dist", "example", "scripts"]
 }
