@@ -13,7 +13,6 @@ pnpm add @enotion/hooks
 
 ## Hooks
 
-- [`crateContextFactory()`](#usecontextfactory)
 - [`useFetch()`](#usefetch)
 - [`usePreload()`](#usepreload)
 - [`useLocalStorage()`](#uselocalstorage)
@@ -26,33 +25,6 @@ pnpm add @enotion/hooks
 - [`useElementSize()`](#useelementsize)
 - [`useSearch()`](#usesearch)
 - [`useClipboard()`](#useclipboard)
-
----
-
-### `createContextFactory()`
-
-Creates a context provider and a hook to consume the context.
-
-```tsx
-"use client";
-import { useContextFactory } from "@enotion/hooks";
-
-const initialState = { value: "initial" };
-const { Provider, useContext } = useContextFactory(initialState);
-
-const Component = () => {
-  const context = useContext();
-  return <div>{context.value}</div>;
-};
-
-export default function Page() {
-  return (
-    <Provider>
-      <Component />
-    </Provider>
-  );
-}
-```
 
 ---
 
