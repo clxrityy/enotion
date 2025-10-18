@@ -17,13 +17,10 @@
     "alerts",
     "popup"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
     "./index.css": {
