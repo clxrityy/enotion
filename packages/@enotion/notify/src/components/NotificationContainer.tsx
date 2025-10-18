@@ -1,20 +1,21 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { useNotificationContext } from "../context";
 import { createPortal } from "react-dom";
-import type { Position, Theme } from "../types";
+import type { Position } from "../types";
 import "../styles/animations.css";
 import { NotificationItem } from "./NotificationItem";
+import { ColorPaletteType } from "@enotion/core";
 
 interface NotificationContainerProps {
   position?: Position;
-  theme?: Theme;
+  colorPalette?: ColorPaletteType;
   pauseOnHover?: boolean;
 }
 
 export function NotificationContainer({
   position = "top-right",
   pauseOnHover = true,
-  theme,
+  colorPalette,
 }: NotificationContainerProps) {
   const { state, dismissNotification } = useNotificationContext();
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -35,10 +36,10 @@ export function NotificationContainer({
     ...(position.includes("left") ? { left: "1rem" } : {}),
     ...(position.includes("center")
       ? {
-          left: "50%",
-          transform: "translateX(-50%)",
-          alignItems: "center",
-        }
+        left: "50%",
+        transform: "translateX(-50%)",
+        alignItems: "center",
+      }
       : {}),
   };
 
@@ -55,7 +56,7 @@ export function NotificationContainer({
           onDismiss={() => dismissNotification(notification.id)}
           pauseOnHover={pauseOnHover}
           position={position}
-          theme={theme}
+          colorPalette={colorPalette}
         />
       ))}
     </div>

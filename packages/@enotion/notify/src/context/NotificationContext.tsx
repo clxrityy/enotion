@@ -3,9 +3,9 @@ import type {
   Notification,
   NotificationState,
   Position,
-  Theme,
 } from "../types";
 import { NotificationContainer } from "../components";
+import { ColorPaletteType } from "@enotion/core";
 
 const defaultState: NotificationState = {
   notifications: [],
@@ -18,9 +18,9 @@ type Action =
   | { type: "ADD_NOTIFICATION"; payload: Notification }
   | { type: "REMOVE_NOTIFICATION"; payload: { id: string } }
   | {
-      type: "UPDATE_NOTIFICATION";
-      payload: Partial<Notification> & { id: string };
-    }
+    type: "UPDATE_NOTIFICATION";
+    payload: Partial<Notification> & { id: string };
+  }
   | { type: "DISMISS_ALL" };
 
 // Create context
@@ -80,13 +80,13 @@ export function NotificationProvider({
   position = "top-right",
   maxNotifications = 5,
   pauseOnHover = true,
-  theme,
+  colorPalette,
 }: {
   children: React.ReactNode;
   position?: Position;
   maxNotifications?: number;
   pauseOnHover?: boolean;
-  theme?: Theme;
+  colorPalette?: ColorPaletteType;
 }) {
   const [state, dispatch] = useReducer(notificationReducer, {
     ...defaultState,
@@ -125,7 +125,7 @@ export function NotificationProvider({
       <NotificationContainer
         position={position}
         pauseOnHover={state.pauseOnHover}
-        theme={theme}
+        colorPalette={colorPalette}
       />
     </NotificationContext.Provider>
   );
