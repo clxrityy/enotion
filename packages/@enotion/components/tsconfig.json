@@ -1,5 +1,5 @@
 {
-  "extends": "@enotion/config/typescript/react-library",
+  "extends": "@enotion/config/tsconfig/react-library",
   "compilerOptions": {
     "outDir": "dist",
     "esModuleInterop": true

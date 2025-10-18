@@ -1,6 +1,6 @@
 {
+  "extends": "@enotion/config/tsconfig/nextjs",
   "compilerOptions": {
-    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,

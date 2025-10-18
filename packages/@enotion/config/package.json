@@ -7,9 +7,9 @@
     "clean": "rm -rf dist && rm -rf .turbo && rm -rf node_modules"
   },
   "exports": {
-    "./typescript/base": "./typescript/base.json",
-    "./typescript/nextjs": "./typescript/nextjs.json",
-    "./typescript/react-library": "./typescript/react-library.json",
+    "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/nextjs": "./tsconfig/nextjs.json",
+    "./tsconfig/react-library": "./tsconfig/react-library.json",
     "./jest/jest.config": {
       "import": "./jest/jest.config.cjs",
       "types": "./jest/index.d.ts"
@@ -21,7 +21,7 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "typescript/**/*",
+    "tsconfig/**/*",
     "jest/**/*",
     "tsup/**/*"
   ],

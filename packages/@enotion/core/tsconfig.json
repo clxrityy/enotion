@@ -1,5 +1,5 @@
 {
-  "extends": "@enotion/config/typescript/base",
+  "extends": "@enotion/config/tsconfig/base",
   "compilerOptions": {
     "outDir": "dist",
     "jsx": "react-jsx"

@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
   - (**removed**) `tsup.config.ts` no longer builds `src/env/index.ts`
 - (**changed**) Added `resolvePackageJsonImports` & `resolvePackageJsonImports` to `@enotion/config/typescript/base`
   - (**changed**) This allows for all modules to export their properties for the [`@enotion/api`](#api-enotionapi) package to dynamically import and use.
+- (**changed**) `@enotion/config/typescript` is now `@enotion/config/tsconfig`
 
 ##### Hooks (`@enotion/hooks`)
 
