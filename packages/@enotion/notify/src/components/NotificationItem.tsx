@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import type { Notification, Position, Theme } from "../types";
-import { Icons } from "@enotion/core/constants";
+import type { Notification, Position } from "../types";
+import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core/constants";
 
 interface NotificationItemProps {
   notification: Notification;
   onDismiss: () => void;
   position: Position;
   pauseOnHover: boolean;
-  theme?: Theme;
+  colorPalette?: ColorPaletteType;
 }
 
 export function NotificationItem({
@@ -15,7 +15,7 @@ export function NotificationItem({
   onDismiss,
   position,
   pauseOnHover,
-  theme,
+  colorPalette,
 }: NotificationItemProps) {
   const [visible, setVisible] = useState<boolean>(false);
   const [isExisting, setIsExisting] = useState<boolean>(false);
@@ -131,9 +131,11 @@ export function NotificationItem({
     return "";
   };
 
+  const palette = colorPalette && ColorPalettes[colorPalette];
+
   // Calculate theme-based styles
   const getStyles = () => {
-    const baseTheme = {
+    let baseTheme = {
       success: { background: "#10B981", color: "white" },
       error: { background: "#EF4444", color: "white" },
       info: { background: "#3B82F6", color: "white" },
@@ -142,12 +144,21 @@ export function NotificationItem({
       default: { background: "white", color: "black" },
     };
 
+    if (palette) {
+      baseTheme = {
+        success: { background: palette.success, color: palette.foreground },
+        error: { background: palette.error, color: palette.foreground },
+        info: { background: palette.info, color: palette.foreground },
+        warning: { background: palette.warning, color: palette.foreground },
+        loading: { background: palette.muted, color: palette.foreground },
+        default: { background: palette.info, color: palette.foreground },
+      };
+    }
+
     const typeTheme = baseTheme[notification.type] || baseTheme.default;
-    const customTheme = theme?.[notification.type] || {};
 
     return {
       ...typeTheme,
-      ...customTheme,
       ...notification.style,
     };
   };

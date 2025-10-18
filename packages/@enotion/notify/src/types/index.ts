@@ -45,19 +45,9 @@ export interface NotificationState {
   maxNotifications: number;
 }
 
-export interface Theme {
-  success?: CSSProperties;
-  error?: CSSProperties;
-  info?: CSSProperties;
-  warning?: CSSProperties;
-  loading?: CSSProperties;
-  default?: CSSProperties;
-}
-
 export interface NotificationProps {
   children: ReactNode;
   position?: Position;
   maxNotifications?: number;
   pauseOnHover?: boolean;
-  theme?: Theme;
 }
