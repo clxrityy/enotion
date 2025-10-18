@@ -1,7 +1,7 @@
 import { cpuTemperature, parseCpuTemperature, parseCpuUsage } from "./cpu.js";
 import { memoryUsage } from "./memory.js";
 import { os } from "./os.js";
-import { bytesToGB } from "../util/bytes.js";
+import { bytesToGB } from "../utils/bytes.js";
 import { performance } from "./performance.js";
 import { uptime } from "./uptime.js";
 import { diskUsage, type DiskInfo } from "./disk.js";

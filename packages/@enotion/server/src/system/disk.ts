@@ -1,5 +1,5 @@
 // Disk information utilities
-import { execAsync } from "../util/index.js";
+import { execAsync } from "../utils/index.js";
 
 /** Disk usage information interface */
 export interface DiskInfo {

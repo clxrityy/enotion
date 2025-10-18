@@ -1,5 +1,5 @@
 import { cpus } from "node:os";
-import { execAsync, parseIdleFromTopOutput } from "../util/index.js";
+import { execAsync, parseIdleFromTopOutput } from "../utils/index.js";
 
 /**
  * Get CPU usage information.
