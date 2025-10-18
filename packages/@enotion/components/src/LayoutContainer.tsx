@@ -129,7 +129,6 @@ export const LayoutContainer = ({
 
   return (
     <div
-      {...props}
       className={cn("layout-container", props.className)}
       style={
         {
@@ -147,6 +146,7 @@ export const LayoutContainer = ({
           ...props.style,
         } as CSSProperties
       }
+      {...props}
     >
       <div className={`layout-container-inner`}>{processedChildren}</div>
     </div>

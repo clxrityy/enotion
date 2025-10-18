@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useElementSize } from "@enotion/hooks";
 import "./styles/skeleton.css";
+import { cn } from "@enotion/core";
 
 export interface SkeletonWrapperProps extends ComponentPropsWithoutRef<"div"> {
   /**
@@ -129,17 +130,16 @@ export function SkeletonWrapper({
 
     // Clone the element and apply skeleton styles
     const originalClassName = (child.props as any).className || "";
-    const skeletonClass = `${originalClassName} ${skeletonClassName}${
-      animate ? " skeleton-animate" : ""
-    }`.trim();
+    const skeletonClass = `${originalClassName} ${skeletonClassName}${animate ? " skeleton-animate" : ""
+      }`.trim();
 
     // Recursively process children
     const processedChildren = (child.props as any).children
       ? Children.map(
-          (child.props as any).children,
-          (nestedChild: ReactNode, nestedIndex: number) =>
-            renderSkeletonFromChild(nestedChild, nestedIndex),
-        )
+        (child.props as any).children,
+        (nestedChild: ReactNode, nestedIndex: number) =>
+          renderSkeletonFromChild(nestedChild, nestedIndex),
+      )
       : undefined;
 
     return cloneElement(child as any, {
@@ -232,17 +232,9 @@ export function Skeleton({
     ...style,
   };
 
-  const combinedClassName = [
-    "skeleton",
-    animate ? "skeleton-animate" : "",
-    className || "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
     <div
-      className={combinedClassName}
+      className={cn(["skeleton", animate && "skeleton-animate", className])}
       style={skeletonStyle}
       aria-busy="true"
       aria-live="polite"
