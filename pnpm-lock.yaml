@@ -166,6 +166,12 @@ importers:
       '@enotion/config':
         specifier: workspace:^
         version: link:../config
+      react:
+        specifier: ^19.2.0
+        version: 19.2.0
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.0(react@19.2.0)
     devDependencies:
       '@jest/globals':
         specifier: ^30.2.0
@@ -176,6 +182,12 @@ importers:
       '@types/node':
         specifier: ^24.7.2
         version: 24.7.2
+      '@types/react':
+        specifier: ^19.2.2
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: ^19.2.0
+        version: 19.2.2(@types/react@19.2.2)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
