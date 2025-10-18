@@ -7,7 +7,7 @@ import {
   createContext,
   useContext,
 } from "react";
-import { createContextFactory } from "./createContextFactory.js";
+import { createContextFactory } from "@enotion/core/utils";
 import { useLocalStorage } from "./useLocalStorage.js";
 
 /**
@@ -37,7 +37,7 @@ const Context = createContext<ColorPaletteContext>(initialColorPaletteContext);
  *
  * @description
  * The `ColorPaletteProvider` component provides a context for managing color palettes in a React application.
- * It uses the `createContextFactory` utility to create a context with an initial state and a hook for managing the state.
+ * It uses the {@link createContextFactory} utility to create a context with an initial state and a hook for managing the state.
  * Child components can access and manipulate the color palette using the `useColorPalette` hook.
  * The provider also listens for changes in the system color scheme and updates the palette accordingly if no user preference is set.
  * @summary

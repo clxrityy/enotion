@@ -59,7 +59,6 @@ All notable changes to this project will be documented in this file.
   - `useColorPalette()` & `<ColorPaletteProvider />`
   - `useSearch()`
   - `useClipboard()`
-- (**added**) Added `createContextFactory()` utility for creating context with ease
 - (**added**) Added `@testing-library/react` dev dependency for testing React hooks
 - (**changed**) More extensive and concise JSDoc comments for usage
 
@@ -102,6 +101,7 @@ All notable changes to this project will be documented in this file.
 ##### Core (`@enotion/core`)
 
 - (**added**) Initialized package (for core utilities and constants shared across other packages)
+- (**added**) Added `createContextFactory()` utility for creating React context with ease
 
 #### Notify (`@enotion/notify`)
 
