@@ -1,13 +1,12 @@
+import config from "@enotion/config/tsup/tsup.config";
 import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
+    ...config,
     entry: ["src/index.ts"],
-    format: ["esm", "cjs"],
-    dts: true,
-    minify: true,
-    sourcemap: true,
-    clean: true,
-    outDir: "dist",
+    dts: {
+      entry: "src/index.ts",
+    },
   },
 ]);
