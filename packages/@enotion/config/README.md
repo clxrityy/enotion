@@ -2,10 +2,10 @@
 
 Private global configuration for enotion packages.
 
-- **TypeScript** configuration (`@enotion/config/typescript`)
-  - [`base.json`](./typescript/base.json) - Base configuration for all packages
-  - [`react-library.json`](./typescript/react-library.json) - Configuration for React libraries
-  - [`nextjs.json`](./typescript/nextjs.json) - Configuration for Next.js projects
+- **TypeScript** configuration (`@enotion/config/tsconfig`)
+  - [`base.json`](./tsconfig/base.json) - Base configuration for all packages
+  - [`react-library.json`](./tsconfig/react-library.json) - Configuration for React libraries
+  - [`nextjs.json`](./tsconfig/nextjs.json) - Configuration for Next.js projects
 - **tsup** configuration (`@enotion/config/tsup`)
   - [`tsup.config.ts`](./tsup/tsup.config.ts) - Base configuration for building packages with tsup
   - [`tsup.entry.config.ts`](./tsup/tsup.entry.config.ts) - Configuration for building packages with multiple entry points with tsup
