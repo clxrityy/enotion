@@ -29,6 +29,9 @@ importers:
       '@enotion/components':
         specifier: workspace:*
         version: link:../../../packages/@enotion/components
+      '@enotion/config':
+        specifier: workspace:*
+        version: link:../../../packages/@enotion/config
       '@enotion/core':
         specifier: workspace:*
         version: link:../../../packages/@enotion/core
