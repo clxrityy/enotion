@@ -12,7 +12,7 @@ describe("System Module", () => {
     }));
 
     // Mock disk module to avoid df command variations
-    jest.unstable_mockModule("../src/system/disk", () => ({
+    jest.unstable_mockModule("../src", () => ({
       diskUsage: async () => ({
         filesystem: "/dev/disk1s1",
         size: "100000000",
@@ -25,7 +25,7 @@ describe("System Module", () => {
       }),
     }));
 
-    const getSystemSnapshot = (await import("../src/system")).default;
+    const getSystemSnapshot = (await import("../src/system/snapshot")).getSystemSnapshot;
     const snapshot = await getSystemSnapshot();
     expect(snapshot).toBeDefined();
     expect(typeof snapshot.cpu.usage).toBe("number");
@@ -45,7 +45,7 @@ describe("System Module", () => {
   it("should handle CPU usage parsing correctly", async () => {
     // Ensure clean module state and mock execAsync before importing the module under test
     jest.resetModules();
-    jest.unstable_mockModule("../src/util/index.js", () => ({
+    jest.unstable_mockModule("../src/utils", () => ({
       execAsync: async () => ({
         stdout:
           "Cpu(s):  12.3%us,  0.0%sy,  0.0%ni, 87.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st\n",
@@ -60,7 +60,7 @@ describe("System Module", () => {
   });
 
   it("should parse macOS top output format", async () => {
-    const { parseIdleFromTopOutput } = await import("../src/util/parsers");
+    const { parseIdleFromTopOutput } = (await import("../src/utils/parsers"));
     const idle = parseIdleFromTopOutput(
       "CPU usage: 7.59% user, 6.45% sys, 85.96% idle\n",
     );
