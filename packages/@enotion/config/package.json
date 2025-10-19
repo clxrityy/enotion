@@ -1,6 +1,7 @@
 {
   "name": "@enotion/config",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "private": true,
   "scripts": {
@@ -10,11 +11,7 @@
     "./tsconfig/base": "./tsconfig/base.json",
     "./tsconfig/nextjs": "./tsconfig/nextjs.json",
     "./tsconfig/react-library": "./tsconfig/react-library.json",
-    "./jest/jest.config": {
-      "import": "./jest/jest.config.cjs",
-      "types": "./jest/index.d.ts"
-    },
-    "./jest/jest.server.config": "./jest/jest.server.config.cjs",
+    "./jest/jest.config": "./jest/jest.config.cjs",
     "./tsup/tsup.config": "./tsup/tsup.config.ts",
     "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts"
   },
