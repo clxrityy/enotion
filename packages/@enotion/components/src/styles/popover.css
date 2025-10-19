@@ -1,0 +1,21 @@
+.enotion-popover-container {
+  position: relative;
+  display: inline-block;
+}
+
+.enotion-popover-trigger {
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.enotion-popover-content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  border: 1px solid var(--popover-content-border);
+  box-shadow: 0 2px 10px var(--popover-content-box-shadow);
+}

@@ -10,3 +10,4 @@ export * from "./Search.js";
 export * from "./CopyButton.js";
 export * from "./LayoutContainer.js";
 export * from "./Navbar.js";
+export * from "./Popover.js";
