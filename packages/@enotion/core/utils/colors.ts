@@ -1,4 +1,4 @@
-import type { Color } from "../types/colors.js";
+import type { Color } from "../constants/colors.js";
 
 /**
  * Convert a hex color string to its RGB components.

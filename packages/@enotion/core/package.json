@@ -18,10 +18,6 @@
       "import": "./dist/constants/index.js",
       "types": "./dist/constants/index.d.ts"
     },
-    "./types": {
-      "import": "./dist/types/index.js",
-      "types": "./dist/types/index.d.ts"
-    },
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
@@ -57,7 +53,7 @@
     "react-dom": "^19.2.0"
   },
   "dependencies": {
-    "@enotion/config": "workspace:^"
+    "@enotion/config": "workspace:*"
   },
   "sideEffects": false,
   "repository": {

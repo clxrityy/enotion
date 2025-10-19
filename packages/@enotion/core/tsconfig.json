@@ -2,6 +2,7 @@
   "extends": "@enotion/config/tsconfig/base",
   "compilerOptions": {
     "outDir": "dist",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "declaration": true
   }
 }
