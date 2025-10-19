@@ -3,6 +3,7 @@ import type { Config } from "jest";
 
 const jestConfig: Config = {
   ...config,
+  setupFilesAfterEnv: ["<rootDir>/tests/setup.js"],
 };
 
 export default jestConfig;
