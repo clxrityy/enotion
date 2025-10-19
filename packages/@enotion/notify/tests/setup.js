@@ -1,9 +1,9 @@
-import "@testing-library/jest-dom";
+require("@testing-library/jest-dom");
 
 // Mock matchMedia
 Object.defineProperty(globalThis.window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation((query: string) => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,

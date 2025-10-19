@@ -3,7 +3,6 @@ import {
   NotificationProvider,
   useNotificationContext,
 } from "../src/context/NotificationContext";
-import { describe, it, expect } from "@jest/globals";
 
 function TestComponent() {
   const {
@@ -53,7 +52,7 @@ function TestComponent() {
         onClick={() => {
           if (state.notifications.length > 0) {
             act(() => {
-              dismissNotification(state.notifications[0].id);
+              dismissNotification(state.notifications[0]!.id);
             });
           }
         }}

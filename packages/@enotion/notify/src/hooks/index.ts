@@ -1,1 +1,1 @@
-export * from "./useNotify";
+export * from "./useNotify.js";

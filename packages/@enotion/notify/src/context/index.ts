@@ -1,1 +1,1 @@
-export * from "./NotificationContext";
+export * from "./NotificationContext.js";

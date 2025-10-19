@@ -1,6 +1,6 @@
 import { ReactNode, useCallback } from "react";
 import { useNotificationContext } from "../context/NotificationContext";
-import type { NotifyOptions } from "../types";
+import type { NotifyOptions } from "../types/index.js";
 
 export function useNotify() {
   const {

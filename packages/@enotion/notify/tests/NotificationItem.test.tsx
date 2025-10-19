@@ -1,7 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { NotificationItem } from "../src/components/NotificationItem";
 import { NotificationType } from "../src";
-import { describe, it, expect, jest } from "@jest/globals";
 
 const baseNotification = {
   id: "test-id",

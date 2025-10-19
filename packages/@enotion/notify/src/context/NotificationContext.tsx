@@ -3,8 +3,8 @@ import type {
   Notification,
   NotificationState,
   Position,
-} from "../types";
-import { NotificationContainer } from "../components";
+} from "../types/index.js";
+import { NotificationContainer } from "../components/index.js";
 import { ColorPaletteType } from "@enotion/core";
 
 const defaultState: NotificationState = {

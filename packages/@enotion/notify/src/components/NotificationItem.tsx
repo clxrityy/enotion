@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import type { Notification, Position } from "../types";
-import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core/constants";
+import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core";
 
 interface NotificationItemProps {
   notification: Notification;

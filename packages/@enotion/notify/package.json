@@ -32,13 +32,11 @@
     "package.json",
     "README.md"
   ],
-  "engines": {
-    "node": ">=12"
-  },
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "jest --config jest.config.cjs",
+    "clean": "rm -rf dist && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
     "@enotion/config": "workspace:*",
