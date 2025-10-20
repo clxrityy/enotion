@@ -11,7 +11,11 @@
     "./tsconfig/base": "./tsconfig/base.json",
     "./tsconfig/nextjs": "./tsconfig/nextjs.json",
     "./tsconfig/react-library": "./tsconfig/react-library.json",
-    "./jest/jest.config": "./jest/jest.config.cjs",
+    "./jest/jest.config": {
+      "types": "./index.d.ts",
+      "require": "./jest/jest.config.cjs",
+      "import": "./jest/jest.config.cjs"
+    },
     "./tsup/tsup.config": "./tsup/tsup.config.ts",
     "./tsup/tsup.entry.config": "./tsup/tsup.entry.config.ts"
   },

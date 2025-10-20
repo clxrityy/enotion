@@ -6,16 +6,16 @@
   "description": "Backend services and APIs for accessing and managing server-side functionalities",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
     "./system": {
-      "import": "./dist/system.mjs",
-      "types": "./dist/system.d.mts"
+      "import": "./dist/system/index.js",
+      "types": "./dist/system/index.d.ts"
     },
     "./network": {
-      "import": "./dist/network.mjs",
-      "types": "./dist/network.d.mts"
+      "import": "./dist/network/index.js",
+      "types": "./dist/network/index.d.ts"
     }
   },
   "files": [

@@ -10,17 +10,17 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "exports": {
-    "./utils": {
-      "import": "./dist/utils/index.js",
-      "types": "./dist/utils/index.d.mts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts"
     },
     "./constants": {
       "import": "./dist/constants/index.js",
       "types": "./dist/constants/index.d.mts"
     },
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.mts"
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.mts"
     }
   },
   "files": [
