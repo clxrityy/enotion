@@ -2,15 +2,9 @@
   "extends": "@enotion/config/tsconfig/react-library",
   "compilerOptions": {
     "outDir": "dist",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": ["jest", "@testing-library/jest-dom"]
   },
-  "include": ["src"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "example",
-    "scripts",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "include": ["src", "tests"],
+  "exclude": ["node_modules", "dist", "example", "scripts"]
 }
