@@ -80,6 +80,7 @@ All notable changes to this project will be documented in this file.
   - `<Navbar />`
 - (**added**) Added CSS files for each component in a `styles/` folder
 - (**added**) Added `colorPalette` prop to components for easy color customization
+- (**changed**) replaced `<LayoutContainer />` with `<Provider />` component that wraps children with all necessary context providers (Theme, ColorPalette, etc.)
 
 ##### Server (`@enotion/server`)
 
