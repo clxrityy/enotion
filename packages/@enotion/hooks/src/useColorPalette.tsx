@@ -73,8 +73,8 @@ export const ColorPaletteProvider = ({
 
     let cleanup: (() => void) | undefined;
 
-    if (globalThis.window !== undefined && globalThis.matchMedia) {
-      const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
+    if (globalThis.window !== undefined && globalThis.window.matchMedia) {
+      const mql = globalThis.window.matchMedia("(prefers-color-scheme: dark)");
 
       // Set initial palette based on system preference if no stored palette
       const systemPalette: ColorPaletteType = mql.matches ? "dark" : "default";

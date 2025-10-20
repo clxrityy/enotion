@@ -8,7 +8,7 @@ import {
   jest,
 } from "@jest/globals";
 
-import { SkeletonWrapper, Skeleton } from "../src/Skeleton";
+import { SkeletonWrapper, Skeleton } from "../src/Skeleton.js";
 
 class ResizeObserverMock {
   public static readonly instances: ResizeObserverMock[] = [];
@@ -19,9 +19,9 @@ class ResizeObserverMock {
     ResizeObserverMock.instances.push(this);
   }
 
-  observe(): void {}
-  unobserve(): void {}
-  disconnect(): void {}
+  observe(): void { }
+  unobserve(): void { }
+  disconnect(): void { }
 
   static invokeAll(entries: ResizeObserverEntry[] = []): void {
     for (const instance of ResizeObserverMock.instances) {
@@ -31,7 +31,7 @@ class ResizeObserverMock {
 }
 
 beforeAll(() => {
-  global.ResizeObserver = ResizeObserverMock;
+  globalThis.ResizeObserver = ResizeObserverMock;
 });
 
 afterEach(() => {

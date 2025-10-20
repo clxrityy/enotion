@@ -60,7 +60,7 @@ export type EventType = Omit<
 export function useEventListener(
   eventName: EventName,
   handler: (event: EventType) => void,
-  element: HTMLElement | Window | Document = window,
+  element: HTMLElement | Window | Document = globalThis.window,
   options?: boolean | AddEventListenerOptions,
 ) {
   // Create a ref that stores handler
