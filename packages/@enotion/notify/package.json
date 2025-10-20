@@ -35,7 +35,7 @@
   "scripts": {
     "start": "tsup --watch",
     "build": "tsup",
-    "test": "jest --config jest.config.cjs",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "clean": "rm -rf dist && rm -rf .turbo && rm -rf node_modules"
   },
   "dependencies": {
