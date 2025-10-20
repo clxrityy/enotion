@@ -51,7 +51,7 @@ export const CopyButton = ({
         justifyContent: "center",
         cursor: "pointer",
         transition: "background-color 0.2s, color 0.2s, border-color 0.2s",
-        ...(props.style || {}),
+        ...props.style,
       }}
       type="button"
       title="copy"
