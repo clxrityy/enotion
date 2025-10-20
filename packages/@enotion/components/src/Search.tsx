@@ -1,8 +1,7 @@
 import { useSearch } from "@enotion/hooks";
 import { Input } from "./Input.js";
 import { Card } from "./Card.js";
-import { HTMLAttributes } from "react";
-import { randomUUID, UUID } from "node:crypto";
+import { HTMLAttributes, useId } from "react";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
@@ -56,7 +55,7 @@ export const Search = <T,>({
 
   const dataWithId = filteredData.map((item) => ({
     ...item,
-    id: (item as any).id ?? (randomUUID() as UUID),
+    id: (item as any).id ?? (useId() as string),
   }));
 
   return (
