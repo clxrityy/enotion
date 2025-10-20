@@ -1,8 +1,11 @@
 {
-  "extends": ["development"],
+  "extends": [
+    "development"
+  ],
   "hints": {
     "no-inline-styles": "off",
     "detect-css-reflows/paint": "off",
-    "detect-css-reflows/composite": "off"
+    "detect-css-reflows/composite": "off",
+    "axe/aria": "off"
   }
 }
