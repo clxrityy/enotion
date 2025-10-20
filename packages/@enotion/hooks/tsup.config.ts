@@ -1,3 +1,1 @@
-import config from "@enotion/config/tsup/tsup.config";
-
-export default config;
+export { default } from "@enotion/config/tsup/tsup.config";

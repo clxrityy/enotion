@@ -1,7 +1,7 @@
-import config from "@enotion/config/tsup/tsup.entry.config";
+import defineEntryConfig from "@enotion/config/tsup/tsup.entry.config";
 
-export default config({
+export default defineEntryConfig({
   index: "src/index.ts",
-  system: "src/system/index.ts",
-  network: "src/network/index.ts",
-});
+  "network/index": "src/network/index.ts",
+  "system/index": "src/system/index.ts",
+}) as any;

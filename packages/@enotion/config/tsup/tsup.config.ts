@@ -2,8 +2,19 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    entry: {
-      index: "src/index.ts",
+    entry: ["src/index.ts"],
+    outDir: "dist",
+    format: ["esm"],
+    splitting: true,
+    sourcemap: true,
+    clean: true,
+    minify: "terser",
+    tsconfig: "tsconfig.json",
+    dts: true,
+    outExtension({ format }) {
+      return {
+        js: `.js`
+      }
     },
     terserOptions: {
       compress: {
@@ -16,16 +27,6 @@ export default defineConfig([
         braces: true,
         preserve_annotations: true,
       },
-    },
-    outDir: "dist",
-    format: ["esm"],
-    splitting: true,
-    sourcemap: true,
-    clean: true,
-    minify: "terser",
-    tsconfig: "tsconfig.json",
-    dts: {
-      entry: "src/index.ts",
     },
   },
 ]);

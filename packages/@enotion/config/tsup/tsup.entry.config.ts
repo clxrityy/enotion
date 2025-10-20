@@ -4,18 +4,30 @@ export default function defineConfig(entry: Record<string, string>) {
   return defineTsupConfig([
     {
       entry,
-      terserOptions: {
-        compress: {
-          defaults: true,
-        },
-      },
       outDir: "dist",
       format: ["esm"],
+      splitting: true,
+      sourcemap: true,
       clean: true,
       minify: "terser",
       tsconfig: "tsconfig.json",
-      dts: {
-        entry,
+      dts: true,
+      outExtension({ format }) {
+        return {
+          js: `.js`
+        }
+      },
+      terserOptions: {
+        compress: {
+          defaults: true,
+          drop_console: true,
+          drop_debugger: true,
+        },
+        format: {
+          comments: true,
+          braces: true,
+          preserve_annotations: true,
+        },
       },
     },
   ]);
