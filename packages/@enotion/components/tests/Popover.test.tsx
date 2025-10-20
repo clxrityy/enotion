@@ -1,4 +1,4 @@
-import { Popover } from "../src/Popover";
+import { Popover } from "../src/Popover.js";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect } from "@jest/globals";
 

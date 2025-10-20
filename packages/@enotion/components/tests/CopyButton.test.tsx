@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import { describe, it, expect, afterEach, jest } from "@jest/globals";
-
-import { CopyButton } from "../src/CopyButton";
+import { jest, describe, it } from "@jest/globals";
+import { CopyButton } from "../src/CopyButton.js";
 
 afterEach(() => {
   jest.restoreAllMocks();

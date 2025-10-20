@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, afterEach, jest } from "@jest/globals";
-import { Input } from "../src/Input";
+import { jest, describe, it } from "@jest/globals";
+import { Input } from "../src/Input.js";
 
 afterEach(() => {
   jest.restoreAllMocks();

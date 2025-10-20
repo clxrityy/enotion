@@ -1,6 +1,6 @@
-import { Search } from "../src/Search";
+import { Search } from "../src/Search.js";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, afterEach, jest } from "@jest/globals";
+import { jest, describe, it } from "@jest/globals";
 
 afterEach(() => {
   jest.restoreAllMocks();
