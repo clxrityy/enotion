@@ -1,16 +1,16 @@
 {
   "name": "@enotion/components",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "description": "A collection of reusable React components to simplify your development process, and ease common tasks",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.mts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     },
     "./index.css": {
       "default": "./dist/index.css"
@@ -58,11 +58,13 @@
   "dependencies": {
     "@enotion/config": "workspace:*",
     "@enotion/core": "workspace:*",
-    "@enotion/hooks": "workspace:*"
+    "@enotion/hooks": "workspace:*",
+    "@enotion/notify": "workspace:*"
   },
   "devDependencies": {
     "@jest/globals": "^30.2.0",
     "@tailwindcss/postcss": "^4.1.14",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.7.2",

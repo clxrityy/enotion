@@ -21,7 +21,7 @@
     "./package.json": "./package.json",
     ".": {
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     },
     "./index.css": {
       "default": "./dist/index.css"
