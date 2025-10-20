@@ -1,26 +1,14 @@
+import config from "@enotion/config/jest/jest.config";
 import type { Config } from "jest";
 
 const jestConfig: Config = {
-  preset: "ts-jest/presets/default-esm",
-  testEnvironment: "node",
-  extensionsToTreatAsEsm: [".ts", ".tsx"],
-  globals: {
-    "ts-jest": {
-      useESM: true,
-    },
-  },
-  moduleNameMapper: {
-    "^(\\.{1,2}/.*)\\.js$": "$1",
-  },
-  testMatch: ["**/__tests__/**/*.(ts|tsx)", "**/?(*.)+(spec|test).(ts|tsx)"],
-  transform: {
-    "^.+\\.tsx?$": [
-      "ts-jest",
-      {
-        useESM: true,
-      },
-    ],
-  },
+  ...config,
+  displayName: "@enotion/server",
+  testEnvironment: "node", // Override for server environment
+  rootDir: ".",
+  testMatch: [
+    "<rootDir>/tests/**/*.{test,spec}.{ts,tsx}",
+  ],
 };
 
 export default jestConfig;
