@@ -53,3 +53,37 @@ class MockResizeObserver {
 }
 
 globalThis.ResizeObserver = MockResizeObserver;
+
+// Mock matchMedia
+Object.defineProperty(globalThis.window, "matchMedia", {
+  writable: true,
+  value: function (query) {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: function () {}, // Deprecated
+      removeListener: function () {}, // Deprecated
+      addEventListener: function () {},
+      removeEventListener: function () {},
+      dispatchEvent: function () {},
+    };
+  },
+});
+
+// Mock getBoundingClientRect
+Element.prototype.getBoundingClientRect = function () {
+  return {
+    width: 275,
+    height: 100,
+    x: 0,
+    y: 0,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    toJSON: function () {
+      return "{}";
+    },
+  };
+};
