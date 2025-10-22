@@ -11,3 +11,4 @@ export * from "./CopyButton.js";
 export * from "./Navbar.js";
 export * from "./Popover.js";
 export * from "./Provider.js";
+export * from "./LayoutProvider.js";

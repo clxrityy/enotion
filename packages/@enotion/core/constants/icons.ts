@@ -11,6 +11,7 @@ import {
   MdLightMode,
 } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { HiOutlineSelector } from "react-icons/hi";
 import { LuCopy, LuCopyCheck } from "react-icons/lu";
 
 export const Icons = {
@@ -27,4 +28,5 @@ export const Icons = {
   Copied: LuCopyCheck,
   DarkMode: MdDarkMode,
   LightMode: MdLightMode,
+  Selector: HiOutlineSelector,
 };

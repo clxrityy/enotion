@@ -38,7 +38,7 @@ const initialThemeContext: ThemeContext = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => {},
+  toggle: () => { },
 };
 
 // Create a simple context without the factory pattern
@@ -87,7 +87,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
     // Check if matchMedia is available (it might not be in test environments)
     if (globalThis.window !== undefined) {
-      const mql = globalThis.matchMedia("(prefers-color-scheme: dark)");
+      const mql = globalThis.window.matchMedia("(prefers-color-scheme: dark)");
 
       // Only auto-set system preference if user hasn't explicitly chosen a theme
 

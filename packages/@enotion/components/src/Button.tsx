@@ -4,14 +4,14 @@ import "./styles/button.css";
 
 export interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
   children: ReactNode;
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
 }
 
 const palettes = ColorPalettes;
 
 /**
  * A customizable Button component with optional color palette support.
- * @param {ColorPaletteType} [colorPalette] - Optional color palette to style the button.
+ * @param {ColorPaletteType} [palette] - Optional color palette to style the button.
  * @param {ComponentPropsWithoutRef<"button">} rest - Other standard button attributes.
  *
  * @example
@@ -19,8 +19,8 @@ const palettes = ColorPalettes;
  * <Button onClick={() => alert('Clicked!')} colorPalette="dark">Click Me</Button>
  * ```
  */
-export function Button({ children, colorPalette, ...rest }: ButtonProps) {
-  const palette = colorPalette ? palettes[colorPalette] : null;
+export function Button({ children, palette, ...rest }: ButtonProps) {
+  const color = palette ? palettes[palette] : null;
 
   return (
     <button
@@ -28,21 +28,21 @@ export function Button({ children, colorPalette, ...rest }: ButtonProps) {
       style={{
         ...(palette
           ? ({
-              backgroundColor: palette.primary,
-              color: palette.foreground,
-              borderColor: palette.border,
-              "--button-hover-background-color": palette.accent,
-              "--button-active-background-color": palette.primary,
-              "--button-disabled-background-color": palette.muted,
-              "--button-disabled-text-color": palette.background,
-              "--button-hover-box-shadow": `0 0 0 3px ${palette.accent}33`,
-              "--button-focus-ring-color": palette.accent,
-              "--button-backdrop-background-color": palette.muted,
-              ...rest.style,
-            } as CSSProperties)
+            backgroundColor: color?.primary,
+            color: color?.foreground,
+            borderColor: color?.border,
+            "--button-hover-background-color": color?.accent,
+            "--button-active-background-color": color?.primary,
+            "--button-disabled-background-color": color?.muted,
+            "--button-disabled-text-color": color?.background,
+            "--button-hover-box-shadow": `0 0 0 3px ${color?.accent}33`,
+            "--button-focus-ring-color": color?.accent,
+            "--button-backdrop-background-color": color?.muted,
+            ...rest.style,
+          } as CSSProperties)
           : {
-              ...(rest.style as CSSProperties),
-            }),
+            ...(rest.style as CSSProperties),
+          }),
       }}
       {...rest}
     >

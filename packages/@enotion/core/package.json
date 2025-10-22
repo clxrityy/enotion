@@ -21,6 +21,13 @@
     "./utils": {
       "import": "./dist/utils/index.js",
       "types": "./dist/utils/index.d.mts"
+    },
+    "./contexts": {
+      "import": "./dist/contexts/index.js",
+      "types": "./dist/contexts/index.d.mts"
+    },
+    "./index.css": {
+      "default": "./dist/index.css"
     }
   },
   "files": [

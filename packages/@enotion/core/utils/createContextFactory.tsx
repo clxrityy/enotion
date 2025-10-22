@@ -40,7 +40,7 @@ export type ContextFactory = <T>(
  *
  * @example
  * ```tsx
- * const { Provider, useContext } = useContextFactory(initialState, useCustomHook);
+ * const { Provider, useContext } = createContextFactory(initialState, useCustomHook);
  * ```
  *
  * @module createContextFactory

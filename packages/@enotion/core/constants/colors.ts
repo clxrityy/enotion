@@ -51,7 +51,7 @@ export const ColorPalettes: Record<string, ColorPalette> = {
     primary: "#60a5fa", // Bright blue that works well on dark backgrounds
     secondary: "#a78bfa", // Light purple for good contrast
     tertiary: "#34d399", // Bright green that pops on dark
-    accent: "#fb7185", // Soft pink-red for accents
+    accent: "#60a5daaa", // Soft blue-purple for accents
     highlight: "#1e293b", // Darker highlight for selection
     muted: "#dddc", // Consistent muted background
     success: "#22c55e", // Vibrant but not harsh green

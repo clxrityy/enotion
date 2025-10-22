@@ -1,0 +1,366 @@
+/**
+ * Animation classes for the enhanced layout system
+ * These classes can be used with the AnimationConfig interface
+ */
+
+/* Fade animations */
+.animate-fadeIn {
+    animation: fadeIn var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-fadeOut {
+    animation: fadeOut var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* Scale animations */
+.animate-scaleIn {
+    animation: scaleIn var(--animation-duration, 200ms) ease-out forwards;
+}
+
+.animate-scaleOut {
+    animation: scaleOut var(--animation-duration, 200ms) ease-out forwards;
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Slide animations - Left */
+.animate-slideInLeft {
+    animation: slideInLeft var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-slideOutLeft {
+    animation: slideOutLeft var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+/* Slide animations - Right */
+.animate-slideInRight {
+    animation: slideInRight var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-slideOutRight {
+    animation: slideOutRight var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Slide animations - Top */
+.animate-slideInTop {
+    animation: slideInTop var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-slideOutTop {
+    animation: slideOutTop var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutTop {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+/* Slide animations - Bottom */
+.animate-slideInBottom {
+    animation: slideInBottom var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-slideOutBottom {
+    animation: slideOutBottom var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes slideInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutBottom {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+
+/* Bounce animations */
+.animate-bounceIn {
+    animation: bounceIn var(--animation-duration, 600ms) ease-out forwards;
+}
+
+.animate-bounceOut {
+    animation: bounceOut var(--animation-duration, 400ms) ease-out forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    70% {
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(0.98);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+/* Zoom animations */
+.animate-zoomIn {
+    animation: zoomIn var(--animation-duration, 300ms) ease-out forwards;
+}
+
+.animate-zoomOut {
+    animation: zoomOut var(--animation-duration, 300ms) ease-out forwards;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* Flip animations */
+.animate-flipIn {
+    animation: flipIn var(--animation-duration, 600ms) ease-out forwards;
+}
+
+.animate-flipOut {
+    animation: flipOut var(--animation-duration, 600ms) ease-out forwards;
+}
+
+@keyframes flipIn {
+    from {
+        opacity: 0;
+        transform: perspective(400px) rotateY(90deg);
+    }
+
+    40% {
+        transform: perspective(400px) rotateY(-10deg);
+    }
+
+    70% {
+        transform: perspective(400px) rotateY(10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: perspective(400px) rotateY(0deg);
+    }
+}
+
+@keyframes flipOut {
+    from {
+        opacity: 1;
+        transform: perspective(400px) rotateY(0deg);
+    }
+
+    30% {
+        transform: perspective(400px) rotateY(-15deg);
+    }
+
+    to {
+        opacity: 0;
+        transform: perspective(400px) rotateY(90deg);
+    }
+}
+
+/* Utility classes for common effects */
+.layout-overlay {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.layout-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.layout-rounded {
+    border-radius: 0.75rem;
+}
+
+/* Responsive animations - reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-fadeIn,
+    .animate-fadeOut,
+    .animate-scaleIn,
+    .animate-scaleOut,
+    .animate-slideInLeft,
+    .animate-slideOutLeft,
+    .animate-slideInRight,
+    .animate-slideOutRight,
+    .animate-slideInTop,
+    .animate-slideOutTop,
+    .animate-slideInBottom,
+    .animate-slideOutBottom,
+    .animate-bounceIn,
+    .animate-bounceOut,
+    .animate-zoomIn,
+    .animate-zoomOut,
+    .animate-flipIn,
+    .animate-flipOut {
+        animation: none;
+    }
+}

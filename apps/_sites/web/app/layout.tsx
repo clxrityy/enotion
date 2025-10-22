@@ -1,18 +1,13 @@
-import type { Metadata } from "next";
-import { Exo } from "next/font/google";
+"use client";
+import { Mulish } from "next/font/google";
+import { LayoutProvider } from "@enotion/components";
 import "./globals.css";
-import { AppProviders } from "@/components/app/AppProviders";
-import { AppLayout } from "@/components/app/AppLayout";
-import { Suspense } from "react";
+import { LayoutRenderer } from "@enotion/core";
 
-const exo = Exo({
-  variable: "--font-exo",
+
+const mulish = Mulish({
+  variable: "--font-mulish",
 });
-
-export const metadata: Metadata = {
-  title: "enotion",
-  description: "An open-source web developer toolkit",
-};
 
 export default function RootLayout({
   children,
@@ -21,14 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${exo.variable} antialiased`}>
-        <Suspense
-          fallback={<div className="w-screen h-screen animate-pulse" />}
-        >
-          <AppProviders>
-            <AppLayout>{children}</AppLayout>
-          </AppProviders>
-        </Suspense>
+      <body className={`${mulish.variable} antialiased`}>
+        <LayoutProvider>
+          <LayoutRenderer />
+          {children}
+        </LayoutProvider>
       </body>
     </html>
   );

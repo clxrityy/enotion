@@ -8,7 +8,7 @@ export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
   data: T[];
   searchKey: keyof T | (keyof T)[];
   render: (item: T, index: number) => React.ReactNode;
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
   placeholder?: string;
 }
 
@@ -47,7 +47,7 @@ export const Search = <T,>({
   data,
   searchKey,
   render,
-  colorPalette,
+  palette,
   placeholder,
   ...props
 }: SearchProps<T>) => {
@@ -62,12 +62,12 @@ export const Search = <T,>({
     <div {...props}>
       <Input
         placeholder={placeholder || "Search..."}
-        colorPalette={colorPalette}
+        palette={palette}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       {dataWithId.map((item, index) => (
-        <Card key={item.id} colorPalette={colorPalette}>
+        <Card key={item.id} palette={palette}>
           {render(item, index)}
         </Card>
       ))}

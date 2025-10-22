@@ -10,3 +10,4 @@ export * from "./useElementSize.js";
 export * from "./useColorPalette.js";
 export * from "./useSearch.js";
 export * from "./useClipboard.js";
+export * from "./useAnimatedModals.js";

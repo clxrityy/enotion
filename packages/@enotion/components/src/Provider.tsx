@@ -6,7 +6,7 @@ import '@enotion/notify/index.css';
 
 export interface ProviderProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
   theme?: Theme;
   notificationOptions?: Omit<NotificationProps, "children">;
 }
@@ -36,13 +36,13 @@ export interface ProviderProps extends HTMLAttributes<HTMLElement> {
  */
 export const Provider = ({
   children,
-  colorPalette,
+  palette,
   theme,
   notificationOptions,
   ...props
 }: Readonly<ProviderProps>) => {
   const defaultPalette = theme === "dark" ? ColorPalettes["dark"] : ColorPalettes["default"];
-  const palette = colorPalette ? ColorPalettes[colorPalette] : defaultPalette;
+  const color = palette ? ColorPalettes[palette] : defaultPalette;
 
   const injectColorPaletteToChildren = (children: ReactNode): ReactNode => {
     return Children.map(children, (child) => {
@@ -60,8 +60,8 @@ export const Provider = ({
       // Native DOM elements have string types (e.g., "div"), custom components have function/object types
       const isCustomComponent = typeof child.type !== "string";
 
-      if (palette && !existingProps.colorPalette && isCustomComponent) {
-        childProps.colorPalette = colorPalette;
+      if (color && !existingProps.palette && isCustomComponent) {
+        childProps.palette = color;
       }
 
       // Recursively process nested children (for both custom components and DOM elements)

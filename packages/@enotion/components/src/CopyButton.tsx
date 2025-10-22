@@ -17,20 +17,20 @@ export interface CopyButtonProps
   onCopied?: (text: string) => void;
   onCopyError?: (error: Error) => void;
   content: string;
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
 }
 
 export const CopyButton = ({
   onCopied,
   onCopyError,
   content,
-  colorPalette,
+  palette,
   ...props
 }: CopyButtonProps) => {
   const { isCopied, copy } = useClipboard({ onError: onCopyError });
 
   const Icon = isCopied ? Icons.Copied : Icons.Copy;
-  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
+  const color = palette ? ColorPalettes[palette] : null;
 
   return (
     <button
@@ -41,9 +41,9 @@ export const CopyButton = ({
         }
       }}
       style={{
-        backgroundColor: palette ? palette.background : undefined,
-        color: palette ? palette.foreground : undefined,
-        border: palette ? `1px solid ${palette.border}` : undefined,
+        backgroundColor: color ? color?.background : undefined,
+        color: color ? color?.foreground : undefined,
+        border: color ? `1px solid ${color?.border}` : undefined,
         padding: "0.25rem",
         borderRadius: "0.25rem",
         display: "flex",

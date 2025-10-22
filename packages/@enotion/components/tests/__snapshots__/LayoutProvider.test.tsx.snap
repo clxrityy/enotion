@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`LayoutProvider Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="snapshot-class"
+  />
+  <div>
+    Snapshot Child
+  </div>
+</DocumentFragment>
+`;

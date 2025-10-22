@@ -3,7 +3,7 @@ import { type ColorPaletteType, ColorPalettes } from "@enotion/core/constants";
 import "./styles/input.css";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
 }
 
 /**
@@ -14,27 +14,21 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * <Input placeholder="Enter text" colorPallete="dark" />
  * ```
  */
-export function Input({ colorPalette, ...rest }: InputProps) {
-  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
+export function Input({ palette, ...rest }: InputProps) {
+  const color = palette ? ColorPalettes[palette] : null;
 
-  if (palette) {
-    return (
-      <input
-        style={
-          {
-            "--input-border-color": palette.border,
-            "--input-focus-border-color": palette.primary,
-            "--input-background-color": palette.background,
-            "--input-text-color": palette.foreground,
-            "--input-placeholder-color": palette.muted,
-            "--input-disabled-background-color": palette.muted,
-            ...rest.style,
-          } as CSSProperties
-        }
-        {...rest}
-      />
-    );
-  }
-
-  return <input {...rest} />;
+  return <input
+    style={
+      {
+        "--input-border-color": color?.border,
+        "--input-focus-border-color": color?.primary,
+        "--input-background-color": color?.background,
+        "--input-text-color": color?.foreground,
+        "--input-placeholder-color": color?.muted,
+        "--input-disabled-background-color": color?.muted,
+        ...rest.style,
+      } as CSSProperties
+    }
+    {...rest}
+  />;
 }

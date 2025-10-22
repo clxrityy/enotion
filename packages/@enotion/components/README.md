@@ -32,7 +32,7 @@ import "@enotion/components/index.css";
 
 ## Customize styles
 
-Most components accept a `colorPalette` prop to customize their color. [See available color palettes here.](https://github.com/clxrityy/enotion/blob/main/packages/%40enotion/config/constants/colors.ts)
+Most components accept a `palette` prop to customize their colors. [See available color palettes here.](https://github.com/clxrityy/enotion/blob/main/packages/%40enotion/config/constants/colors.ts)
 
 ## Components
 

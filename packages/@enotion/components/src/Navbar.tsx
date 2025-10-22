@@ -6,7 +6,6 @@ import {
   HTMLAttributes,
   ReactNode,
   useEffect,
-  useId,
   useRef,
   useState,
 } from "react";
@@ -16,7 +15,7 @@ import { Theme, useElementSize } from "@enotion/hooks";
 import { Popover } from "./Popover.js";
 import { Select } from "./Select.js";
 
-const { Menu, DarkMode, LightMode } = Icons;
+const { Menu, MenuOpen, DarkMode, LightMode } = Icons;
 
 export interface NavbarProps extends HTMLAttributes<HTMLElement> {
   logo?: ReactNode;
@@ -25,7 +24,7 @@ export interface NavbarProps extends HTMLAttributes<HTMLElement> {
   items?: NavItem[];
   onItemClick?: (item: NavItem) => void;
   palettes?: typeof ColorPalettes;
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
   onPaletteChange?: (palette: ColorPaletteType) => void;
   currentTheme?: Theme;
   toggleTheme?: () => void;
@@ -80,7 +79,7 @@ export const Navbar = (
     items = [],
     onItemClick,
     palettes = ColorPalettes,
-    colorPalette,
+    palette,
     onPaletteChange,
     currentTheme,
     toggleTheme,
@@ -88,6 +87,7 @@ export const Navbar = (
   }: NavbarProps,
 ) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
 
   const size = useElementSize(ref);
@@ -96,41 +96,46 @@ export const Navbar = (
     setIsMobile(size.width < 768);
   }, [size]);
 
-  const palette = colorPalette && palettes[colorPalette];
+  const color = palette && palettes[palette];
+
+  const toggleMenu = () => {
+    setMenuOpened(!menuOpened);
+  }
 
   return (
     <header
       ref={ref}
       style={{
-        "--navbar-background": palette ? palette.background : undefined,
-        "--navbar-foreground": palette ? palette.foreground : "inherit",
-        "--navbar-border": palette ? palette.border : undefined,
-        "--navbar-accent": palette ? palette.accent : undefined,
-        "--navbar-muted": palette ? palette.muted : undefined,
+        "--navbar-background": color ? color.background : undefined,
+        "--navbar-foreground": color ? color.foreground : "inherit",
+        "--navbar-border": color ? color.border : undefined,
+        "--navbar-accent": color ? color.accent : undefined,
+        "--navbar-muted": color ? color.muted : undefined,
+        "--navbar-primary": color ? color.primary : undefined,
         ...props.style,
       } as CSSProperties}
       className={cn(
-        `sticky top-0 z-50 w-full border-b-[var(--navbar-border)] bg-[var(--navbar-background)]/90 text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/60 px-4 md:px-5 [&_*]:no-underline`,
+        `enotion-navbar sticky top-0 z-50 w-full border-b-[var(--navbar-border)] bg-[var(--navbar-background)]/90 text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/60 px-4 md:px-5 [&_*]:no-underline`,
         className
       )}
       {...props}
     >
-      <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-4">
+      <div className="enotion-navbar-container container mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-4">
         {/* LEFT */}
-        <div className="flex flex-1 items-cener gap-2">
+        <div className="flex flex-1 items-center gap-2">
           {/* MOBILE MENU TRIGGER */}
           {isMobile && (
             <Popover
-              colorPalette={colorPalette}
+              palette={palette}
               className="w-64 p-1"
               popoverContent={
-                <nav className="max-w-none">
+                <nav className="max-w-none enotion-mobile-nav" role="navigation" aria-label="Mobile navigation">
                   <ul className="flex flex-col items-start gap-0">
                     {items.map((item, index) => {
                       const Icon = item.icon;
-                      const key = useId().concat(index.toString());
+                      const key = `mobile-${item.label}-${index}`;
                       return (
-                        <li key={key} className="w-full">
+                        <li key={key} className="">
                           <button
                             type="button"
                             onClick={(e) => {
@@ -138,8 +143,8 @@ export const Navbar = (
                               if (onItemClick) onItemClick(item);
                             }}
                             className={cn(
-                              "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-accent)] hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
-                              item.active && "bg-[var(--navbar-accent)]/20 text-[var(--navbar-foreground)]/90"
+                              "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-muted)]/75 hover:text-[var(--navbar-foreground)] cursor-pointer no-underline",
+                              item.active && "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90"
                             )}
                           >
                             {Icon &&
@@ -156,29 +161,11 @@ export const Navbar = (
                       )
                     })}
                   </ul>
-                  {/* {items.map((item) => {
-                    const key = useId();
-                    return (
-                      <button
-                        key={key}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onItemClick?.(item);
-                        }}
-                        className={cn(
-                          "block rounded-md px-3 py-2 text-base font-medium hover:bg-[var(--navbar-accent)]/10",
-                          item.active ? "bg-[var(--navbar-accent)]/20 font-semibold" : "font-normal"
-                        )}
-                      >
-                        {item.label}
-                      </button>
-                    )
-                  })} */}
                 </nav>
               }
             >
-              <span className="h-8 w-8 flex items-center justify-center group hover:bg-[var(--navbar-accent)]/40 hover:text-[var(--navbar-foreground)] cursor-pointer">
-                <Menu size={24} />
+              <span className="enotion-navbar-mobile-trigger h-8 w-8 flex items-center justify-center group hover:bg-[var(--navbar-muted)]/40 hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-colors" role="button" tabIndex={0} aria-label="Open mobile menu">
+                {menuOpened ? <MenuOpen onClick={toggleMenu} size={20} /> : <Menu onClick={toggleMenu} size={20} />}
               </span>
             </Popover>
           )}
@@ -189,7 +176,7 @@ export const Navbar = (
               title="logo"
               type="button"
               style={{
-                "--navbar-primary": palette ? palette.primary : undefined
+                "--navbar-primary": color ? color.primary : undefined
               } as CSSProperties}
               onClick={(e) => e.preventDefault()}
               className="flex items-center space-x-2 text-[var(--navbar-primary)] hover:text-[var(--navbar-primary)]/90 transition-colors cursor-pointer"
@@ -203,14 +190,14 @@ export const Navbar = (
             </button>
             {/* DESKTOP MENU */}
             {!isMobile && (
-              <nav className="flex">
-                <ul className="gap-2">
+              <nav className="flex" role="navigation" aria-label="Main navigation">
+                <ul className="flex gap-2">
                   {items.map((item, index) => {
                     const Icon = item.icon;
-                    const key = useId().concat(index.toString());
+                    const key = `desktop-${item.label}-${index}`;
 
                     return (
-                      <li key={key}>
+                      <li key={key} className="relative">
                         <button
                           type="button"
                           onClick={(e) => {
@@ -218,8 +205,8 @@ export const Navbar = (
                             if (onItemClick) onItemClick(item);
                           }}
                           className={cn(
-                            "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-accent)] hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
-                            item.active && "bg-[var(--navbar-accent)]/20 text-[var(--navbar-foreground)]/90"
+                            "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
+                            item.active && "bg-[var(--navbar-muted)]/20 text-[var(--navbar-foreground)]/95"
                           )}
                         >
                           {Icon &&
@@ -244,13 +231,13 @@ export const Navbar = (
         <div className="flex items-center gap-2">
           {/* THEME TOGGLE */}
           {
-            currentTheme && toggleTheme && (
+            currentTheme && (
               <button
                 type="button"
                 onClick={toggleTheme}
                 aria-label="Toggle theme"
                 title="Toggle theme"
-                className="p-2 rounded-md hover:bg-[var(--navbar-accent)]/20 transition-colors"
+                className="p-2 rounded-md hover:bg-[var(--navbar-muted)]/20 transition-colors"
               >
                 {currentTheme === "dark" ? <LightMode size={20} /> : <DarkMode size={20} />}
               </button>
@@ -258,10 +245,10 @@ export const Navbar = (
           }
           {/* PALETTE SELECTOR */}
           {
-            colorPalette && onPaletteChange && (
+            palette && (
               <Select
-                value={colorPalette}
-                onChange={(e) => onPaletteChange(e.target.value as ColorPaletteType)}
+                value={palette}
+                onChange={(e) => onPaletteChange && onPaletteChange(e.target.value as ColorPaletteType)}
                 options={Object.keys(palettes).map((paletteKey) => ({
                   label: paletteKey.charAt(0).toUpperCase() + paletteKey.slice(1),
                   value: paletteKey,
@@ -276,146 +263,3 @@ export const Navbar = (
     </header>
   )
 }
-
-// export type NavbarPosition = "top" | "bottom" | "left" | "right";
-
-// export interface NavbarContainerProps extends ComponentProps<"nav"> {
-//   children?: ReactNode;
-//   colorPalette?: ColorPaletteType;
-//   position?: NavbarPosition;
-// }
-
-// export interface NavbarProps extends HTMLAttributes<HTMLDivElement> {
-//   children?: ReactNode;
-//   colorPalette?: ColorPaletteType;
-// }
-
-// const TopNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
-//   const palette = colorPalette && ColorPalettes[colorPalette];
-
-//   return (
-//     <nav
-//       className={cn("navbar-top enotion-navbar", props.className)}
-//       style={{
-//         borderBottom: palette ? `1px solid ${palette.border}` : undefined,
-//         backgroundColor: palette ? palette.background : undefined,
-//         color: palette ? palette.foreground : "inherit",
-//         ...props.style,
-//       }}
-//       {...props}
-//     >
-//       {children}
-//     </nav>
-//   );
-// };
-
-// const BottomNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
-//   const palette = colorPalette && ColorPalettes[colorPalette];
-
-//   return (
-//     <nav
-//       className={cn("navbar-bottom enotion-navbar", props.className)}
-//       style={{
-//         borderTop: palette ? `1px solid ${palette.border}` : undefined,
-//         backgroundColor: palette ? palette.background : undefined,
-//         color: palette ? palette.foreground : "inherit",
-//         ...props.style,
-//       }}
-//       {...props}
-//     >
-//       {children}
-//     </nav>
-//   );
-// };
-
-// const LeftNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
-//   const palette = colorPalette && ColorPalettes[colorPalette];
-
-//   return (
-//     <nav
-//       className={cn("navbar-left enotion-navbar", props.className)}
-//       style={{
-//         borderRight: palette ? `1px solid ${palette.border}` : undefined,
-//         backgroundColor: palette ? palette.background : undefined,
-//         color: palette ? palette.foreground : "inherit",
-//         ...props.style,
-//       }}
-//       {...props}
-//     >
-//       {children}
-//     </nav>
-//   );
-// };
-
-// const RightNavbar = ({ children, colorPalette, ...props }: NavbarProps) => {
-//   const palette = colorPalette && ColorPalettes[colorPalette];
-
-//   return (
-//     <nav
-//       className={cn("navbar-right enotion-navbar", props.className)}
-//       style={{
-//         borderLeft: palette ? `1px solid ${palette.border}` : undefined,
-//         backgroundColor: palette ? palette.background : undefined,
-//         color: palette ? palette.foreground : "inherit",
-//         ...props.style,
-//       }}
-//       {...props}
-//     >
-//       {children}
-//     </nav>
-//   );
-// };
-
-// const NavbarContainer = ({
-//   position = "top",
-//   children,
-//   colorPalette,
-//   ...props
-// }: NavbarContainerProps) => {
-//   const palette = colorPalette && ColorPalettes[colorPalette];
-
-//   const style = {
-//     "--navbar-box-shadow-color": palette ? palette.muted : undefined,
-//     "--navbar-shadow-color": palette ? palette.border : undefined,
-//     "--navbar-before-bg-color-start": palette ? palette.accent : undefined,
-//     "--navbar-before-bg-color-end": palette ? palette.background : undefined,
-//     "--navbar-after-bg-color": palette ? palette.background : undefined,
-//     color: palette ? palette.foreground : "inherit",
-//     ...props.style,
-//   } as CSSProperties;
-
-//   const render = () => {
-//     switch (position) {
-//       case "top":
-//         return (
-//           <TopNavbar style={style} colorPalette={colorPalette} {...props}>
-//             {children}
-//           </TopNavbar>
-//         );
-//       case "bottom":
-//         return (
-//           <BottomNavbar style={style} colorPalette={colorPalette} {...props}>
-//             {children}
-//           </BottomNavbar>
-//         );
-//       case "left":
-//         return (
-//           <LeftNavbar style={style} colorPalette={colorPalette} {...props}>
-//             {children}
-//           </LeftNavbar>
-//         );
-//       case "right":
-//         return (
-//           <RightNavbar style={style} colorPalette={colorPalette} {...props}>
-//             {children}
-//           </RightNavbar>
-//         );
-//       default:
-//         return null;
-//     }
-//   };
-
-//   return render();
-// };
-
-// export { NavbarContainer as Navbar };
