@@ -50,6 +50,9 @@
       },
       "complexity": {
         "noBannedTypes": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
       }
     }
   },
