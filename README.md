@@ -1,6 +1,6 @@
 # enotion
 
-A turborepo containing a collection of React hooks and shared configurations.
+A turborepo containing a collection of React hooks and shared configurations for building dynamic, contextual, responsive, and interactive web applications.
 
 - [Changelog](./CHANGELOG.md)
 
