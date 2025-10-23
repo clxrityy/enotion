@@ -3,7 +3,6 @@ import { describe, it, expect } from "@jest/globals";
 import { LayoutProvider } from "../src/LayoutProvider.js";
 
 describe("LayoutProvider Component", () => {
-
   it("renders children correctly when passed directly", () => {
     const { getByText } = render(
       <LayoutProvider>
@@ -24,7 +23,6 @@ describe("LayoutProvider Component", () => {
   });
 
   it("applies additional props to LayoutRenderer", () => {
-
     const { container } = render(
       <LayoutProvider className="custom-class" id={"...123"}>
         <div>Test Child</div>

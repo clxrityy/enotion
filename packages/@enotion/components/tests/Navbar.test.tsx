@@ -8,9 +8,9 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={[]}
       />,
     );

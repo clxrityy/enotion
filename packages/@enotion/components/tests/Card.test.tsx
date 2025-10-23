@@ -26,10 +26,10 @@ describe("Card Component", () => {
     const rgbTextColorValues = getRGBfromHex(palette?.foreground as string);
     const textColor = rgbTextColorValues
       ? convertRGBtoString(
-        rgbTextColorValues.r,
-        rgbTextColorValues.g,
-        rgbTextColorValues.b,
-      )
+          rgbTextColorValues.r,
+          rgbTextColorValues.g,
+          rgbTextColorValues.b,
+        )
       : "";
 
     expect(styles.color).toBe(textColor);
@@ -45,10 +45,10 @@ describe("Card Component", () => {
     );
     const backgroundColor = rgbBackgroundColorValues
       ? convertRGBtoString(
-        rgbBackgroundColorValues.r,
-        rgbBackgroundColorValues.g,
-        rgbBackgroundColorValues.b,
-      )
+          rgbBackgroundColorValues.r,
+          rgbBackgroundColorValues.g,
+          rgbBackgroundColorValues.b,
+        )
       : "";
 
     expect(styles.backgroundColor).toBe(backgroundColor);
