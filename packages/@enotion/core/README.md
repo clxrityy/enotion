@@ -20,3 +20,5 @@ Contains core functionalities and utilities used across other `@enotion` package
 - ##### Constants (`@enotion/core/constants`)
   - `colors.ts` - A set of predefined color palettes used throughout the application.
   - `icons.ts` - A collection of [`react-icons`](https://react-icons.github.io/react-icons/) components for consistent iconography.
+- ##### Contexts (`@enotion/core/contexts`)
+  - `LayoutContext.tsx` - Provides layout-related context and state management.

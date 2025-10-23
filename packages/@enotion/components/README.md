@@ -49,6 +49,7 @@ Most components accept a `palette` prop to customize their colors. [See availabl
 - [`<LayoutContainer />`](./src/LayoutContainer.tsx)
 - [`<Navbar />`](./src/Navbar.tsx)
 - [`<Popover />`](./src/Popover.tsx)
+- [`<LayoutProvider />`](./src/LayoutProvider.tsx)
 
 ---
 
