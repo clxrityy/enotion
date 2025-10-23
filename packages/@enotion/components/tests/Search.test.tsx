@@ -31,7 +31,7 @@ describe("Search", () => {
       <Search
         data={data}
         searchKey="name"
-        colorPalette="dark"
+        palette="dark"
         render={(item) => <div>{item.name}</div>}
       />,
     );

@@ -10,12 +10,12 @@ describe("Card Component", () => {
     expect(screen.getByText("Test Card Content")).toBeDefined();
   });
 
-  it("applies color palette styles when colorPalette prop is provided", () => {
+  it("applies color palette styles when palette prop is provided", () => {
     // Using the "dark" palette for testing
     const palette = ColorPalettes.dark;
 
     // Render the Card with the dark color palette
-    render(<Card colorPalette="dark">Styled Card</Card>);
+    render(<Card palette="dark">Styled Card</Card>);
     // Get the rendered card element
     const cardElement = screen.getByText("Styled Card");
     // Get computed styles of the card element
@@ -26,10 +26,10 @@ describe("Card Component", () => {
     const rgbTextColorValues = getRGBfromHex(palette?.foreground as string);
     const textColor = rgbTextColorValues
       ? convertRGBtoString(
-          rgbTextColorValues.r,
-          rgbTextColorValues.g,
-          rgbTextColorValues.b,
-        )
+        rgbTextColorValues.r,
+        rgbTextColorValues.g,
+        rgbTextColorValues.b,
+      )
       : "";
 
     expect(styles.color).toBe(textColor);
@@ -45,10 +45,10 @@ describe("Card Component", () => {
     );
     const backgroundColor = rgbBackgroundColorValues
       ? convertRGBtoString(
-          rgbBackgroundColorValues.r,
-          rgbBackgroundColorValues.g,
-          rgbBackgroundColorValues.b,
-        )
+        rgbBackgroundColorValues.r,
+        rgbBackgroundColorValues.g,
+        rgbBackgroundColorValues.b,
+      )
       : "";
 
     expect(styles.backgroundColor).toBe(backgroundColor);

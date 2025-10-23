@@ -24,7 +24,7 @@ describe("Select", () => {
       { value: "option2", label: "Option 2" },
     ];
 
-    render(<Select options={options} colorPalette="dark" />);
+    render(<Select options={options} palette="dark" />);
     const select = screen.getByRole("combobox");
     expect(select).toBeDefined();
   });

@@ -4,7 +4,7 @@ import "./styles/select.css";
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: { value: string; label: string }[];
-  colorPalette?: ColorPaletteType;
+  palette?: ColorPaletteType;
 }
 
 /**
@@ -20,36 +20,36 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
  * <Select options={options} colorPalette="dark" />
  * ```
  */
-export function Select({ options, colorPalette, ...rest }: SelectProps) {
-  const palette = colorPalette ? ColorPalettes[colorPalette] : null;
+export function Select({ options, palette, ...rest }: SelectProps) {
+  const color = palette ? ColorPalettes[palette] : null;
 
   return (
     <div className="select-container">
       <select
         style={
           {
-            "--select-border-color": palette?.border,
-            "--select-focus-border-color": palette?.primary,
-            "--select-background-color": palette?.background,
-            "--select-text-color": palette?.foreground,
-            "--select-placeholder-color": palette?.muted,
-            "--select-disabled-background-color": palette?.muted,
-            "--select-disabled-text-color": palette?.background,
-            "--select-option-hover-background-color": palette?.muted,
-            "--select-option-hover-text-color": palette?.foreground,
-            "--select-disabled-borer-color": palette?.muted,
-            "--select-option-selected-background-color": palette?.primary,
-            "--select-option-selected-text-color": palette?.background,
-            "--select-hover-border-color": palette?.primary,
-            "--select-invalid-border-color": palette?.warning,
-            "--select-invalid-focus-ring-color": palette?.warning,
-            "--select-option-background-color": palette?.background,
-            "--select-option-text-color": palette?.foreground,
-            "--select-option-disabled-background-color": palette?.muted,
-            "--select-option-disabled-text-color": palette?.background,
-            "--select-icon-color": palette?.foreground,
-            "--select-icon-disabled-color": palette?.muted,
-            "--select-icon-hover-color": palette?.foreground,
+            "--select-border-color": color?.border,
+            "--select-focus-border-color": color?.primary,
+            "--select-background-color": color?.background,
+            "--select-text-color": color?.foreground,
+            "--select-placeholder-color": color?.muted,
+            "--select-disabled-background-color": color?.muted,
+            "--select-disabled-text-color": color?.background,
+            "--select-option-hover-background-color": color?.muted,
+            "--select-option-hover-text-color": color?.foreground,
+            "--select-disabled-borer-color": color?.muted,
+            "--select-option-selected-background-color": color?.primary,
+            "--select-option-selected-text-color": color?.background,
+            "--select-hover-border-color": color?.primary,
+            "--select-invalid-border-color": color?.warning,
+            "--select-invalid-focus-ring-color": color?.warning,
+            "--select-option-background-color": color?.background,
+            "--select-option-text-color": color?.foreground,
+            "--select-option-disabled-background-color": color?.muted,
+            "--select-option-disabled-text-color": color?.background,
+            "--select-icon-color": color?.foreground,
+            "--select-icon-disabled-color": color?.muted,
+            "--select-icon-hover-color": color?.foreground,
             ...rest.style,
           } as CSSProperties
         }

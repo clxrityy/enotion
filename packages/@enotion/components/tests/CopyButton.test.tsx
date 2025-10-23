@@ -24,7 +24,7 @@ describe("CopyButton", () => {
   });
 
   it("applies color palette styles", () => {
-    render(<CopyButton content="Sample text to copy" colorPalette="default" />);
+    render(<CopyButton content="Sample text to copy" palette="default" />);
     const button = screen.getByRole("button", { name: /copy/i });
     expect(button).toHaveProperty("style.backgroundColor");
     expect(button).toHaveProperty("style.color");
