@@ -14,13 +14,9 @@ const items: NavItem[] = [
 ];
 
 const Logo = ({ palette }: { palette?: ColorPaletteType }) => {
-
   const color = palette ? ColorPalettes[palette] : undefined;
 
-  const {
-    svgContent,
-    error,
-  } = useSVG({
+  const { svgContent, error } = useSVG({
     src: "/logo.svg",
     width: 20,
     height: 20,
@@ -45,8 +41,10 @@ const Logo = ({ palette }: { palette?: ColorPaletteType }) => {
       }}
       dangerouslySetInnerHTML={{ __html: svgMarkup }}
     />
-  ) : <></>;
-}
+  ) : (
+    <></>
+  );
+};
 
 export default function Layout({
   children,

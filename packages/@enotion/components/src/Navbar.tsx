@@ -93,8 +93,8 @@ export const Navbar = ({
     callback(e) {
       e.preventDefault();
       setMenuOpened(false);
-    }
-  })
+    },
+  });
 
   const size = useElementSize(ref);
 
@@ -119,7 +119,9 @@ export const Navbar = ({
           "--navbar-accent": color ? color.accent : undefined,
           "--navbar-muted": color ? color.muted : undefined,
           "--navbar-primary": color ? color.primary : undefined,
-          backgroundColor: color ? blendHexColors(color.background, color.muted, 0.33) : undefined,
+          backgroundColor: color
+            ? blendHexColors(color.background, color.muted, 0.33)
+            : undefined,
           boxShadow: color
             ? `0 1px 3px ${blendHexColors(color.muted, color.background, 0.5)}`
             : undefined,
@@ -160,7 +162,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-muted)]/75 hover:text-[var(--navbar-foreground)] cursor-pointer no-underline",
                               item.active &&
-                              "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
+                                "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
                             )}
                           >
                             {Icon && (
@@ -220,8 +222,7 @@ export const Navbar = ({
                           }}
                           className={cn(
                             "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
-                            item.active &&
-                            "bg-[var(--navbar-muted)]/20",
+                            item.active && "bg-[var(--navbar-muted)]/20",
                           )}
                         >
                           {Icon && (

@@ -23,7 +23,12 @@ export interface UseSVGOptions extends SVGProps<SVGSVGElement> {
  * });
  * ```
  */
-export function useSVG({ src, strokeColor, fillColor, ...svgProps }: UseSVGOptions): {
+export function useSVG({
+  src,
+  strokeColor,
+  fillColor,
+  ...svgProps
+}: UseSVGOptions): {
   svgContent: string | null;
   error: Error | null;
   svgProps: SVGProps<SVGSVGElement>;
@@ -42,7 +47,10 @@ export function useSVG({ src, strokeColor, fillColor, ...svgProps }: UseSVGOptio
 
         // Apply stroke and fill colors if provided
         if (strokeColor) {
-          svgText = svgText.replaceAll(/stroke="[^"]*"/g, `stroke="${strokeColor}"`);
+          svgText = svgText.replaceAll(
+            /stroke="[^"]*"/g,
+            `stroke="${strokeColor}"`,
+          );
         }
         if (fillColor) {
           svgText = svgText.replaceAll(/fill="[^"]*"/g, `fill="${fillColor}"`);

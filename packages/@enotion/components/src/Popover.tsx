@@ -101,12 +101,16 @@ export const Popover = ({
           }}
           style={
             {
-              "--popover-content-border": color ? adjustHexColorOpacity(color.border, 0.25) : undefined,
+              "--popover-content-border": color
+                ? adjustHexColorOpacity(color.border, 0.25)
+                : undefined,
               "--popover-content-box-shadow": color
                 ? adjustHexColorOpacity(color.muted, 0.1)
                 : undefined,
               color: color ? color.foreground : "inherit",
-              backgroundColor: color ? blendHexColors(color.background, color.muted, 0.33) : "inherit",
+              backgroundColor: color
+                ? blendHexColors(color.background, color.muted, 0.33)
+                : "inherit",
               borderRadius: "0.5rem",
               padding: "0.5rem",
             } as CSSProperties

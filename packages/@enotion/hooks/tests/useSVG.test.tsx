@@ -8,8 +8,8 @@ describe("useSVG", () => {
       useSVG({
         width: 100,
         height: 100,
-        src: "./mocks/logo.svg"
-      })
+        src: "./mocks/logo.svg",
+      }),
     );
     const svgElement = result.current;
 
