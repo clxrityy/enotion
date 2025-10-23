@@ -1,6 +1,6 @@
 import { LayoutContextProvider, LayoutRenderer } from "@enotion/core";
-import "./styles/layout-provider.css";
 import { Provider, type ProviderProps } from "./Provider.js";
+import "@enotion/core/index.css";
 
 export interface LayoutProviderProps extends Omit<ProviderProps, "children"> {
   children?: React.ReactNode;
