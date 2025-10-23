@@ -11,3 +11,4 @@ export * from "./useColorPalette.js";
 export * from "./useSearch.js";
 export * from "./useClipboard.js";
 export * from "./useAnimatedModals.js";
+export * from "./useSVG.js";
