@@ -58,7 +58,7 @@ export interface LayoutElement {
   content: ReactNode;
   visible: boolean;
   zIndex?: number;
-  position?: 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
+  position?: "static" | "relative" | "absolute" | "fixed" | "sticky";
   onVisibilityChange?: (visible: boolean) => void;
   render?: () => ReactNode;
   animation?: AnimationConfig;
@@ -91,7 +91,7 @@ export interface LayoutElement {
 export interface LayoutContextState {
   elements: Map<string, LayoutElement>;
   groups: Map<string, LayoutGroup>;
-  registerElement: (element: Omit<LayoutElement, 'visible'>) => void;
+  registerElement: (element: Omit<LayoutElement, "visible">) => void;
   unregisterElement: (id: string) => void;
   updateElement: (id: string, updates: Partial<LayoutElement>) => void;
   showElement: (id: string) => void;
@@ -112,29 +112,31 @@ export interface LayoutContextState {
 export const initialLayoutContextState: LayoutContextState = {
   elements: new Map(),
   groups: new Map(),
-  registerElement: () => { },
-  unregisterElement: () => { },
-  updateElement: () => { },
-  showElement: () => { },
-  hideElement: () => { },
-  toggleElement: () => { },
+  registerElement: () => {},
+  unregisterElement: () => {},
+  updateElement: () => {},
+  showElement: () => {},
+  hideElement: () => {},
+  toggleElement: () => {},
   getElementById: () => undefined,
   getVisibleElements: () => [],
   isElementVisible: () => false,
-  createGroup: () => { },
-  removeGroup: () => { },
-  addElementToGroup: () => { },
-  removeElementFromGroup: () => { },
-  showGroup: () => { },
-  hideGroup: () => { },
-  evaluateConditionals: () => { },
+  createGroup: () => {},
+  removeGroup: () => {},
+  addElementToGroup: () => {},
+  removeElementFromGroup: () => {},
+  showGroup: () => {},
+  hideGroup: () => {},
+  evaluateConditionals: () => {},
 };
 
 const useLayoutContextState = (): LayoutContextState => {
-  const [elements, setElements] = useState<Map<string, LayoutElement>>(new Map());
+  const [elements, setElements] = useState<Map<string, LayoutElement>>(
+    new Map(),
+  );
   const [groups, setGroups] = useState<Map<string, LayoutGroup>>(new Map());
 
-  const registerElement = (elementData: Omit<LayoutElement, 'visible'>) => {
+  const registerElement = (elementData: Omit<LayoutElement, "visible">) => {
     setElements((prev) => {
       const newMap = new Map(prev);
       const element: LayoutElement = {
@@ -151,7 +153,7 @@ const useLayoutContextState = (): LayoutContextState => {
           if (group && !group.elements.includes(elementData.id)) {
             const updatedGroup = {
               ...group,
-              elements: [...group.elements, elementData.id]
+              elements: [...group.elements, elementData.id],
             };
             groupsMap.set(group.id, updatedGroup);
           }
@@ -176,7 +178,7 @@ const useLayoutContextState = (): LayoutContextState => {
           if (group) {
             const updatedGroup = {
               ...group,
-              elements: group.elements.filter((elementId) => elementId !== id)
+              elements: group.elements.filter((elementId) => elementId !== id),
             };
             groupsMap.set(group.id, updatedGroup);
           }
@@ -310,7 +312,7 @@ const useLayoutContextState = (): LayoutContextState => {
         if (group && !group.elements.includes(elementId)) {
           const updatedGroup = {
             ...group,
-            elements: [...group.elements, elementId]
+            elements: [...group.elements, elementId],
           };
           newMap.set(groupId, updatedGroup);
         }
@@ -330,7 +332,7 @@ const useLayoutContextState = (): LayoutContextState => {
         if (group) {
           const updatedGroup = {
             ...group,
-            elements: group.elements.filter((id) => id !== elementId)
+            elements: group.elements.filter((id) => id !== elementId),
           };
           newMap.set(groupId, updatedGroup);
         }
@@ -405,9 +407,14 @@ export interface LayoutContextProviderProps {
   children: ReactNode;
 }
 
-const { Provider, useContext } = createContextFactory(initialLayoutContextState, useLayoutContextState);
+const { Provider, useContext } = createContextFactory(
+  initialLayoutContextState,
+  useLayoutContextState,
+);
 
-export const LayoutContextProvider = ({ children }: LayoutContextProviderProps) => {
+export const LayoutContextProvider = ({
+  children,
+}: LayoutContextProviderProps) => {
   return <Provider>{children}</Provider>;
 };
 
@@ -466,15 +473,22 @@ export const useLayoutElement = (
   options?: {
     autoShow?: boolean;
     zIndex?: number;
-    position?: LayoutElement['position'];
+    position?: LayoutElement["position"];
     onVisibilityChange?: (visible: boolean) => void;
     animation?: AnimationConfig;
     group?: string;
     conditional?: ConditionalConfig;
     priority?: number;
-  }
+  },
 ) => {
-  const { registerElement, unregisterElement, showElement, hideElement, toggleElement, isElementVisible } = useLayoutContext();
+  const {
+    registerElement,
+    unregisterElement,
+    showElement,
+    hideElement,
+    toggleElement,
+    isElementVisible,
+  } = useLayoutContext();
 
   // Register element on mount
   useEffect(() => {
@@ -499,7 +513,17 @@ export const useLayoutElement = (
     return () => {
       unregisterElement(id);
     };
-  }, [id, content, options?.zIndex, options?.position, options?.autoShow, options?.animation, options?.group, options?.conditional, options?.priority]);
+  }, [
+    id,
+    content,
+    options?.zIndex,
+    options?.position,
+    options?.autoShow,
+    options?.animation,
+    options?.group,
+    options?.conditional,
+    options?.priority,
+  ]);
 
   return {
     show: () => showElement(id),
@@ -546,9 +570,11 @@ export const LayoutRenderer = ({ ...props }: LayoutRendererProps) => {
             key={element.id}
             className={element.animation?.enter}
             style={{
-              position: element.position || 'relative',
+              position: element.position || "relative",
               zIndex: element.zIndex,
-              animationDuration: element.animation?.duration ? `${element.animation.duration}ms` : undefined,
+              animationDuration: element.animation?.duration
+                ? `${element.animation.duration}ms`
+                : undefined,
             }}
           >
             {element.render ? element.render() : element.content}
@@ -557,4 +583,3 @@ export const LayoutRenderer = ({ ...props }: LayoutRendererProps) => {
     </div>
   );
 };
-

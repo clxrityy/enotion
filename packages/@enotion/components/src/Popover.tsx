@@ -1,8 +1,18 @@
-import { useState, useRef, ReactNode, HTMLAttributes, CSSProperties } from "react";
+import {
+  useState,
+  useRef,
+  ReactNode,
+  HTMLAttributes,
+  CSSProperties,
+} from "react";
 import "./styles/popover.css";
 import { useOutsideClick } from "@enotion/hooks";
 import { cn } from "@enotion/core/utils";
-import { adjustHexColorOpacity, ColorPalettes, ColorPaletteType } from "@enotion/core";
+import {
+  adjustHexColorOpacity,
+  ColorPalettes,
+  ColorPaletteType,
+} from "@enotion/core";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -27,7 +37,12 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
  * </Popover>
  * ```
  */
-export const Popover = ({ children, popoverContent, palette, ...props }: PopoverProps) => {
+export const Popover = ({
+  children,
+  popoverContent,
+  palette,
+  ...props
+}: PopoverProps) => {
   const popoverRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -36,7 +51,8 @@ export const Popover = ({ children, popoverContent, palette, ...props }: Popover
   useOutsideClick({
     ref: popoverRef,
     callback(event) {
-      if (popoverRef.current &&
+      if (
+        popoverRef.current &&
         !popoverRef.current.contains(event.target as Node) &&
         !triggerRef.current?.contains(event.target as Node)
       ) {
@@ -48,13 +64,16 @@ export const Popover = ({ children, popoverContent, palette, ...props }: Popover
   const color = palette && ColorPalettes[palette];
 
   return (
-    <div className={cn("enotion-popover-container", props.className)} {...props}>
+    <div
+      className={cn("enotion-popover-container", props.className)}
+      {...props}
+    >
       <button
         type="button"
         ref={triggerRef}
         onClick={() => setIsVisible((prev) => !prev)}
         onKeyDown={(e) => {
-          if (e.key === 'Escape' && isVisible) {
+          if (e.key === "Escape" && isVisible) {
             setIsVisible(false);
           }
         }}
@@ -71,27 +90,30 @@ export const Popover = ({ children, popoverContent, palette, ...props }: Popover
       </button>
       {isVisible && (
         <div
-          id="enotion-popover-content"
           ref={popoverRef}
           className="enotion-popover-content"
           role="dialog"
           aria-modal="false"
           onKeyDown={(e) => {
-            if (e.key === 'Escape') {
+            if (e.key === "Escape") {
               setIsVisible(false);
               triggerRef.current?.focus();
             }
           }}
-          style={{
-            "--popover-content-border": color ? color.border : undefined,
-            "--popover-content-box-shadow": color ? adjustHexColorOpacity(color.accent, 0.1) : undefined,
-            borderRadius: "0.5rem",
-            padding: "0.5rem",
-          } as CSSProperties}
+          style={
+            {
+              "--popover-content-border": color ? color.border : undefined,
+              "--popover-content-box-shadow": color
+                ? adjustHexColorOpacity(color.accent, 0.1)
+                : undefined,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+            } as CSSProperties
+          }
         >
           {popoverContent}
         </div>
       )}
     </div>
   );
-}
+};

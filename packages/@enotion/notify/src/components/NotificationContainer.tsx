@@ -36,10 +36,10 @@ export function NotificationContainer({
     ...(position.includes("left") ? { left: "1rem" } : {}),
     ...(position.includes("center")
       ? {
-        left: "50%",
-        transform: "translateX(-50%)",
-        alignItems: "center",
-      }
+          left: "50%",
+          transform: "translateX(-50%)",
+          alignItems: "center",
+        }
       : {}),
   };
 

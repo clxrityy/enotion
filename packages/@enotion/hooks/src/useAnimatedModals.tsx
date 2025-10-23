@@ -52,13 +52,13 @@ export const useAnimatedModals = ({
       animation: animationConfig ?? {
         enter: "animate-fadeIn",
         exit: "animate-fadeOut",
-        duration: 300
+        duration: 300,
       },
     });
 
     // Show the modal
     showElement(modalId);
-  }
+  };
 
   return { showModal };
-}
+};

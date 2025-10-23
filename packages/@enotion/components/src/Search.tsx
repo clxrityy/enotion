@@ -53,9 +53,11 @@ export const Search = <T,>({
 }: SearchProps<T>) => {
   const { query, setQuery, filteredData } = useSearch<T>(data, searchKey);
 
+  const id = useId();
+
   const dataWithId = filteredData.map((item) => ({
     ...item,
-    id: (item as any).id ?? (useId() as string),
+    id: (item as any).id ?? id,
   }));
 
   return (

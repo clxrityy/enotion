@@ -5,7 +5,6 @@ import { Button } from "../src/Button.js";
 import { ColorPalettes } from "@enotion/core/constants";
 import { getRGBfromHex, convertRGBtoString } from "@enotion/core";
 
-
 describe("Provider Component", () => {
   it("renders children correctly when passed directly", () => {
     const { getByText } = render(

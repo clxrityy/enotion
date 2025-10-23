@@ -18,9 +18,9 @@ type Action =
   | { type: "ADD_NOTIFICATION"; payload: Notification }
   | { type: "REMOVE_NOTIFICATION"; payload: { id: string } }
   | {
-    type: "UPDATE_NOTIFICATION";
-    payload: Partial<Notification> & { id: string };
-  }
+      type: "UPDATE_NOTIFICATION";
+      payload: Partial<Notification> & { id: string };
+    }
   | { type: "DISMISS_ALL" };
 
 // Create context

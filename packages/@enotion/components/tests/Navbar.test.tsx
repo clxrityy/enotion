@@ -8,11 +8,11 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         colorPalette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={[]}
-      />
+      />,
     );
     expect(getByText("Logo")).toBeDefined();
   });

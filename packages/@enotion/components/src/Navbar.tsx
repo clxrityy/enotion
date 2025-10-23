@@ -36,7 +36,7 @@ export interface NavItem {
   icon?: ComponentType<{
     size?: number;
     className?: string;
-    'aria-hidden'?: boolean;
+    "aria-hidden"?: boolean;
   }>;
   active?: boolean;
   subItems?: NavItem[];
@@ -70,22 +70,20 @@ export interface NavItem {
  * />
  * ```
  */
-export const Navbar = (
-  {
-    className,
-    logo,
-    title,
-    logoHref,
-    items = [],
-    onItemClick,
-    palettes = ColorPalettes,
-    palette,
-    onPaletteChange,
-    currentTheme,
-    toggleTheme,
-    ...props
-  }: NavbarProps,
-) => {
+export const Navbar = ({
+  className,
+  logo,
+  title,
+  logoHref,
+  items = [],
+  onItemClick,
+  palettes = ColorPalettes,
+  palette,
+  onPaletteChange,
+  currentTheme,
+  toggleTheme,
+  ...props
+}: NavbarProps) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
@@ -100,23 +98,25 @@ export const Navbar = (
 
   const toggleMenu = () => {
     setMenuOpened(!menuOpened);
-  }
+  };
 
   return (
     <header
       ref={ref}
-      style={{
-        "--navbar-background": color ? color.background : undefined,
-        "--navbar-foreground": color ? color.foreground : "inherit",
-        "--navbar-border": color ? color.border : undefined,
-        "--navbar-accent": color ? color.accent : undefined,
-        "--navbar-muted": color ? color.muted : undefined,
-        "--navbar-primary": color ? color.primary : undefined,
-        ...props.style,
-      } as CSSProperties}
+      style={
+        {
+          "--navbar-background": color ? color.background : undefined,
+          "--navbar-foreground": color ? color.foreground : "inherit",
+          "--navbar-border": color ? color.border : undefined,
+          "--navbar-accent": color ? color.accent : undefined,
+          "--navbar-muted": color ? color.muted : undefined,
+          "--navbar-primary": color ? color.primary : undefined,
+          ...props.style,
+        } as CSSProperties
+      }
       className={cn(
         `enotion-navbar sticky top-0 z-50 w-full border-b-[var(--navbar-border)] bg-[var(--navbar-background)]/90 text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/60 px-4 md:px-5 [&_*]:no-underline`,
-        className
+        className,
       )}
       {...props}
     >
@@ -129,7 +129,10 @@ export const Navbar = (
               palette={palette}
               className="w-64 p-1"
               popoverContent={
-                <nav className="max-w-none enotion-mobile-nav" role="navigation" aria-label="Mobile navigation">
+                <nav
+                  className="max-w-none enotion-mobile-nav"
+                  aria-label="Mobile navigation"
+                >
                   <ul className="flex flex-col items-start gap-0">
                     {items.map((item, index) => {
                       const Icon = item.icon;
@@ -144,28 +147,32 @@ export const Navbar = (
                             }}
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-muted)]/75 hover:text-[var(--navbar-foreground)] cursor-pointer no-underline",
-                              item.active && "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90"
+                              item.active &&
+                                "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
                             )}
                           >
-                            {Icon &&
+                            {Icon && (
                               <Icon
                                 size={16}
                                 className="text-[var(--navbar-muted)]/90"
                                 aria-hidden={true}
-                              />}
-                            <span>
-                              {item.label}
-                            </span>
+                              />
+                            )}
+                            <span>{item.label}</span>
                           </button>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 </nav>
               }
             >
-              <span className="enotion-navbar-mobile-trigger h-8 w-8 flex items-center justify-center group hover:bg-[var(--navbar-muted)]/40 hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-colors" role="button" tabIndex={0} aria-label="Open mobile menu">
-                {menuOpened ? <MenuOpen onClick={toggleMenu} size={20} /> : <Menu onClick={toggleMenu} size={20} />}
+              <span className="enotion-navbar-mobile-trigger h-8 w-8 flex items-center justify-center group hover:bg-[var(--navbar-muted)]/40 hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-colors">
+                {menuOpened ? (
+                  <MenuOpen onClick={toggleMenu} size={20} />
+                ) : (
+                  <Menu onClick={toggleMenu} size={20} />
+                )}
               </span>
             </Popover>
           )}
@@ -175,22 +182,22 @@ export const Navbar = (
             <button
               title="logo"
               type="button"
-              style={{
-                "--navbar-primary": color ? color.primary : undefined
-              } as CSSProperties}
+              style={
+                {
+                  "--navbar-primary": color ? color.primary : undefined,
+                } as CSSProperties
+              }
               onClick={(e) => e.preventDefault()}
               className="flex items-center space-x-2 text-[var(--navbar-primary)] hover:text-[var(--navbar-primary)]/90 transition-colors cursor-pointer"
             >
-              <div className="text-2xl">
-                {logo}
-              </div>
+              <div className="text-2xl">{logo}</div>
               <span className="hidden font-bold text-xl sm:inline-block">
                 {title}
               </span>
             </button>
             {/* DESKTOP MENU */}
             {!isMobile && (
-              <nav className="flex" role="navigation" aria-label="Main navigation">
+              <nav className="flex" aria-label="Main navigation">
                 <ul className="flex gap-2">
                   {items.map((item, index) => {
                     const Icon = item.icon;
@@ -206,21 +213,21 @@ export const Navbar = (
                           }}
                           className={cn(
                             "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
-                            item.active && "bg-[var(--navbar-muted)]/20 text-[var(--navbar-foreground)]/95"
+                            item.active &&
+                              "bg-[var(--navbar-muted)]/20 text-[var(--navbar-foreground)]/95",
                           )}
                         >
-                          {Icon &&
+                          {Icon && (
                             <Icon
                               size={16}
                               className="text-[var(--navbar-muted)]/90"
                               aria-hidden={true}
-                            />}
-                          <span>
-                            {item.label}
-                          </span>
+                            />
+                          )}
+                          <span>{item.label}</span>
                         </button>
                       </li>
-                    )
+                    );
                   })}
                 </ul>
               </nav>
@@ -230,36 +237,39 @@ export const Navbar = (
         {/* RIGHT */}
         <div className="flex items-center gap-2">
           {/* THEME TOGGLE */}
-          {
-            currentTheme && (
-              <button
-                type="button"
-                onClick={toggleTheme}
-                aria-label="Toggle theme"
-                title="Toggle theme"
-                className="p-2 rounded-md hover:bg-[var(--navbar-muted)]/20 transition-colors"
-              >
-                {currentTheme === "dark" ? <LightMode size={20} /> : <DarkMode size={20} />}
-              </button>
-            )
-          }
+          {currentTheme && (
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              title="Toggle theme"
+              className="p-2 rounded-md hover:bg-[var(--navbar-muted)]/20 transition-colors"
+            >
+              {currentTheme === "dark" ? (
+                <LightMode size={20} />
+              ) : (
+                <DarkMode size={20} />
+              )}
+            </button>
+          )}
           {/* PALETTE SELECTOR */}
-          {
-            palette && (
-              <Select
-                value={palette}
-                onChange={(e) => onPaletteChange && onPaletteChange(e.target.value as ColorPaletteType)}
-                options={Object.keys(palettes).map((paletteKey) => ({
-                  label: paletteKey.charAt(0).toUpperCase() + paletteKey.slice(1),
-                  value: paletteKey,
-                }))}
-                aria-label="Select color palette"
-                title="Select color palette"
-              />
-            )
-          }
+          {palette && (
+            <Select
+              value={palette}
+              onChange={(e) =>
+                onPaletteChange &&
+                onPaletteChange(e.target.value as ColorPaletteType)
+              }
+              options={Object.keys(palettes).map((paletteKey) => ({
+                label: paletteKey.charAt(0).toUpperCase() + paletteKey.slice(1),
+                value: paletteKey,
+              }))}
+              aria-label="Select color palette"
+              title="Select color palette"
+            />
+          )}
         </div>
       </div>
     </header>
-  )
-}
+  );
+};

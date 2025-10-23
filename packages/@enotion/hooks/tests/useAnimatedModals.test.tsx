@@ -1,5 +1,11 @@
 import { useAnimatedModals } from "../src/useAnimatedModals.js";
-import { renderHook, act, render, screen, waitFor } from "@testing-library/react";
+import {
+  renderHook,
+  act,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { describe, it, expect, jest } from "@jest/globals";
 import { LayoutContextProvider, LayoutRenderer } from "@enotion/core";
 
@@ -18,7 +24,10 @@ describe("useAnimatedModals", () => {
 
       return (
         <div>
-          <button type="button" onClick={() => showModal("test-modal", <div>Test Modal</div>)}>
+          <button
+            type="button"
+            onClick={() => showModal("test-modal", <div>Test Modal</div>)}
+          >
             Open Modal
           </button>
         </div>
@@ -29,7 +38,7 @@ describe("useAnimatedModals", () => {
       <LayoutContextProvider>
         <TestComponent />
         <LayoutRenderer data-testid="layout-renderer" />
-      </LayoutContextProvider>
+      </LayoutContextProvider>,
     );
 
     const openButton = screen.getByText("Open Modal");

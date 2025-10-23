@@ -17,18 +17,20 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Input({ palette, ...rest }: InputProps) {
   const color = palette ? ColorPalettes[palette] : null;
 
-  return <input
-    style={
-      {
-        "--input-border-color": color?.border,
-        "--input-focus-border-color": color?.primary,
-        "--input-background-color": color?.background,
-        "--input-text-color": color?.foreground,
-        "--input-placeholder-color": color?.muted,
-        "--input-disabled-background-color": color?.muted,
-        ...rest.style,
-      } as CSSProperties
-    }
-    {...rest}
-  />;
+  return (
+    <input
+      style={
+        {
+          "--input-border-color": color?.border,
+          "--input-focus-border-color": color?.primary,
+          "--input-background-color": color?.background,
+          "--input-text-color": color?.foreground,
+          "--input-placeholder-color": color?.muted,
+          "--input-disabled-background-color": color?.muted,
+          ...rest.style,
+        } as CSSProperties
+      }
+      {...rest}
+    />
+  );
 }

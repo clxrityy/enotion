@@ -4,7 +4,7 @@ import { Provider, type ProviderProps } from "./Provider.js";
 
 export interface LayoutProviderProps extends Omit<ProviderProps, "children"> {
   children?: React.ReactNode;
-};
+}
 
 /**
  * LayoutProvider component that wraps the application with layout context and rendering.
@@ -55,4 +55,4 @@ export const LayoutProvider = ({
       </Provider>
     </LayoutContextProvider>
   );
-}
+};

@@ -7,7 +7,7 @@ describe("Popover Component", () => {
     render(
       <Popover popoverContent={<div>Popover Content</div>}>
         <span>Open Popover</span>
-      </Popover>
+      </Popover>,
     );
     expect(screen.getByText("Open Popover")).toBeDefined();
   });
@@ -16,7 +16,7 @@ describe("Popover Component", () => {
     render(
       <Popover popoverContent={<div>Popover Content</div>}>
         <span>Open Popover</span>
-      </Popover>
+      </Popover>,
     );
     const trigger = screen.getByText("Open Popover");
     fireEvent.click(trigger);
@@ -30,7 +30,7 @@ describe("Popover Component", () => {
           <span>Open Popover</span>
         </Popover>
         <div data-testid="outside-area">Outside Area</div>
-      </div>
+      </div>,
     );
     const trigger = screen.getByText("Open Popover");
     fireEvent.click(trigger);

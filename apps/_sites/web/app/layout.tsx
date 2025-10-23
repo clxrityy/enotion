@@ -4,7 +4,6 @@ import { LayoutProvider } from "@enotion/components";
 import "./globals.css";
 import { LayoutRenderer } from "@enotion/core";
 
-
 const mulish = Mulish({
   variable: "--font-mulish",
 });

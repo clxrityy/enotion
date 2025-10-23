@@ -6,9 +6,7 @@ const jestConfig: Config = {
   displayName: "@enotion/server",
   testEnvironment: "node", // Override for server environment
   rootDir: ".",
-  testMatch: [
-    "<rootDir>/tests/**/*.{test,spec}.{ts,tsx}",
-  ],
+  testMatch: ["<rootDir>/tests/**/*.{test,spec}.{ts,tsx}"],
 };
 
 export default jestConfig;

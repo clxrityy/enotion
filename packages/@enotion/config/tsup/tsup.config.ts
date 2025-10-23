@@ -13,8 +13,8 @@ export default defineConfig([
     dts: true,
     outExtension({ format }) {
       return {
-        js: `.js`
-      }
+        js: `.js`,
+      };
     },
     terserOptions: {
       compress: {

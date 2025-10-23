@@ -25,7 +25,8 @@ describe("System Module", () => {
       }),
     }));
 
-    const getSystemSnapshot = (await import("../src/system/snapshot")).getSystemSnapshot;
+    const getSystemSnapshot = (await import("../src/system/snapshot"))
+      .getSystemSnapshot;
     const snapshot = await getSystemSnapshot();
     expect(snapshot).toBeDefined();
     expect(typeof snapshot.cpu.usage).toBe("number");
@@ -60,7 +61,7 @@ describe("System Module", () => {
   });
 
   it("should parse macOS top output format", async () => {
-    const { parseIdleFromTopOutput } = (await import("../src/utils/parsers"));
+    const { parseIdleFromTopOutput } = await import("../src/utils/parsers");
     const idle = parseIdleFromTopOutput(
       "CPU usage: 7.59% user, 6.45% sys, 85.96% idle\n",
     );

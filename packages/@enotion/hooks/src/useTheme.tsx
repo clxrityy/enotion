@@ -38,7 +38,7 @@ const initialThemeContext: ThemeContext = {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => { },
+  toggle: () => {},
 };
 
 // Create a simple context without the factory pattern

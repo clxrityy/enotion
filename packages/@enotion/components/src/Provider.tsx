@@ -1,8 +1,14 @@
 import { ColorPalettes, ColorPaletteType } from "@enotion/core";
 import { ColorPaletteProvider, Theme, ThemeProvider } from "@enotion/hooks";
 import { NotificationProvider, NotificationProps } from "@enotion/notify";
-import { Children, cloneElement, HTMLAttributes, isValidElement, ReactNode } from "react";
-import '@enotion/notify/index.css';
+import {
+  Children,
+  cloneElement,
+  HTMLAttributes,
+  isValidElement,
+  ReactNode,
+} from "react";
+import "@enotion/notify/index.css";
 
 export interface ProviderProps extends HTMLAttributes<HTMLElement> {
   children: ReactNode;
@@ -41,7 +47,8 @@ export const Provider = ({
   notificationOptions,
   ...props
 }: Readonly<ProviderProps>) => {
-  const defaultPalette = theme === "dark" ? ColorPalettes["dark"] : ColorPalettes["default"];
+  const defaultPalette =
+    theme === "dark" ? ColorPalettes["dark"] : ColorPalettes["default"];
   const color = palette ? ColorPalettes[palette] : defaultPalette;
 
   const injectColorPaletteToChildren = (children: ReactNode): ReactNode => {
@@ -66,12 +73,14 @@ export const Provider = ({
 
       // Recursively process nested children (for both custom components and DOM elements)
       if (existingProps.children) {
-        childProps.children = injectColorPaletteToChildren(existingProps.children);
+        childProps.children = injectColorPaletteToChildren(
+          existingProps.children,
+        );
       }
 
       // Clone the element with the new props
       return cloneElement(child, childProps);
-    })
+    });
   };
 
   const processedChildren = injectColorPaletteToChildren(children);
@@ -85,4 +94,4 @@ export const Provider = ({
       </ColorPaletteProvider>
     </ThemeProvider>
   );
-}
+};

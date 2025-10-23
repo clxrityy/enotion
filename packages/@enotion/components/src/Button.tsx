@@ -28,21 +28,21 @@ export function Button({ children, palette, ...rest }: ButtonProps) {
       style={{
         ...(palette
           ? ({
-            backgroundColor: color?.primary,
-            color: color?.foreground,
-            borderColor: color?.border,
-            "--button-hover-background-color": color?.accent,
-            "--button-active-background-color": color?.primary,
-            "--button-disabled-background-color": color?.muted,
-            "--button-disabled-text-color": color?.background,
-            "--button-hover-box-shadow": `0 0 0 3px ${color?.accent}33`,
-            "--button-focus-ring-color": color?.accent,
-            "--button-backdrop-background-color": color?.muted,
-            ...rest.style,
-          } as CSSProperties)
+              backgroundColor: color?.primary,
+              color: color?.foreground,
+              borderColor: color?.border,
+              "--button-hover-background-color": color?.accent,
+              "--button-active-background-color": color?.primary,
+              "--button-disabled-background-color": color?.muted,
+              "--button-disabled-text-color": color?.background,
+              "--button-hover-box-shadow": `0 0 0 3px ${color?.accent}33`,
+              "--button-focus-ring-color": color?.accent,
+              "--button-backdrop-background-color": color?.muted,
+              ...rest.style,
+            } as CSSProperties)
           : {
-            ...(rest.style as CSSProperties),
-          }),
+              ...(rest.style as CSSProperties),
+            }),
       }}
       {...rest}
     >

@@ -14,8 +14,8 @@ export default function defineConfig(entry: Record<string, string>) {
       dts: true,
       outExtension({ format }) {
         return {
-          js: `.js`
-        }
+          js: `.js`,
+        };
       },
       terserOptions: {
         compress: {
