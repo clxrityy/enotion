@@ -1,9 +1,9 @@
-import { LayoutProvider } from "../src/LayoutProvider.js";
 import { render } from "@testing-library/react";
 import { describe, it, expect } from "@jest/globals";
-import { useId } from "react";
+import { LayoutProvider } from "../src/LayoutProvider.js";
 
 describe("LayoutProvider Component", () => {
+
   it("renders children correctly when passed directly", () => {
     const { getByText } = render(
       <LayoutProvider>
@@ -24,16 +24,15 @@ describe("LayoutProvider Component", () => {
   });
 
   it("applies additional props to LayoutRenderer", () => {
-    const id = useId();
 
     const { container } = render(
-      <LayoutProvider className="custom-class" id={id}>
+      <LayoutProvider className="custom-class" id={"...123"}>
         <div>Test Child</div>
       </LayoutProvider>,
     );
     const layoutRenderer = container.querySelector(".custom-class");
     expect(layoutRenderer).toBeDefined();
-    expect(layoutRenderer?.id).toBe(id);
+    expect(layoutRenderer?.id).toBe("...123");
   });
 
   it("matches snapshot", () => {
