@@ -8,8 +8,6 @@ const jestConfig: Config = {
   testMatch: ["<rootDir>/tests/**/*.{test,spec}.{ts,tsx}"],
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
-    "@enotion/core/index.css": "./styles/layout-animations.css",
-    "^@enotion/(.*)$": "<rootDir>/../$1/src",
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
   },
   transformIgnorePatterns: ["node_modules/(?!(@enotion)/)"],

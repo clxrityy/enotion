@@ -27,6 +27,7 @@ module.exports = {
     "^@enotion/core/constants$": "<rootDir>/../core/constants/index.ts",
     "^@enotion/core/utils$": "<rootDir>/../core/utils/index.ts",
     "^@enotion/core/(.*)$": "<rootDir>/../core/$1",
+    "^@enotion/core/index\\.css$": "identity-obj-proxy",
     "^@enotion/notify/index\\.css$": "identity-obj-proxy",
     "^@enotion/(.*)$": "<rootDir>/../$1/src",
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
