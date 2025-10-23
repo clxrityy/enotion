@@ -35,14 +35,21 @@
         "useIterableCallbackReturn": "off"
       },
       "a11y": {
-        "useValidLang": "off"
+        "useValidLang": "off",
+        "useButtonType": "warn"
       },
       "style": {
-        "useImportType": "off"
+        "useImportType": "off",
+        "noNonNullAssertion": "warn"
       },
       "correctness": {
         "useJsxKeyInIterable": "error",
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noUnusedFunctionParameters": "warn",
+        "noChildrenProp": "off"
+      },
+      "complexity": {
+        "noBannedTypes": "warn"
       }
     }
   },
