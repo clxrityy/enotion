@@ -26,8 +26,7 @@
   left: 50%;
   transform: translateX(-50%);
   margin-top: 10px;
-  border: 0.5px solid var(--popover-content-border);
-  box-shadow: 0px 1px 15px var(--popover-content-box-shadow, rgba(0, 0, 0, 0.1));
+  box-shadow: 0px 1px 15px var(--popover-content-box-shadow, rgba(0, 0, 0, 0.33));
   z-index: 1000;
   animation: popover-appear 0.15s ease-out;
   min-width: max-content;

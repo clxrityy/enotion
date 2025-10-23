@@ -29,7 +29,7 @@ export function Select({ options, palette, ...rest }: SelectProps) {
         style={
           {
             "--select-border-color": color?.border,
-            "--select-focus-border-color": color?.primary,
+            "--select-focus-border-color": color?.foreground,
             "--select-background-color": color?.background,
             "--select-text-color": color?.foreground,
             "--select-placeholder-color": color?.muted,
@@ -40,7 +40,7 @@ export function Select({ options, palette, ...rest }: SelectProps) {
             "--select-disabled-borer-color": color?.muted,
             "--select-option-selected-background-color": color?.primary,
             "--select-option-selected-text-color": color?.background,
-            "--select-hover-border-color": color?.primary,
+            "--select-hover-border-color": color?.secondary,
             "--select-invalid-border-color": color?.warning,
             "--select-invalid-focus-ring-color": color?.warning,
             "--select-option-background-color": color?.background,

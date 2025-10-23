@@ -7,7 +7,7 @@ import {
 } from "react";
 import "./styles/popover.css";
 import { useOutsideClick } from "@enotion/hooks";
-import { cn } from "@enotion/core/utils";
+import { blendHexColors, cn } from "@enotion/core/utils";
 import {
   adjustHexColorOpacity,
   ColorPalettes,
@@ -25,7 +25,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
  * @param {PopoverProps} props - The props for the Popover component.
  * @param {ReactNode} props.children - The trigger element that toggles the popover.
  * @param {ReactNode} props.popoverContent - The content to be displayed inside the popover.
- * @param {ColorPaletteType} [props.colorPalette] {@link ColorPaletteType} - Optional color palette for styling.
+ * @param {ColorPaletteType} [props.palette] {@link ColorPaletteType} - Optional color palette for styling.
  *
  * @description The Popover component provides a button that, when clicked, shows or hides a floating container with specified content.
  * It also handles outside clicks to close the popover when clicking outside of it.
@@ -82,7 +82,6 @@ export const Popover = ({
         aria-expanded={isVisible}
         aria-controls="enotion-popover-content"
         style={{
-          backgroundColor: color ? color.background : undefined,
           color: color ? color.foreground : "inherit",
         }}
       >
@@ -102,10 +101,12 @@ export const Popover = ({
           }}
           style={
             {
-              "--popover-content-border": color ? color.border : undefined,
+              "--popover-content-border": color ? adjustHexColorOpacity(color.border, 0.25) : undefined,
               "--popover-content-box-shadow": color
-                ? adjustHexColorOpacity(color.accent, 0.1)
+                ? adjustHexColorOpacity(color.muted, 0.1)
                 : undefined,
+              color: color ? color.foreground : "inherit",
+              backgroundColor: color ? blendHexColors(color.background, color.muted, 0.33) : "inherit",
               borderRadius: "0.5rem",
               padding: "0.5rem",
             } as CSSProperties

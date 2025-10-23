@@ -86,7 +86,7 @@ select option:disabled {
     border-color 0.2s,
     box-shadow 0.2s;
   appearance: none;
-  max-width: calc(100% - 4em);
+  max-width: calc(100% - 0.25em);
   box-sizing: border-box;
   cursor: pointer;
   margin: 1rem;
@@ -107,16 +107,16 @@ select option:disabled {
     transform 0.2s;
 }
 
-select:disabled + .select-icon {
+select:disabled+.select-icon {
   color: var(--select-icon-disabled-color);
 }
 
-select:hover + .select-icon {
+select:hover+.select-icon {
   color: var(--select-icon-hover-color);
   transform: scale(0.95);
 }
 
-select:focus + .select-icon {
+select:focus+.select-icon {
   background-color: var(--select-icon-focus-background);
   border-radius: 0.25rem;
 }

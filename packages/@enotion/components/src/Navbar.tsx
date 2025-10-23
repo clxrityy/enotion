@@ -1,5 +1,5 @@
 import { ColorPalettes, type ColorPaletteType } from "@enotion/core/constants";
-import { cn } from "@enotion/core";
+import { blendHexColors, cn } from "@enotion/core";
 import {
   ComponentType,
   CSSProperties,
@@ -11,7 +11,7 @@ import {
 } from "react";
 import "./styles/navbar.css";
 import { Icons } from "@enotion/core/constants";
-import { Theme, useElementSize } from "@enotion/hooks";
+import { Theme, useElementSize, useOutsideClick } from "@enotion/hooks";
 import { Popover } from "./Popover.js";
 import { Select } from "./Select.js";
 
@@ -88,6 +88,14 @@ export const Navbar = ({
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
 
+  useOutsideClick({
+    ref: ref,
+    callback(e) {
+      e.preventDefault();
+      setMenuOpened(false);
+    }
+  })
+
   const size = useElementSize(ref);
 
   useEffect(() => {
@@ -111,11 +119,15 @@ export const Navbar = ({
           "--navbar-accent": color ? color.accent : undefined,
           "--navbar-muted": color ? color.muted : undefined,
           "--navbar-primary": color ? color.primary : undefined,
+          backgroundColor: color ? blendHexColors(color.background, color.muted, 0.33) : undefined,
+          boxShadow: color
+            ? `0 1px 3px ${blendHexColors(color.muted, color.background, 0.5)}`
+            : undefined,
           ...props.style,
         } as CSSProperties
       }
       className={cn(
-        `enotion-navbar sticky top-0 z-50 w-full border-b-[var(--navbar-border)] bg-[var(--navbar-background)]/90 text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/60 px-4 md:px-5 [&_*]:no-underline`,
+        `enotion-navbar sticky top-0 z-50 w-full border-b-[var(--navbar-border)] text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/90 px-4 md:px-5 [&_*]:no-underline`,
         className,
       )}
       {...props}
@@ -148,7 +160,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-muted)]/75 hover:text-[var(--navbar-foreground)] cursor-pointer no-underline",
                               item.active &&
-                                "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
+                              "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
                             )}
                           >
                             {Icon && (
@@ -167,7 +179,7 @@ export const Navbar = ({
                 </nav>
               }
             >
-              <span className="enotion-navbar-mobile-trigger h-8 w-8 flex items-center justify-center group hover:bg-[var(--navbar-muted)]/40 hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-colors">
+              <span className="h-8 w-8 flex items-center justify-center group hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-all">
                 {menuOpened ? (
                   <MenuOpen onClick={toggleMenu} size={20} />
                 ) : (
@@ -182,16 +194,11 @@ export const Navbar = ({
             <button
               title="logo"
               type="button"
-              style={
-                {
-                  "--navbar-primary": color ? color.primary : undefined,
-                } as CSSProperties
-              }
               onClick={(e) => e.preventDefault()}
-              className="flex items-center space-x-2 text-[var(--navbar-primary)] hover:text-[var(--navbar-primary)]/90 transition-colors cursor-pointer"
+              className="flex items-center space-x-2 text-[var(--navbar-foreground)] transition-colors cursor-pointer"
             >
-              <div className="text-2xl">{logo}</div>
-              <span className="hidden font-bold text-xl sm:inline-block">
+              <div>{logo}</div>
+              <span className="hidden font-bold font-mono text-xl sm:inline-block">
                 {title}
               </span>
             </button>
@@ -214,7 +221,7 @@ export const Navbar = ({
                           className={cn(
                             "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
                             item.active &&
-                              "bg-[var(--navbar-muted)]/20 text-[var(--navbar-foreground)]/95",
+                            "bg-[var(--navbar-muted)]/20",
                           )}
                         >
                           {Icon && (
