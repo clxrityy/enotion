@@ -1,5 +1,5 @@
 import { LayoutContextProvider, LayoutRenderer } from "@enotion/core";
-import "@enotion/core/index.css";
+import "./styles/layout-provider.css";
 import { Provider, type ProviderProps } from "./Provider.js";
 
 export interface LayoutProviderProps extends Omit<ProviderProps, "children"> {
