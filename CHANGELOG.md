@@ -3,18 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 - [0.1.0](#0.1.0)
-  - [Global](#global)
-  - [Config](#config-enotionconfig)
-  - [Hooks](#hooks-enotionhooks)
-  - [Components](#components-enotioncomponents)
-  - [Server](#server-enotionserver)
-  - [Core](#core-enotioncore)
-  - [Notify](#notify-enotionnotify)
-  - [API](#api-enotionapi)
+  - [GLOBAL](#global)
+  - [`@enotion/config`](#config-enotionconfig)
+  - [`@enotion/hooks`](#hooks-enotionhooks)
+  - [`@enotion/components`](#components-enotioncomponents)
+  - [`@enotion/server`](#server-enotionserver)
+  - [`@enotion/core`](#core-enotioncore)
+  - [`@enotion/notify`](#notify-enotionnotify)
+
+---
 
 ## 0.1.0
 
-##### Global
+##### GLOBAL
 
 - (**added**) Initialized project
 - (**added**) Biome configurations
@@ -38,9 +39,6 @@ All notable changes to this project will be documented in this file.
 - (**removed**) Removed build environment
   - (**removed**) Removed `@enotion/config/env`
   - (**removed**) `tsup.config.ts` no longer builds `src/env/index.ts`
-- (**changed**) Added `resolvePackageJsonImports` & `resolvePackageJsonImports` to `@enotion/config/typescript/base`
-  - (**changed**) This allows for all modules to export their properties for the [`@enotion/api`](#api-enotionapi) package to dynamically import and use.
-- (**changed**) `@enotion/config/typescript` is now `@enotion/config/tsconfig`
 
 ##### Hooks (`@enotion/hooks`)
 
@@ -60,6 +58,7 @@ All notable changes to this project will be documented in this file.
   - `useColorPalette()` & `<ColorPaletteProvider />`
   - `useSearch()`
   - `useClipboard()`
+  - `useAnimatedModals()`
 - (**added**) Added `@testing-library/react` dev dependency for testing React hooks
 - (**changed**) More extensive and concise JSDoc comments for usage
 
@@ -78,9 +77,12 @@ All notable changes to this project will be documented in this file.
   - `<LayoutContainer />`
   - `<CopyButton />`
   - `<Navbar />`
+  - `<Popover />`
+  - `<LayoutProvider />`
 - (**added**) Added CSS files for each component in a `styles/` folder
 - (**added**) Added `colorPalette` prop to components for easy color customization
-- (**changed**) replaced `<LayoutContainer />` with `<Provider />` component that wraps children with all necessary context providers (Theme, ColorPalette, etc.)
+- (**changed**) Replaced the need for multiple providers by condensing them to one `<LayoutProvider />` component
+  - Utilizes the `LayoutContextProvider` & `LayoutRenderer` from [`@enotion/core/contexts`](#config-enotionconfig)
 
 ##### Server (`@enotion/server`)
 
@@ -102,8 +104,10 @@ All notable changes to this project will be documented in this file.
 
 ##### Core (`@enotion/core`)
 
-- (**added**) Initialized package (for core utilities and constants shared across other packages)
+- (**added**) Initialized package (for core utilities, constants, and contexts shared across other packages)
 - (**added**) Added `createContextFactory()` utility for creating React context with ease
+- (**added**) `/contexts` export folder for shared contexts
+  - (**added**) Added `LayoutContext` for managing layout-related state
 
 #### Notify (`@enotion/notify`)
 
@@ -113,3 +117,5 @@ All notable changes to this project will be documented in this file.
 - (**added**) Supports different notification types (success, error, info, warning, loading)
 - (**added**) Customizable duration and styles
 - (**added**) Dismissible notifications
+
+---
