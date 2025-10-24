@@ -129,7 +129,7 @@ export const Navbar = ({
         } as CSSProperties
       }
       className={cn(
-        `enotion-navbar sticky top-0 z-50 w-full border-b-[var(--navbar-border)] text-[var(--navbar-foreground)] backdrop-blur supports-[backdrop-filter]:bg-[var(--navbar-background)]/90 px-4 md:px-5 [&_*]:no-underline`,
+        `enotion-navbar sticky top-0 z-50 w-full border-b-(--navbar-border) text-(--navbar-foreground) backdrop-blur supports-backdrop-filter:bg-(--navbar-background)/90 px-4 md:px-5 **:no-underline`,
         className,
       )}
       {...props}
@@ -160,15 +160,15 @@ export const Navbar = ({
                               if (onItemClick) onItemClick(item);
                             }}
                             className={cn(
-                              "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[var(--navbar-muted)]/75 hover:text-[var(--navbar-foreground)] cursor-pointer no-underline",
+                              "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                                "bg-[var(--navbar-muted)]/20 text-[var(--navbar-primary)]/90",
+                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (
                               <Icon
                                 size={16}
-                                className="text-[var(--navbar-muted)]/90"
+                                className="text-(--navbar-muted)/90"
                                 aria-hidden={true}
                               />
                             )}
@@ -181,7 +181,7 @@ export const Navbar = ({
                 </nav>
               }
             >
-              <span className="h-8 w-8 flex items-center justify-center group hover:text-[var(--navbar-foreground)] cursor-pointer rounded-md transition-all">
+              <span className="h-8 w-8 flex items-center justify-center group hover:text-(--navbar-foreground) cursor-pointer rounded-md transition-all">
                 {menuOpened ? (
                   <MenuOpen onClick={toggleMenu} size={20} />
                 ) : (
@@ -197,7 +197,7 @@ export const Navbar = ({
               title="logo"
               type="button"
               onClick={(e) => e.preventDefault()}
-              className="flex items-center space-x-2 text-[var(--navbar-foreground)] transition-colors cursor-pointer"
+              className="flex items-center space-x-2 text-(--navbar-foreground) transition-colors cursor-pointer"
             >
               <div>{logo}</div>
               <span className="hidden font-bold font-mono text-xl sm:inline-block">
@@ -221,14 +221,14 @@ export const Navbar = ({
                             if (onItemClick) onItemClick(item);
                           }}
                           className={cn(
-                            "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-[var(--navbar-foreground)]/90 cursor-pointer no-underline",
-                            item.active && "bg-[var(--navbar-muted)]/20",
+                            "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-(--navbar-foreground)/90 cursor-pointer no-underline",
+                            item.active && "bg-(--navbar-muted)/20",
                           )}
                         >
                           {Icon && (
                             <Icon
                               size={16}
-                              className="text-[var(--navbar-muted)]/90"
+                              className="text-(--navbar-muted)/90"
                               aria-hidden={true}
                             />
                           )}
@@ -251,7 +251,7 @@ export const Navbar = ({
               onClick={toggleTheme}
               aria-label="Toggle theme"
               title="Toggle theme"
-              className="p-2 rounded-md hover:bg-[var(--navbar-muted)]/20 transition-colors"
+              className="p-2 rounded-md hover:bg-(--navbar-muted)/20 transition-colors"
             >
               {currentTheme === "dark" ? (
                 <LightMode size={20} />
