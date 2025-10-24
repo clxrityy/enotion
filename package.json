@@ -12,7 +12,8 @@
     "clean:install": "turbo run clean && rm -rf node_modules && rm -rf packages/**/node_modules && rm -rf pnpm-lock.yaml && pnpm install",
     "clean": "turbo run clean",
     "versions": "chmod +x ./scripts/version.sh && ./scripts/version.sh",
-    "start": "turbo run start"
+    "start": "turbo run start",
+    "up-deps": "pnpm up --latest --recursive"
   },
   "author": {
     "name": "MJ Anglin",
@@ -20,10 +21,10 @@
     "url": "https://mjanglin.com"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.2.6",
+    "@biomejs/biome": "2.2.7",
     "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.6",
     "turbo": "^2.5.8",
     "typescript": "5.9.3"
   },
