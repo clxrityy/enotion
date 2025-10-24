@@ -12,3 +12,5 @@ export * from "./Navbar.js";
 export * from "./Popover.js";
 export * from "./Provider.js";
 export * from "./LayoutProvider.js";
+export * from "./Wrapper.js";
+// export * from "./Modal.js";
