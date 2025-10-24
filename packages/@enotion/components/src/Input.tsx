@@ -8,10 +8,10 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 /**
  * A customizable Input component with optional color palette support.
- * @param {ColorPaletteType} [colorPallete] - Optional color palette to style the input.
+ * @param {ColorPaletteType} [palette] - Optional color palette to style the input.
  * @example
  * ```tsx
- * <Input placeholder="Enter text" colorPallete="dark" />
+ * <Input placeholder="Enter text" palette="dark" />
  * ```
  */
 export function Input({ palette, ...rest }: InputProps) {

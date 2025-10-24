@@ -20,7 +20,7 @@ export interface ProviderProps extends HTMLAttributes<HTMLElement> {
 /**
  * Provider - A combined provider for Theme and Color Palette contexts.
  * @param children - The child components that will have access to the theme and color palette contexts.
- * @param colorPalette - Optional color palette to be applied to all children.
+ * @param palette - Optional color palette to be applied to all children.
  * @param theme - Optional theme to be applied to the provider.
  * @param props - Additional HTML attributes for the provider component.
  *

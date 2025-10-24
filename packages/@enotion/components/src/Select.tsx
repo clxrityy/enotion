@@ -9,15 +9,15 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 /**
  * A customizable Select component with optional color palette support.
- * @param {Object[]} props.options - Array of option objects with value and label.
- * @param {ColorPaletteType} [props.colorPalette] - Optional color palette to style the select.
+ * @param {Object[]} options - Array of option objects with value and label.
+ * @param @see {@link ColorPaletteType} `palette` - Optional color palette to style the select.
  * @example
  * ```tsx
  * const options = [
  *   { value: 'option1', label: 'Option 1' },
  *   { value: 'option2', label: 'Option 2' },
  * ];
- * <Select options={options} colorPalette="dark" />
+ * <Select options={options} palette="dark" />
  * ```
  */
 export function Select({ options, palette, ...rest }: SelectProps) {

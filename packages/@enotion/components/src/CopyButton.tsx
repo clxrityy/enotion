@@ -10,7 +10,10 @@ import {
  * @description Props for the CopyButton component.
  * @interface CopyButtonProps
  * @extends ButtonHTMLAttributes<HTMLButtonElement>
- * @property `onCopy()` - Callback function invoked after a successful copy action.
+ * @property `onCopied()` - Callback function invoked after a successful copy action.
+ * @property `onCopyError()` - Callback function invoked if an error occurs during the copy action.
+ * @property `content` - The text content to be copied to the clipboard.
+ * @property `palette` - Optional color palette to style the button.
  */
 export interface CopyButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,6 +23,26 @@ export interface CopyButtonProps
   palette?: ColorPaletteType;
 }
 
+/**
+ * @description A button component that copies specified content to the clipboard when clicked.
+ * It provides visual feedback by changing its icon upon a successful copy action.
+ * The button can be styled using an optional color palette.
+ *
+ * @param @see {@link CopyButtonProps} props - Props for the CopyButton component.
+ * @example
+ * ```tsx
+ * import { CopyButton } from '@enotion/components';
+ *
+ * const MyComponent = () => (
+ *   <CopyButton
+ *     content="Text to copy"
+ *     onCopied={(text) => console.log(`Copied: ${text}`)}
+ *     onCopyError={(error) => console.error('Copy failed', error)}
+ *     palette="default"
+ *   />
+ * );
+ * ```
+ */
 export const CopyButton = ({
   onCopied,
   onCopyError,
