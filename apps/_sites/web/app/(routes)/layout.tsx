@@ -1,6 +1,6 @@
 "use client";
 
-import { Navbar, type NavItem } from "@enotion/components";
+import { Navbar, Wrapper, type NavItem } from "@enotion/components";
 import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core";
 import { useColorPalette, useSVG } from "@enotion/hooks";
 
@@ -52,17 +52,18 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const { palette, setPalette } = useColorPalette();
-
   return (
     <main className="text-inherit">
       <Navbar
         palette={palette}
-        title="My Site"
+        title="enotion"
         items={items}
         logo={<Logo palette={palette} />}
         onPaletteChange={setPalette}
       />
-      {children}
+      <Wrapper palette={palette}>
+        {children}
+      </Wrapper>
     </main>
   );
 }
