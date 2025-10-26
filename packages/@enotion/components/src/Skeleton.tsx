@@ -130,17 +130,16 @@ export function SkeletonWrapper({
 
     // Clone the element and apply skeleton styles
     const originalClassName = (child.props as any).className || "";
-    const skeletonClass = `${originalClassName} ${skeletonClassName}${
-      animate ? " skeleton-animate" : ""
-    }`.trim();
+    const skeletonClass = `${originalClassName} ${skeletonClassName}${animate ? " skeleton-animate" : ""
+      }`.trim();
 
     // Recursively process children
     const processedChildren = (child.props as any).children
       ? Children.map(
-          (child.props as any).children,
-          (nestedChild: ReactNode, nestedIndex: number) =>
-            renderSkeletonFromChild(nestedChild, nestedIndex),
-        )
+        (child.props as any).children,
+        (nestedChild: ReactNode, nestedIndex: number) =>
+          renderSkeletonFromChild(nestedChild, nestedIndex),
+      )
       : undefined;
 
     return cloneElement(child as any, {
