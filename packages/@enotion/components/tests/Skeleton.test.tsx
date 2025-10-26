@@ -19,9 +19,9 @@ class ResizeObserverMock {
     ResizeObserverMock.instances.push(this);
   }
 
-  observe(): void {}
-  unobserve(): void {}
-  disconnect(): void {}
+  observe(): void { }
+  unobserve(): void { }
+  disconnect(): void { }
 
   static invokeAll(entries: ResizeObserverEntry[] = []): void {
     for (const instance of ResizeObserverMock.instances) {
@@ -109,7 +109,7 @@ describe("Skeleton", () => {
     });
 
     const getComputedStyleSpy = jest
-      .spyOn(window, "getComputedStyle")
+      .spyOn(globalThis.window, "getComputedStyle")
       .mockReturnValue({
         borderRadius: "8px",
       } as unknown as CSSStyleDeclaration);
