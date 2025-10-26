@@ -1,8 +1,14 @@
 # enotion
 
+<img alt="enotion" src="./banner.png" width="400" />
+
 A turborepo containing a collection of React hooks and shared configurations for building dynamic, contextual, responsive, and interactive web applications.
 
 - [Changelog](./CHANGELOG.md)
+
+```bash
+npm install @enotion/<package>
+```
 
 ## Public packages
 
@@ -15,3 +21,5 @@ A turborepo containing a collection of React hooks and shared configurations for
 ## Private packages
 
 - [`@enotion/config`](./packages/@enotion/config/README.md) - Private global configuration for enotion packages.
+
+---
