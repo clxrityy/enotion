@@ -200,7 +200,7 @@ export const Navbar = ({
               className="flex items-center space-x-2 text-(--navbar-foreground) transition-colors cursor-pointer"
             >
               <div>{logo}</div>
-              <span className="hidden font-bold font-mono text-xl sm:inline-block">
+              <span className="hidden font-bold text-xl sm:inline-block">
                 {title}
               </span>
             </button>
