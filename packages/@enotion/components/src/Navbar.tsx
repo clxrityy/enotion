@@ -11,7 +11,7 @@ import {
 } from "react";
 import "./styles/navbar.css";
 import { Icons } from "@enotion/core/constants";
-import { Theme, useElementSize, useOutsideClick } from "@enotion/hooks";
+import { Theme, useElementSize } from "@enotion/hooks";
 import { Popover } from "./Popover.js";
 import { Select } from "./Select.js";
 
@@ -85,16 +85,7 @@ export const Navbar = ({
   ...props
 }: NavbarProps) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const ref = useRef<HTMLElement>(null);
-
-  useOutsideClick({
-    ref: ref,
-    callback(e) {
-      e.preventDefault();
-      setMenuOpened(false);
-    },
-  });
 
   const size = useElementSize(ref);
 
@@ -103,10 +94,6 @@ export const Navbar = ({
   }, [size]);
 
   const color = palette && palettes[palette];
-
-  const toggleMenu = () => {
-    setMenuOpened(!menuOpened);
-  };
 
   return (
     <header
@@ -151,6 +138,73 @@ export const Navbar = ({
                     {items.map((item, index) => {
                       const Icon = item.icon;
                       const key = `mobile-${item.label}-${index}`;
+
+                      // If item has subItems, render them in mobile view
+                      if (item.subItems && item.subItems.length > 0) {
+                        return (
+                          <li key={key} className="w-full">
+                            <div className="flex w-full flex-col gap-2">
+                              <div
+                                className={cn(
+                                  "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors bg-(--navbar-muted)/10",
+                                  item.active &&
+                                  "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                )}
+                              >
+                                {Icon && (
+                                  <Icon
+                                    size={16}
+                                    className="text-(--navbar-muted)/90"
+                                    aria-hidden={true}
+                                  />
+                                )}
+                                <span>{item.label}</span>
+                              </div>
+                              <div className="ml-4 mt-1 flex flex-col gap-1">
+                                {item.subItems.map((subItem, subIndex) => {
+                                  const SubIcon = subItem.icon;
+                                  const subKey = `mobile-sub-${subItem.label}-${subIndex}`;
+                                  return (
+                                    <button
+                                      key={subKey}
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        if (onItemClick) onItemClick(subItem);
+                                      }}
+                                      className={cn(
+                                        "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
+                                        subItem.active &&
+                                        "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                      )}
+                                    >
+                                      <div className="flex flex-col gap-0.5">
+                                        <div className="flex items-center gap-1.5">
+                                          {SubIcon && (
+                                            <SubIcon
+                                              size={14}
+                                              className="text-(--navbar-foreground)/90"
+                                              aria-hidden={true}
+                                            />
+                                          )}
+                                          <span className="font-medium">{subItem.label}</span>
+                                        </div>
+                                        {subItem.description && (
+                                          <span className="text-xs text-(--navbar-foreground)/85 leading-tight">
+                                            {subItem.description}
+                                          </span>
+                                        )}
+                                      </div>
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      }
+
+                      // Regular item without subItems
                       return (
                         <li key={key} className="">
                           <button
@@ -162,7 +216,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (
@@ -182,11 +236,7 @@ export const Navbar = ({
               }
             >
               <span className="h-8 w-8 flex items-center justify-center group hover:text-(--navbar-foreground) cursor-pointer rounded-md transition-all">
-                {menuOpened ? (
-                  <MenuOpen onClick={toggleMenu} size={20} />
-                ) : (
-                  <Menu onClick={toggleMenu} size={20} />
-                )}
+                <Menu title="menu" size={20} />
               </span>
             </Popover>
           )}
@@ -207,11 +257,90 @@ export const Navbar = ({
             {/* DESKTOP MENU */}
             {!isMobile && (
               <nav className="flex" aria-label="Main navigation">
-                <ul className="flex gap-2">
+                <ul className="flex gap-2 items-center">
                   {items.map((item, index) => {
                     const Icon = item.icon;
                     const key = `desktop-${item.label}-${index}`;
 
+                    // If item has subItems, render as dropdown
+                    if (item.subItems && item.subItems.length > 0) {
+                      return (
+                        <li key={key} className="relative">
+                          <Popover
+                            palette={palette}
+                            className="w-80 p-2"
+                            popoverContent={
+                              <nav
+                                className="max-w-none enotion-desktop-subnav"
+                                aria-label={`${item.label} submenu`}
+                              >
+                                <ul className="flex flex-col gap-1 items-center w-full">
+                                  {item.subItems.map((subItem, subIndex) => {
+                                    const SubIcon = subItem.icon;
+                                    const subKey = `sub-${subItem.label}-${subIndex}`;
+                                    return (
+                                      <li key={subKey}>
+                                        <button
+                                          type="button"
+                                          onClick={(e) => {
+                                            e.preventDefault();
+                                            if (onItemClick) onItemClick(subItem);
+                                          }}
+                                          className={cn(
+                                            "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
+                                            subItem.active &&
+                                            "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                          )}
+                                        >
+                                          <div className="flex items-center gap-2">
+                                            {SubIcon && (
+                                              <SubIcon
+                                                size={16}
+                                                className="text-(--navbar-foreground)/90"
+                                                aria-hidden={true}
+                                              />
+                                            )}
+                                            <span className="font-medium">{subItem.label}</span>
+                                          </div>
+                                          {subItem.description && (
+                                            <span className="text-xs text-(--navbar-foreground)/80">
+                                              {subItem.description}
+                                            </span>
+                                          )}
+                                        </button>
+                                      </li>
+                                    );
+                                  })}
+                                </ul>
+                              </nav>
+                            }
+                          >
+                            <span
+                              className={cn(
+                                "enotion-navbar-item flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-(--navbar-foreground)/90 cursor-pointer no-underline",
+                                item.active && "bg-(--navbar-muted)/20",
+                              )}
+                            >
+                              {Icon && (
+                                <Icon
+                                  size={16}
+                                  className="text-(--navbar-muted)/90"
+                                  aria-hidden={true}
+                                />
+                              )}
+                              <span>{item.label}</span>
+                              <Icons.Selector
+                                size={16}
+                                className="text-(--navbar-muted)/70"
+                                aria-hidden={true}
+                              />
+                            </span>
+                          </Popover>
+                        </li>
+                      );
+                    }
+
+                    // Regular item without subItems
                     return (
                       <li key={key} className="relative">
                         <button
