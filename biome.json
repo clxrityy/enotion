@@ -36,7 +36,8 @@
       },
       "a11y": {
         "useValidLang": "off",
-        "useButtonType": "warn"
+        "useButtonType": "warn",
+        "noStaticElementInteractions": "warn"
       },
       "style": {
         "useImportType": "off",
