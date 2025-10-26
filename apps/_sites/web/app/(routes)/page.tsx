@@ -15,10 +15,10 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-4">Welcome to enotion</h1>
 
       <div className="flex gap-4">
-        <Button palette={palette} onClick={() => setIsOpen(true)}>
+        <Button type="button" palette={palette} onClick={() => setIsOpen(true)}>
           Show Animated Modal
         </Button>
-        <Button onClick={() => setIsBasicModalOpen(true)}>
+        <Button type="button" onClick={() => setIsBasicModalOpen(true)}>
           Show Basic Modal
         </Button>
       </div>
@@ -34,7 +34,7 @@ export default function Home() {
           This is a basic modal component that hovers over the page content.
         </p>
         <div className="flex gap-2">
-          <Button palette={palette} onClick={() => setIsBasicModalOpen(false)}>
+          <Button type="button" palette={palette} onClick={() => setIsBasicModalOpen(false)}>
             Close
           </Button>
         </div>
@@ -52,7 +52,7 @@ export default function Home() {
           This is an animated modal with layout integration.
         </p>
         <div className="flex gap-2">
-          <Button palette={palette} onClick={() => setIsOpen(false)}>
+          <Button type="button" palette={palette} onClick={() => setIsOpen(false)}>
             Close
           </Button>
         </div>
