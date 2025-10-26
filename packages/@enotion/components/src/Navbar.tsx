@@ -148,7 +148,7 @@ export const Navbar = ({
                                 className={cn(
                                   "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors bg-(--navbar-muted)/10",
                                   item.active &&
-                                  "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                    "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                 )}
                               >
                                 {Icon && (
@@ -175,7 +175,7 @@ export const Navbar = ({
                                       className={cn(
                                         "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
                                         subItem.active &&
-                                        "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                          "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                       )}
                                     >
                                       <div className="flex flex-col gap-0.5">
@@ -187,7 +187,9 @@ export const Navbar = ({
                                               aria-hidden={true}
                                             />
                                           )}
-                                          <span className="font-medium">{subItem.label}</span>
+                                          <span className="font-medium">
+                                            {subItem.label}
+                                          </span>
                                         </div>
                                         {subItem.description && (
                                           <span className="text-xs text-(--navbar-foreground)/85 leading-tight">
@@ -216,7 +218,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (
@@ -284,12 +286,13 @@ export const Navbar = ({
                                           type="button"
                                           onClick={(e) => {
                                             e.preventDefault();
-                                            if (onItemClick) onItemClick(subItem);
+                                            if (onItemClick)
+                                              onItemClick(subItem);
                                           }}
                                           className={cn(
                                             "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
                                             subItem.active &&
-                                            "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                           )}
                                         >
                                           <div className="flex items-center gap-2">
@@ -300,7 +303,9 @@ export const Navbar = ({
                                                 aria-hidden={true}
                                               />
                                             )}
-                                            <span className="font-medium">{subItem.label}</span>
+                                            <span className="font-medium">
+                                              {subItem.label}
+                                            </span>
                                           </div>
                                           {subItem.description && (
                                             <span className="text-xs text-(--navbar-foreground)/80">

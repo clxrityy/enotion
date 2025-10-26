@@ -34,7 +34,11 @@ export default function Home() {
           This is a basic modal component that hovers over the page content.
         </p>
         <div className="flex gap-2">
-          <Button type="button" palette={palette} onClick={() => setIsBasicModalOpen(false)}>
+          <Button
+            type="button"
+            palette={palette}
+            onClick={() => setIsBasicModalOpen(false)}
+          >
             Close
           </Button>
         </div>
@@ -52,7 +56,11 @@ export default function Home() {
           This is an animated modal with layout integration.
         </p>
         <div className="flex gap-2">
-          <Button type="button" palette={palette} onClick={() => setIsOpen(false)}>
+          <Button
+            type="button"
+            palette={palette}
+            onClick={() => setIsOpen(false)}
+          >
             Close
           </Button>
         </div>

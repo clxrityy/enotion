@@ -7,7 +7,6 @@ import { useColorPalette, useSVG } from "@enotion/hooks";
 const items: NavItem[] = [
   {
     label: "Home",
-
   },
   {
     label: "Packages",
@@ -41,8 +40,8 @@ const items: NavItem[] = [
         description: "Server-side utilities for enotion",
         href: "/packages/server",
         icon: Icons.Server,
-      }
-    ]
+      },
+    ],
   },
 ];
 

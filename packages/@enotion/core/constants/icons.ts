@@ -17,7 +17,6 @@ import { BiSolidComponent } from "react-icons/bi";
 import { GiHook, GiPlanetCore } from "react-icons/gi";
 import { HiOutlineServerStack } from "react-icons/hi2";
 
-
 export const Icons = {
   Menu: MdMenu,
   MenuOpen: MdMenuOpen,

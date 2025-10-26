@@ -9,9 +9,9 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={[]}
       />,
     );
@@ -24,11 +24,8 @@ describe("Navbar Component", () => {
     },
     {
       label: "Submenu",
-      subItems: [
-        { label: "Subitem 1" },
-        { label: "Subitem 2" },
-      ],
-    }
+      subItems: [{ label: "Subitem 1" }, { label: "Subitem 2" }],
+    },
   ];
 
   it("renders navigation items", async () => {
@@ -36,13 +33,13 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         items={navItems}
       />,
     );
 
     // Find the popover trigger button by class
-    const menuButton = container.querySelector('.enotion-popover-trigger');
+    const menuButton = container.querySelector(".enotion-popover-trigger");
     expect(menuButton).toBeTruthy();
 
     // Use fireEvent to click the button
@@ -60,14 +57,14 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
-        onPaletteChange={() => { }}
+        toggleTheme={() => {}}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
 
     // Find the popover trigger button by class
-    const menuButton = container.querySelector('.enotion-popover-trigger');
+    const menuButton = container.querySelector(".enotion-popover-trigger");
     expect(menuButton).toBeTruthy();
 
     // Use fireEvent to click the button
@@ -86,7 +83,7 @@ describe("Navbar Component", () => {
       expect(subitem1).toBeDefined();
       expect(subitem2).toBeDefined();
     });
-  });  // Theme toggling
+  }); // Theme toggling
   it("toggles theme", () => {
     let theme: Theme = "dark";
 
@@ -100,7 +97,7 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
@@ -116,7 +113,7 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
