@@ -1,4 +1,10 @@
-import { adjustHexColorOpacity, ColorPalettes, ColorPaletteType, Icons, useLayoutContext } from "@enotion/core";
+import {
+  adjustHexColorOpacity,
+  ColorPalettes,
+  ColorPaletteType,
+  Icons,
+  useLayoutContext,
+} from "@enotion/core";
 import { type UseAnimatedModalsOptions } from "@enotion/hooks";
 import React, { ReactNode, HTMLAttributes, useEffect } from "react";
 import { Modal } from "./Modal.js";
@@ -10,7 +16,7 @@ export interface AnimatedModalProps extends HTMLAttributes<HTMLDivElement> {
   modalId: string;
   isOpen?: boolean;
   onClose?: () => void;
-  animationConfig?: UseAnimatedModalsOptions['animationConfig'];
+  animationConfig?: UseAnimatedModalsOptions["animationConfig"];
 }
 
 /**
@@ -73,7 +79,7 @@ export const AnimatedModal = ({
   // Use useEffect to show/hide modal based on isOpen prop
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && onClose) {
+      if (e.key === "Escape" && onClose) {
         onClose();
       }
     };
@@ -89,7 +95,7 @@ export const AnimatedModal = ({
     };
 
     const handleKeyDownReact = (e: React.KeyboardEvent) => {
-      if (e.key === 'Escape' && onClose) {
+      if (e.key === "Escape" && onClose) {
         onClose();
       }
     };
@@ -99,15 +105,17 @@ export const AnimatedModal = ({
         role="dialog"
         aria-modal="true"
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: palette ? adjustHexColorOpacity(ColorPalettes[palette]!.background, 0.5)! : 'rgba(0, 0, 0, 0.5)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          width: "100%",
+          height: "100%",
+          backgroundColor: palette
+            ? adjustHexColorOpacity(ColorPalettes[palette]!.background, 0.5)!
+            : "rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           zIndex: 1000,
         }}
         onClick={handleBackdropClick}
@@ -118,7 +126,6 @@ export const AnimatedModal = ({
         <div
           onClick={handleContentClick}
           onKeyDown={(e) => e.stopPropagation()}
-          tabIndex={0}
         >
           <Modal isOpen={true} palette={palette}>
             {children}
@@ -127,13 +134,13 @@ export const AnimatedModal = ({
                 onClick={onClose}
                 palette={palette}
                 style={{
-                  position: 'absolute',
-                  top: '8px',
-                  right: '8px',
-                  background: 'transparent',
-                  border: 'none',
-                  fontSize: '18px',
-                  cursor: 'pointer',
+                  position: "absolute",
+                  top: "8px",
+                  right: "8px",
+                  background: "transparent",
+                  border: "none",
+                  fontSize: "18px",
+                  cursor: "pointer",
                 }}
                 aria-label="Close modal"
               >
@@ -163,16 +170,27 @@ export const AnimatedModal = ({
       showElement(modalId);
 
       // Add global key listener for escape key
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
 
       return () => {
-        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener("keydown", handleKeyDown);
       };
     } else {
       // Hide the modal when isOpen is false
       hideElement(modalId);
     }
-  }, [isOpen, modalId, children, palette, onClose, animationConfig, props, registerElement, showElement, hideElement]);  // This component doesn't render anything directly -
+  }, [
+    isOpen,
+    modalId,
+    children,
+    palette,
+    onClose,
+    animationConfig,
+    props,
+    registerElement,
+    showElement,
+    hideElement,
+  ]); // This component doesn't render anything directly -
   // the modal is rendered through the layout system
   return null;
 };

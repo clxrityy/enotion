@@ -1,4 +1,8 @@
-import { adjustHexColorOpacity, ColorPalettes, ColorPaletteType } from "@enotion/core";
+import {
+  adjustHexColorOpacity,
+  ColorPalettes,
+  ColorPaletteType,
+} from "@enotion/core";
 import { useOutsideClick } from "@enotion/hooks";
 import { HTMLAttributes, ReactNode, useRef, useEffect } from "react";
 
@@ -26,7 +30,13 @@ export interface ModalProps extends HTMLAttributes<HTMLDivElement> {
  * </Modal>
  * ```
  */
-export const Modal = ({ children, palette, isOpen, onClose, ...props }: ModalProps) => {
+export const Modal = ({
+  children,
+  palette,
+  isOpen,
+  onClose,
+  ...props
+}: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const color = palette ? ColorPalettes[palette] : undefined;
@@ -43,20 +53,20 @@ export const Modal = ({ children, palette, isOpen, onClose, ...props }: ModalPro
   // Handle escape key to close modal
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && onClose) {
+      if (e.key === "Escape" && onClose) {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
       // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -68,15 +78,15 @@ export const Modal = ({ children, palette, isOpen, onClose, ...props }: ModalPro
     <div
       className="modal-overlay"
       style={{
-        position: 'fixed',
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         zIndex: 1000,
       }}
     >
@@ -84,16 +94,16 @@ export const Modal = ({ children, palette, isOpen, onClose, ...props }: ModalPro
         ref={modalRef}
         className="modal-content"
         style={{
-          backgroundColor: color?.background || '#ffffff',
-          color: color?.foreground || '#000000',
-          border: `1px solid ${color?.border || '#e2e8f0'}`,
-          borderRadius: '8px',
-          padding: '24px',
-          boxShadow: `0 4px 12px ${adjustHexColorOpacity(color?.accent || '#000000', 0.15)}`,
-          maxWidth: '90vw',
-          maxHeight: '90vh',
-          overflow: 'auto',
-          minWidth: '300px',
+          backgroundColor: color?.background || "#ffffff",
+          color: color?.foreground || "#000000",
+          border: `1px solid ${color?.border || "#e2e8f0"}`,
+          borderRadius: "8px",
+          padding: "24px",
+          boxShadow: `0 4px 12px ${adjustHexColorOpacity(color?.accent || "#000000", 0.15)}`,
+          maxWidth: "90vw",
+          maxHeight: "90vh",
+          overflow: "auto",
+          minWidth: "300px",
         }}
         {...props}
       >
@@ -101,4 +111,4 @@ export const Modal = ({ children, palette, isOpen, onClose, ...props }: ModalPro
       </div>
     </div>
   );
-}
+};

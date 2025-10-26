@@ -162,7 +162,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (

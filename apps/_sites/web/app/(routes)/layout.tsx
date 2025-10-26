@@ -61,9 +61,7 @@ export default function Layout({
         logo={<Logo palette={palette} />}
         onPaletteChange={setPalette}
       />
-      <Wrapper palette={palette}>
-        {children}
-      </Wrapper>
+      <Wrapper palette={palette}>{children}</Wrapper>
     </main>
   );
 }

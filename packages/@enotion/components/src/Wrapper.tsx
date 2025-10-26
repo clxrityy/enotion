@@ -6,11 +6,7 @@ export interface WrapperProps extends HTMLAttributes<HTMLDivElement> {
   palette?: ColorPaletteType;
 }
 
-export const Wrapper = ({
-  children,
-  palette,
-  ...props
-}: WrapperProps) => {
+export const Wrapper = ({ children, palette, ...props }: WrapperProps) => {
   const color = palette ? ColorPalettes[palette] : undefined;
 
   return (
@@ -29,5 +25,5 @@ export const Wrapper = ({
     >
       {children}
     </div>
-  )
-}
+  );
+};
