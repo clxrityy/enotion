@@ -54,7 +54,7 @@ button:disabled {
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(1.05);
   border-radius: 8px;
   transition: transform 0.1s ease;
   filter: saturate(0.8);
