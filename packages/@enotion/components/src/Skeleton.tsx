@@ -5,10 +5,11 @@ import {
   cloneElement,
   isValidElement,
   Children,
+  CSSProperties,
 } from "react";
-import { useElementSize } from "@enotion/hooks";
+import { Theme, useElementSize } from "@enotion/hooks";
 import "./styles/skeleton.css";
-import { cn } from "@enotion/core";
+import { adjustHexColorOpacity, cn, ColorPalettes, ColorPaletteType } from "@enotion/core";
 
 export interface SkeletonWrapperProps extends ComponentPropsWithoutRef<"div"> {
   /**
@@ -34,6 +35,11 @@ export interface SkeletonWrapperProps extends ComponentPropsWithoutRef<"div"> {
    * @default true
    */
   animate?: boolean;
+  /**
+   *
+   */
+  palette?: ColorPaletteType;
+  theme?: Theme;
 }
 
 /**
@@ -80,13 +86,24 @@ export function SkeletonWrapper({
   animate = true,
   className,
   style,
+  palette,
+  theme,
   ...rest
 }: Readonly<SkeletonWrapperProps>) {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const defaultPalette = theme === "dark" ? "dark" : "default";
+  const colors = palette ? ColorPalettes[palette] : ColorPalettes[defaultPalette];
+  const styles = {
+    "--skeleton-bg-color": colors?.muted,
+    "--skeleton-bg-accent": adjustHexColorOpacity(colors?.background || "", 0.75),
+    "--skeleton-fg-color": colors?.foreground,
+    ...style,
+  } as CSSProperties;
+
   if (!isLoading) {
     return (
-      <div ref={containerRef} className={className} style={style} {...rest}>
+      <div ref={containerRef} className={className} style={styles} {...rest}>
         {children}
       </div>
     );
@@ -97,7 +114,7 @@ export function SkeletonWrapper({
     return (
       <div
         className={className}
-        style={style}
+        style={styles}
         {...rest}
         aria-busy="true"
         aria-live="polite"
@@ -130,17 +147,16 @@ export function SkeletonWrapper({
 
     // Clone the element and apply skeleton styles
     const originalClassName = (child.props as any).className || "";
-    const skeletonClass = `${originalClassName} ${skeletonClassName}${
-      animate ? " skeleton-animate" : ""
-    }`.trim();
+    const skeletonClass = `${originalClassName} ${skeletonClassName}${animate ? " skeleton-animate" : ""
+      }`.trim();
 
     // Recursively process children
     const processedChildren = (child.props as any).children
       ? Children.map(
-          (child.props as any).children,
-          (nestedChild: ReactNode, nestedIndex: number) =>
-            renderSkeletonFromChild(nestedChild, nestedIndex),
-        )
+        (child.props as any).children,
+        (nestedChild: ReactNode, nestedIndex: number) =>
+          renderSkeletonFromChild(nestedChild, nestedIndex),
+      )
       : undefined;
 
     return cloneElement(child as any, {
@@ -158,7 +174,7 @@ export function SkeletonWrapper({
   return (
     <div
       className={className}
-      style={style}
+      style={styles}
       {...rest}
       aria-busy="true"
       aria-live="polite"
@@ -212,6 +228,8 @@ export interface SkeletonProps extends ComponentPropsWithoutRef<"div"> {
    * @default true
    */
   animate?: boolean;
+  palette?: ColorPaletteType;
+  theme?: Theme;
 }
 
 export function Skeleton({
@@ -222,16 +240,23 @@ export function Skeleton({
   animate = true,
   className,
   style,
+  palette,
+  theme,
   ...rest
 }: Readonly<SkeletonProps>) {
   const size = useElementSize(referenceElement ?? { current: null });
+  const defaultPalette = theme === "dark" ? "dark" : "default";
+  const colors = palette ? ColorPalettes[palette] : ColorPalettes[defaultPalette];
 
-  const skeletonStyle: React.CSSProperties = {
+  const skeletonStyle = {
     width: referenceElement ? size.width : width || "100%",
     height: referenceElement ? size.height : height || "1em",
     borderRadius: referenceElement ? size.borderRadius : borderRadius,
+    "--skeleton-bg-color": colors?.muted,
+    "--skeleton-bg-accent": colors?.background,
+    "--skeleton-fg-color": colors?.foreground,
     ...style,
-  };
+  } as CSSProperties;
 
   return (
     <div

@@ -47,13 +47,13 @@ export const ColorPalettes: Record<string, ColorPalette> = {
   dark: {
     background: "#111100", // Deep blue-gray for reduced eye strain
     foreground: "#f1f5f9", // Soft white for better readability
-    border: "#1ee0011", // Subtle border that's visible but not harsh
+    border: "#555555", // Subtle border that's visible but not harsh
     primary: "#31a9d9", // Bright blue that works well on dark backgrounds
     secondary: "#a78bfa", // Light purple for good contrast
     tertiary: "#34d399", // Bright green that pops on dark
     accent: "#60a6ee", // Soft blue-purple for accents
     highlight: "#1e293b", // Darker highlight for selection
-    muted: "#121212", // Consistent muted background
+    muted: "#222222", // Consistent muted background
     success: "#22c55e", // Vibrant but not harsh green
     warning: "#fbbf24", // Warm yellow for warnings
     error: "#f87171", // Soft red that's not too aggressive

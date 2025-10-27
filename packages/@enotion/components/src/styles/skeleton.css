@@ -4,7 +4,7 @@
  */
 
 .skeleton {
-  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background: linear-gradient(90deg, var(--skeleton-bg-color) 25%, var(--skeleton-bg-accent) 50%, var(--skeleton-bg-color) 75%);
   background-size: 200% 100%;
   border-radius: 4px;
   position: relative;
@@ -36,14 +36,6 @@
 
   100% {
     background-position: -200% 0;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
-    background-size: 200% 100%;
   }
 }
 

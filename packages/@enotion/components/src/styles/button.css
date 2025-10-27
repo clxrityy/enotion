@@ -45,8 +45,8 @@ button {
 }
 
 button:hover {
-  border-radius: 8px;
-  transform: scale(1.02);
+  border-radius: 6px;
+  transform: scale(1.05);
 }
 
 button:disabled {
@@ -54,8 +54,7 @@ button:disabled {
 }
 
 button:active {
-  transform: scale(1.05);
-  border-radius: 8px;
+  transform: scale(1.1);
   transition: transform 0.1s ease;
   filter: saturate(0.8);
 }
