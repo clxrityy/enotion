@@ -18,7 +18,9 @@ export default function RootLayout({
       <body className={`${mulish.variable} antialiased`}>
         <LayoutProvider>
           <LayoutRenderer />
-          {children}
+          <div className="absolute w-screen h-screen z-0 *:z-10">
+            {children}
+          </div>
         </LayoutProvider>
       </body>
     </html>

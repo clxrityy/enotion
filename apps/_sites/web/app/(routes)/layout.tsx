@@ -3,6 +3,8 @@
 import { Navbar, Wrapper, type NavItem } from "@enotion/components";
 import { ColorPalettes, ColorPaletteType, Icons } from "@enotion/core";
 import { useColorPalette, useSVG } from "@enotion/hooks";
+import { useRouter } from "next/navigation";
+// import { CSSProperties } from "react";
 
 const items: NavItem[] = [
   {
@@ -84,16 +86,27 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   const { palette, setPalette } = useColorPalette();
+  const { push } = useRouter();
+
+  // const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
+
   return (
-    <main className="text-inherit">
+    <main
+      className="text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete">
       <Navbar
         palette={palette}
         title="enotion"
         items={items}
+        onItemClick={(item) => push(item.href || "/")}
         logo={<Logo palette={palette} />}
         onPaletteChange={setPalette}
       />
-      <Wrapper palette={palette}>{children}</Wrapper>
+      <Wrapper
+        palette={palette}
+        className="py-5 px-4 max-w-3xl"
+      >
+        {children}
+      </Wrapper>
     </main>
   );
 }

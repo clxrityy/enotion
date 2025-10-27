@@ -11,5 +11,23 @@ body {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
-  max-height: 100vh;
+  max-height: fit-content;
+}
+
+@layer utilities {
+  .bg-background {
+    background-color: var(--background);
+  }
+
+  .text-foreground {
+    color: var(--foreground);
+  }
+
+  .bg-muted {
+    background-color: var(--bg-muted);
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
