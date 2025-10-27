@@ -91,8 +91,7 @@ export default function Layout({
   // const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
   return (
-    <main
-      className="text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete">
+    <main className="text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete">
       <Navbar
         palette={palette}
         title="enotion"
@@ -101,10 +100,7 @@ export default function Layout({
         logo={<Logo palette={palette} />}
         onPaletteChange={setPalette}
       />
-      <Wrapper
-        palette={palette}
-        className="py-5 px-4 max-w-3xl"
-      >
+      <Wrapper palette={palette} className="py-5 px-4 max-w-3xl">
         {children}
       </Wrapper>
     </main>

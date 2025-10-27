@@ -22,15 +22,18 @@ const initialSessionContextState: SessionContextState = {
   layoutState: undefined,
   palettes: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setLayoutState: (state: LayoutContextState) => { },
-  setPalettes: (palettes: typeof ColorPalettes) => { },
-  addPalette: (palette: ColorPalette, name: string) => { },
-  removePalette: (name: string) => { },
+  setLayoutState: (state: LayoutContextState) => {},
+  setPalettes: (palettes: typeof ColorPalettes) => {},
+  addPalette: (palette: ColorPalette, name: string) => {},
+  removePalette: (name: string) => {},
 };
 
 const useSessionContextState = (): SessionContextState => {
-  const [layoutState, setLayoutState] = useState<LayoutContextState>(initialLayoutContextState);
-  const [palettes, setPalettesState] = useState<typeof ColorPalettes>(ColorPalettes);
+  const [layoutState, setLayoutState] = useState<LayoutContextState>(
+    initialLayoutContextState,
+  );
+  const [palettes, setPalettesState] =
+    useState<typeof ColorPalettes>(ColorPalettes);
 
   const setPalettes = (newPalettes: typeof ColorPalettes) => {
     setPalettesState(newPalettes);
@@ -59,7 +62,7 @@ const useSessionContextState = (): SessionContextState => {
     addPalette,
     removePalette,
   };
-}
+};
 
 export interface SessionContextProviderProps {
   children: ReactNode;
@@ -67,7 +70,7 @@ export interface SessionContextProviderProps {
 
 const { Provider, useContext } = createContextFactory<SessionContextState>(
   initialSessionContextState,
-  useSessionContextState
+  useSessionContextState,
 );
 
 /**
@@ -80,7 +83,9 @@ const { Provider, useContext } = createContextFactory<SessionContextState>(
  * It leverages the `useSessionContextState` hook to handle the state and logic for session management, including layout state and color palettes.
  * This provider should wrap the part of the application where session context is needed, allowing any nested components to access and modify the session state.
  */
-export const SessionContextProvider = ({ children }: SessionContextProviderProps) => {
+export const SessionContextProvider = ({
+  children,
+}: SessionContextProviderProps) => {
   return <Provider>{children}</Provider>;
 };
 

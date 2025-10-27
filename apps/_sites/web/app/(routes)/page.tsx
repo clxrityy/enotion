@@ -6,7 +6,6 @@ import { useColorPalette } from "@enotion/hooks";
 import { CSSProperties, useState } from "react";
 
 export default function Home() {
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { palette } = useColorPalette();
@@ -18,30 +17,42 @@ export default function Home() {
   };
 
   return (
-    <div className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10" style={{
-      "--muted": colors?.muted,
-      "--foreground": colors?.foreground,
-      "--background": colors?.background,
-      "--primary": colors?.primary,
-      "--secondary": colors?.secondary,
-      "--tertiary": colors?.tertiary,
-      "--accent": colors?.accent,
-      "--border": colors?.border,
-      "--highlight": colors?.highlight,
-      "--success": colors?.success,
-      "--warning": colors?.warning,
-      "--error": colors?.error,
-      "--info": colors?.info,
-    } as CSSProperties}>
+    <div
+      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10"
+      style={
+        {
+          "--muted": colors?.muted,
+          "--foreground": colors?.foreground,
+          "--background": colors?.background,
+          "--primary": colors?.primary,
+          "--secondary": colors?.secondary,
+          "--tertiary": colors?.tertiary,
+          "--accent": colors?.accent,
+          "--border": colors?.border,
+          "--highlight": colors?.highlight,
+          "--success": colors?.success,
+          "--warning": colors?.warning,
+          "--error": colors?.error,
+          "--info": colors?.info,
+        } as CSSProperties
+      }
+    >
       <h1 className="text-3xl font-bold mb-4">Welcome to My Site</h1>
 
       <div className="flex gap-4">
-        <Button palette={palette} variant="default" onClick={() => setIsOpen(true)}>Show Modal</Button>
+        <Button
+          palette={palette}
+          variant="default"
+          onClick={() => setIsOpen(true)}
+        >
+          Show Modal
+        </Button>
         <Button palette={palette} variant="default" onClick={toggleLoading}>
           {isLoading ? "Stop Loading" : "Test Skeleton"}
         </Button>
-        <Button palette={palette} variant="default"><a href="/test-mdx">Test MDX</a></Button>
-
+        <Button palette={palette} variant="default">
+          <a href="/test-mdx">Test MDX</a>
+        </Button>
       </div>
 
       <div className="border p-4 rounded">
@@ -53,7 +64,9 @@ export default function Home() {
           className=""
           style={{}}
         >
-          <p>This is some text that will be replaced with skeleton when loading.</p>
+          <p>
+            This is some text that will be replaced with skeleton when loading.
+          </p>
           <h3>A Heading</h3>
           <div>Some other content</div>
         </SkeletonWrapper>

@@ -9,7 +9,12 @@ import {
 } from "react";
 import { Theme, useElementSize } from "@enotion/hooks";
 import "./styles/skeleton.css";
-import { adjustHexColorOpacity, cn, ColorPalettes, ColorPaletteType } from "@enotion/core";
+import {
+  adjustHexColorOpacity,
+  cn,
+  ColorPalettes,
+  ColorPaletteType,
+} from "@enotion/core";
 
 export interface SkeletonWrapperProps extends ComponentPropsWithoutRef<"div"> {
   /**
@@ -93,10 +98,15 @@ export function SkeletonWrapper({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const defaultPalette = theme === "dark" ? "dark" : "default";
-  const colors = palette ? ColorPalettes[palette] : ColorPalettes[defaultPalette];
+  const colors = palette
+    ? ColorPalettes[palette]
+    : ColorPalettes[defaultPalette];
   const styles = {
     "--skeleton-bg-color": colors?.muted,
-    "--skeleton-bg-accent": adjustHexColorOpacity(colors?.background || "", 0.75),
+    "--skeleton-bg-accent": adjustHexColorOpacity(
+      colors?.background || "",
+      0.75,
+    ),
     "--skeleton-fg-color": colors?.foreground,
     ...style,
   } as CSSProperties;
@@ -147,16 +157,17 @@ export function SkeletonWrapper({
 
     // Clone the element and apply skeleton styles
     const originalClassName = (child.props as any).className || "";
-    const skeletonClass = `${originalClassName} ${skeletonClassName}${animate ? " skeleton-animate" : ""
-      }`.trim();
+    const skeletonClass = `${originalClassName} ${skeletonClassName}${
+      animate ? " skeleton-animate" : ""
+    }`.trim();
 
     // Recursively process children
     const processedChildren = (child.props as any).children
       ? Children.map(
-        (child.props as any).children,
-        (nestedChild: ReactNode, nestedIndex: number) =>
-          renderSkeletonFromChild(nestedChild, nestedIndex),
-      )
+          (child.props as any).children,
+          (nestedChild: ReactNode, nestedIndex: number) =>
+            renderSkeletonFromChild(nestedChild, nestedIndex),
+        )
       : undefined;
 
     return cloneElement(child as any, {
@@ -246,7 +257,9 @@ export function Skeleton({
 }: Readonly<SkeletonProps>) {
   const size = useElementSize(referenceElement ?? { current: null });
   const defaultPalette = theme === "dark" ? "dark" : "default";
-  const colors = palette ? ColorPalettes[palette] : ColorPalettes[defaultPalette];
+  const colors = palette
+    ? ColorPalettes[palette]
+    : ColorPalettes[defaultPalette];
 
   const skeletonStyle = {
     width: referenceElement ? size.width : width || "100%",
