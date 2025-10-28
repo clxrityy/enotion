@@ -1,6 +1,7 @@
 import { CSSProperties, InputHTMLAttributes } from "react";
 import { type ColorPaletteType, ColorPalettes } from "@enotion/core/constants";
 import "./styles/input.css";
+import { adjustHexColorOpacity } from "@enotion/core";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   palette?: ColorPaletteType;
@@ -25,8 +26,14 @@ export function Input({ palette, ...rest }: InputProps) {
           "--input-focus-border-color": color?.primary,
           "--input-background-color": color?.background,
           "--input-text-color": color?.foreground,
-          "--input-placeholder-color": color?.muted,
-          "--input-disabled-background-color": color?.muted,
+          "--input-placeholder-color": adjustHexColorOpacity(
+            color?.foreground ?? "#000000",
+            0.6,
+          ),
+          "--input-disabled-background-color": adjustHexColorOpacity(
+            color?.foreground ?? "#000000",
+            0.1,
+          ),
           ...rest.style,
         } as CSSProperties
       }
