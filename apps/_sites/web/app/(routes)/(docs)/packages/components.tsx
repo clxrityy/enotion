@@ -24,15 +24,13 @@ import { useNotify } from "@enotion/notify";
 
 interface DocLayoutProps {
   children: ReactNode;
-  currentPackage?: string;
-  currentModule?: string;
 }
 
 export function DocLayout({
   children,
-  currentPackage,
-  currentModule,
 }: DocLayoutProps) {
+  const [currentPackage, setCurrentPackage] = useState<string>("");
+  const [currentModule, setCurrentModule] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const { palette } = useColorPalette();
 
@@ -91,22 +89,55 @@ export function DocLayout({
               <h3 className="font-semibold text-sm mb-2">Packages</h3>
               <ul className="space-y-1">
                 {packages.map((pkg) => (
-                  <li key={pkg.slug}>
-                    <Link
-                      href={`/packages/${pkg.slug}`}
-                      className={`
-                          block px-3 py-2 rounded text-sm
-                          ${currentPackage === pkg.slug ? "bg-(--active-color) font-semibold" : "hover:bg-(--border-color)/50"}
-                        `}
+                  <li key={pkg.slug} onFocus={() => {
+                    setCurrentPackage(pkg.slug);
+                  }}
+                    onBlur={() => {
+                      setCurrentPackage("");
+                      setCurrentModule("");
+                    }}
+                    onMouseEnter={(e) => {
+                      if (e.currentTarget.contains(e.currentTarget)) {
+                        return;
+                      }
+                      setCurrentPackage(pkg.slug);
+                    }}
+                  >
+                    <span
+                      className={cn("flex flex-row justify-between items-center px-3 py-2 rounded text-sm w-full",
+                        currentPackage === pkg.slug ? "bg-(--active-color) font-semibold" : "")}
                     >
-                      {pkg.name}
-                    </Link>
+                      <Link
+                        href={`/packages/${pkg.slug}`}
+                        className={`
+                        `}
+                      >
+                        {pkg.name}
+                      </Link>
+                      <Button
+                        onClick={() => {
+                          setCurrentPackage((prev) => {
+                            if (prev.length > 0 && prev !== pkg.slug) {
+                              return ""
+                            }
+
+                            return prev;
+                          })
+                        }}>
+                        <Icons.Selector
+                        />
+                      </Button>
+                    </span>
 
                     {/* Show modules when package is active */}
                     {currentPackage === pkg.slug && (
-                      <ul className="mt-2 space-y-1">
+                      <ul className="mt-2 space-y-1 backdrop:blur-sm p-2 border-l-2 border-(--border-color)/50 bg-(--muted)/5">
                         {pkg.modules.map((mod) => (
-                          <li key={mod.slug}>
+                          <li key={mod.slug}
+                            onTouchMove={() => {
+                              setCurrentModule(mod.slug);
+                            }}
+                          >
                             <Link
                               href={`/packages/${pkg.slug}/${mod.slug}`}
                               className={`
@@ -244,7 +275,7 @@ export const PackagesComponent = () => {
           className={cn(
             "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[1.042] hover:border hover:border-(--active-color)/25",
             active === pkg.name &&
-              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+            "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
           )}
         >
           <h3 className="font-semibold text-lg mb-2">
