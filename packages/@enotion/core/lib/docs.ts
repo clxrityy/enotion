@@ -119,29 +119,37 @@ export function getAllModules(packageSlug: string): DocModule[] | undefined {
 }
 
 export type SearchablePackageItems = {
-  package: string;
-  module: DocModule;
+  name: string;
   description: string;
   slug: string;
+  type?: "module" | "package";
+  package?: string;
+  tag?: string | string[];
 }[];
 
 export function getSearchableItems(rootSlug?: string): SearchablePackageItems {
   const items: SearchablePackageItems = [];
 
-  const pkgs = rootSlug
-    ? packages.filter((pkg) => pkg.slug === rootSlug)
-    : packages;
+  // Don't filter packages - rootSlug is just a URL prefix
+  const pkgs = packages;
 
   for (const pkg of pkgs) {
-    for (const mod of pkg.modules) {
-      items.push({
-        package: pkg.name,
-        module: mod,
-        description: mod.description,
-        slug: `${rootSlug}/${pkg.slug}/${mod.slug}`,
-      });
-    }
+    items.push(...pkg.modules.map((mod) => ({
+      name: mod.name,
+      description: mod.description,
+      slug: `${rootSlug || ""}/${pkg.slug}/${mod.slug}`,
+      type: "module",
+      package: pkg.name,
+      tag: mod.tag,
+    } as SearchablePackageItems[number])));
   }
+
+  items.push(...pkgs.map((pkg) => ({
+    name: pkg.name,
+    description: pkg.description,
+    slug: `${rootSlug || ""}/${pkg.slug}`,
+    type: "package",
+  } as SearchablePackageItems[number])));
 
   return items;
 }
