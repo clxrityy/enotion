@@ -1,12 +1,11 @@
 "use client";
 
-import { CSSProperties, Suspense, useState, type ReactNode } from "react";
+import { CSSProperties, useState, type ReactNode } from "react";
 import {
   Button,
   Card,
   CopyButton,
   Search,
-  Skeleton,
 } from "@enotion/components";
 import { useColorPalette } from "@enotion/hooks";
 import {
@@ -21,6 +20,7 @@ import {
 } from "@enotion/core";
 import Link from "next/link";
 import { useNotify } from "@enotion/notify";
+import { useRouter } from "next/navigation";
 
 interface DocLayoutProps {
   children: ReactNode;
@@ -61,7 +61,7 @@ export function DocLayout({
           className={`
             fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 border-r
             p-4 overflow-y-auto bg-(--bg-color) border-(--border-color) transition-transform
-            ${sidebarOpen ? "translate-x-0" : "-translte-x-full"}
+            ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             `}
         >
           <div className="p-4 space-y-6">
@@ -70,24 +70,19 @@ export function DocLayout({
               <Search
                 palette={palette}
                 data={getSearchableItems("/packages")}
-                searchKey={["slug", "module", "description", "package"]}
+                searchKey={["slug", "description", "name"]}
                 render={(item, idx) => (
-                  <Suspense
-                    key={`${item.slug}-${idx}`}
-                    fallback={<Skeleton palette={palette} />}
-                  >
-                    <DocSearchResultItem
-                      key={`${item.package}-${item.module.slug}`}
-                      item={item}
-                    />
-                  </Suspense>
+                  <DocSearchResultItem
+                    key={`${item.name}-${item.slug}-${idx}`}
+                    item={item}
+                  />
                 )}
               />
             </div>
             {/* Packages Navigation */}
             <nav>
               <h3 className="font-semibold text-sm mb-2">Packages</h3>
-              <ul className="space-y-1">
+              <ul className="space-y-1 w-full">
                 {packages.map((pkg) => (
                   <li key={pkg.slug} onFocus={() => {
                     setCurrentPackage(pkg.slug);
@@ -102,9 +97,10 @@ export function DocLayout({
                       }
                       setCurrentPackage(pkg.slug);
                     }}
+                    className="w-full"
                   >
                     <span
-                      className={cn("flex flex-row justify-between items-center px-3 py-2 rounded text-sm w-full",
+                      className={cn("flex flex-row justify-around items-center px-3 py-2 rounded text-sm w-full",
                         currentPackage === pkg.slug ? "bg-(--active-color) font-semibold" : "")}
                     >
                       <Link
@@ -131,7 +127,7 @@ export function DocLayout({
 
                     {/* Show modules when package is active */}
                     {currentPackage === pkg.slug && (
-                      <ul className="mt-2 space-y-1 backdrop:blur-sm p-2 border-l-2 border-(--border-color)/50 bg-(--muted)/5">
+                      <ul className="mt-2 space-y-1 backdrop:blur-sm p-2 border-l-2 border-(--border-color)/50 bg-(--muted)/2">
                         {pkg.modules.map((mod) => (
                           <li key={mod.slug}
                             onTouchMove={() => {
@@ -187,15 +183,62 @@ export function DocSearchResultItem({
 }: {
   item: SearchablePackageItems[number];
 }) {
+
+  const { push } = useRouter();
+
   return (
-    <Link
-      href={`/packages/${item.package}/${item.module.slug}`}
-      className="block p-4 rounded"
+    <button
+      title={item.name}
+      type="button"
+      className={cn("relative w-full text-left mb-4 rounded", item.tag && "mb-8")}
+      onClick={(e) => {
+        e.preventDefault();
+        if (item.type && item.type === "module") {
+          push(`/packages/${item.package}/${item.slug}`);
+        } else {
+          push(`/packages/${item.slug}`);
+        }
+      }}
     >
-      <h3 className="font-semibold">{item.module.name}</h3>
-      <p className="text-sm">{item.module.description}</p>
-    </Link>
-  );
+      <div
+        className="flex flex-col gap-2 w-full justify-between"
+      >
+        <div className="grid grid-cols-1 items-center justify-between gap-1 w-full">
+          <h4 className="font-bold text-xs md:text-sm xl:text-base">{item.name}</h4>
+          {
+            item.package && (
+              <pre className="text-xs text-(--muted) mt-1 mb-2">
+                {item.package}
+              </pre>
+            )
+          }
+        </div>
+        <p className="text-xs xl:text-sm min-w-26 max-w-max">{item.description}</p>
+      </div>
+      {
+        item.tag && (
+          <div className="absolute w-full h-full mt-4 mr-2">
+            <div className="flex justify-end items-end text-xs font-mono tracking-tightest">
+              {Array.isArray(item.tag) ? item.tag.map((tag, idx) => (
+                <span
+                  key={`${tag}-${idx}`}
+                  className="bg-(--border-color)/25 text-(--foreground) py-1 px-2 rounded-full"
+                >
+                  {tag}
+                </span>
+              )) : (
+                <span
+                  className="bg-(--border-color)/25 text-(--foreground) py-1 px-2 rounded-full"
+                >
+                  {item.tag}
+                </span>
+              )}
+            </div>
+          </div>
+        )
+      }
+    </button>
+  )
 }
 
 interface PlaygroundProps {
