@@ -31,12 +31,12 @@ export interface ColorPalette {
 export const ColorPalettes: Record<string, ColorPalette> = {
   default: {
     background: "#ffffff",
-    foreground: "#101010", // Improved contrast while softer than pure black
+    foreground: "#111111", // Improved contrast while softer than pure black
     border: "#dddeee", // More neutral gray
     primary: "#2563ff", // Modern blue with better contrast
     secondary: "#7c3ead", // Complementary purple-ish blue
     tertiary: "#4b5afc", // A mixture of primary and secondary for balance
-    accent: "#0c5ebdee", // Darker blue for accents
+    accent: "#777777", // Dark grey for accents
     highlight: "#fef3c7", // Soft yellow background for highlights
     muted: "#bbbccc", // A muted light gray background
     success: "#10b981", // Modern green with good contrast
