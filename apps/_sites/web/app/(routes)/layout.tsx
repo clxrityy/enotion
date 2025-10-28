@@ -92,7 +92,12 @@ export default function Layout({
   // const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
   return (
-    <main className={cn("text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete", palette === "monochrome" && "saturate-[200] -bg-conic-30 grayscale")}>
+    <main
+      className={cn(
+        "text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete",
+        palette === "monochrome" && "saturate-[200] -bg-conic-30 grayscale",
+      )}
+    >
       <Navbar
         palette={palette}
         title="enotion"

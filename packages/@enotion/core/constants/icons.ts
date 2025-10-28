@@ -16,7 +16,10 @@ import { LuCopy, LuCopyCheck } from "react-icons/lu";
 import { BiSolidComponent } from "react-icons/bi";
 import { GiHook, GiPlanetCore } from "react-icons/gi";
 import { HiOutlineServerStack } from "react-icons/hi2";
-import { TbLayoutSidebarLeftCollapseFilled, TbLayoutSidebarRightCollapseFilled } from "react-icons/tb";
+import {
+  TbLayoutSidebarLeftCollapseFilled,
+  TbLayoutSidebarRightCollapseFilled,
+} from "react-icons/tb";
 
 export const Icons = {
   Menu: MdMenu,
