@@ -1,7 +1,7 @@
 import { useSearch } from "@enotion/hooks";
 import { Input } from "./Input.js";
 import { Card } from "./Card.js";
-import { HTMLAttributes, useId } from "react";
+import { HTMLAttributes } from "react";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
@@ -53,26 +53,27 @@ export const Search = <T,>({
 }: SearchProps<T>) => {
   const { query, setQuery, filteredData } = useSearch<T>(data, searchKey);
 
-  const id = useId();
-
-  const dataWithId = filteredData.map((item) => ({
-    ...item,
-    id: (item as any).id ?? id,
-  }));
-
   return (
     <div {...props}>
       <Input
+        type="text"
         placeholder={placeholder || "Search..."}
         palette={palette}
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          e.preventDefault();
+          setQuery(e.target.value);
+        }}
       />
-      {dataWithId.map((item, index) => (
-        <Card key={item.id} palette={palette}>
-          {render(item, index)}
-        </Card>
-      ))}
+      {query && filteredData.map((item, index) => {
+        // Create a unique key from the item content
+        const itemKey = `search-item-${JSON.stringify(item)}-${index}`;
+        return (
+          <Card key={itemKey} palette={palette}>
+            {render(item, index)}
+          </Card>
+        );
+      })}
     </div>
   );
 };
