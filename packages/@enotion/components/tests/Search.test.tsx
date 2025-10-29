@@ -39,7 +39,7 @@ describe("Search", () => {
     expect(input).toBeDefined();
   });
 
-  it("filters data based on search input", () => {
+  it("filters data based on search input", async () => {
     render(
       <Search
         data={data}
@@ -63,5 +63,21 @@ describe("Search", () => {
     expect(screen.getByText("Grapes")).toBeDefined();
     expect(screen.queryByText("Banana")).toBeNull();
     expect(screen.queryByText("Orange")).toBeNull();
+  });
+
+  it("shows no items when query is empty and showItemsWhenQueryEmpty is false", () => {
+    render(
+      <Search
+        data={data}
+        searchKey="name"
+        render={(item) => <div>{item.name}</div>}
+        showItemsWhenQueryEmpty={false}
+      />,
+    );
+    // Initially, no items should be displayed
+    expect(screen.queryByText("Apple")).toBeNull();
+    expect(screen.queryByText("Banana")).toBeNull();
+    expect(screen.queryByText("Orange")).toBeNull();
+    expect(screen.queryByText("Grapes")).toBeNull();
   });
 });

@@ -10,6 +10,7 @@ export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
   render: (item: T, index: number) => React.ReactNode;
   palette?: ColorPaletteType;
   placeholder?: string;
+  showItemsWhenQueryEmpty?: boolean;
 }
 
 /**
@@ -17,6 +18,9 @@ export interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
  * @param data - The array of data objects to be searched.
  * @param searchKey - The key of the object to perform the search on.
  * @param render - A function that takes an item and its index, and returns a React node to render.
+ * @param palette - Optional color palette for styling the component.
+ * @param placeholder - Optional placeholder text for the search input.
+ * @param showItemsWhenQueryEmpty - Whether to show all items when the search query is empty (default: true).
  * @param props - Additional props to pass to the input element.
  *
  * @description
@@ -49,6 +53,7 @@ export const Search = <T,>({
   render,
   palette,
   placeholder,
+  showItemsWhenQueryEmpty = true,
   ...props
 }: SearchProps<T>) => {
   const { query, setQuery, filteredData } = useSearch<T>(data, searchKey);
@@ -65,7 +70,7 @@ export const Search = <T,>({
           setQuery(e.target.value);
         }}
       />
-      {query && filteredData.map((item, index) => {
+      {(showItemsWhenQueryEmpty || query) && filteredData.map((item, index) => {
         // Create a unique key from the item content
         const itemKey = `search-item-${JSON.stringify(item)}-${index}`;
         return (
