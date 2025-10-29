@@ -77,6 +77,7 @@ export function DocLayout({
                     item={item}
                   />
                 )}
+                showItemsWhenQueryEmpty={false}
               />
             </div>
             {/* Packages Navigation */}
