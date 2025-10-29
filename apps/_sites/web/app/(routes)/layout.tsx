@@ -104,6 +104,7 @@ export default function Layout({
         items={items}
         onItemClick={(item) => push(item.href || "/")}
         logo={<Logo palette={palette} />}
+        logoHref="/"
         onPaletteChange={setPalette}
       />
       <Wrapper palette={palette} className="py-5 px-4 max-w-3xl">
