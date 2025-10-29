@@ -5,11 +5,10 @@ import { MDXProvider } from "@mdx-js/react";
 import dynamic from "next/dynamic";
 
 const Content = dynamic(() => import("./content.mdx"), {
-  ssr: false
+  ssr: false,
 });
 
 export default function Page() {
-
   const { palette } = useColorPalette();
 
   return (

@@ -48,14 +48,20 @@ import { useCallback, useState } from "react";
 export const useSearch = <T,>(data: T[], searchKey: keyof T | (keyof T)[]) => {
   const [query, setQuery] = useState<string>("");
 
-  const filteredData: T[] = useCallback(() => data.filter((item) => {
-    if (Array.isArray(searchKey)) {
-      return searchKey.some((key) =>
-        String(item[key]).toLowerCase().includes(query.toLowerCase()),
-      );
-    }
-    return String(item[searchKey]).toLowerCase().includes(query.toLowerCase());
-  }), [data, query, searchKey])();
+  const filteredData: T[] = useCallback(
+    () =>
+      data.filter((item) => {
+        if (Array.isArray(searchKey)) {
+          return searchKey.some((key) =>
+            String(item[key]).toLowerCase().includes(query.toLowerCase()),
+          );
+        }
+        return String(item[searchKey])
+          .toLowerCase()
+          .includes(query.toLowerCase());
+      }),
+    [data, query, searchKey],
+  )();
 
   return { query, setQuery, filteredData };
 };

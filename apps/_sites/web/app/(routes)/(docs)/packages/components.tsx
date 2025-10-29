@@ -1,12 +1,7 @@
 "use client";
 
 import { CSSProperties, useState, type ReactNode } from "react";
-import {
-  Button,
-  Card,
-  CopyButton,
-  Search,
-} from "@enotion/components";
+import { Button, Card, CopyButton, Search } from "@enotion/components";
 import { useColorPalette } from "@enotion/hooks";
 import {
   adjustHexColorOpacity,
@@ -26,9 +21,7 @@ interface DocLayoutProps {
   children: ReactNode;
 }
 
-export function DocLayout({
-  children,
-}: DocLayoutProps) {
+export function DocLayout({ children }: DocLayoutProps) {
   const [currentPackage, setCurrentPackage] = useState<string>("");
   const [currentModule, setCurrentModule] = useState<string>("");
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
@@ -71,9 +64,9 @@ export function DocLayout({
                 palette={palette}
                 data={getSearchableItems("/packages")}
                 searchKey={["slug", "description", "name"]}
-                render={(item, idx) => (
+                render={(item) => (
                   <DocSearchResultItem
-                    key={`${item.name}-${item.slug}-${idx}`}
+                    key={`${item.name}-${item.slug}`}
                     item={item}
                   />
                 )}
@@ -85,9 +78,11 @@ export function DocLayout({
               <h3 className="font-semibold text-sm mb-2">Packages</h3>
               <ul className="space-y-1 w-full">
                 {packages.map((pkg) => (
-                  <li key={pkg.slug} onFocus={() => {
-                    setCurrentPackage(pkg.slug);
-                  }}
+                  <li
+                    key={pkg.slug}
+                    onFocus={() => {
+                      setCurrentPackage(pkg.slug);
+                    }}
                     onBlur={() => {
                       setCurrentPackage("");
                       setCurrentModule("");
@@ -101,8 +96,12 @@ export function DocLayout({
                     className="w-full"
                   >
                     <span
-                      className={cn("flex flex-row justify-around items-center px-3 py-2 rounded text-sm w-full",
-                        currentPackage === pkg.slug ? "bg-(--active-color) font-semibold" : "")}
+                      className={cn(
+                        "flex flex-row justify-around items-center px-3 py-2 rounded text-sm w-full",
+                        currentPackage === pkg.slug
+                          ? "bg-(--active-color) font-semibold"
+                          : "",
+                      )}
                     >
                       <Link
                         href={`/packages/${pkg.slug}`}
@@ -115,14 +114,14 @@ export function DocLayout({
                         onClick={() => {
                           setCurrentPackage((prev) => {
                             if (prev.length > 0 && prev !== pkg.slug) {
-                              return ""
+                              return "";
                             }
 
                             return prev;
-                          })
-                        }}>
-                        <Icons.Selector
-                        />
+                          });
+                        }}
+                      >
+                        <Icons.Selector />
                       </Button>
                     </span>
 
@@ -130,7 +129,8 @@ export function DocLayout({
                     {currentPackage === pkg.slug && (
                       <ul className="mt-2 space-y-1 backdrop:blur-sm p-2 border-l-2 border-(--border-color)/50 bg-(--muted)/2">
                         {pkg.modules.map((mod) => (
-                          <li key={mod.slug}
+                          <li
+                            key={mod.slug}
                             onTouchMove={() => {
                               setCurrentModule(mod.slug);
                             }}
@@ -184,14 +184,16 @@ export function DocSearchResultItem({
 }: {
   item: SearchablePackageItems[number];
 }) {
-
   const { push } = useRouter();
 
   return (
     <button
       title={item.name}
       type="button"
-      className={cn("relative w-full text-left mb-4 rounded", item.tag && "mb-8")}
+      className={cn(
+        "relative w-full text-left mb-4 rounded",
+        item.tag && "mb-8",
+      )}
       onClick={(e) => {
         e.preventDefault();
         if (item.type && item.type === "module") {
@@ -201,45 +203,43 @@ export function DocSearchResultItem({
         }
       }}
     >
-      <div
-        className="flex flex-col gap-2 w-full justify-between"
-      >
+      <div className="flex flex-col gap-2 w-full justify-between">
         <div className="grid grid-cols-1 items-center justify-between gap-1 w-full">
-          <h4 className="font-bold text-xs md:text-sm xl:text-base">{item.name}</h4>
-          {
-            item.package && (
-              <pre className="text-xs text-(--muted) mt-1 mb-2">
-                {item.package}
-              </pre>
-            )
-          }
+          <h4 className="font-bold text-xs md:text-sm xl:text-base">
+            {item.name}
+          </h4>
+          {item.package && (
+            <pre className="text-xs text-(--muted) mt-1 mb-2">
+              {item.package}
+            </pre>
+          )}
         </div>
-        <p className="text-xs xl:text-sm min-w-26 max-w-max">{item.description}</p>
+        <p className="text-xs xl:text-sm min-w-26 max-w-max">
+          {item.description}
+        </p>
       </div>
-      {
-        item.tag && (
-          <div className="absolute w-full h-full mt-4 mr-2">
-            <div className="flex justify-end items-end text-xs font-mono tracking-tightest">
-              {Array.isArray(item.tag) ? item.tag.map((tag, idx) => (
+      {item.tag && (
+        <div className="absolute w-full h-full mt-4 mr-2">
+          <div className="flex justify-end items-end text-xs font-mono tracking-tightest">
+            {Array.isArray(item.tag) ? (
+              item.tag.map((tag) => (
                 <span
-                  key={`${tag}-${idx}`}
+                  key={`${item.name}-tag-${tag}`}
                   className="bg-(--border-color)/25 text-(--foreground) py-1 px-2 rounded-full"
                 >
                   {tag}
                 </span>
-              )) : (
-                <span
-                  className="bg-(--border-color)/25 text-(--foreground) py-1 px-2 rounded-full"
-                >
-                  {item.tag}
-                </span>
-              )}
-            </div>
+              ))
+            ) : (
+              <span className="bg-(--border-color)/25 text-(--foreground) py-1 px-2 rounded-full">
+                {item.tag}
+              </span>
+            )}
           </div>
-        )
-      }
+        </div>
+      )}
     </button>
-  )
+  );
 }
 
 interface PlaygroundProps {
@@ -319,7 +319,7 @@ export const PackagesComponent = () => {
           className={cn(
             "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[1.042] hover:border hover:border-(--active-color)/25",
             active === pkg.name &&
-            "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
           )}
         >
           <h3 className="font-semibold text-lg mb-2">

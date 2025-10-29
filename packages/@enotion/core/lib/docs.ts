@@ -134,22 +134,32 @@ export function getSearchableItems(rootSlug?: string): SearchablePackageItems {
   const pkgs = packages;
 
   for (const pkg of pkgs) {
-    items.push(...pkg.modules.map((mod) => ({
-      name: mod.name,
-      description: mod.description,
-      slug: `${rootSlug || ""}/${pkg.slug}/${mod.slug}`,
-      type: "module",
-      package: pkg.name,
-      tag: mod.tag,
-    } as SearchablePackageItems[number])));
+    items.push(
+      ...pkg.modules.map(
+        (mod) =>
+          ({
+            name: mod.name,
+            description: mod.description,
+            slug: `${rootSlug || ""}/${pkg.slug}/${mod.slug}`,
+            type: "module",
+            package: pkg.name,
+            tag: mod.tag,
+          }) as SearchablePackageItems[number],
+      ),
+    );
   }
 
-  items.push(...pkgs.map((pkg) => ({
-    name: pkg.name,
-    description: pkg.description,
-    slug: `${rootSlug || ""}/${pkg.slug}`,
-    type: "package",
-  } as SearchablePackageItems[number])));
+  items.push(
+    ...pkgs.map(
+      (pkg) =>
+        ({
+          name: pkg.name,
+          description: pkg.description,
+          slug: `${rootSlug || ""}/${pkg.slug}`,
+          type: "package",
+        }) as SearchablePackageItems[number],
+    ),
+  );
 
   return items;
 }

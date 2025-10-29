@@ -70,15 +70,16 @@ export const Search = <T,>({
           setQuery(e.target.value);
         }}
       />
-      {(showItemsWhenQueryEmpty || query) && filteredData.map((item, index) => {
-        // Create a unique key from the item content
-        const itemKey = `search-item-${JSON.stringify(item)}-${index}`;
-        return (
-          <Card key={itemKey} palette={palette}>
-            {render(item, index)}
-          </Card>
-        );
-      })}
+      {(showItemsWhenQueryEmpty || query) &&
+        filteredData.map((item, index) => {
+          // Create a unique key from the item content
+          const itemKey = `search-item-${JSON.stringify(item)}-${index}`;
+          return (
+            <Card key={itemKey} palette={palette}>
+              {render(item, index)}
+            </Card>
+          );
+        })}
     </div>
   );
 };
