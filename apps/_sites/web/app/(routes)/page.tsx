@@ -50,9 +50,6 @@ export default function Home() {
         <Button palette={palette} variant="default" onClick={toggleLoading}>
           {isLoading ? "Stop Loading" : "Test Skeleton"}
         </Button>
-        <Button palette={palette} variant="default">
-          <a href="/test-mdx">Test MDX</a>
-        </Button>
       </div>
 
       <div className="border p-4 rounded">
