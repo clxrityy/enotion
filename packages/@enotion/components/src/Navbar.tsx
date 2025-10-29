@@ -15,7 +15,7 @@ import { Theme, useElementSize } from "@enotion/hooks";
 import { Popover } from "./Popover.js";
 import { Select } from "./Select.js";
 
-const { Menu, MenuOpen, DarkMode, LightMode } = Icons;
+const { Menu, DarkMode, LightMode } = Icons;
 
 export interface NavbarProps extends HTMLAttributes<HTMLElement> {
   logo?: ReactNode;
@@ -32,16 +32,18 @@ export interface NavbarProps extends HTMLAttributes<HTMLElement> {
 
 export interface NavItem {
   href?: string;
-  label: string;
+  label?: string;
   icon?: ComponentType<{
     size?: number;
     className?: string;
     "aria-hidden"?: boolean;
   }>;
   active?: boolean;
-  subItems?: NavItem[];
+  subItems?: NavSubItem[];
   description?: string;
 }
+
+export type NavSubItem = Omit<NavItem, "subItems">;
 
 /**
  * Navbar component
@@ -148,7 +150,7 @@ export const Navbar = ({
                                 className={cn(
                                   "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors bg-(--navbar-muted)/10",
                                   item.active &&
-                                    "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                  "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                 )}
                               >
                                 {Icon && (
@@ -164,6 +166,7 @@ export const Navbar = ({
                                 {item.subItems.map((subItem, subIndex) => {
                                   const SubIcon = subItem.icon;
                                   const subKey = `mobile-sub-${subItem.label}-${subIndex}`;
+
                                   return (
                                     <button
                                       key={subKey}
@@ -175,7 +178,7 @@ export const Navbar = ({
                                       className={cn(
                                         "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:invert-25 hover:saturate-105 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left focus:outline-(--navbar-primary)/75",
                                         subItem.active &&
-                                          "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
+                                        "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
                                       )}
                                     >
                                       <div className="flex flex-col gap-0.5">
@@ -218,7 +221,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (
@@ -248,8 +251,13 @@ export const Navbar = ({
             <button
               title="logo"
               type="button"
-              onClick={(e) => e.preventDefault()}
               className="flex items-center space-x-2 text-(--navbar-foreground) transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                if (logoHref) {
+                  globalThis.window.location.href = logoHref;
+                }
+              }}
             >
               <div>{logo}</div>
               <span className="hidden font-bold text-xl sm:inline-block">
@@ -292,7 +300,7 @@ export const Navbar = ({
                                           className={cn(
                                             "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
                                             subItem.active &&
-                                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                            "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                           )}
                                         >
                                           <div className="flex items-center gap-2">
