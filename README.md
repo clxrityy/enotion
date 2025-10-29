@@ -1,6 +1,6 @@
-# enotion
+# enotion <img src="logo.svg" alt="enotion" width="28px" />
 
-<img alt="enotion" src="./banner.png" width="400" />
+<img alt="enotion" src="./banner.png" width="350" />
 
 A turborepo containing a collection of React hooks and shared configurations for building dynamic, contextual, responsive, and interactive web applications.
 
