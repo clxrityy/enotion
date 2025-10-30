@@ -1,4 +1,4 @@
-import { useVisibility } from "../src/useVisibility";
+import { useVisibility } from "../src/useVisibility.js";
 import {
   afterEach,
   beforeEach,
@@ -14,7 +14,7 @@ describe("useVisibility", () => {
   let originalIntersectionObserver: typeof IntersectionObserver;
 
   beforeEach(() => {
-    originalIntersectionObserver = (global as any).IntersectionObserver;
+    originalIntersectionObserver = (globalThis as any).IntersectionObserver;
 
     // Mock IntersectionObserver
     const mockObserve = jest.fn();
@@ -22,7 +22,7 @@ describe("useVisibility", () => {
     const mockDisconnect = jest.fn();
 
     class MockIntersectionObserver {
-      constructor(private callback: IntersectionObserverCallback) {}
+      constructor(private callback: IntersectionObserverCallback) { }
 
       observe = mockObserve;
       unobserve = mockUnobserve;
@@ -45,12 +45,12 @@ describe("useVisibility", () => {
       };
     }
 
-    (global as any).IntersectionObserver = MockIntersectionObserver;
+    (globalThis as any).IntersectionObserver = MockIntersectionObserver;
   });
 
   afterEach(() => {
     // Restore original IntersectionObserver
-    (global as any).IntersectionObserver = originalIntersectionObserver;
+    (globalThis as any).IntersectionObserver = originalIntersectionObserver;
     jest.restoreAllMocks();
   });
 
@@ -95,7 +95,7 @@ describe("useVisibility", () => {
     let triggerIntersect: (isIntersecting: boolean) => void;
 
     // Override the mock to capture the triggerIntersect method
-    (global as any).IntersectionObserver = class {
+    (globalThis as any).IntersectionObserver = class {
       constructor(private callback: IntersectionObserverCallback) {
         triggerIntersect = (isIntersecting: boolean) => {
           const entries: IntersectionObserverEntry[] = [

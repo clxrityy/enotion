@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, render, screen, waitFor } from "@testing-library/react";
-import { useClipboard } from "../src/useClipboard";
+import { useClipboard } from "../src/useClipboard.js";
 
 describe("useClipboard", () => {
   beforeEach(() => {
@@ -56,7 +56,7 @@ describe("useClipboard", () => {
 
     const consoleErrorSpy = jest
       .spyOn(console, "error")
-      .mockImplementation(() => {});
+      .mockImplementation(() => { });
 
     const Component = () => {
       const { isCopied, copy } = useClipboard({

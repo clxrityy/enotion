@@ -7,7 +7,7 @@ import {
   jest,
 } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
-import { useLocalStorage } from "../src/useLocalStorage";
+import { useLocalStorage } from "../src/useLocalStorage.js";
 
 describe("useLocalStorage", () => {
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe("useLocalStorage", () => {
 
   afterEach(() => {
     // Clean up localStorage and restore any mocked methods after each test
-    window.localStorage.clear();
+    globalThis.window.localStorage.clear();
     jest.restoreAllMocks();
   });
 
@@ -29,7 +29,7 @@ describe("useLocalStorage", () => {
   };
 
   it("should initialize with initial value when localStorage is empty", () => {
-    window.localStorage.clear();
+    globalThis.window.localStorage.clear();
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
     );
@@ -41,8 +41,8 @@ describe("useLocalStorage", () => {
   });
 
   it("should initialize with value from localStorage if it exists", () => {
-    window.localStorage.clear();
-    window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.clear();
+    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
@@ -55,7 +55,7 @@ describe("useLocalStorage", () => {
   });
 
   it("should update localStorage when setter is called", () => {
-    window.localStorage.clear();
+    globalThis.window.localStorage.clear();
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
     );
@@ -69,15 +69,15 @@ describe("useLocalStorage", () => {
     const [value] = result.current;
 
     expect(value).toBe("newValue");
-    expect(window.localStorage.getItem("testKey")).toBe(
+    expect(globalThis.window.localStorage.getItem("testKey")).toBe(
       JSON.stringify("newValue"),
     );
     expect(error).toBeNull();
   });
 
   it("should remove item from localStorage when remove function is called", () => {
-    window.localStorage.clear();
-    window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.clear();
+    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
@@ -89,13 +89,13 @@ describe("useLocalStorage", () => {
       removeValue();
     });
 
-    expect(window.localStorage.getItem("testKey")).toBeNull();
+    expect(globalThis.window.localStorage.getItem("testKey")).toBeNull();
     expect(error).toBeNull();
   });
 
   it("should handle JSON parse error gracefully", () => {
-    window.localStorage.clear();
-    window.localStorage.setItem("testKey", "invalid JSON");
+    globalThis.window.localStorage.clear();
+    globalThis.window.localStorage.setItem("testKey", "invalid JSON");
 
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
@@ -108,7 +108,7 @@ describe("useLocalStorage", () => {
   });
 
   it("should handle localStorage setItem error gracefully", () => {
-    window.localStorage.clear();
+    globalThis.window.localStorage.clear();
     mockStorageMethod("setItem", "setItem error");
 
     const { result } = renderHook(() =>
@@ -131,12 +131,12 @@ describe("useLocalStorage", () => {
   });
 
   it("should handle localStorage removeItem error gracefully", () => {
-    window.localStorage.clear();
+    globalThis.window.localStorage.clear();
     // Set up initial value - make sure it's there
-    window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
 
     // Verify localStorage actually has the value
-    expect(window.localStorage.getItem("testKey")).toBe(
+    expect(globalThis.window.localStorage.getItem("testKey")).toBe(
       JSON.stringify("storedValue"),
     );
 

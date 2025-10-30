@@ -1,4 +1,4 @@
-import { useScreenSize } from "../src/useScreenSize";
+import { useScreenSize } from "../src/useScreenSize.js";
 import { renderHook, screen, render, act } from "@testing-library/react";
 import { describe, expect, it, jest, afterEach } from "@jest/globals";
 
@@ -19,8 +19,8 @@ describe("useScreenSize", () => {
 
     // Simulate tablet size
     act(() => {
-      window.innerWidth = 800;
-      window.dispatchEvent(new Event("resize"));
+      globalThis.window.innerWidth = 800;
+      globalThis.window.dispatchEvent(new Event("resize"));
     });
     rerender();
     expect(result.current.width).toBe(800);
@@ -30,8 +30,8 @@ describe("useScreenSize", () => {
 
     // Simulate mobile size
     act(() => {
-      window.innerWidth = 500;
-      window.dispatchEvent(new Event("resize"));
+      globalThis.window.innerWidth = 500;
+      globalThis.window.dispatchEvent(new Event("resize"));
     });
     rerender();
     expect(result.current.width).toBe(500);
@@ -46,8 +46,8 @@ describe("useScreenSize", () => {
     expect(result.current.width).toBe(1024);
     // Simulate window resize
     act(() => {
-      window.innerWidth = 600;
-      window.dispatchEvent(new Event("resize"));
+      globalThis.window.innerWidth = 600;
+      globalThis.window.dispatchEvent(new Event("resize"));
     });
     rerender(); // Re-render to capture the updated state
     expect(result.current.width).toBe(600);
@@ -79,8 +79,8 @@ describe("useScreenSize", () => {
 
     // Simulate large desktop size
     act(() => {
-      window.innerWidth = 1600;
-      window.dispatchEvent(new Event("resize"));
+      globalThis.window.innerWidth = 1600;
+      globalThis.window.dispatchEvent(new Event("resize"));
     });
     rerender();
     expect(result.current.width).toBe(1600);
@@ -94,17 +94,17 @@ describe("useScreenSize", () => {
 
     // Simulate portrait orientation
     act(() => {
-      Object.defineProperty(window, "innerWidth", {
+      Object.defineProperty(globalThis.window, "innerWidth", {
         writable: true,
         configurable: true,
         value: 600,
       });
-      Object.defineProperty(window, "innerHeight", {
+      Object.defineProperty(globalThis.window, "innerHeight", {
         writable: true,
         configurable: true,
         value: 800,
       });
-      window.dispatchEvent(new Event("resize"));
+      globalThis.window.dispatchEvent(new Event("resize"));
     });
     rerender();
     expect(result.current.width).toBe(600);

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
 import { act, render, screen } from "@testing-library/react";
-import { useFetch } from "../src/useFetch";
+import { useFetch } from "../src/useFetch.js";
 
 describe("useFetch", () => {
   const mockSuccessResponse = { message: "Success" };
@@ -10,7 +10,7 @@ describe("useFetch", () => {
   });
 
   it("should fetch data successfully", async () => {
-    global.fetch = jest.fn(() =>
+    globalThis.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve(mockSuccessResponse),
@@ -52,7 +52,7 @@ describe("useFetch", () => {
   });
 
   it("should handle fetch error", async () => {
-    global.fetch = jest.fn(() =>
+    globalThis.fetch = jest.fn(() =>
       Promise.resolve({
         ok: false,
         status: 404,
@@ -90,7 +90,7 @@ describe("useFetch", () => {
   });
 
   it("should handle network error", async () => {
-    global.fetch = jest.fn(() =>
+    globalThis.fetch = jest.fn(() =>
       Promise.reject(new Error("Network Error")),
     ) as unknown as typeof fetch;
 

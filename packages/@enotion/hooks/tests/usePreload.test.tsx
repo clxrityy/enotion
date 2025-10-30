@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals";
-import { usePreload } from "../src/usePreload";
+import { usePreload } from "../src/usePreload.js";
 
 describe("usePreload", () => {
   beforeEach(() => {
@@ -7,7 +7,7 @@ describe("usePreload", () => {
   });
 
   it("should preload resources successfully", () => {
-    const importComponent = () => import("./mocks/TestComponent");
+    const importComponent = () => import("./mocks/TestComponent.js");
 
     const Component = () => {
       const preloadComponent = usePreload(importComponent);

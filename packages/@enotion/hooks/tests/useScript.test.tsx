@@ -12,16 +12,16 @@ import { useScript } from "../src/useScript.js";
 describe("useScript", () => {
   beforeEach(() => {
     // Clear any existing scripts
-    document
-      .querySelectorAll('script[src*="example.com"]')
-      .forEach((script) => script.remove());
+    for (const script of document.querySelectorAll('script[src*="example.com"]')) {
+      script.remove();
+    }
   });
 
   afterEach(() => {
     // Clean up after each test
-    document
-      .querySelectorAll('script[src*="example.com"]')
-      .forEach((script) => script.remove());
+    for (const script of document.querySelectorAll('script[src*="example.com"]')) {
+      script.remove();
+    }
     jest.restoreAllMocks();
   });
 

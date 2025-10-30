@@ -1,4 +1,4 @@
-import { useOutsideClick } from "../src/useOutsideClick";
+import { useOutsideClick } from "../src/useOutsideClick.js";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { describe, it, expect, jest } from "@jest/globals";
 import { useRef } from "react";

@@ -7,7 +7,7 @@ import {
   expect,
 } from "@jest/globals";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import { useTheme, ThemeProvider } from "../src/useTheme";
+import { useTheme, ThemeProvider } from "../src/useTheme.js";
 
 // Mock matchMedia before any tests run
 const mockMatchMedia = jest.fn((query: string) => ({

@@ -7,7 +7,7 @@ import {
   jest,
 } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
-import { useEventListener } from "../src/useEventListener";
+import { useEventListener } from "../src/useEventListener.js";
 
 describe("useEventListener", () => {
   beforeEach(() => {
@@ -19,8 +19,8 @@ describe("useEventListener", () => {
   });
 
   it("should add and remove event listener on mount and unmount", () => {
-    const addEventListenerSpy = jest.spyOn(window, "addEventListener");
-    const removeEventListenerSpy = jest.spyOn(window, "removeEventListener");
+    const addEventListenerSpy = jest.spyOn(globalThis.window, "addEventListener");
+    const removeEventListenerSpy = jest.spyOn(globalThis.window, "removeEventListener");
     const handler = jest.fn();
 
     const { unmount } = renderHook(() => useEventListener("click", handler));
@@ -32,7 +32,7 @@ describe("useEventListener", () => {
     );
 
     act(() => {
-      window.dispatchEvent(new Event("click"));
+      globalThis.window.dispatchEvent(new Event("click"));
     });
 
     expect(handler).toHaveBeenCalledTimes(1);
@@ -56,7 +56,7 @@ describe("useEventListener", () => {
     );
 
     act(() => {
-      window.dispatchEvent(new Event("click"));
+      globalThis.window.dispatchEvent(new Event("click"));
     });
 
     expect(handler1).toHaveBeenCalledTimes(1);
@@ -65,7 +65,7 @@ describe("useEventListener", () => {
     rerender({ handler: handler2 });
 
     act(() => {
-      window.dispatchEvent(new Event("click"));
+      globalThis.window.dispatchEvent(new Event("click"));
     });
 
     expect(handler1).toHaveBeenCalledTimes(1);
@@ -76,7 +76,7 @@ describe("useEventListener", () => {
     const handler = jest.fn();
     const invalidElement = {} as HTMLElement;
 
-    const addEventListenerSpy = jest.spyOn(window, "addEventListener");
+    const addEventListenerSpy = jest.spyOn(globalThis.window, "addEventListener");
 
     renderHook(() => useEventListener("click", handler, invalidElement));
 

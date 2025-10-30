@@ -22,8 +22,8 @@ class ResizeObserverMock {
   }
 }
 
-global.ResizeObserver = ResizeObserverMock as any;
-import { useElementSize } from "../src/useElementSize";
+globalThis.ResizeObserver = ResizeObserverMock as any;
+import { useElementSize } from "../src/useElementSize.js";
 import { render, act, waitFor } from "@testing-library/react";
 import { useRef, useEffect } from "react";
 import {
@@ -59,8 +59,8 @@ describe("useElementSize", () => {
       get: () => 456,
     });
     // Mock getComputedStyle
-    originalGetComputedStyle = window.getComputedStyle;
-    window.getComputedStyle = jest.fn(
+    originalGetComputedStyle = globalThis.window.getComputedStyle;
+    globalThis.window.getComputedStyle = jest.fn(
       (_elt: Element, _pseudoElt?: string | null): CSSStyleDeclaration => {
         return {
           borderRadius: "8px",
@@ -68,7 +68,7 @@ describe("useElementSize", () => {
             prop === "borderRadius" ? "8px" : "",
         } as Partial<CSSStyleDeclaration> as CSSStyleDeclaration;
       },
-    ) as typeof window.getComputedStyle;
+    ) as typeof globalThis.window.getComputedStyle;
   });
 
   afterEach(() => {
@@ -87,7 +87,7 @@ describe("useElementSize", () => {
         originalOffsetHeight,
       );
     }
-    window.getComputedStyle = originalGetComputedStyle;
+    globalThis.window.getComputedStyle = originalGetComputedStyle;
   });
 
   it("returns initial size and borderRadius", () => {

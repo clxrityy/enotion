@@ -6,9 +6,9 @@ import {
   it,
   expect,
 } from "@jest/globals";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useEffect } from "react";
-import { useColorPalette, ColorPaletteProvider } from "../src/useColorPalette";
+import { useColorPalette, ColorPaletteProvider } from "../src/useColorPalette.js";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 describe("useColorPalette", () => {
