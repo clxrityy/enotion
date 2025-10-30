@@ -2,120 +2,142 @@
 
 All notable changes to this project will be documented in this file.
 
-- [0.1.0](#0.1.0)
-  - [GLOBAL](#global)
-  - [`@enotion/config`](#config-enotionconfig)
-  - [`@enotion/hooks`](#hooks-enotionhooks)
-  - [`@enotion/components`](#components-enotioncomponents)
-  - [`@enotion/server`](#server-enotionserver)
-  - [`@enotion/core`](#core-enotioncore)
-  - [`@enotion/notify`](#notify-enotionnotify)
+---
+
+## 0.1.0 (2025-10-30)
+
+- [core](#enotioncore-v010)
+- [hooks](#enotionhooks-v010)
+- [components](#enotioncomponents-v010)
+- [notify](#enotionnotify-v010)
+- [server](#enotionserver-v000)
+- [config](#enotionconfig-v100)
+
+### Project Setup
+
+- Initialized monorepo with Turborepo and pnpm workspaces
+- Configured Biome for linting and formatting (replacing ESLint and Prettier)
+- Set up automated versioning scripts for all packages
+- Configured Jest testing environment across all packages
 
 ---
 
-## 0.1.0
+### [`@enotion/core`](./packages/@enotion/core) `v0.1.0`
 
-##### GLOBAL
+Core utilities, constants, and contexts for the enotion ecosystem.
 
-- (**added**) Initialized project
-- (**added**) Biome configurations
-- (**added**) Added log script to simplify command line changes with autochange
-- (**changed**) Replaced Prettier & ESLint with Biome
-- (**changed**) Adjusted some linting rules
-- (**changed**) Replaced log script with new version script to automate versioning across all packages
+**Exports:**
 
-##### Config (`@enotion/config`)
+- **Constants**: Color palettes, icons (react-icons), palette types
+- **Utilities**: `cn()` (class name merger), color manipulation functions (`adjustHexColorOpacity`, `blendHexColors`)
+- **Contexts**: `LayoutContext` with provider and renderer, `createContextFactory()` helper
+- **Documentation**: Package metadata and searchable module definitions
 
-- (**added**) Initialized config package (for configurations throughout the entire repo)
-- (**changed**) Moved typescript-config into a config package (@enotion/config/typescript)
-- (**changed**) Moved jest-config into a config package (@enotion/config/jest)
-- (**changed**) Added tsup-config into a config package (@enotion/config/tsup)
-- (**added**) Added constants into a config package (@enotion/config/constants)
-  - (**added**) Added color constants
-- (**changed**) Updated package.json exports to reflect neater import paths
-- (**changed**) Updated TypeScript `base` config to include ESNext in library target
-- (**changed**) Updated tsup config to build .mts files for ESM support
-- (**changed**) Moved constants/utils to new package (`@enotion/core`)
-- (**removed**) Removed build environment
-  - (**removed**) Removed `@enotion/config/env`
-  - (**removed**) `tsup.config.ts` no longer builds `src/env/index.ts`
+**Features:**
 
-##### Hooks (`@enotion/hooks`)
+- Modular exports: `@enotion/core`, `@enotion/core/constants`, `@enotion/core/utils`, `@enotion/core/contexts`
+- ESM-first with TypeScript support (.mts)
+- Tailwind CSS integration with utility classes
+- Zero external dependencies for core utilities
 
-- (**added**) Initialized package
-- (**added**) Set up test environment with jest
-- (**added**) current hooks:
-  - `useFetch()`
-  - `usePreload()`
-  - `useLocalStorage()`
-  - `useEventListener()`
-  - `useTheme()` & `<ThemeProvider />`
-  - `useScript()`
-  - `useVisibility()`
-  - `useOutsideClick()`
-  - `useScreenSize()`
-  - `useElementSize()`
-  - `useColorPalette()` & `<ColorPaletteProvider />`
-  - `useSearch()`
-  - `useClipboard()`
-  - `useAnimatedModals()`
-- (**added**) Added `@testing-library/react` dev dependency for testing React hooks
-- (**changed**) More extensive and concise JSDoc comments for usage
+---
 
-##### Components (`@enotion/components`)
+### [`@enotion/hooks`](./packages/@enotion/hooks) `v0.1.0`
 
-- (**added**) Initialized package
-- (**added**)
-- (**added**) current components:
-  - `<Skeleton />` & `<SkeletonWrapper />`
-  - `<Button />`
-  - `<Input />`
-  - `<Link />`
-  - `<Select />`
-  - `<Card />`
-  - `<Search />`
-  - `<LayoutContainer />`
-  - `<CopyButton />`
-  - `<Navbar />`
-  - `<Popover />`
-  - `<LayoutProvider />`
-- (**added**) Added CSS files for each component in a `styles/` folder
-- (**added**) Added `colorPalette` prop to components for easy color customization
-- (**changed**) Replaced the need for multiple providers by condensing them to one `<LayoutProvider />` component
-  - Utilizes the `LayoutContextProvider` & `LayoutRenderer` from [`@enotion/core/contexts`](#config-enotionconfig)
+Collection of reusable React hooks for common patterns.
 
-##### Server (`@enotion/server`)
+**Hooks:**
 
-- (**added**) Initialized package
-- (**added**) Added `getSystemSnapshot()` function to get a snapshot of the system information
-  - (**added**) Added system information utilities
-  - (**added**) Added CPU information utilities
-  - (**added**) Added Memory information utilities
-  - (**added**) Added OS information utilities
-  - (**added**) Added Performance information utilities
-  - (**added**) Added Disk information utilities
-- (**added**) Added network utilities
-  - (**added**) Added `getLocalIps()` function to get local IP addresses
-  - (**added**) Added `getHostname()` function to get the system hostname
-  - (**added**) Added `isPortAvailable()` function to check if a port is available
-  - (**added**) Added `findAvailablePort()` function to find an available port
-- (**added**) Added `execAsync()` utility to execute shell commands asynchronously
-- (**added**) Added `bytesToGB()` utility to convert bytes to gigabytes
+- **State Management**: `useLocalStorage`, `useTheme`, `useColorPalette`, `useAnimatedModals`
+- **UI Utilities**: `useSearch`, `useClipboard`, `useVisibility`, `useIsMounted`, `useSVG`
+- **Events**: `useEventListener`, `useOutsideClick`
+- **Layout**: `useScreenSize`, `useElementSize`
+- **Data Fetching**: `useFetch`, `usePreload`
+- **Scripts**: `useScript`
 
-##### Core (`@enotion/core`)
+**Features:**
 
-- (**added**) Initialized package (for core utilities, constants, and contexts shared across other packages)
-- (**added**) Added `createContextFactory()` utility for creating React context with ease
-- (**added**) `/contexts` export folder for shared contexts
-  - (**added**) Added `LayoutContext` for managing layout-related state
+- Context providers: `ThemeProvider`, `ColorPaletteProvider`
+- Comprehensive JSDoc documentation
+- Full TypeScript support with generic types
+- 100% test coverage with Jest and React Testing Library
 
-#### Notify (`@enotion/notify`)
+---
 
-- (**added**) Initialized package
-- (**added**) Added `NotificationProvider` component to wrap the application
-- (**added**) Added `useNotify` hook for triggering notifications
-- (**added**) Supports different notification types (success, error, info, warning, loading)
-- (**added**) Customizable duration and styles
-- (**added**) Dismissible notifications
+### [`@enotion/components`](./packages/@enotion/components) `v0.1.0`
+
+Reusable React UI components with built-in theming and accessibility.
+
+**Components:**
+
+- **Display**: `Card`, `Skeleton`, `Modal`, `AnimatedModal`
+- **Navigation**: `Navbar` (with sub-navigation), `Link`, `Popover`
+- **Forms**: `Input`, `Select`, `Button`, `CopyButton`, `Search`
+- **Layout**: `LayoutProvider`, `Provider`, `Wrapper`
+
+**Features:**
+
+- Color palette support via `palette` prop
+- CSS modules with Tailwind integration
+- Responsive design with mobile/desktop variants
+- Comprehensive test suite (38+ tests passing)
+- Modular CSS exports (`@enotion/components/index.css`)
+
+---
+
+### [`@enotion/notify`](./packages/@enotion/notify) `v0.1.0`
+
+React notification system for alerts and messages.
+
+**API:**
+
+- `NotificationProvider` - Context provider component
+- `useNotify()` - Hook for triggering notifications
+
+**Features:**
+
+- Notification types: success, error, info, warning, loading
+- Customizable duration and styles
+- Dismissible notifications with animations
+- Position control and stacking
+- Icon support with custom rendering
+
+---
+
+### [`@enotion/server`](./packages/@enotion/server) `v0.0.0`
+
+Server-side utilities for Node.js applications.
+
+**Modules:**
+
+- **System**: `getSystemSnapshot()`, CPU/memory/OS/performance/disk utilities
+- **Network**: `getLocalIps()`, `getHostname()`, `isPortAvailable()`, `findAvailablePort()`
+- **Process**: `execAsync()` for async shell commands
+
+**Features:**
+
+- Modular exports: `@enotion/server`, `@enotion/server/system`, `@enotion/server/network`
+- Helper utilities: `bytesToGB()` for data conversion
+- TypeScript-first with full type definitions
+- Zero runtime dependencies
+
+---
+
+### [`@enotion/config`](./packages/@enotion/config) `v1.0.0` (private)
+
+Shared configuration files for the monorepo.
+
+**Configurations:**
+
+- **TypeScript**: `base.json`, `nextjs.json`, `react-library.json`
+- **Jest**: `jest.config.cjs` with React Testing Library setup
+- **tsup**: `tsup.config.ts`, `tsup.entry.config.ts` for ESM bundling with Terser
+
+**Features:**
+
+- Centralized configuration management
+- ESNext library targets
+- `.mts` file generation for ESM compatibility
+- Shared dev dependencies across workspace
 
 ---
