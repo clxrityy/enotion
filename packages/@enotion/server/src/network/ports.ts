@@ -34,7 +34,7 @@ export async function isPortOpen(
  * @param end - The ending port number (default is 4000).
  * @returns A promise that resolves to the first available port number, or null if none are available.
  */
-export async function findAvailablePort(
+export async function findOpenPort(
   start: number = 3000,
   end: number = 4000,
 ): Promise<number | null> {
