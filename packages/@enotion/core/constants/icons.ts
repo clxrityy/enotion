@@ -12,7 +12,7 @@ import {
 } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { HiOutlineSelector } from "react-icons/hi";
-import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { LuCopy, LuCopyCheck, LuPackageOpen, LuPackage } from "react-icons/lu";
 import { BiSolidComponent } from "react-icons/bi";
 import { GiHook, GiPlanetCore } from "react-icons/gi";
 import { HiOutlineServerStack } from "react-icons/hi2";
@@ -42,4 +42,6 @@ export const Icons = {
   Server: HiOutlineServerStack,
   SidebarOpen: TbLayoutSidebarLeftCollapseFilled,
   SidebarClose: TbLayoutSidebarRightCollapseFilled,
+  PackageOpen: LuPackageOpen,
+  Package: LuPackage,
 };
