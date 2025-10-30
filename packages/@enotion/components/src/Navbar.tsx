@@ -41,9 +41,20 @@ export interface NavItem {
   active?: boolean;
   subItems?: NavSubItem[];
   description?: string;
+  main?: {
+    heading: string;
+    description?: string;
+    icon?: ComponentType<{
+      size?: number;
+      className?: string;
+      "aria-hidden"?: boolean;
+    }>;
+    href?: string;
+    footer?: string;
+  };
 }
 
-export type NavSubItem = Omit<NavItem, "subItems">;
+export type NavSubItem = Omit<NavItem, "subItems" & "main">;
 
 /**
  * Navbar component
@@ -150,7 +161,7 @@ export const Navbar = ({
                                 className={cn(
                                   "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors bg-(--navbar-muted)/10",
                                   item.active &&
-                                    "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                  "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                 )}
                               >
                                 {Icon && (
@@ -162,47 +173,75 @@ export const Navbar = ({
                                 )}
                                 <span>{item.label}</span>
                               </div>
-                              <div className="ml-4 mt-1 flex flex-col gap-1">
-                                {item.subItems.map((subItem, subIndex) => {
-                                  const SubIcon = subItem.icon;
-                                  const subKey = `mobile-sub-${subItem.label}-${subIndex}`;
-
-                                  return (
-                                    <button
-                                      key={subKey}
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        if (onItemClick) onItemClick(subItem);
-                                      }}
-                                      className={cn(
-                                        "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:invert-25 hover:saturate-105 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left focus:outline-(--navbar-primary)/75",
-                                        subItem.active &&
-                                          "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
-                                      )}
-                                    >
-                                      <div className="flex flex-col gap-0.5">
-                                        <div className="flex items-center gap-1.5">
-                                          {SubIcon && (
-                                            <SubIcon
-                                              size={14}
-                                              className="text-(--navbar-foreground)/90"
-                                              aria-hidden={true}
-                                            />
-                                          )}
-                                          <span className="font-medium">
-                                            {subItem.label}
-                                          </span>
-                                        </div>
-                                        {subItem.description && (
-                                          <span className="text-xs text-(--navbar-foreground)/85 leading-tight">
-                                            {subItem.description}
+                              <div className="flex flex-col sm:flex-row items-center justify-between">
+                                {
+                                  item.main && (
+                                    <div className="flex items-center gap-2 border-(--navbar-border) py-6 px-2 mb-2 sm:w-full shadow-lg rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow hover:shadow-sm">
+                                      <div className="flex flex-col">
+                                        <a href={item.main.href ?? item.href} className="font-bold text-xl">
+                                          <div className="flex flex-row items-center justify-start gap-2">
+                                            {
+                                              item.main.icon && (
+                                                <item.main.icon
+                                                  size={50}
+                                                  className="opacity-65"
+                                                  aria-hidden={true}
+                                                />
+                                              )
+                                            }
+                                            {item.main.heading}
+                                          </div>
+                                        </a>
+                                        {item.main.description && (
+                                          <span className="text-xs text-(--navbar-foreground)/80 text-center mt-1 leading-tight">
+                                            {item.main.description}
                                           </span>
                                         )}
                                       </div>
-                                    </button>
-                                  );
-                                })}
+                                    </div>
+                                  )
+                                }
+                                <div className="ml-4 mt-1 flex flex-col gap-1">
+                                  {item.subItems.map((subItem, subIndex) => {
+                                    const SubIcon = subItem.icon;
+                                    const subKey = `mobile-sub-${subItem.label}-${subIndex}`;
+                                    return (
+                                      <button
+                                        key={subKey}
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          if (onItemClick) onItemClick(subItem);
+                                        }}
+                                        className={cn(
+                                          "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:invert-25 hover:saturate-105 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left focus:outline-(--navbar-primary)/75",
+                                          subItem.active &&
+                                          "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
+                                        )}
+                                      >
+                                        <div className="flex flex-col gap-0.5">
+                                          <div className="flex items-center gap-1.5">
+                                            {SubIcon && (
+                                              <SubIcon
+                                                size={14}
+                                                className="text-(--navbar-foreground)/90"
+                                                aria-hidden={true}
+                                              />
+                                            )}
+                                            <span className="font-medium">
+                                              {subItem.label}
+                                            </span>
+                                          </div>
+                                          {subItem.description && (
+                                            <span className="text-xs text-(--navbar-foreground)/85 leading-tight">
+                                              {subItem.description}
+                                            </span>
+                                          )}
+                                        </div>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
                               </div>
                             </div>
                           </li>
@@ -221,7 +260,7 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
                             {Icon && (
@@ -284,47 +323,72 @@ export const Navbar = ({
                                 className="max-w-none enotion-desktop-subnav"
                                 aria-label={`${item.label} submenu`}
                               >
-                                <ul className="flex flex-col gap-1 items-center w-full">
-                                  {item.subItems.map((subItem, subIndex) => {
-                                    const SubIcon = subItem.icon;
-                                    const subKey = `sub-${subItem.label}-${subIndex}`;
-                                    return (
-                                      <li key={subKey}>
-                                        <button
-                                          type="button"
-                                          onClick={(e) => {
-                                            e.preventDefault();
-                                            if (onItemClick)
-                                              onItemClick(subItem);
-                                          }}
-                                          className={cn(
-                                            "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
-                                            subItem.active &&
-                                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
-                                          )}
-                                        >
-                                          <div className="flex items-center gap-2">
-                                            {SubIcon && (
-                                              <SubIcon
-                                                size={16}
-                                                className="text-(--navbar-foreground)/90"
+                                <div className="flex gap-2 items-center justify-between">
+                                  {item.main && (
+                                    <div className="flex flex-col mb-2 items-center gap-2 border-(--navbar-border) py-6 px-2 w-full sm:w-fit shadow-sm rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow hover:shadow-xs">
+                                      <a href={item.main.href ?? item.href} className="font-bold text-lg">
+                                        <div className="flex flex-row items-center justify-start gap-2">
+                                          {
+                                            item.main.icon && (
+                                              <item.main.icon
+                                                size={24}
+                                                className="opacity-65"
                                                 aria-hidden={true}
                                               />
+                                            )
+                                          }
+                                          {item.main.heading}
+                                        </div>
+                                      </a>
+                                      {item.main.description && (
+                                        <span className="text-xs text-(--navbar-foreground)/80 mt-1 leading-tight">
+                                          {item.main.description}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
+                                  <ul className="flex flex-col gap-1 items-center w-full">
+                                    {item.subItems.map((subItem, subIndex) => {
+                                      const SubIcon = subItem.icon;
+                                      const subKey = `sub-${subItem.label}-${subIndex}`;
+                                      return (
+                                        <li key={subKey}>
+                                          <button
+                                            type="button"
+                                            onClick={(e) => {
+                                              e.preventDefault();
+                                              if (onItemClick)
+                                                onItemClick(subItem);
+                                            }}
+                                            className={cn(
+                                              "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
+                                              subItem.active &&
+                                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                             )}
-                                            <span className="font-medium">
-                                              {subItem.label}
-                                            </span>
-                                          </div>
-                                          {subItem.description && (
-                                            <span className="text-xs text-(--navbar-foreground)/80">
-                                              {subItem.description}
-                                            </span>
-                                          )}
-                                        </button>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
+                                          >
+                                            <div className="flex items-center gap-2">
+                                              {SubIcon && (
+                                                <SubIcon
+                                                  size={16}
+                                                  className="text-(--navbar-foreground)/90"
+                                                  aria-hidden={true}
+                                                />
+                                              )}
+                                              <span className="font-medium">
+                                                {subItem.label}
+                                              </span>
+                                            </div>
+                                            {subItem.description && (
+                                              <span className="text-xs text-(--navbar-foreground)/80">
+                                                {subItem.description}
+                                              </span>
+                                            )}
+                                          </button>
+                                        </li>
+                                      );
+                                    })}
+                                  </ul>
+                                </div>
                               </nav>
                             }
                           >
