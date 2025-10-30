@@ -76,7 +76,96 @@ export const packages: DocPackage[] = [
     slug: "components",
     description: "Reusable React components for building user interfaces",
     modules: [
-      // finish
+      {
+        name: "AnimatedModal",
+        slug: "animated-modal",
+        description: "Animated modal component for displaying content in a modal dialog with smooth transitions",
+        tag: "component",
+      },
+      {
+        name: "Button",
+        slug: "button",
+        description: "Customizable button component with variants",
+        tag: "component",
+      },
+      {
+        name: "Card",
+        slug: "card",
+        description: "Card component for displaying content in a styled container",
+        tag: "component",
+      },
+      {
+        name: "CopyButton",
+        slug: "copy-button",
+        description: "Button component for copying text to clipboard",
+        tag: "component",
+      },
+      {
+        name: "Input",
+        slug: "input",
+        description: "Styled input component for user text input",
+        tag: "component",
+      },
+      {
+        name: "LayoutProvider",
+        slug: "layout-provider",
+        description: "Context provider for managing layout state and rendering",
+        tag: "component",
+      },
+      {
+        name: "Link",
+        slug: "link",
+        description: "Styled link component for navigation",
+        tag: "component",
+      },
+      {
+        name: "Modal",
+        slug: "modal",
+        description: "Modal component for displaying content in a dialog",
+        tag: "component",
+      },
+      {
+        name: "Navbar",
+        slug: "navbar",
+        description: "Navigation bar component for application headers",
+        tag: "component",
+      },
+      {
+        name: "Popover",
+        slug: "popover",
+        description: "Popover component for displaying contextual information",
+        tag: "component",
+      },
+      {
+        name: "Provider",
+        slug: "provider",
+        description: "Context provider for theme and color palette management",
+        tag: "component",
+      },
+      {
+        name: "Search",
+        slug: "search",
+        description: "Search component for filtering and displaying data",
+        tag: "component",
+      },
+      {
+        name: "Select",
+        slug: "select",
+        description: "Dropdown select component for choosing options",
+        tag: "component",
+      },
+      {
+        name: "Skeleton",
+        slug: "skeleton",
+        description: "Skeleton loading component for indicating loading states",
+        tag: "component",
+      },
+      {
+        name: "Wrapper",
+        slug: "wrapper",
+        description: "Wrapper component for consistent styling and layout",
+        tag: "component",
+      },
     ],
   },
   {
@@ -84,7 +173,18 @@ export const packages: DocPackage[] = [
     slug: "notify",
     description: "Notification system for displaying alerts and messages",
     modules: [
-      // finish
+      {
+        name: 'useNotify',
+        slug: 'use-notify',
+        description: 'Hook for managing notifications',
+        tag: 'hook',
+      },
+      {
+        name: 'NotifyProvider',
+        slug: 'notify-provider',
+        description: 'Context provider for notification system',
+        tag: 'component',
+      }
     ],
   },
   {
@@ -92,7 +192,90 @@ export const packages: DocPackage[] = [
     slug: "server",
     description: "Server-side utilities and middleware for enotion",
     modules: [
-      // finish
+      {
+        name: "getLocalIps",
+        slug: "get-local-ips",
+        description: "Utility to retrieve local IP addresses",
+        tag: ["network", "utility"],
+      },
+      {
+        name: "getHostname",
+        slug: "get-hostname",
+        description: "Utility to retrieve the system hostname",
+        tag: ["network", "utility"],
+      },
+      {
+        name: "isPortOpen",
+        slug: "is-port-open",
+        description: "Utility to check if a network port is open",
+        tag: ["network", "utility"],
+      },
+      {
+        name: "findOpenPort",
+        slug: "find-open-port",
+        description: "Utility to find an open network port",
+        tag: ["network", "utility"],
+      },
+      {
+        name: "cpuUsage",
+        slug: "cpu-usage",
+        description: "Utility function to return the current CPU usage array",
+        tag: ["system", "utility", "cpu"],
+      },
+      {
+        name: "parseCpuUsage",
+        slug: "parse-cpu-usage",
+        description: "Utility function to parse CPU usage data into a percentage string",
+        tag: ["system", "utility", "cpu"],
+      },
+      {
+        name: "cpuTemperature",
+        slug: "cpu-temperature",
+        description: "Utility function to return the current CPU temperature",
+        tag: ["system", "utility", "cpu"],
+      },
+      {
+        name: "parseCpuTemperature",
+        slug: "parse-cpu-temperature",
+        description: "Utility function to parse CPU temperature data into a string",
+        tag: ["system", "utility", "cpu"],
+      },
+      {
+        name: "diskUsage",
+        slug: "disk-usage",
+        description: "Utility function to retrieve disk usage information for a given path",
+        tag: ["system", "utility"],
+      },
+      {
+        name: "memoryUsage",
+        slug: "memory-usage",
+        description: "Utility function to retrieve memory usage information",
+        tag: ["system", "utility"],
+      },
+      {
+        name: "os",
+        slug: "os",
+        description: "Utility function to retrieve operating system information",
+        tag: ["system", "utility"],
+      },
+      {
+        name: "performance",
+        slug: "performance",
+        description: "Utility function to retrieve system performance metrics",
+        tag: ["system", "utility"],
+      },
+      {
+        name: "uptime",
+        slug: "uptime",
+        description: "Utility function to retrieve system uptime information",
+        tag: ["system", "utility"],
+      },
+      {
+        name: "getSystemSnapshot",
+        slug: "get-system-snapshot",
+        description: "Utility function to retrieve a snapshot of the current system information",
+        tag: ["system", "utility"],
+      }
     ],
   },
 ];
