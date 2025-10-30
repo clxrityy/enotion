@@ -9,9 +9,9 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => {}}
+        toggleTheme={() => { }}
         palette="default"
-        onPaletteChange={() => {}}
+        onPaletteChange={() => { }}
         items={[]}
       />,
     );
@@ -33,7 +33,7 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => {}}
+        toggleTheme={() => { }}
         items={navItems}
       />,
     );
@@ -57,8 +57,8 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => {}}
-        onPaletteChange={() => {}}
+        toggleTheme={() => { }}
+        onPaletteChange={() => { }}
         items={navItems}
       />,
     );
@@ -97,7 +97,7 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => {}}
+        onPaletteChange={() => { }}
         items={navItems}
       />,
     );
@@ -113,10 +113,52 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => {}}
+        onPaletteChange={() => { }}
         items={navItems}
       />,
     );
     expect(theme).toBe("light");
+  });
+
+  it("renders nav item main if provided", async () => {
+    const navItemsWithMain: NavItem[] = [
+      {
+        label: "Home",
+        subItems: [
+          { label: "Getting Started" },
+          { label: "Documentation" },
+        ],
+        main: {
+          heading: "Welcome Home",
+          description: "This is the main section for Home.",
+        }
+      },
+      {
+        label: "About",
+      },
+    ];
+
+    const { getByText, container } = render(
+      <Navbar
+        logo={<div>Logo</div>}
+        currentTheme="light"
+        toggleTheme={() => { }}
+        onPaletteChange={() => { }}
+        items={navItemsWithMain}
+      />,
+    );
+
+    // Find the popover trigger button by class
+    const menuButton = container.querySelector(".enotion-popover-trigger");
+    expect(menuButton).toBeTruthy();
+
+    // Use fireEvent to click the button
+    fireEvent.click(menuButton!);
+
+    // Wait for main item to be accessible after opening the menu
+    await waitFor(() => {
+      expect(getByText("Welcome Home")).toBeDefined();
+      expect(getByText("This is the main section for Home.")).toBeDefined();
+    });
   });
 });
