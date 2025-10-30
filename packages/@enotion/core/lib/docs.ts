@@ -139,6 +139,12 @@ export const packages: DocPackage[] = [
         slug: "use-visibility",
         description: "Hook for tracking the visibility of a DOM element",
         tag: "hook",
+      },
+      {
+        name: "useIsMounted",
+        slug: "use-is-mounted",
+        description: "Hook to determine if a component is currently mounted",
+        tag: "hook",
       }
     ],
   },
