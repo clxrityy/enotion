@@ -51,24 +51,95 @@ export const packages: DocPackage[] = [
     description: "Custom React hooks for state management and theming",
     modules: [
       {
+        name: "useAnimatedModals",
+        slug: "use-animated-modals",
+        description: "Hook for managing and animating modals through the layout context",
+        tag: "hook",
+      },
+      {
+        name: "useClipboard",
+        slug: "use-clipboard",
+        description: "Hook for managing clipboard operations",
+        tag: "hook",
+      },
+      {
+        name: "useColorPalette",
+        slug: "use-color-palette",
+        description: "Hook for managing color palettes and themes",
+        tag: "hook",
+      },
+      {
+        name: "useElementSize",
+        slug: "use-element-size",
+        description: "Hook for tracking the size of a DOM element",
+        tag: "hook",
+      },
+      {
+        name: "useEventListener",
+        slug: "use-event-listener",
+        description: "Hook for adding and removing event listeners",
+        tag: "hook",
+      },
+      {
+        name: "useFetch",
+        slug: "use-fetch",
+        description: "Hook for fetching data and inferring data types",
+        tag: "hook",
+      },
+      {
         name: "useLocalStorage",
         slug: "use-local-storage",
         description: "Hook for managing state synchronized with localStorage",
         tag: "hook",
       },
       {
-        name: "useTheme",
-        slug: "use-theme",
-        description: "Hook for accessing and manipulating theme context",
+        name: "useOutsideClick",
+        slug: "use-outside-click",
+        description: "Hook for detecting clicks outside a specified element",
         tag: "hook",
       },
       {
-        name: "useColorPalette",
-        slug: "use-color-palette",
-        description: "Hook for managing color palettes",
+        name: "usePreload",
+        slug: "use-preload",
+        description: "Hook for preloading resources",
         tag: "hook",
       },
-      // finish
+      {
+        name: "useScreenSize",
+        slug: "use-screen-size",
+        description: "Hook for tracking the size of the viewport",
+        tag: "hook",
+      },
+      {
+        name: "useScript",
+        slug: "use-script",
+        description: "Hook for dynamically loading external scripts",
+        tag: "hook",
+      },
+      {
+        name: "useSearch",
+        slug: "use-search",
+        description: "Hook for searching and filtering data",
+        tag: "hook",
+      },
+      {
+        name: "useSVG",
+        slug: "use-svg",
+        description: "Hook for loading and manipulating SVGs",
+        tag: "hook",
+      },
+      {
+        name: "useTheme",
+        slug: "use-theme",
+        description: "Hook for managing application theme",
+        tag: "hook",
+      },
+      {
+        name: "useVisibility",
+        slug: "use-visibility",
+        description: "Hook for tracking the visibility of a DOM element",
+        tag: "hook",
+      }
     ],
   },
   {
