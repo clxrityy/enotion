@@ -4,15 +4,21 @@ import { Navbar, Wrapper, type NavItem } from "@enotion/components";
 import { cn, ColorPalettes, ColorPaletteType, Icons } from "@enotion/core";
 import { useColorPalette, useSVG } from "@enotion/hooks";
 import { useRouter } from "next/navigation";
-// import { CSSProperties } from "react";
 
 const items: NavItem[] = [
   {
     label: "Home",
+    href: "/",
   },
   {
     label: "Packages",
     href: "/packages",
+    main: {
+      icon: Icons.Package,
+      description: "Explore the enotion packages",
+      href: "/packages",
+      heading: "Packages"
+    },
     subItems: [
       {
         label: "Hooks",
@@ -88,8 +94,6 @@ export default function Layout({
 }>) {
   const { palette, setPalette } = useColorPalette();
   const { push } = useRouter();
-
-  // const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
   return (
     <main

@@ -1,8 +1,14 @@
+import { Icons } from "../constants";
+import { IconType } from "react-icons/lib";
+
+const { Core, Hooks, Components, Server, Notifications } = Icons
+
 export interface DocPackage {
   name: string;
   slug: string;
   description: string;
   modules: DocModule[];
+  icon?: IconType;
 }
 
 export interface DocModule {
@@ -17,6 +23,7 @@ export const packages: DocPackage[] = [
     name: "@enotion/core",
     slug: "core",
     description: "Core utilities, constants, and contexts for enotion",
+    icon: Core,
     modules: [
       {
         name: "cn",
@@ -49,6 +56,7 @@ export const packages: DocPackage[] = [
     name: "@enotion/hooks",
     slug: "hooks",
     description: "Custom React hooks for state management and theming",
+    icon: Hooks,
     modules: [
       {
         name: "useAnimatedModals",
@@ -151,6 +159,7 @@ export const packages: DocPackage[] = [
   {
     name: "@enotion/components",
     slug: "components",
+    icon: Components,
     description: "Reusable React components for building user interfaces",
     modules: [
       {
@@ -248,6 +257,7 @@ export const packages: DocPackage[] = [
   {
     name: "@enotion/notify",
     slug: "notify",
+    icon: Notifications,
     description: "Notification system for displaying alerts and messages",
     modules: [
       {
@@ -267,6 +277,7 @@ export const packages: DocPackage[] = [
   {
     name: "@enotion/server",
     slug: "server",
+    icon: Server,
     description: "Server-side utilities and middleware for enotion",
     modules: [
       {
