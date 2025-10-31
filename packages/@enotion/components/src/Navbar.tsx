@@ -176,7 +176,7 @@ export const Navbar = ({
                               <div className="flex flex-col sm:flex-row items-center justify-between">
                                 {
                                   item.main && (
-                                    <div className="flex items-center gap-2 border-(--navbar-border) py-6 px-2 mb-2 sm:w-full shadow-lg rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow hover:shadow-sm">
+                                    <div className="flex items-center gap-2 border-(--navbar-border) py-6 px-2 mb-2 sm:w-full shadow-xs rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow">
                                       <div className="flex flex-col">
                                         <a href={item.main.href ?? item.href} className="font-bold text-xl">
                                           <div className="flex flex-row items-center justify-start gap-2">
@@ -325,7 +325,7 @@ export const Navbar = ({
                               >
                                 <div className="flex gap-2 items-center justify-between">
                                   {item.main && (
-                                    <div className="flex flex-col mb-2 items-center gap-2 border-(--navbar-border) py-6 px-2 w-full sm:w-fit shadow-sm rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow hover:shadow-xs">
+                                    <div className="flex flex-col mb-2 items-center gap-2 border-(--navbar-border) py-6 px-2 w-full sm:w-fit rounded-lg bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/75 hover:bg-(linear-gradient(to right, var(--navbar-background), var(--navbar-muted)))/90 transition-shadow shadow-xs">
                                       <a href={item.main.href ?? item.href} className="font-bold text-lg">
                                         <div className="flex flex-row items-center justify-start gap-2">
                                           {
