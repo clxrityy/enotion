@@ -252,6 +252,12 @@ export const packages: DocPackage[] = [
         description: "Wrapper component for consistent styling and layout",
         tag: "component",
       },
+      {
+        name: "CodeBlock",
+        slug: "code-block",
+        description: "Syntax-highlighted code display component",
+        tag: "component",
+      }
     ],
   },
   {
