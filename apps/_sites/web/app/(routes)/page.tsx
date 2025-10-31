@@ -1,20 +1,13 @@
 "use client";
 
-import { AnimatedModal, Button, SkeletonWrapper } from "@enotion/components";
 import { ColorPalettes } from "@enotion/core";
 import { useColorPalette } from "@enotion/hooks";
-import { CSSProperties, useState } from "react";
+import { CSSProperties } from "react";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { palette } = useColorPalette();
 
   const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
-
-  const toggleLoading = () => {
-    setIsLoading(!isLoading);
-  };
 
   return (
     <div
@@ -37,22 +30,19 @@ export default function Home() {
         } as CSSProperties
       }
     >
-      <h1 className="text-3xl font-bold mb-4">Welcome to My Site</h1>
+      <h1 className="text-3xl font-bold mb-4">enotion</h1>
 
       <div className="flex gap-4">
-        <Button
+        {/* <Button
           palette={palette}
           variant="default"
           onClick={() => setIsOpen(true)}
         >
           Show Modal
-        </Button>
-        <Button palette={palette} variant="default" onClick={toggleLoading}>
-          {isLoading ? "Stop Loading" : "Test Skeleton"}
-        </Button>
+        </Button> */}
       </div>
 
-      <div className="border p-4 rounded">
+      {/* <div className="border p-4 rounded">
         <h2 className="text-xl font-semibold mb-4">Skeleton Test</h2>
         <SkeletonWrapper
           palette={palette}
@@ -67,9 +57,9 @@ export default function Home() {
           <h3>A Heading</h3>
           <div>Some other content</div>
         </SkeletonWrapper>
-      </div>
+      </div> */}
 
-      <AnimatedModal
+      {/* <AnimatedModal
         onClose={() => setIsOpen(false)}
         isOpen={isOpen}
         modalId="modal-test"
@@ -77,7 +67,7 @@ export default function Home() {
         animationConfig={{}}
       >
         <h2 className="text-2xl font-semibold mb-4">Hello from Modal!</h2>
-      </AnimatedModal>
+      </AnimatedModal> */}
     </div>
   );
 }

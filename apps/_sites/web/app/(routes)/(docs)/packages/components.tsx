@@ -158,11 +158,11 @@ export function DocLayout({ children }: DocLayoutProps) {
         {/* Main Content */}
         <div
           className={`
-          flex-1 transition-all
+          flex-1 transition-all h-[calc(100vh-4rem)] overflow-y-auto
           ${sidebarOpen ? "ml-64" : "ml-0"}
           `}
         >
-          <div className="max-w-4xl mx-auto p-8">{children}</div>
+          <div className="max-w-4xl mx-auto p-8 pb-16">{children}</div>
         </div>
 
         {/* Toggle Sidebar Button */}

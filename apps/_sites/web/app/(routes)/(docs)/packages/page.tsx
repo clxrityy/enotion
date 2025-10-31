@@ -12,7 +12,7 @@ export default function Page() {
   const { palette } = useColorPalette();
 
   return (
-    <div className="flex flex-col gap-4 mx-10 overflow-y-scroll w-full h-full">
+    <div className="flex flex-col gap-4 mx-4 overflow-y-scroll w-full h-full">
       <SkeletonWrapper palette={palette} isLoading={true}>
         <MDXProvider>
           <Content />
