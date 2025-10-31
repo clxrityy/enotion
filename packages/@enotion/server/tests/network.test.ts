@@ -1,7 +1,7 @@
 import {
   getHostname,
   getLocalIps,
-  findAvailablePort,
+  findOpenPort,
   isPortOpen,
 } from "../src/network";
 import { describe, it, expect } from "@jest/globals";
@@ -34,10 +34,10 @@ describe("Network Module", () => {
   });
 
   it("should find an available port", async () => {
-    const port = await findAvailablePort(3000, 3010);
+    const port = await findOpenPort(3000, 3010);
     expect(
       port === null ||
-        (typeof port === "number" && port >= 3000 && port <= 3010),
+      (typeof port === "number" && port >= 3000 && port <= 3010),
     ).toBe(true);
   });
 });
