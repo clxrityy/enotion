@@ -321,18 +321,21 @@ export const PackagesComponent = () => {
             className={cn(
               "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[1.042] hover:border hover:border-(--active-color)/25",
               active === pkg.name &&
-              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+                "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
             )}
           >
             <h3 className="font-semibold text-lg mb-2">
-              <Link href={`/packages/${pkg.slug}`} className="flex items-center justify-start md:justify-between gap-2">
+              <Link
+                href={`/packages/${pkg.slug}`}
+                className="flex items-center justify-start md:justify-between gap-2"
+              >
                 {pkg.name}
                 {Icon && <Icon />}
               </Link>
             </h3>
             <p className="text-sm text-(--muted)">{pkg.description}</p>
           </Card>
-        )
+        );
       })}
     </div>
   );

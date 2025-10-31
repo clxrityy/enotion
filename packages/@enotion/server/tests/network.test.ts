@@ -37,7 +37,7 @@ describe("Network Module", () => {
     const port = await findOpenPort(3000, 3010);
     expect(
       port === null ||
-      (typeof port === "number" && port >= 3000 && port <= 3010),
+        (typeof port === "number" && port >= 3000 && port <= 3010),
     ).toBe(true);
   });
 });

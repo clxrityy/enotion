@@ -1,7 +1,7 @@
 import { Icons } from "../constants";
 import { IconType } from "react-icons/lib";
 
-const { Core, Hooks, Components, Server, Notifications } = Icons
+const { Core, Hooks, Components, Server, Notifications } = Icons;
 
 export interface DocPackage {
   name: string;
@@ -61,7 +61,8 @@ export const packages: DocPackage[] = [
       {
         name: "useAnimatedModals",
         slug: "use-animated-modals",
-        description: "Hook for managing and animating modals through the layout context",
+        description:
+          "Hook for managing and animating modals through the layout context",
         tag: "hook",
       },
       {
@@ -153,7 +154,7 @@ export const packages: DocPackage[] = [
         slug: "use-is-mounted",
         description: "Hook to determine if a component is currently mounted",
         tag: "hook",
-      }
+      },
     ],
   },
   {
@@ -165,7 +166,8 @@ export const packages: DocPackage[] = [
       {
         name: "AnimatedModal",
         slug: "animated-modal",
-        description: "Animated modal component for displaying content in a modal dialog with smooth transitions",
+        description:
+          "Animated modal component for displaying content in a modal dialog with smooth transitions",
         tag: "component",
       },
       {
@@ -177,7 +179,8 @@ export const packages: DocPackage[] = [
       {
         name: "Card",
         slug: "card",
-        description: "Card component for displaying content in a styled container",
+        description:
+          "Card component for displaying content in a styled container",
         tag: "component",
       },
       {
@@ -257,7 +260,7 @@ export const packages: DocPackage[] = [
         slug: "code-block",
         description: "Syntax-highlighted code display component",
         tag: "component",
-      }
+      },
     ],
   },
   {
@@ -267,17 +270,17 @@ export const packages: DocPackage[] = [
     description: "Notification system for displaying alerts and messages",
     modules: [
       {
-        name: 'useNotify',
-        slug: 'use-notify',
-        description: 'Hook for managing notifications',
-        tag: 'hook',
+        name: "useNotify",
+        slug: "use-notify",
+        description: "Hook for managing notifications",
+        tag: "hook",
       },
       {
-        name: 'NotifyProvider',
-        slug: 'notify-provider',
-        description: 'Context provider for notification system',
-        tag: 'component',
-      }
+        name: "NotifyProvider",
+        slug: "notify-provider",
+        description: "Context provider for notification system",
+        tag: "component",
+      },
     ],
   },
   {
@@ -319,7 +322,8 @@ export const packages: DocPackage[] = [
       {
         name: "parseCpuUsage",
         slug: "parse-cpu-usage",
-        description: "Utility function to parse CPU usage data into a percentage string",
+        description:
+          "Utility function to parse CPU usage data into a percentage string",
         tag: ["system", "utility", "cpu"],
       },
       {
@@ -331,13 +335,15 @@ export const packages: DocPackage[] = [
       {
         name: "parseCpuTemperature",
         slug: "parse-cpu-temperature",
-        description: "Utility function to parse CPU temperature data into a string",
+        description:
+          "Utility function to parse CPU temperature data into a string",
         tag: ["system", "utility", "cpu"],
       },
       {
         name: "diskUsage",
         slug: "disk-usage",
-        description: "Utility function to retrieve disk usage information for a given path",
+        description:
+          "Utility function to retrieve disk usage information for a given path",
         tag: ["system", "utility"],
       },
       {
@@ -349,7 +355,8 @@ export const packages: DocPackage[] = [
       {
         name: "os",
         slug: "os",
-        description: "Utility function to retrieve operating system information",
+        description:
+          "Utility function to retrieve operating system information",
         tag: ["system", "utility"],
       },
       {
@@ -367,9 +374,10 @@ export const packages: DocPackage[] = [
       {
         name: "getSystemSnapshot",
         slug: "get-system-snapshot",
-        description: "Utility function to retrieve a snapshot of the current system information",
+        description:
+          "Utility function to retrieve a snapshot of the current system information",
         tag: ["system", "utility"],
-      }
+      },
     ],
   },
 ];

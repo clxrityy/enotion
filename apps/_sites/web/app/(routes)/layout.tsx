@@ -17,7 +17,7 @@ const items: NavItem[] = [
       icon: Icons.Package,
       description: "Explore the enotion packages",
       href: "/packages",
-      heading: "Packages"
+      heading: "Packages",
     },
     subItems: [
       {

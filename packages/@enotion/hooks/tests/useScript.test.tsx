@@ -12,14 +12,18 @@ import { useScript } from "../src/useScript.js";
 describe("useScript", () => {
   beforeEach(() => {
     // Clear any existing scripts
-    for (const script of document.querySelectorAll('script[src*="example.com"]')) {
+    for (const script of document.querySelectorAll(
+      'script[src*="example.com"]',
+    )) {
       script.remove();
     }
   });
 
   afterEach(() => {
     // Clean up after each test
-    for (const script of document.querySelectorAll('script[src*="example.com"]')) {
+    for (const script of document.querySelectorAll(
+      'script[src*="example.com"]',
+    )) {
       script.remove();
     }
     jest.restoreAllMocks();

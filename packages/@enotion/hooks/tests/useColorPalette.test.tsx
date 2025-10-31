@@ -8,7 +8,10 @@ import {
 } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import { useEffect } from "react";
-import { useColorPalette, ColorPaletteProvider } from "../src/useColorPalette.js";
+import {
+  useColorPalette,
+  ColorPaletteProvider,
+} from "../src/useColorPalette.js";
 import { ColorPaletteType } from "@enotion/core/constants";
 
 describe("useColorPalette", () => {

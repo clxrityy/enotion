@@ -20,7 +20,8 @@ export interface CodeBlockProps {
  * Language-specific syntax highlighting patterns
  */
 const SYNTAX_PATTERNS = {
-  keyword: /\b(const|let|var|function|return|if|else|for|while|class|extends|import|export|from|default|async|await|try|catch|throw|new|delete|typeof|instanceof|in|of|break|continue|switch|case|interface|type|enum|namespace|module|declare|public|private|protected|static|readonly|abstract|as|implements|constructor|get|set|super|this)\b/g,
+  keyword:
+    /\b(const|let|var|function|return|if|else|for|while|class|extends|import|export|from|default|async|await|try|catch|throw|new|delete|typeof|instanceof|in|of|break|continue|switch|case|interface|type|enum|namespace|module|declare|public|private|protected|static|readonly|abstract|as|implements|constructor|get|set|super|this)\b/g,
   string: /(["'`])(?:(?=(\\?))\2.)*?\1/g,
   comment: /(\/\/.*$|\/\*[\s\S]*?\*\/)/gm,
   number: /\b(\d+\.?\d*|\.\d+)\b/g,
@@ -38,7 +39,7 @@ const SYNTAX_PATTERNS = {
  */
 function tokenizeCode(
   code: string,
-  _language?: string
+  _language?: string,
 ): Array<{ type: string; value: string }> {
   const tokens: Array<{ type: string; value: string; index: number }> = [];
 
@@ -101,7 +102,7 @@ function tokenizeCode(
 function getTokenColor(
   type: string,
   palette?: ColorPaletteType,
-  theme?: Theme
+  theme?: Theme,
 ): string {
   const colors = palette ? ColorPalettes[palette] : null;
   const isDark = theme === "dark";
@@ -123,8 +124,7 @@ function getTokenColor(
       text: isDark ? "#abb2bf" : "#383a42",
     };
     return (
-      fallbackColors[type as keyof typeof fallbackColors] ||
-      fallbackColors.text
+      fallbackColors[type as keyof typeof fallbackColors] || fallbackColors.text
     );
   }
 
@@ -144,9 +144,7 @@ function getTokenColor(
     text: colors.foreground,
   };
 
-  return (
-    tokenColorMap[type as keyof typeof tokenColorMap] || colors.foreground
-  );
+  return tokenColorMap[type as keyof typeof tokenColorMap] || colors.foreground;
 }
 
 /**
@@ -257,12 +255,13 @@ export function CodeBlock({
     paddingLeft: showLineNumbers ? "0" : "0.5rem",
     paddingRight: "1rem",
     backgroundColor: highlightLines.includes(lineNum)
-      ? (highlightBg || "transparent")
+      ? highlightBg || "transparent"
       : "transparent",
     borderLeft: highlightLines.includes(lineNum)
       ? `3px solid ${colors?.primary || "#61afef"}`
       : "3px solid transparent",
-  }); const lineNumberStyle: CSSProperties = {
+  });
+  const lineNumberStyle: CSSProperties = {
     display: "inline-block",
     width: "3rem",
     paddingRight: "1rem",
@@ -270,7 +269,8 @@ export function CodeBlock({
     color: lineNumberColor || foregroundColor,
     userSelect: "none",
     flexShrink: 0,
-  }; return (
+  };
+  return (
     <pre className={`enotion-code-block ${className}`} style={codeBlockStyle}>
       <code>
         {lineTokens.map((lineTokenArray, lineIdx) => {
@@ -289,8 +289,7 @@ export function CodeBlock({
                       key={tokenKey}
                       style={{
                         color: getTokenColor(token.type, palette, theme),
-                        fontWeight:
-                          token.type === "keyword" ? "600" : "normal",
+                        fontWeight: token.type === "keyword" ? "600" : "normal",
                         fontStyle:
                           token.type === "comment" ? "italic" : "normal",
                       }}

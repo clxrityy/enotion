@@ -9,9 +9,9 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={[]}
       />,
     );
@@ -33,7 +33,7 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
+        toggleTheme={() => {}}
         items={navItems}
       />,
     );
@@ -57,8 +57,8 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
-        onPaletteChange={() => { }}
+        toggleTheme={() => {}}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
@@ -97,7 +97,7 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
@@ -113,7 +113,7 @@ describe("Navbar Component", () => {
         currentTheme={theme}
         toggleTheme={toggleTheme}
         palette="default"
-        onPaletteChange={() => { }}
+        onPaletteChange={() => {}}
         items={navItems}
       />,
     );
@@ -124,14 +124,11 @@ describe("Navbar Component", () => {
     const navItemsWithMain: NavItem[] = [
       {
         label: "Home",
-        subItems: [
-          { label: "Getting Started" },
-          { label: "Documentation" },
-        ],
+        subItems: [{ label: "Getting Started" }, { label: "Documentation" }],
         main: {
           heading: "Welcome Home",
           description: "This is the main section for Home.",
-        }
+        },
       },
       {
         label: "About",
@@ -142,8 +139,8 @@ describe("Navbar Component", () => {
       <Navbar
         logo={<div>Logo</div>}
         currentTheme="light"
-        toggleTheme={() => { }}
-        onPaletteChange={() => { }}
+        toggleTheme={() => {}}
+        onPaletteChange={() => {}}
         items={navItemsWithMain}
       />,
     );

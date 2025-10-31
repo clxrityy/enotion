@@ -42,7 +42,10 @@ describe("useLocalStorage", () => {
 
   it("should initialize with value from localStorage if it exists", () => {
     globalThis.window.localStorage.clear();
-    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.setItem(
+      "testKey",
+      JSON.stringify("storedValue"),
+    );
 
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
@@ -77,7 +80,10 @@ describe("useLocalStorage", () => {
 
   it("should remove item from localStorage when remove function is called", () => {
     globalThis.window.localStorage.clear();
-    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.setItem(
+      "testKey",
+      JSON.stringify("storedValue"),
+    );
 
     const { result } = renderHook(() =>
       useLocalStorage<string>("testKey", "initialValue"),
@@ -133,7 +139,10 @@ describe("useLocalStorage", () => {
   it("should handle localStorage removeItem error gracefully", () => {
     globalThis.window.localStorage.clear();
     // Set up initial value - make sure it's there
-    globalThis.window.localStorage.setItem("testKey", JSON.stringify("storedValue"));
+    globalThis.window.localStorage.setItem(
+      "testKey",
+      JSON.stringify("storedValue"),
+    );
 
     // Verify localStorage actually has the value
     expect(globalThis.window.localStorage.getItem("testKey")).toBe(

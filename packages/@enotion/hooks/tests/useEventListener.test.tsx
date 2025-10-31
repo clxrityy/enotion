@@ -19,8 +19,14 @@ describe("useEventListener", () => {
   });
 
   it("should add and remove event listener on mount and unmount", () => {
-    const addEventListenerSpy = jest.spyOn(globalThis.window, "addEventListener");
-    const removeEventListenerSpy = jest.spyOn(globalThis.window, "removeEventListener");
+    const addEventListenerSpy = jest.spyOn(
+      globalThis.window,
+      "addEventListener",
+    );
+    const removeEventListenerSpy = jest.spyOn(
+      globalThis.window,
+      "removeEventListener",
+    );
     const handler = jest.fn();
 
     const { unmount } = renderHook(() => useEventListener("click", handler));
@@ -76,7 +82,10 @@ describe("useEventListener", () => {
     const handler = jest.fn();
     const invalidElement = {} as HTMLElement;
 
-    const addEventListenerSpy = jest.spyOn(globalThis.window, "addEventListener");
+    const addEventListenerSpy = jest.spyOn(
+      globalThis.window,
+      "addEventListener",
+    );
 
     renderHook(() => useEventListener("click", handler, invalidElement));
 

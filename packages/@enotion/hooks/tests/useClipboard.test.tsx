@@ -56,7 +56,7 @@ describe("useClipboard", () => {
 
     const consoleErrorSpy = jest
       .spyOn(console, "error")
-      .mockImplementation(() => { });
+      .mockImplementation(() => {});
 
     const Component = () => {
       const { isCopied, copy } = useClipboard({
