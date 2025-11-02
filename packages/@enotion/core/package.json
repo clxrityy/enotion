@@ -26,6 +26,10 @@
       "import": "./dist/contexts/index.js",
       "types": "./dist/contexts/index.d.mts"
     },
+    "./lib": {
+      "import": "./dist/lib/index.js",
+      "types": "./dist/lib/index.d.mts"
+    },
     "./index.css": {
       "default": "./dist/index.css"
     }
@@ -45,7 +49,7 @@
     "clsx": "^2.1.1",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
-    "jsdom": "^27.0.1",
+    "jsdom": "^27.1.0",
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.3.1",
     "terser": "^5.44.0",
