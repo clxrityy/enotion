@@ -16,3 +16,4 @@ export * from "./Wrapper.js";
 export * from "./Modal.js";
 export * from "./AnimatedModal.js";
 export * from "./CodeBlock.js";
+export * from "./LinkHeading.js";
