@@ -271,7 +271,7 @@ export function CodeBlock({
     flexShrink: 0,
   };
   return (
-    <pre className={`enotion-code-block ${className}`} style={codeBlockStyle}>
+    <section className={`enotion-code-block ${className}`} style={codeBlockStyle}>
       <code>
         {lineTokens.map((lineTokenArray, lineIdx) => {
           const lineNum = lineIdx + 1;
@@ -303,6 +303,6 @@ export function CodeBlock({
           );
         })}
       </code>
-    </pre>
+    </section>
   );
 }

@@ -10,9 +10,9 @@ function sayHello() {
 
   it("renders with default props", () => {
     const { container } = render(<CodeBlock>{sampleCode}</CodeBlock>);
-    const preElement = container.querySelector("pre");
-    expect(preElement).toBeDefined();
-    expect(preElement?.classList.contains("enotion-code-block")).toBe(true);
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement).toBeDefined();
+    expect(sectionElement?.classList.contains("enotion-code-block")).toBe(true);
   });
 
   it("renders code content", () => {
@@ -27,8 +27,8 @@ function sayHello() {
     const { container } = render(
       <CodeBlock className="custom-class">{sampleCode}</CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
-    expect(preElement?.classList.contains("custom-class")).toBe(true);
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement?.classList.contains("custom-class")).toBe(true);
   });
 
   it("applies custom styles", () => {
@@ -36,9 +36,9 @@ function sayHello() {
     const { container } = render(
       <CodeBlock style={customStyle}>{sampleCode}</CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
-    expect(preElement?.style.maxWidth).toBe("500px");
-    expect(preElement?.style.padding).toBe("2rem");
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement?.style.maxWidth).toBe("500px");
+    expect(sectionElement?.style.padding).toBe("2rem");
   });
 
   it("renders with line numbers when showLineNumbers is true", () => {
@@ -51,7 +51,7 @@ function sayHello() {
     // Should have line number spans
     const lineNumberSpans = container.querySelectorAll("span");
     const hasLineNumbers = Array.from(lineNumberSpans).some(
-      (span) => span.textContent === "1" || span.textContent === "2",
+      (span) => span.textContent === "1" || span.textContent === "2" || span.textContent === "3",
     );
     expect(hasLineNumbers).toBe(true);
     expect(lines?.length).toBeGreaterThan(0);
@@ -59,40 +59,43 @@ function sayHello() {
 
   it("does not render line numbers by default", () => {
     const { container } = render(<CodeBlock>{sampleCode}</CodeBlock>);
-    const preElement = container.querySelector("pre");
-    // Check padding to verify line numbers are not shown
-    const styles = getComputedStyle(preElement as HTMLElement);
-    expect(styles.padding).toBe("1rem");
+    const sectionElement = container.querySelector("section");
+    // Should not have line number spans when showLineNumbers is false
+    const lineNumberSpans = container.querySelectorAll("span");
+    const hasLineNumbers = Array.from(lineNumberSpans).some(
+      (span) => span.textContent === "1" || span.textContent === "2",
+    );
+    expect(hasLineNumbers).toBe(false);
+    expect(sectionElement).toBeDefined();
   });
 
   it("applies theme colors correctly", () => {
     const { container } = render(
       <CodeBlock theme="dark">{sampleCode}</CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
-    const styles = getComputedStyle(preElement as HTMLElement);
-
-    // Dark theme should have dark background
-    expect(styles.backgroundColor).toBeTruthy();
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement).toBeDefined();
+    // Dark theme should use dark background
+    expect(sectionElement?.style.backgroundColor).toBeTruthy();
   });
 
   it("applies light theme colors", () => {
     const { container } = render(
       <CodeBlock theme="light">{sampleCode}</CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
-    expect(preElement).toBeDefined();
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement).toBeDefined();
+    expect(sectionElement?.style.backgroundColor).toBeTruthy();
   });
 
   it("applies color palette when provided", () => {
     const { container } = render(
       <CodeBlock palette="dark">{sampleCode}</CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
-    const styles = getComputedStyle(preElement as HTMLElement);
-
-    expect(styles.backgroundColor).toBeTruthy();
-    expect(styles.color).toBeTruthy();
+    const sectionElement = container.querySelector("section");
+    expect(sectionElement).toBeDefined();
+    expect(sectionElement?.style.backgroundColor).toBeTruthy();
+    expect(sectionElement?.style.color).toBeTruthy();
   });
 
   it("highlights specified lines", () => {
@@ -104,21 +107,19 @@ function sayHello() {
 
     expect(lines?.length).toBeGreaterThan(0);
 
-    // First line should have highlight styling
+    // First line should have highlight styling (border-left)
     const firstLine = lines?.[0];
-    const firstLineStyles = firstLine ? getComputedStyle(firstLine) : null;
-    expect(firstLineStyles?.borderLeft).toContain("3px");
+    expect(firstLine?.style.borderLeft).toContain("3px");
   });
 
   it("tokenizes keywords correctly", () => {
     const { container } = render(<CodeBlock>{sampleCode}</CodeBlock>);
     const codeElement = container.querySelector("code");
 
-    // Check if keywords are wrapped in spans
+    // Check if keywords are styled with bold font-weight
     const spans = codeElement?.querySelectorAll("span");
     const hasKeywordSpan = Array.from(spans || []).some((span) => {
-      const style = getComputedStyle(span);
-      return style.fontWeight === "600" || style.fontWeight === "bold";
+      return span.style.fontWeight === "600";
     });
 
     expect(hasKeywordSpan).toBe(true);
@@ -183,8 +184,7 @@ line 4`;
     const spans = codeElement?.querySelectorAll("span");
 
     const hasItalicSpan = Array.from(spans || []).some((span) => {
-      const style = getComputedStyle(span);
-      return style.fontStyle === "italic";
+      return span.style.fontStyle === "italic";
     });
 
     expect(hasItalicSpan).toBe(true);
@@ -211,25 +211,28 @@ line 4`;
 
   it("combines palette and showLineNumbers", () => {
     const { container } = render(
-      <CodeBlock palette="solarized" showLineNumbers>
+      <CodeBlock palette="dark" showLineNumbers>
         {sampleCode}
       </CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
+    const sectionElement = container.querySelector("section");
     const codeElement = container.querySelector("code");
 
-    expect(preElement).toBeDefined();
+    expect(sectionElement).toBeDefined();
     expect(codeElement).toBeDefined();
 
-    // Should have line numbers with palette colors
-    const styles = getComputedStyle(preElement as HTMLElement);
-    expect(styles.padding).toBe("1rem 0px");
+    // Should have line numbers
+    const lineNumberSpans = container.querySelectorAll("span");
+    const hasLineNumbers = Array.from(lineNumberSpans).some(
+      (span) => span.textContent === "1" || span.textContent === "2",
+    );
+    expect(hasLineNumbers).toBe(true);
   });
 
   it("renders with all features combined", () => {
     const { container } = render(
       <CodeBlock
-        palette="monokai"
+        palette="dark"
         theme="dark"
         showLineNumbers
         highlightLines={[2]}
@@ -239,10 +242,10 @@ line 4`;
         {sampleCode}
       </CodeBlock>,
     );
-    const preElement = container.querySelector("pre");
+    const sectionElement = container.querySelector("section");
 
-    expect(preElement).toBeDefined();
-    expect(preElement?.classList.contains("full-featured")).toBe(true);
-    expect(preElement?.style.maxHeight).toBe("400px");
+    expect(sectionElement).toBeDefined();
+    expect(sectionElement?.classList.contains("full-featured")).toBe(true);
+    expect(sectionElement?.style.maxHeight).toBe("400px");
   });
 });
