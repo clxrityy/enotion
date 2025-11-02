@@ -83,9 +83,11 @@ export function DocLayout({ children }: DocLayoutProps) {
                     onFocus={() => {
                       setCurrentPackage(pkg.slug);
                     }}
-                    onBlur={() => {
-                      setCurrentPackage("");
-                      setCurrentModule("");
+                    onBlur={(e) => {
+                      if (e.currentTarget.contains(e.relatedTarget) === false) {
+                        setCurrentPackage("");
+                        setCurrentModule("");
+                      }
                     }}
                     onMouseEnter={(e) => {
                       if (e.currentTarget.contains(e.currentTarget)) {
@@ -321,7 +323,7 @@ export const PackagesComponent = () => {
             className={cn(
               "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[1.042] hover:border hover:border-(--active-color)/25",
               active === pkg.name &&
-                "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
             )}
           >
             <h3 className="font-semibold text-lg mb-2">
