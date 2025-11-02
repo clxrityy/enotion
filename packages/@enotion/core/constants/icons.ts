@@ -19,6 +19,7 @@ import { HiOutlineServerStack } from "react-icons/hi2";
 import {
   TbLayoutSidebarLeftCollapseFilled,
   TbLayoutSidebarRightCollapseFilled,
+  TbHash,
 } from "react-icons/tb";
 
 export const Icons = {
@@ -44,4 +45,5 @@ export const Icons = {
   SidebarClose: TbLayoutSidebarRightCollapseFilled,
   PackageOpen: LuPackageOpen,
   Package: LuPackage,
+  Hash: TbHash,
 };
