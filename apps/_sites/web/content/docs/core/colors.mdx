@@ -1,0 +1,201 @@
+# colors
+
+A comprehensive set of utilities for color manipulation, conversion, and palette management.
+
+## Import
+
+```typescript
+import {
+  getRGBfromHex,
+  convertRGBtoString,
+  getHexFromRGB,
+  lightenHexColor,
+  darkenHexColor,
+  adjustHexColorOpacity,
+  isValidHexColor,
+  blendHexColors,
+  parseColor,
+  ColorPalettes,
+  type ColorPalette,
+  type ColorPaletteType
+} from "@enotion/core";
+```
+
+## Color Conversion
+
+### getRGBfromHex
+
+Convert a hex color string to RGB components.
+
+```typescript
+const rgb = getRGBfromHex("#ff5733");
+// { r: 255, g: 87, b: 51 }
+
+const rgb2 = getRGBfromHex("#f57"); // Handles shorthand
+// { r: 255, g: 85, b: 119 }
+```
+
+### convertRGBtoString
+
+Convert RGB components to an RGB string.
+
+```typescript
+const rgbString = convertRGBtoString(255, 87, 51);
+// "rgb(255, 87, 51)"
+```
+
+### getHexFromRGB
+
+Convert RGB components to a hex color string.
+
+```typescript
+const hexColor = getHexFromRGB(255, 87, 51);
+// "#ff5733"
+```
+
+### parseColor
+
+Parse various color formats into a hex color string.
+
+```typescript
+parseColor("#ff5733");           // "#ff5733"
+parseColor([255, 87, 51]);       // "#ff5733"
+parseColor([255, 87, 51, 0.5]);  // "#ff573380"
+parseColor(0xff5733);            // "#ff5733"
+```
+
+## Color Manipulation
+
+### lightenHexColor
+
+Lighten a hex color by a specified amount.
+
+```typescript
+const lightened = lightenHexColor("#ff5733", 20);
+// Returns a lighter shade (e.g., "#ff6f4d")
+```
+
+### darkenHexColor
+
+Darken a hex color by a specified amount.
+
+```typescript
+const darkened = darkenHexColor("#ff5733", 20);
+// Returns a darker shade (e.g., "#e6451f")
+```
+
+### adjustHexColorOpacity
+
+Adjust the opacity of a hex color.
+
+```typescript
+const withOpacity = adjustHexColorOpacity("#ff5733", 0.5);
+// "#ff573380"
+```
+
+### blendHexColors
+
+Blend two hex colors together by a specified ratio.
+
+```typescript
+const blended = blendHexColors("#ff5733", "#33aaff", 0.5);
+// Returns a 50/50 blend (e.g., "#996699")
+
+const moreRed = blendHexColors("#ff5733", "#33aaff", 0.25);
+// Returns 75% first color, 25% second color
+```
+
+## Validation
+
+### isValidHexColor
+
+Validate if a string is a valid hex color.
+
+```typescript
+isValidHexColor("#ff5733"); // true
+isValidHexColor("ff5733");  // true
+isValidHexColor("#fff");    // true (shorthand)
+isValidHexColor("zzz");     // false
+```
+
+## Color Palettes
+
+### ColorPalette Interface
+
+```typescript
+interface ColorPalette {
+  background: string;
+  foreground: string;
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  accent: string;
+  border: string;
+  highlight: string;
+  muted: string;
+  success: string;
+  warning: string;
+  error: string;
+  info: string;
+}
+```
+
+### Built-in Palettes
+
+The package includes four pre-defined color palettes:
+
+#### default
+Modern, clean palette with blue accents and high contrast.
+
+#### dark
+Dark theme with vibrant accent colors optimized for reduced eye strain.
+
+#### monochrome
+Grayscale palette with colorful status indicators.
+
+#### softBeach
+Warm palette with sandy and coral tones.
+
+### Usage
+
+```typescript
+import { ColorPalettes } from "@enotion/core";
+
+// Access a palette
+const darkPalette = ColorPalettes.dark;
+
+// Use palette colors
+const buttonStyle = {
+  backgroundColor: darkPalette.primary,
+  color: darkPalette.foreground,
+  border: `1px solid ${darkPalette.border}`
+};
+```
+
+## Type Definitions
+
+```typescript
+type Color =
+  | number
+  | string
+  | [number, number, number]
+  | [number, number, number, number]
+  | { r: number; g: number; b: number }
+  | { red: number; green: number; blue: number };
+
+type ColorPaletteType = "default" | "dark" | "monochrome" | "softBeach";
+```
+
+## API Reference
+
+| Function | Parameters | Returns | Description |
+|----------|-----------|---------|-------------|
+| **getRGBfromHex** | **hex: string** | **\{ r, g, b } \| null** | Convert hex to RGB |
+| **convertRGBtoString** | **r, g, b: number** | **string** | RGB to string |
+| **getHexFromRGB** | **r, g, b: number** | **string** | RGB to hex |
+| **lightenHexColor** | **hex: string, amount: number** | **string \| null** | Lighten color |
+| **darkenHexColor** | **hex: string, amount: number** | **string \| null** | Darken color |
+| **adjustHexColorOpacity** | **hex: string, opacity: number** | **string \| null** | Add opacity |
+| **isValidHexColor** | **hex: string** | **boolean** | Validate hex color |
+| **blendHexColors** | **hex1, hex2: string, ratio: number** | **string \| null** | Blend colors |
+| **parseColor** | **color: Color** | **string** | Parse to hex |

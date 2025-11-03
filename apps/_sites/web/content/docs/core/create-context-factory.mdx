@@ -1,0 +1,284 @@
+# createContextFactory
+
+A utility for creating React context with a built-in provider and custom hook, streamlining context creation and usage.
+
+## Import
+
+```typescript
+import { createContextFactory } from "@enotion/core/utils";
+```
+
+## Basic Usage
+
+```tsx
+import { useState } from "react";
+import { createContextFactory } from "@enotion/core/utils";
+
+// 1. Define your state shape
+interface CounterState {
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+}
+
+// 2. Create initial state
+const initialState: CounterState = {
+  count: 0,
+  increment: () => {},
+  decrement: () => {}
+};
+
+// 3. Create state hook
+const useCounterState = (): CounterState => {
+  const [count, setCount] = useState(0);
+
+  return {
+    count,
+    increment: () => setCount(c => c + 1),
+    decrement: () => setCount(c => c - 1)
+  };
+};
+
+// 4. Create context factory
+const { Provider, useContext } = createContextFactory(
+  initialState,
+  useCounterState
+);
+
+// 5. Export provider and hook
+export const CounterProvider = Provider;
+export const useCounter = useContext;
+```
+
+## Using the Context
+
+```tsx
+// App.tsx
+import { CounterProvider } from "./CounterContext";
+
+function App() {
+  return (
+    <CounterProvider>
+      <Counter />
+    </CounterProvider>
+  );
+}
+
+// Counter.tsx
+import { useCounter } from "./CounterContext";
+
+function Counter() {
+  const { count, increment, decrement } = useCounter();
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
+  );
+}
+```
+
+## Advanced: Additional Context
+
+You can pass additional context properties:
+
+```tsx
+function App() {
+  return (
+    <CounterProvider context={{ appName: "My App" }}>
+      <Counter />
+    </CounterProvider>
+  );
+}
+```
+
+## Type Definition
+
+```typescript
+type ContextFactory = <T>(
+  initialContextState: T,
+  useContextState: () => T,
+) => {
+  Consumer: Consumer<T>;
+  Provider: FC<Readonly<{ children: ReactNode; context?: {} }>>;
+  useContext: () => T;
+};
+```
+
+## Returns
+
+The **createContextFactory** function returns an object with three properties:
+
+### Consumer
+
+The React context consumer component (rarely needed with hooks).
+
+### Provider
+
+A component that wraps your app or component tree to provide the context.
+
+**Props:**
+- **children: ReactNode** - Components that can access the context
+- **context?: {}** - Optional additional context properties
+
+### useContext
+
+A custom hook to access the context value.
+
+**Returns:** The current context state (type `T`)
+
+## Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| **initialContextState** | **T** | The initial state/value of the context |
+| **useContextState** | **() => T** | A hook that returns the current state of the context |
+
+## Benefits
+
+1. **Less Boilerplate**: Combines context creation, provider, and hook in one call
+2. **Type Safety**: Full TypeScript support with proper type inference
+3. **Separation of Concerns**: State logic lives in the hook, not the provider
+4. **Reusable Pattern**: Consistent way to create contexts across your app
+5. **Flexible**: Can add additional context properties as needed
+
+## Best Practices
+
+### 1. Separate Files
+
+Keep your context in its own file:
+
+```
+src/
+  contexts/
+    ThemeContext.tsx
+    UserContext.tsx
+    LayoutContext.tsx
+```
+
+### 2. Export Pattern
+
+```tsx
+// ThemeContext.tsx
+const { Provider, useContext } = createContextFactory(
+  initialThemeState,
+  useThemeState
+);
+
+export const ThemeProvider = Provider;
+export const useTheme = useContext;
+
+// Don't export Consumer unless needed
+```
+
+### 3. Nest Providers
+
+```tsx
+function App() {
+  return (
+    <ThemeProvider>
+      <UserProvider>
+        <LayoutProvider>
+          <AppContent />
+        </LayoutProvider>
+      </UserProvider>
+    </ThemeProvider>
+  );
+}
+```
+
+### 4. Default Values
+
+Always provide meaningful initial values:
+
+```tsx
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+  login: () => {},
+  logout: () => {}
+};
+```
+
+## Examples
+
+### Theme Context
+
+```tsx
+interface ThemeState {
+  theme: "light" | "dark";
+  toggleTheme: () => void;
+}
+
+const useThemeState = (): ThemeState => {
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  return {
+    theme,
+    toggleTheme: () => setTheme(t => t === "light" ? "dark" : "light")
+  };
+};
+
+const { Provider, useContext } = createContextFactory(
+  { theme: "light", toggleTheme: () => {} },
+  useThemeState
+);
+
+export const ThemeProvider = Provider;
+export const useTheme = useContext;
+```
+
+### User Context with API
+
+```tsx
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface UserState {
+  user: User | null;
+  loading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+const useUserState = (): UserState => {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const login = async (email: string, password: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password })
+      });
+      const userData = await response.json();
+      setUser(userData);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const logout = () => setUser(null);
+
+  return { user, loading, login, logout };
+};
+
+const { Provider, useContext } = createContextFactory(
+  { user: null, loading: false, login: async () => {}, logout: () => {} },
+  useUserState
+);
+
+export const UserProvider = Provider;
+export const useUser = useContext;
+```
+
+## See Also
+
+- [layout](/packages/core/layout-context) - Layout context built with this factory
+- [session](/packages/core/session-context) - Session context built with this factory

@@ -1,0 +1,416 @@
+# Layout Context
+
+A comprehensive context system for managing dynamic layout elements, their visibility, animations, grouping, and conditional rendering.
+
+## Import
+
+```typescript
+import {
+  LayoutContextProvider,
+  useLayoutContext,
+  useLayoutElement,
+  LayoutRenderer,
+  type LayoutElement,
+  type LayoutGroup,
+  type AnimationConfig
+} from "@enotion/core/contexts";
+```
+
+## Quick Start
+
+```tsx
+import { LayoutContextProvider, LayoutRenderer } from "@enotion/core/contexts";
+
+function App() {
+  return (
+    <LayoutContextProvider>
+      <YourApp />
+      <LayoutRenderer className="layout-container" />
+    </LayoutContextProvider>
+  );
+}
+```
+
+## Core Concepts
+
+### Layout Elements
+
+Layout elements are components that can be dynamically shown, hidden, and managed through the layout context.
+
+```typescript
+interface LayoutElement {
+  id: string;
+  content: ReactNode;
+  visible: boolean;
+  zIndex?: number;
+  position?: "static" | "relative" | "absolute" | "fixed" | "sticky";
+  onVisibilityChange?: (visible: boolean) => void;
+  render?: () => ReactNode;
+  animation?: AnimationConfig;
+  group?: string;
+  conditional?: ConditionalConfig;
+  priority?: number;
+}
+```
+
+### Groups
+
+Groups allow you to manage multiple related elements together, with optional exclusive visibility (only one visible at a time).
+
+```typescript
+interface LayoutGroup {
+  id: string;
+  elements: string[];
+  exclusive?: boolean; // Only one element visible at a time
+}
+```
+
+### Animations
+
+Configure enter and exit animations for elements.
+
+```typescript
+interface AnimationConfig {
+  enter?: string;   // CSS class for enter animation
+  exit?: string;    // CSS class for exit animation
+  duration?: number; // Duration in milliseconds
+}
+```
+
+## Using Layout Elements
+
+### useLayoutElement Hook
+
+The easiest way to register and control a layout element:
+
+```tsx
+import { useLayoutElement } from "@enotion/core/contexts";
+
+function Modal() {
+  const { show, hide, toggle, isVisible } = useLayoutElement(
+    "modal",
+    <div className="modal-content">
+      <h2>Modal Title</h2>
+      <p>Modal content here</p>
+    </div>,
+    {
+      autoShow: false,
+      zIndex: 1000,
+      position: "fixed",
+      animation: {
+        enter: "fade-in",
+        exit: "fade-out",
+        duration: 300
+      }
+    }
+  );
+
+  return (
+    <button onClick={show}>Open Modal</button>
+  );
+}
+```
+
+### Manual Registration
+
+For more control, use the context methods directly:
+
+```tsx
+import { useLayoutContext } from "@enotion/core/contexts";
+import { useEffect } from "react";
+
+function Sidebar() {
+  const { registerElement, showElement, hideElement } = useLayoutContext();
+
+  useEffect(() => {
+    registerElement({
+      id: "sidebar",
+      content: <SidebarContent />,
+      zIndex: 100,
+      position: "fixed"
+    });
+
+    return () => unregisterElement("sidebar");
+  }, []);
+
+  return (
+    <div>
+      <button onClick={() => showElement("sidebar")}>Show</button>
+      <button onClick={() => hideElement("sidebar")}>Hide</button>
+    </div>
+  );
+}
+```
+
+## Context Methods
+
+### Element Management
+
+```typescript
+// Register a new element
+registerElement({
+  id: "notification",
+  content: <Notification />,
+  zIndex: 2000
+});
+
+// Update element properties
+updateElement("notification", {
+  content: <UpdatedNotification />,
+  zIndex: 2100
+});
+
+// Remove element
+unregisterElement("notification");
+```
+
+### Visibility Control
+
+```typescript
+// Show an element
+showElement("sidebar");
+
+// Hide an element
+hideElement("sidebar");
+
+// Toggle visibility
+toggleElement("sidebar");
+
+// Check if visible
+const isVisible = isElementVisible("sidebar");
+```
+
+### Retrieving Elements
+
+```typescript
+// Get specific element
+const element = getElementById("modal");
+
+// Get all visible elements
+const visibleElements = getVisibleElements();
+```
+
+## Groups
+
+### Creating Groups
+
+```tsx
+const { createGroup } = useLayoutContext();
+
+createGroup({
+  id: "modals",
+  elements: ["login-modal", "signup-modal", "settings-modal"],
+  exclusive: true // Only one modal visible at a time
+});
+```
+
+### Group Operations
+
+```typescript
+// Add element to group
+addElementToGroup("forgot-password-modal", "modals");
+
+// Remove element from group
+removeElementFromGroup("settings-modal", "modals");
+
+// Show all elements in group
+showGroup("modals");
+
+// Hide all elements in group
+hideGroup("modals");
+
+// Remove group
+removeGroup("modals");
+```
+
+### Exclusive Groups
+
+When **exclusive: true**, showing one element automatically hides others:
+
+```tsx
+createGroup({
+  id: "tabs",
+  elements: ["tab1", "tab2", "tab3"],
+  exclusive: true
+});
+
+// Showing tab2 will automatically hide tab1 and tab3
+showElement("tab2");
+```
+
+## Conditional Rendering
+
+Elements can be conditionally rendered based on dynamic conditions:
+
+```tsx
+registerElement({
+  id: "mobile-menu",
+  content: <MobileMenu />,
+  conditional: {
+    condition: () => window.innerWidth < 768,
+    onConditionChange: (visible) => {
+      console.log("Mobile menu should be:", visible ? "visible" : "hidden");
+    }
+  }
+});
+
+// Evaluate all conditionals (call when conditions might have changed)
+evaluateConditionals();
+```
+
+## Animations
+
+### CSS Animation Classes
+
+```css
+/* styles.css */
+.fade-in {
+  animation: fadeIn 300ms ease-in;
+}
+
+.fade-out {
+  animation: fadeOut 300ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+```
+
+### Using Animations
+
+```tsx
+useLayoutElement("animated-modal", <Modal />, {
+  animation: {
+    enter: "fade-in",
+    exit: "fade-out",
+    duration: 300
+  }
+});
+```
+
+## Layout Renderer
+
+The **LayoutRenderer** component renders all visible elements:
+
+```tsx
+<LayoutRenderer
+  className="layout-root"
+  style={{ position: "relative" }}
+/>
+```
+
+Elements are automatically:
+- Sorted by **zIndex**
+- Positioned according to their **position** property
+- Animated with configured animations
+- Rendered with their custom **render** function if provided
+
+## Complete Example
+
+```tsx
+import {
+  LayoutContextProvider,
+  LayoutRenderer,
+  useLayoutElement,
+  useLayoutContext
+} from "@enotion/core/contexts";
+
+function App() {
+  return (
+    <LayoutContextProvider>
+      <MainContent />
+      <LayoutRenderer className="overlay-container" />
+    </LayoutContextProvider>
+  );
+}
+
+function MainContent() {
+  const { createGroup } = useLayoutContext();
+
+  useEffect(() => {
+    // Create exclusive group for modals
+    createGroup({
+      id: "modals",
+      elements: ["login", "signup"],
+      exclusive: true
+    });
+  }, []);
+
+  return (
+    <div>
+      <h1>My App</h1>
+      <LoginButton />
+      <SignupButton />
+    </div>
+  );
+}
+
+function LoginButton() {
+  const { show } = useLayoutElement(
+    "login",
+    <LoginModal />,
+    {
+      zIndex: 1000,
+      position: "fixed",
+      animation: { enter: "slide-up", exit: "slide-down", duration: 250 },
+      group: "modals"
+    }
+  );
+
+  return <button onClick={show}>Login</button>;
+}
+
+function SignupButton() {
+  const { show } = useLayoutElement(
+    "signup",
+    <SignupModal />,
+    {
+      zIndex: 1000,
+      position: "fixed",
+      animation: { enter: "slide-up", exit: "slide-down", duration: 250 },
+      group: "modals"
+    }
+  );
+
+  return <button onClick={show}>Sign Up</button>;
+}
+```
+
+## API Reference
+
+### useLayoutContext()
+
+Returns the full layout context state and methods.
+
+### useLayoutElement(id, content, options)
+
+Registers and controls a layout element.
+
+**Parameters:**
+- **id: string** - Unique identifier
+- **content: ReactNode** - Element content
+- **options?: object** - Configuration options
+
+**Returns:**
+- `show: () => void` - Show the element
+- `hide: () => void` - Hide the element
+- `toggle: () => void` - Toggle visibility
+- `isVisible: boolean` - Current visibility state
+
+### LayoutRenderer
+
+Component that renders all visible layout elements.
+
+**Props:** Standard HTML div attributes
+
+## See Also
+
+- [createContextFactory](/packages/core/create-context-factory) - The factory used to create this context
+- [AnimatedModal](/packages/components/animated-modal) - Component that uses the layout context

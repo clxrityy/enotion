@@ -1,0 +1,106 @@
+# cn
+
+A utility function to conditionally join class names and merge Tailwind CSS classes, combining the power of [clsx](https://github.com/lukeed/clsx) and [tailwind-merge](https://github.com/dcastil/tailwind-merge).
+
+## Import
+
+```typescript
+import { cn } from "@enotion/core/utils";
+```
+
+## Usage
+
+The `cn` function accepts any number of arguments and intelligently merges them, handling conflicts in Tailwind CSS classes.
+
+### Basic Example
+
+```tsx
+import { cn } from "@enotion/core/utils";
+
+function Button({ className, isActive }) {
+  return (
+    <button
+      className={cn(
+        "px-4 py-2 rounded",
+        isActive && "bg-blue-500 text-white",
+        className
+      )}
+    >
+      Click me
+    </button>
+  );
+}
+```
+
+### Conditional Classes
+
+```tsx
+const buttonClass = cn(
+  "base-class",
+  condition && "conditional-class",
+  anotherCondition ? "true-class" : "false-class"
+);
+```
+
+### Tailwind Conflict Resolution
+
+The function automatically resolves conflicts between Tailwind classes, keeping the last one:
+
+```tsx
+// Without cn - both classes applied (incorrect behavior)
+<div className="p-4 p-6" /> // Results in padding issues
+
+// With cn - only p-6 is applied (correct)
+<div className={cn("p-4", "p-6")} /> // Results in p-6
+```
+
+### Array and Object Syntax
+
+```tsx
+cn([
+  "base",
+  { active: isActive },
+  ["nested", "classes"]
+]);
+
+cn({
+  "text-white": true,
+  "bg-blue-500": isActive,
+  "hover:bg-blue-600": isActive
+});
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>...inputs</td>
+      <td><code>string | number | boolean | null | undefined | object | array</code></td>
+      <td>Any number of class name inputs, which can be strings, numbers, booleans, objects (for conditional classes), or arrays (for nested classes).</td>
+    </tr>
+  </tbody>
+</table>
+
+## Returns
+
+A single merged string with all class names properly combined and Tailwind conflicts resolved.
+
+## Why Use This?
+
+1. **Tailwind Conflict Resolution**: Automatically handles conflicting Tailwind utility classes
+2. **Conditional Logic**: Clean syntax for conditional class names
+3. **Type Safety**: Full TypeScript support with proper type inference
+4. **DX**: Cleaner code compared to manual string concatenation or template literals
+
+## Related
+
+- [clsx](https://github.com/lukeed/clsx) - The underlying utility for class name composition
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Merges Tailwind CSS classes without conflicts

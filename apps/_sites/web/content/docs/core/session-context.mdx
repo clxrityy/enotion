@@ -1,0 +1,329 @@
+# Session Context
+
+A context system for managing global user session state, including layout preferences and color palette management.
+
+## Import
+
+```typescript
+import {
+  SessionContextProvider,
+  useSessionContext,
+  type SessionContextState,
+  type SessionData
+} from "@enotion/core/contexts";
+```
+
+## Setup
+
+Wrap your application with the **SessionContextProvider**:
+
+```tsx
+import { SessionContextProvider } from "@enotion/core/contexts";
+
+function App() {
+  return (
+    <SessionContextProvider>
+      <YourApp />
+    </SessionContextProvider>
+  );
+}
+```
+
+## Usage
+
+Access the session context with the **useSessionContext** hook:
+
+```tsx
+import { useSessionContext } from "@enotion/core/contexts";
+
+function MyComponent() {
+  const {
+    layoutState,
+    setLayoutState,
+    palettes,
+    setPalettes,
+    addPalette,
+    removePalette
+  } = useSessionContext();
+
+  return (
+    <div>
+      <h2>Session Management</h2>
+      {/* Use session state */}
+    </div>
+  );
+}
+```
+
+## Session State
+
+### Interface
+
+```typescript
+interface SessionContextState {
+  layoutState?: LayoutContextState;
+  palettes?: typeof ColorPalettes;
+  setLayoutState: (state: LayoutContextState) => void;
+  setPalettes: (palettes: typeof ColorPalettes) => void;
+  addPalette: (palette: ColorPalette, name: string) => void;
+  removePalette: (name: string) => void;
+}
+```
+
+## Managing Layout State
+
+Store and retrieve layout preferences:
+
+```tsx
+import { useSessionContext } from "@enotion/core/contexts";
+import { useLayoutContext } from "@enotion/core/contexts";
+
+function LayoutManager() {
+  const { layoutState, setLayoutState } = useSessionContext();
+  const currentLayout = useLayoutContext();
+
+  const saveLayout = () => {
+    setLayoutState(currentLayout);
+    console.log("Layout saved!");
+  };
+
+  return (
+    <button onClick={saveLayout}>
+      Save Layout Preferences
+    </button>
+  );
+}
+```
+
+## Managing Color Palettes
+
+### Set All Palettes
+
+Replace the entire palette collection:
+
+```tsx
+const { setPalettes } = useSessionContext();
+
+const customPalettes = {
+  light: { /* ColorPalette */ },
+  dark: { /* ColorPalette */ },
+  custom: { /* ColorPalette */ }
+};
+
+setPalettes(customPalettes);
+```
+
+### Add a Single Palette
+
+Add or update a single palette:
+
+```tsx
+const { addPalette } = useSessionContext();
+
+const oceanPalette = {
+  background: "#e0f2fe",
+  foreground: "#0c4a6e",
+  primary: "#0ea5e9",
+  secondary: "#06b6d4",
+  tertiary: "#22d3ee",
+  accent: "#38bdf8",
+  border: "#bae6fd",
+  highlight: "#f0f9ff",
+  muted: "#e0f2fe",
+  success: "#10b981",
+  warning: "#f59e0b",
+  error: "#ef4444",
+  info: "#3b82f6"
+};
+
+addPalette(oceanPalette, "ocean");
+```
+
+### Remove a Palette
+
+```tsx
+const { removePalette } = useSessionContext();
+
+removePalette("ocean");
+```
+
+### Access Current Palettes
+
+```tsx
+const { palettes } = useSessionContext();
+
+// Use a specific palette
+const darkColors = palettes?.dark;
+
+// Iterate over all palettes
+Object.entries(palettes || {}).forEach(([name, palette]) => {
+  console.log(`${name}:`, palette);
+});
+```
+
+## Complete Example
+
+```tsx
+import {
+  SessionContextProvider,
+  useSessionContext
+} from "@enotion/core/contexts";
+import { ColorPalette } from "@enotion/core";
+
+function App() {
+  return (
+    <SessionContextProvider>
+      <PaletteManager />
+      <ThemeSelector />
+    </SessionContextProvider>
+  );
+}
+
+function PaletteManager() {
+  const { addPalette, removePalette, palettes } = useSessionContext();
+
+  const createCustomPalette = () => {
+    const custom: ColorPalette = {
+      background: "#fef3c7",
+      foreground: "#78350f",
+      primary: "#f59e0b",
+      secondary: "#d97706",
+      tertiary: "#ea580c",
+      accent: "#fb923c",
+      border: "#fde68a",
+      highlight: "#fef3c7",
+      muted: "#fef3c7",
+      success: "#10b981",
+      warning: "#f59e0b",
+      error: "#ef4444",
+      info: "#3b82f6"
+    };
+
+    addPalette(custom, "sunset");
+  };
+
+  return (
+    <div>
+      <h2>Palette Manager</h2>
+      <button onClick={createCustomPalette}>Add Sunset Palette</button>
+      <button onClick={() => removePalette("sunset")}>Remove Sunset</button>
+
+      <h3>Available Palettes:</h3>
+      <ul>
+        {Object.keys(palettes || {}).map(name => (
+          <li key={name}>{name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ThemeSelector() {
+  const { palettes } = useSessionContext();
+  const [selected, setSelected] = useState("default");
+
+  const currentPalette = palettes?.[selected];
+
+  return (
+    <div style={{
+      backgroundColor: currentPalette?.background,
+      color: currentPalette?.foreground
+    }}>
+      <select
+        value={selected}
+        onChange={(e) => setSelected(e.target.value)}
+      >
+        {Object.keys(palettes || {}).map(name => (
+          <option key={name} value={name}>{name}</option>
+        ))}
+      </select>
+
+      <p>Current theme: {selected}</p>
+    </div>
+  );
+}
+```
+
+## Persistence
+
+The session context doesn't persist by default. To persist session data:
+
+```tsx
+import { useEffect } from "react";
+import { useSessionContext } from "@enotion/core/contexts";
+
+function SessionPersistence() {
+  const { palettes, layoutState, setPalettes, setLayoutState } = useSessionContext();
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const savedPalettes = localStorage.getItem("session-palettes");
+    if (savedPalettes) {
+      setPalettes(JSON.parse(savedPalettes));
+    }
+  }, []);
+
+  // Save to localStorage when palettes change
+  useEffect(() => {
+    if (palettes) {
+      localStorage.setItem("session-palettes", JSON.stringify(palettes));
+    }
+  }, [palettes]);
+
+  return null;
+}
+
+// Add to your app
+function App() {
+  return (
+    <SessionContextProvider>
+      <SessionPersistence />
+      <YourApp />
+    </SessionContextProvider>
+  );
+}
+```
+
+## Type Definitions
+
+```typescript
+interface SessionData {
+  layoutState?: LayoutContextState;
+  palettes?: typeof ColorPalettes;
+}
+
+interface SessionContextState extends SessionData {
+  setLayoutState: (state: LayoutContextState) => void;
+  setPalettes: (palettes: typeof ColorPalettes) => void;
+  addPalette: (palette: ColorPalette, name: string) => void;
+  removePalette: (name: string) => void;
+}
+```
+
+## API Reference
+
+### useSessionContext()
+
+Returns the session context state and methods.
+
+**Returns:**
+- **layoutState?: LayoutContextState** - Current layout state
+- **palettes?: typeof ColorPalettes** - All available color palettes
+- **setLayoutState: (state) => void** - Set layout state
+- **setPalettes: (palettes) => void** - Replace all palettes
+- **addPalette: (palette, name) => void** - Add/update a palette
+- **removePalette: (name) => void** - Remove a palette
+
+## Use Cases
+
+1. **Theme Management**: Store user's preferred color palette
+2. **Layout Persistence**: Save sidebar state, panel positions
+3. **User Preferences**: Store UI customization choices
+4. **Multi-Tenant**: Different palettes for different organizations
+5. **Accessibility**: Custom high-contrast or colorblind-friendly palettes
+
+## See Also
+
+- [layout context](/packages/core/layout-context) - Layout management context
+- [colors](/packages/core/colors) - Color palette definitions
+- [createContextFactory](/packages/core/create-context-factory) - The factory used to create this context
