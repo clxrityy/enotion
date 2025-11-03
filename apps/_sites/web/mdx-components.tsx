@@ -63,19 +63,37 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </blockquote>
     ),
     table: ({ children }) => (
-      <table className="w-full table-auto mb-4 border table">
+      <section className="mdx-table-wrapper">
+        <table className="mdx-table">
+          {children}
+        </table>
+      </section>
+    ),
+    thead: ({ children }) => (
+      <thead>
         {children}
-      </table>
+      </thead>
+    ),
+    tbody: ({ children }) => (
+      <tbody>
+        {children}
+      </tbody>
     ),
     th: ({ children }) => (
-      <th className="border-b px-4 py-2 text-left">
+      <th>
         {children}
       </th>
     ),
     td: ({ children }) => (
-      <td className="border-b px-4 py-2">{children}</td>
+      <td>
+        {children}
+      </td>
     ),
-    tr: ({ children }) => <tr>{children}</tr>,
+    tr: ({ children }) => (
+      <tr>
+        {children}
+      </tr>
+    ),
     ...components,
   };
 }
