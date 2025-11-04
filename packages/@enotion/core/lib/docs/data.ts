@@ -1,28 +1,16 @@
-import { Icons } from "../constants";
-import { IconType } from "react-icons/lib";
+import { Icons } from "../../constants";
+import { ComponentsPackageExtraContent, CorePackageExtraContent } from "./components";
+import { DocPackage } from "./types";
+
 
 const { Core, Hooks, Components, Server, Notifications } = Icons;
-
-export interface DocPackage {
-  name: string;
-  slug: string;
-  description: string;
-  modules: DocModule[];
-  icon?: IconType;
-}
-
-export interface DocModule {
-  tag: string | string[];
-  name: string;
-  description: string;
-  slug: string;
-}
 
 export const packages: DocPackage[] = [
   {
     name: "@enotion/core",
     slug: "core",
     description: "Core utilities, constants, and contexts for enotion",
+    extraContent: CorePackageExtraContent(),
     icon: Core,
     modules: [
       {
@@ -162,6 +150,7 @@ export const packages: DocPackage[] = [
     slug: "components",
     icon: Components,
     description: "Reusable React components for building user interfaces",
+    extraContent: ComponentsPackageExtraContent(),
     modules: [
       {
         name: "AnimatedModal",
@@ -268,6 +257,7 @@ export const packages: DocPackage[] = [
     slug: "notify",
     icon: Notifications,
     description: "Notification system for displaying alerts and messages",
+    extraContent: "Provides a flexible and customizable notification system for React applications. Make sure to wrap your application with the NotifyProvider to enable notifications, or use the default Provider/LayoutProvider from @enotion/components which includes it.",
     modules: [
       {
         name: "useNotify",
@@ -287,6 +277,7 @@ export const packages: DocPackage[] = [
     name: "@enotion/server",
     slug: "server",
     icon: Server,
+    extraContent: "These utilities are designed for server-side use only and should not be imported into client-side code to avoid bundling unnecessary dependencies.",
     description: "Server-side utilities and middleware for enotion",
     modules: [
       {
@@ -381,70 +372,3 @@ export const packages: DocPackage[] = [
     ],
   },
 ];
-
-export function getPackageBySlug(slug: string): DocPackage | undefined {
-  return packages.find((pkg) => pkg.slug === slug);
-}
-
-export function getAllPackages(): DocPackage[] {
-  return packages;
-}
-
-export function getModuleBySlug(
-  packageSlug: string,
-  moduleSlug: string,
-): DocModule | undefined {
-  const pkg = getPackageBySlug(packageSlug);
-  return pkg?.modules.find((mod) => mod.slug === moduleSlug);
-}
-
-export function getAllModules(packageSlug: string): DocModule[] | undefined {
-  const pkg = getPackageBySlug(packageSlug);
-  return pkg?.modules;
-}
-
-export type SearchablePackageItems = {
-  name: string;
-  description: string;
-  slug: string;
-  type?: "module" | "package";
-  package?: string;
-  tag?: string | string[];
-}[];
-
-export function getSearchableItems(rootSlug?: string): SearchablePackageItems {
-  const items: SearchablePackageItems = [];
-
-  // Don't filter packages - rootSlug is just a URL prefix
-  const pkgs = packages;
-
-  for (const pkg of pkgs) {
-    items.push(
-      ...pkg.modules.map(
-        (mod) =>
-          ({
-            name: mod.name,
-            description: mod.description,
-            slug: `${rootSlug || ""}/${pkg.slug}/${mod.slug}`,
-            type: "module",
-            package: pkg.name,
-            tag: mod.tag,
-          }) as SearchablePackageItems[number],
-      ),
-    );
-  }
-
-  items.push(
-    ...pkgs.map(
-      (pkg) =>
-        ({
-          name: pkg.name,
-          description: pkg.description,
-          slug: `${rootSlug || ""}/${pkg.slug}`,
-          type: "package",
-        }) as SearchablePackageItems[number],
-    ),
-  );
-
-  return items;
-}
