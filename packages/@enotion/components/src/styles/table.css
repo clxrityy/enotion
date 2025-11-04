@@ -1,0 +1,168 @@
+/* Responsive wrapper */
+.enotion-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: 1rem;
+}
+
+/* Scrollbar styling */
+.enotion-table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.enotion-table-responsive::-webkit-scrollbar-track {
+  background: var(--table-muted, transparent);
+  border-radius: 4px;
+}
+
+.enotion-table-responsive::-webkit-scrollbar-thumb {
+  background: var(--table-border, transparent);
+  border-radius: 4px;
+}
+
+.enotion-table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--table-accent, transparent);
+}
+
+/* Base table styles */
+.enotion-table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  background-color: var(--table-background, transparent);
+  color: var(--table-foreground);
+  border: 1px solid var(--table-border, transparent);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 12px;
+}
+
+.enotion-table th,
+.enotion-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--table-border, transparent);
+  text-align: left;
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  border-radius: 3px;
+}
+
+.enotion-table th {
+  background-color: var(--table-accent, transparent);
+  color: var(--table-text-on-accent);
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+/* Hover effect */
+.enotion-table-hover tbody tr {
+  transition: background-color 0.15s ease-in-out;
+}
+
+.enotion-table-hover tbody tr:hover {
+  background-color: var(--table-hover, transparent);
+  cursor: pointer;
+}
+
+/* Striped rows */
+.enotion-table-striped tbody tr:nth-child(even) {
+  background-color: var(--table-striped, transparent);
+}
+
+.enotion-table-striped.enotion-table-hover tbody tr:nth-child(even):hover {
+  background-color: var(--table-hover, transparent);
+}
+
+/* Bordered variant */
+.enotion-table-bordered {
+  border: 2px solid var(--table-border, transparent);
+}
+
+.enotion-table-bordered th,
+.enotion-table-bordered td {
+  border: 1px solid var(--table-border, transparent);
+  border-radius: 2px;
+}
+
+/* Mobile stacked layout */
+@media (max-width: 768px) {
+  .enotion-table-stack-mobile {
+    border: 0;
+  }
+
+  .enotion-table-stack-mobile thead {
+    display: none;
+  }
+
+  .enotion-table-stack-mobile tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--table-border, transparent);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .enotion-table-stack-mobile th,
+  .enotion-table-stack-mobile td {
+    display: block;
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid var(--table-border, transparent);
+    padding: 0.75rem 1rem;
+    position: relative;
+  }
+
+  .enotion-table-stack-mobile th {
+    position: static;
+    background-color: var(--table-accent, transparent);
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 2px solid var(--table-border, transparent);
+  }
+
+  .enotion-table-stack-mobile td:last-child {
+    border-bottom: none;
+  }
+
+  .enotion-table-stack-mobile td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    color: var(--table-foreground, transparent);
+  }
+
+  /* Disable hover on mobile stacked */
+  .enotion-table-stack-mobile.enotion-table-hover tbody tr:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+}
+
+/* Tablet responsiveness */
+@media (max-width: 1024px) and (min-width: 769px) {
+
+  .enotion-table th,
+  .enotion-table td {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+
+  .enotion-table th,
+  .enotion-table td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .enotion-table-responsive::-webkit-scrollbar {
+    height: 6px;
+  }
+}
