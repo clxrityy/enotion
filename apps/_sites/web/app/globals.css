@@ -14,6 +14,46 @@ body {
   max-height: fit-content;
 }
 
+/* MDX Table Styles */
+.mdx-table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mdx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.mdx-table thead {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mdx-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.mdx-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mdx-table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.mdx-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
 @layer utilities {
   .bg-background {
     background-color: var(--background);
@@ -25,6 +65,11 @@ body {
 
   .bg-muted {
     background-color: var(--bg-muted);
+  }
+
+  .animate-spin-slower {
+    animation: spin 6s linear 100ms infinite,
+      spin-reverse 6s linear 100ms infinite;
   }
 }
 
