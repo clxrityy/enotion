@@ -1,11 +1,17 @@
-"use client";
 import { Mulish } from "next/font/google";
-import { LayoutProvider } from "@enotion/components";
 import "./globals.css";
-import { LayoutRenderer } from "@enotion/core";
+import { Provider } from "./provider";
+import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "enotion",
+  description: "A turbo-powered monorepo for building modern web applications.",
+}
 
 const mulish = Mulish({
   variable: "--font-mulish",
+  subsets: ["latin"],
 });
 
 export default function RootLayout({
@@ -16,12 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mulish.variable} antialiased`}>
-        <LayoutProvider>
-          <LayoutRenderer />
-          <div className="absolute w-screen h-screen z-0 *:z-10">
+        <Suspense fallback={<div
+          className="fixed inset-0 flex items-center justify-center backdrop-blur-sm z-50 animate-pulse"
+        />}>
+          <Provider>
             {children}
-          </div>
-        </LayoutProvider>
+          </Provider>
+        </Suspense>
       </body>
     </html>
   );
