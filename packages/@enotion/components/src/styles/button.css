@@ -10,7 +10,7 @@ button {
     Make it so the max width of the button wraps the width with padding to the screen size
     e.g. if the screen is 400px wide, the button can be at most 396px wide (2 * 1em padding)
   */
-  max-width: calc(100% - 4em);
+  max-width: calc(100% - 50%);
 }
 
 @media screen and (max-width: 600px) {
@@ -40,7 +40,7 @@ button {
   button {
     font-size: 1.25rem;
     padding: 0.75em 1.25em;
-    max-width: calc(100% - 6em);
+    max-width: calc(100% - 75%);
   }
 }
 
@@ -51,6 +51,9 @@ button:hover {
 
 button:disabled {
   cursor: not-allowed;
+  animation: none;
+  transform: none;
+  opacity: 0.6;
 }
 
 button:active {
@@ -61,4 +64,13 @@ button:active {
 
 button::backdrop {
   background-color: var(--button-backdrop-background-color);
+}
+
+button:disabled:active,
+button:disabled:hover {
+  outline: none;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+  filter: none;
 }
