@@ -1,6 +1,32 @@
+import { Table } from "@enotion/components";
+
 # colors
 
 A comprehensive set of utilities for color manipulation, conversion, and palette management.
+
+- [Import](#import)
+- [Color Conversion](#color-conversion)
+  - [getRGBfromHex](#getrgbfromhex)
+  - [convertRGBtoString](#convertrgbtostring)
+  - [getHexFromRGB](#gethexfromrgb)
+  - [parseColor](#parsecolor)
+- [Color Manipulation](#color-manipulation)
+  - [lightenHexColor](#lightenhexcolor)
+  - [darkenHexColor](#darkenhexcolor)
+  - [adjustHexColorOpacity](#adjusthexcoloropacity)
+  - [blendHexColors](#blendhexcolors)
+- [Validation](#validation)
+  - [isValidHexColor](#isvalidhexcolor)
+- [Color Palettes](#color-palettes)
+  - [ColorPalette Interface](#colorpalette-interface)
+  - [Built-in Palettes](#built-in-palettes)
+    - [default](#default)
+    - [dark](#dark)
+    - [monochrome](#monochrome)
+    - [softBeach](#softbeach)
+  - [Usage](#usage)
+- [Type Definitions](#type-definitions)
+- [API Reference](#api-reference)
 
 ## Import
 
@@ -188,14 +214,47 @@ type ColorPaletteType = "default" | "dark" | "monochrome" | "softBeach";
 
 ## API Reference
 
-| Function | Parameters | Returns | Description |
-|----------|-----------|---------|-------------|
-| **getRGBfromHex** | **hex: string** | **\{ r, g, b } \| null** | Convert hex to RGB |
-| **convertRGBtoString** | **r, g, b: number** | **string** | RGB to string |
-| **getHexFromRGB** | **r, g, b: number** | **string** | RGB to hex |
-| **lightenHexColor** | **hex: string, amount: number** | **string \| null** | Lighten color |
-| **darkenHexColor** | **hex: string, amount: number** | **string \| null** | Darken color |
-| **adjustHexColorOpacity** | **hex: string, opacity: number** | **string \| null** | Add opacity |
-| **isValidHexColor** | **hex: string** | **boolean** | Validate hex color |
-| **blendHexColors** | **hex1, hex2: string, ratio: number** | **string \| null** | Blend colors |
-| **parseColor** | **color: Color** | **string** | Parse to hex |
+<Table
+  rows={[
+    {
+      title: "getRGBfromHex",
+      items: ["hex: string", "{ r, g, b } | null", "Convert hex to RGB"]
+    },
+    {
+      title: "convertRGBtoString",
+      items: ["r, g, b: number", "string", "RGB to string"]
+    },
+    {
+      title: "getHexFromRGB",
+      items: ["r, g, b: number", "string", "RGB to hex"]
+    },
+    {
+      title: "lightenHexColor",
+      items: ["hex: string, amount: number", "string | null", "Lighten color"]
+    },
+    {
+      title: "darkenHexColor",
+      items: ["hex: string, amount: number", "string | null", "Darken color"]
+    },
+    {
+      title: "adjustHexColorOpacity",
+      items: ["hex: string, opacity: number", "string | null", "Add opacity"]
+    },
+    {
+      title: "isValidHexColor",
+      items: ["hex: string", "boolean", "Validate hex color"]
+    },
+    {
+      title: "blendHexColors",
+      items: ["hex1, hex2: string, ratio: number", "string | null", "Blend colors"]
+    },
+    {
+      title: "parseColor",
+      items: ["color: Color", "string", "Parse to hex"]
+    }
+  ]}
+  striped
+  bordered
+  hover
+/>
+

@@ -1,6 +1,21 @@
-# createContextFactory
+import { Table } from "@enotion/components";
+
+# create-context-factory
 
 A utility for creating React context with a built-in provider and custom hook, streamlining context creation and usage.
+
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [Using the Context](#using-the-context)
+- [Advanced: Additional Context](#advanced-additional-context)
+- [Type Definition](#type-definition)
+- [Returns](#returns)
+- [Parameters](#parameters)
+- [Benefits](#benefits)
+- [Best Practices](#best-practices)
+- [Examples](#examples)
+
+---
 
 ## Import
 
@@ -131,10 +146,20 @@ A custom hook to access the context value.
 
 ## Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| **initialContextState** | **T** | The initial state/value of the context |
-| **useContextState** | **() => T** | A hook that returns the current state of the context |
+<Table
+  rows={[
+    {
+      title: "initialContextState",
+      items: ["T", "The initial state/value of the context"]
+    },
+    {
+      title: "useContextState",
+      items: ["() => T", "A hook that returns the current state of the context"]
+    }
+  ]}
+  striped
+  bordered
+/>
 
 ## Benefits
 

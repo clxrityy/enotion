@@ -1,6 +1,20 @@
+import { Table } from "@enotion/components";
+
 # cn
 
 A utility function to conditionally join class names and merge Tailwind CSS classes, combining the power of [clsx](https://github.com/lukeed/clsx) and [tailwind-merge](https://github.com/dcastil/tailwind-merge).
+
+- [Import](#import)
+- [Usage](#usage)
+  - [Basic Example](#basic-example)
+  - [Conditional Classes](#conditional-classes)
+  - [Tailwind Conflict Resolution](#tailwind-conflict-resolution)
+  - [Array and Object Syntax](#array-and-object-syntax)
+- [Parameters](#parameters)
+- [Returns](#returns)
+- [Why Use This?](#why-use-this)
+
+---
 
 ## Import
 
@@ -10,7 +24,7 @@ import { cn } from "@enotion/core/utils";
 
 ## Usage
 
-The `cn` function accepts any number of arguments and intelligently merges them, handling conflicts in Tailwind CSS classes.
+The **cn** function accepts any number of arguments and intelligently merges them, handling conflicts in Tailwind CSS classes.
 
 ### Basic Example
 
@@ -72,22 +86,16 @@ cn({
 
 ## Parameters
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>...inputs</td>
-      <td><code>string | number | boolean | null | undefined | object | array</code></td>
-      <td>Any number of class name inputs, which can be strings, numbers, booleans, objects (for conditional classes), or arrays (for nested classes).</td>
-    </tr>
-  </tbody>
-</table>
+<Table
+  rows={[
+    {
+      title: "...inputs",
+      items: ["string | number | boolean | null | undefined | object | array", "Any number of class name inputs, which can be strings, numbers, booleans, objects (for conditional classes), or arrays (for nested classes)."]
+    }
+  ]}
+  striped
+  bordered
+/>
 
 ## Returns
 
