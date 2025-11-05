@@ -5,22 +5,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     // Basic HTML elements styled with your design system
     h1: ({ children }) => (
-      <LinkHeading level={1} className="my-6 text-3xl font-bold">
+      <LinkHeading level={1} className="my-6 text-3xl font-extrabold">
         {children}
       </LinkHeading>
     ),
     h2: ({ children }) => (
-      <LinkHeading level={2} className="my-4 text-2xl font-semibold">
+      <LinkHeading level={2} className="my-4 text-2xl font-bold">
         {children}
       </LinkHeading>
     ),
     h3: ({ children }) => (
-      <LinkHeading level={3} className="my-3 text-xl font-medium">
+      <LinkHeading level={3} className="my-3 text-xl font-semibold">
         {children}
       </LinkHeading>
     ),
     h4: ({ children }) => (
-      <LinkHeading level={4} className="my-2 text-lg font-medium">
+      <LinkHeading level={4} className="my-2 text-lg font-semibold">
         {children}
       </LinkHeading>
     ),
@@ -56,7 +56,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ol: ({ children }) => (
       <ol className="list-decimal list-inside mb-4 space-y-1">{children}</ol>
     ),
-    li: ({ children }) => <li className="text-foreground">{children}</li>,
+    li: ({ children }) => <li>{children}</li>,
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 pl-4 my-4 italic">
         {children}
@@ -94,6 +94,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </tr>
     ),
+    hr: () => <hr className="my-6 border" />,
     ...components,
   };
 }
