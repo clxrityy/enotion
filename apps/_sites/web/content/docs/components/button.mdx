@@ -1,0 +1,284 @@
+import { Button } from "@enotion/components";
+import { Icons } from "@enotion/core/constants";
+
+# Button
+
+A versatile button component with multiple variants and full color palette integration.
+
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [Variants](#variants)
+  - [Default](#default)
+  - [Outline](#outline)
+  - [Primary](#primary)
+  - [Secondary](#secondary)
+  - [Tertiary](#tertiary)
+  - [Info](#info)
+  - [Success](#success)
+  - [Danger](#danger)
+- [With Color Palettes](#with-color-palettes)
+- [Props](#props)
+- [CSS Custom Properties](#css-custom-properties)
+- [Examples](#examples)
+  - [With Icon](#with-icon)
+  - [Disabled State](#disabled-state)
+  - [Full Width](#full-width)
+  - [Custom Styling](#custom-styling)
+- [Accessibility](#accessibility)
+
+---
+
+## Import
+
+```tsx
+import { Button } from "@enotion/components";
+```
+
+## Basic Usage
+
+```tsx
+<Button onClick={() => alert('Clicked!')}>
+  Click Me
+</Button>
+```
+
+<Button onClick={() => alert('Clicked!')}>
+  Click Me
+</Button>
+
+## Variants
+
+The Button component supports 8 different variants:
+
+### Default
+
+```tsx
+<Button variant="default" palette="dark">
+  Default Button
+</Button>
+```
+
+<Button variant="default" palette="dark">
+  Default Button
+</Button>
+
+### Outline
+
+```tsx
+<Button variant="outline" palette="dark">
+  Outline Button
+</Button>
+```
+
+<Button variant="outline" palette="dark">
+  Outline Button
+</Button>
+
+### Primary
+
+```tsx
+<Button variant="primary" palette="dark">
+  Primary Button
+</Button>
+```
+
+<Button variant="primary" palette="dark">
+  Primary Button
+</Button>
+
+### Secondary
+
+```tsx
+<Button variant="secondary" palette="dark">
+  Secondary Button
+</Button>
+```
+
+<Button variant="secondary" palette="dark">
+  Secondary Button
+</Button>
+
+### Tertiary
+
+```tsx
+<Button variant="tertiary" palette="dark">
+  Tertiary Button
+</Button>
+```
+
+<Button variant="tertiary" palette="dark">
+  Tertiary Button
+</Button>
+
+### Info
+
+```tsx
+<Button variant="info" palette="dark">
+  Info Button
+</Button>
+```
+
+<Button variant="info" palette="dark">
+  Info Button
+</Button>
+
+### Success
+
+```tsx
+<Button variant="success" palette="dark">
+  Success Button
+</Button>
+```
+
+<Button variant="success" palette="dark">
+  Success Button
+</Button>
+
+### Danger
+
+```tsx
+<Button variant="danger" palette="dark">
+  Danger Button
+</Button>
+```
+
+<Button variant="danger" palette="dark">
+  Danger Button
+</Button>
+
+## With Color Palettes
+
+```tsx
+<Button palette="softBeach" variant="secondary">
+  Soft Beach Theme
+</Button>
+
+<Button palette="monochrome" variant="primary">
+  Monochrome Theme
+</Button>
+```
+
+<div className="flex gap-4 flex-col sm:flex-row">
+  <Button palette="softBeach" variant="secondary">
+    Soft Beach Theme
+  </Button>
+
+  <Button palette="monochrome" variant="primary">
+    Monochrome Theme
+  </Button>
+</div>
+
+## Props
+
+```typescript
+interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
+  children: ReactNode;
+  palette?: ColorPaletteType;
+  variant?:
+    | "default"
+    | "outline"
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "info"
+    | "success"
+    | "danger";
+}
+```
+
+### children
+- **Type:** **ReactNode**
+- **Required:** Yes
+- Button content
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for styling (**"default"** | **"dark"** | **"monochrome"** | **"softBeach"**)
+
+### variant
+- **Type:** **string**
+- **Default:** **"default"**
+- Button style variant
+
+## CSS Custom Properties
+
+When using a palette, the component sets these CSS variables:
+
+- **--button-hover-background-color**
+- **--button-active-background-color**
+- **--button-disabled-background-color**
+- **--button-disabled-text-color**
+- **--button-hover-box-shadow**
+- **--button-focus-ring-color**
+- **--button-backdrop-background-color**
+
+## Examples
+
+### With Icon
+
+```tsx
+<Button variant="primary" palette="dark">
+  <div className="flex flex-row gap-2 items-center justify-center">
+    <Icons.Selector size={16} /> <span>
+      Select
+    </span>
+  </div>
+</Button>
+```
+
+<Button variant="primary" palette="dark">
+  <div className="flex flex-row gap-2 items-center justify-center">
+    <Icons.Selector size={16} /> <span>
+      Select
+    </span>
+  </div>
+</Button>
+
+### Disabled State
+
+```tsx
+<Button disabled palette="default" variant="primary">
+  Disabled Button
+</Button>
+```
+
+<Button disabled palette="default" variant="danger">
+  Disabled Button
+</Button>
+
+### Full Width
+
+```tsx
+<Button style={{ width: '100%' }} variant="primary">
+  Full Width Button
+</Button>
+```
+
+### Custom Styling
+
+```tsx
+<Button
+  variant="outline"
+  palette="dark"
+  className="custom-button"
+  style={{ borderRadius: '20px' }}
+>
+  Custom Styled
+</Button>
+```
+
+## Accessibility
+
+The Button component:
+- Uses semantic **\<button>** element
+- Supports all standard button attributes
+- Defaults to **type="button"** to prevent form submission
+- Respects disabled state
+- Supports keyboard navigation
+
+## See Also
+
+- [Card](/packages/components/card) - Container component
+- [Input](/packages/components/input) - Form input component
+- [colors](/packages/core/colors) - Color palette system
