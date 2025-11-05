@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import "./index.css";
 
 export async function generateMetadata({
   params,
