@@ -13,14 +13,11 @@ export const CorePackageExtraContent = () => (
 
 export const ComponentsPackageExtraContent = () => (
   <ul style={{ fontSize: "0.9rem", lineHeight: "1.4rem", listStyleType: "disc", paddingLeft: "1.5rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-    <li className="flex items-start w-fit">
-      <span>
-        All components require client-side rendering. Make sure to add
-      </span>
-      <pre>"use client";</pre>
-      <span>
-        at the top of your files.
-      </span>
+    <li className="flex flex-col gap-2">
+      Ensure you mark your page/component as a Client Component:{" "}
+      <code>
+        {`"use client";`}
+      </code>
     </li>
     <li className="flex flex-col gap-2">
       To inherit component CSS styles:{" "}
