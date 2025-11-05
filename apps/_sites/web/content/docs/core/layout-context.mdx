@@ -2,6 +2,36 @@
 
 A comprehensive context system for managing dynamic layout elements, their visibility, animations, grouping, and conditional rendering.
 
+- [Import](#import)
+- [Quick Start](#quick-start)
+- [Core Concepts](#core-concepts)
+  - [Layout Elements](#layout-elements)
+  - [Groups](#groups)
+  - [Animations](#animations)
+- [Using Layout Elements](#using-layout-elements)
+  - [useLayoutElement Hook](#uselayoutelement-hook)
+  - [Manual Registration](#manual-registration)
+- [Context Methods](#context-methods)
+  - [Element Management](#element-management)
+  - [Visibility Control](#visibility-control)
+  - [Retrieving Elements](#retrieving-elements)
+- [Groups](#groups-1)
+  - [Creating Groups](#creating-groups)
+  - [Group Operations](#group-operations)
+  - [Exclusive Groups](#exclusive-groups)
+- [Conditional Rendering](#conditional-rendering)
+- [Animations](#animations-1)
+  - [CSS Animation Classes](#css-animation-classes)
+  - [Using Animations](#using-animations)
+- [Layout Renderer](#layout-renderer)
+- [Complete Example](#complete-example)
+- [API Reference](#api-reference)
+  - [useLayoutContext()](#uselayoutcontext)
+  - [useLayoutElement(id, content, options)](#uselayoutelementid-content-options)
+  - [LayoutRenderer](#layoutrenderer)
+
+---
+
 ## Import
 
 ```typescript
@@ -399,10 +429,10 @@ Registers and controls a layout element.
 - **options?: object** - Configuration options
 
 **Returns:**
-- `show: () => void` - Show the element
-- `hide: () => void` - Hide the element
-- `toggle: () => void` - Toggle visibility
-- `isVisible: boolean` - Current visibility state
+- **show: () => void** - Show the element
+- **hide: () => void** - Hide the element
+- **toggle: () => void** - Toggle visibility
+- **isVisible: boolean** - Current visibility state
 
 ### LayoutRenderer
 
