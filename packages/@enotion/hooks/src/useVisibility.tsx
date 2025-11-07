@@ -61,8 +61,11 @@ export function useVisibility({
     watching.current = true;
 
     new IntersectionObserver(
-      (entries) =>
-        entries.forEach(({ isIntersecting }) => setIsVisible(isIntersecting)),
+      (entries) => {
+        for (const { isIntersecting } of entries) {
+          setIsVisible(isIntersecting);
+        }
+      },
       {
         root:
           (typeof parentSelector === "object" && parentSelector.current) ||
