@@ -7,7 +7,7 @@ import {
   createContext,
   useContext,
 } from "react";
-import { createContextFactory } from "@enotion/core/utils";
+import { createContextFactory } from "@enotion/core";
 import { useLocalStorage } from "./useLocalStorage.js";
 
 /**
