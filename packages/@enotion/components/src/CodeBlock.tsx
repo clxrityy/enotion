@@ -1,5 +1,5 @@
 import { ColorPalettes, ColorPaletteType } from "@enotion/core/constants";
-import { adjustHexColorOpacity, blendHexColors } from "@enotion/core/utils";
+import { adjustHexColorOpacity, blendHexColors, cn } from "@enotion/core/utils";
 import type { ReactNode, CSSProperties } from "react";
 import "./styles/codeblock.css";
 
@@ -271,7 +271,7 @@ export function CodeBlock({
     flexShrink: 0,
   };
   return (
-    <section className={`enotion-code-block ${className}`} style={codeBlockStyle}>
+    <section className={cn(`enotion-code-block`, className)} style={codeBlockStyle}>
       <code>
         {lineTokens.map((lineTokenArray, lineIdx) => {
           const lineNum = lineIdx + 1;
