@@ -1,6 +1,6 @@
 {
   "name": "@enotion/server",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "private": false,
   "description": "Backend services and APIs for accessing and managing server-side functionalities",
