@@ -1,0 +1,84 @@
+# Link
+
+A styled anchor component with palette support and CSS custom properties.
+
+## Features
+
+- Simple wrapper around native anchor element
+- Palette-based theming
+- CSS custom properties for link, hover, and visited states
+- Extends all standard anchor attributes
+- Inline styles for dynamic theming
+
+## Props
+
+The Link component accepts the following props:
+
+- **palette** (ColorPaletteType, optional): Color palette for theming the link
+- **href** (string, optional): URL the link points to
+- **children** (ReactNode, optional): Content inside the link
+- All standard anchor HTML attributes (target, rel, etc.)
+
+## Basic Usage
+
+```tsx
+import { Link } from "@enotion/components";
+
+function Example() {
+  return (
+    <Link href="https://example.com">
+      Visit our website
+    </Link>
+  );
+}
+```
+
+## With Palette
+
+```tsx
+import { Link } from "@enotion/components";
+
+function Example() {
+  return (
+    <Link href="/about" palette="solarized">
+      About Us
+    </Link>
+  );
+}
+```
+
+## External Link
+
+```tsx
+import { Link } from "@enotion/components";
+
+function Example() {
+  return (
+    <Link
+      href="https://github.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub
+    </Link>
+  );
+}
+```
+
+## Styling
+
+The component uses CSS custom properties for comprehensive link state styling:
+
+- **--link-color**: Default link color
+- **--link-hover-color**: Color when hovering over the link
+- **--link-visited-color**: Color for visited links
+
+These properties are automatically populated from the selected color palette, ensuring consistent theming across your application.
+
+## Use Cases
+
+- Navigation menus
+- In-content hyperlinks
+- Footer links
+- External resource references
+- Call-to-action links

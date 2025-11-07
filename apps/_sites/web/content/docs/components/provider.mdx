@@ -1,0 +1,120 @@
+# Provider
+
+A combined context provider for theme, color palette, and notifications.
+
+## Features
+
+- Unified provider for ThemeProvider, ColorPaletteProvider, and NotificationProvider
+- Automatic palette injection into child components
+- Supports system, light, and dark themes
+- Notification system integration
+- Smart component detection (only injects palette into custom components)
+- Recursive children processing
+
+## Props
+
+The Provider component accepts the following props:
+
+- **children** (ReactNode, required): Child components to provide context to
+- **palette** (ColorPaletteType, optional): Color palette to apply
+- **theme** (Theme, optional): Theme mode (system, light, or dark)
+- **notificationOptions** (object, optional): Options for NotificationProvider
+- All standard HTML element attributes
+
+## Basic Usage
+
+```tsx
+import { Provider } from "@enotion/components";
+
+function App() {
+  return (
+    <Provider palette="solarized" theme="dark">
+      <YourApp />
+    </Provider>
+  );
+}
+```
+
+## With Theme Management
+
+```tsx
+import { Provider } from "@enotion/components";
+import { useState } from "react";
+
+function App() {
+  const [theme, setTheme] = useState("system");
+
+  return (
+    <Provider theme={theme}>
+      <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+        Toggle Theme
+      </button>
+      <YourApp />
+    </Provider>
+  );
+}
+```
+
+## With Notification Options
+
+```tsx
+import { Provider } from "@enotion/components";
+
+function App() {
+  return (
+    <Provider
+      palette="monochrome"
+      notificationOptions={{
+        position: "top-right",
+        duration: 3000,
+      }}
+    >
+      <YourApp />
+    </Provider>
+  );
+}
+```
+
+## Behavior
+
+The Provider component performs several key functions:
+
+1. **Theme Management**: Wraps children in ThemeProvider for theme context
+2. **Palette Management**: Wraps children in ColorPaletteProvider for palette context
+3. **Notification System**: Wraps children in NotificationProvider for notifications
+4. **Automatic Injection**: Automatically injects palette prop into custom components that don't already have one
+5. **Recursive Processing**: Processes nested children to ensure all components receive palette
+
+## Palette Injection
+
+The Provider intelligently injects the palette prop:
+
+- Only injects into custom components (not native DOM elements like div, span)
+- Skips components that already have a palette prop
+- Recursively processes all nested children
+- Preserves all existing props on components
+
+## Use Cases
+
+- Application root wrapper
+- Themed sections
+- Multi-tenant applications with different palettes
+- Dynamic theme switching
+- Notification-enabled applications
+
+## Theme Options
+
+The theme prop supports three values:
+
+- **system**: Follows system preference
+- **light**: Forces light theme
+- **dark**: Forces dark theme
+
+When no palette is specified, the Provider uses a default palette based on the theme:
+
+- dark theme → "dark" palette
+- light/system theme → "default" palette
+
+## CSS Import
+
+The Provider automatically imports notification styles. Ensure your build system supports CSS imports from node_modules.

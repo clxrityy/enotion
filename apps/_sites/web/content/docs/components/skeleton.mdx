@@ -1,0 +1,174 @@
+# Skeleton
+
+Loading placeholder components with automatic sizing and animation.
+
+## Components
+
+This module exports two components:
+
+- **SkeletonWrapper**: Wraps content and shows skeleton placeholders during loading
+- **Skeleton**: Standalone skeleton element with custom dimensions
+
+## SkeletonWrapper
+
+A wrapper component that automatically generates skeleton placeholders matching the dimensions of its children.
+
+### Props
+
+- **isLoading** (boolean, optional): Controls whether to show skeleton or children
+- **children** (ReactNode, required): Content to wrap and measure
+- **skeleton** (ReactNode, optional): Custom skeleton to display during loading
+- **skeletonClassName** (string, optional): CSS class for skeleton elements (default: "skeleton")
+- **animate** (boolean, optional): Enable skeleton animation (default: true)
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- **theme** (Theme, optional): Theme (light/dark) for default palette selection
+- All standard div HTML attributes
+
+### Basic Usage
+
+```tsx
+import { SkeletonWrapper } from "@enotion/components";
+
+function Example({ isLoading }) {
+  return (
+    <SkeletonWrapper isLoading={isLoading}>
+      <div className="card">
+        <h2>Title</h2>
+        <p>Description text</p>
+      </div>
+    </SkeletonWrapper>
+  );
+}
+```
+
+### With Custom Skeleton
+
+```tsx
+import { SkeletonWrapper } from "@enotion/components";
+
+function Example({ isLoading }) {
+  return (
+    <SkeletonWrapper
+      isLoading={isLoading}
+      skeleton={<div className="custom-skeleton" />}
+    >
+      <UserProfile />
+    </SkeletonWrapper>
+  );
+}
+```
+
+### Multiple Children
+
+```tsx
+import { SkeletonWrapper } from "@enotion/components";
+
+function Example({ isLoading }) {
+  return (
+    <SkeletonWrapper isLoading={isLoading}>
+      <h1>Page Title</h1>
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+      <button>Action</button>
+    </SkeletonWrapper>
+  );
+}
+```
+
+## Skeleton
+
+A standalone skeleton element for custom loading placeholders.
+
+### Props
+
+- **width** (number | string, optional): Width in pixels or CSS units
+- **height** (number | string, optional): Height in pixels or CSS units
+- **borderRadius** (number | string, optional): Border radius (default: "4px")
+- **referenceElement** (RefObject, optional): Element to inherit size from
+- **animate** (boolean, optional): Enable animation (default: true)
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- **theme** (Theme, optional): Theme (light/dark) for default palette selection
+- All standard div HTML attributes
+
+### Basic Usage
+
+```tsx
+import { Skeleton } from "@enotion/components";
+
+function Example() {
+  return (
+    <Skeleton width={200} height={40} />
+  );
+}
+```
+
+### With Reference Element
+
+```tsx
+import { Skeleton } from "@enotion/components";
+import { useRef } from "react";
+
+function Example() {
+  const ref = useRef(null);
+
+  return (
+    <>
+      <div ref={ref}>Content</div>
+      <Skeleton referenceElement={ref} />
+    </>
+  );
+}
+```
+
+### Custom Styling
+
+```tsx
+import { Skeleton } from "@enotion/components";
+
+function Example() {
+  return (
+    <Skeleton
+      width="100%"
+      height="2em"
+      borderRadius="8px"
+      palette="monochrome"
+    />
+  );
+}
+```
+
+### Card Loading State
+
+```tsx
+import { Skeleton } from "@enotion/components";
+
+function CardSkeleton() {
+  return (
+    <div className="card">
+      <Skeleton width="100%" height={200} />
+      <Skeleton width="80%" height={24} />
+      <Skeleton width="100%" height={16} />
+      <Skeleton width="90%" height={16} />
+    </div>
+  );
+}
+```
+
+## Animation
+
+Both components support animation via the animate prop. When enabled, skeletons display a subtle pulse or shimmer effect to indicate loading state.
+
+## Styling
+
+Both components use CSS custom properties for theming:
+
+- **--skeleton-bg-color**: Background color from palette muted
+- **--skeleton-bg-accent**: Accent background for animation
+- **--skeleton-fg-color**: Foreground color
+
+## Accessibility
+
+Both components include proper ARIA attributes:
+
+- **aria-busy="true"**: Indicates loading state
+- **aria-live="polite"**: Announces state changes to screen readers

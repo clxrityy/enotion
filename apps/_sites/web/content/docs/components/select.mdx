@@ -1,0 +1,143 @@
+# Select
+
+A dropdown select component with comprehensive theming and palette support.
+
+## Features
+
+- Options array with value/label pairs
+- Extensive CSS custom properties (25+ variables)
+- Palette-based theming
+- Inline styles for dynamic theming
+- Native select element with custom styling
+- Full keyboard navigation support
+
+## Props
+
+The Select component accepts the following props:
+
+- **options** (array, required): Array of option objects with value and label properties
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- **value** (string, optional): Currently selected value
+- **onChange** (function, optional): Callback when selection changes
+- All standard select HTML attributes
+
+## Basic Usage
+
+```tsx
+import { Select } from "@enotion/components";
+
+function Example() {
+  const options = [
+    { value: "apple", label: "Apple" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Orange" },
+  ];
+
+  return (
+    <Select options={options} />
+  );
+}
+```
+
+## Controlled Component
+
+```tsx
+import { Select } from "@enotion/components";
+import { useState } from "react";
+
+function Example() {
+  const [fruit, setFruit] = useState("apple");
+
+  const options = [
+    { value: "apple", label: "Apple" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Orange" },
+  ];
+
+  return (
+    <Select
+      options={options}
+      value={fruit}
+      onChange={(e) => setFruit(e.target.value)}
+    />
+  );
+}
+```
+
+## With Palette
+
+```tsx
+import { Select } from "@enotion/components";
+
+function Example() {
+  const options = [
+    { value: "light", label: "Light Theme" },
+    { value: "dark", label: "Dark Theme" },
+    { value: "auto", label: "Auto" },
+  ];
+
+  return (
+    <Select
+      options={options}
+      palette="solarized"
+    />
+  );
+}
+```
+
+## With Default Selection
+
+```tsx
+import { Select } from "@enotion/components";
+
+function Example() {
+  const options = [
+    { value: "", label: "Choose a color..." },
+    { value: "red", label: "Red" },
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" },
+  ];
+
+  return (
+    <Select
+      options={options}
+      defaultValue=""
+    />
+  );
+}
+```
+
+## Styling
+
+The Select component uses an extensive set of CSS custom properties for complete visual customization:
+
+**Container Properties:**
+- --select-background
+- --select-foreground
+- --select-border
+- --select-accent
+- --select-muted
+
+**State Properties:**
+- --select-hover-background
+- --select-hover-border
+- --select-focus-background
+- --select-focus-border
+- --select-focus-ring
+
+**Dropdown Properties:**
+- --select-option-background
+- --select-option-foreground
+- --select-option-hover-background
+- --select-option-selected-background
+
+All properties are automatically populated from the selected color palette, ensuring consistent theming.
+
+## Use Cases
+
+- Theme selectors
+- Language selection
+- Filter dropdowns
+- Settings panels
+- Form inputs
+- Navigation elements

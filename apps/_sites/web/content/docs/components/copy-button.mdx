@@ -1,0 +1,84 @@
+# CopyButton
+
+A button component that copies content to the clipboard and provides visual feedback.
+
+## Features
+
+- Copies text to clipboard on click
+- Visual feedback with icon change (copy to checkmark)
+- Automatic timeout to reset state
+- Optional success and error callbacks
+- Palette support for theming
+- Inline styles using CSS custom properties
+
+## Props
+
+The CopyButton component accepts the following props:
+
+- **content** (string, required): The text content to copy to the clipboard
+- **onCopied** (function, optional): Callback function called after successful copy
+- **onCopyError** (function, optional): Callback function called if copy operation fails
+- **palette** (ColorPaletteType, optional): Color palette for theming the button
+- All standard button HTML attributes
+
+## Basic Usage
+
+```tsx
+import { CopyButton } from "@enotion/components";
+
+function Example() {
+  return (
+    <CopyButton content="Hello, world!" />
+  );
+}
+```
+
+## With Callbacks
+
+```tsx
+import { CopyButton } from "@enotion/components";
+
+function Example() {
+  return (
+    <CopyButton
+      content="Code snippet here"
+      onCopied={() => console.log("Copied!")}
+      onCopyError={(error) => console.error("Copy failed:", error)}
+    />
+  );
+}
+```
+
+## With Palette
+
+```tsx
+import { CopyButton } from "@enotion/components";
+
+function Example() {
+  return (
+    <CopyButton
+      content="Styled content"
+      palette="monochrome"
+    />
+  );
+}
+```
+
+## Behavior
+
+The component uses the useClipboard hook to handle clipboard operations. When clicked:
+
+1. Attempts to copy content to clipboard
+2. Shows checkmark icon on success
+3. Calls onCopied callback if provided
+4. Automatically resets to copy icon after timeout
+5. Calls onCopyError callback on failure
+
+## Styling
+
+The component uses inline styles with CSS custom properties derived from the selected palette:
+
+- Background color adapts to palette background
+- Foreground color adapts to palette foreground
+- Hover and focus states use palette accent colors
+- Border uses palette border color

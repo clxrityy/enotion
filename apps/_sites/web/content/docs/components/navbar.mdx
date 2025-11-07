@@ -1,0 +1,221 @@
+# Navbar
+
+A responsive navigation bar with theme toggling, palette selection, and dropdown menus.
+
+## Features
+
+- Responsive design with mobile and desktop layouts
+- Theme toggle button (light/dark)
+- Color palette selector
+- Nested navigation with sub-items
+- Mobile menu with popover
+- Desktop dropdown menus
+- Logo and title support
+- Custom icons for nav items
+- Palette-based theming
+- Sticky positioning
+
+## Props
+
+The Navbar component accepts the following props:
+
+- **logo** (ReactNode, optional): Logo element to display
+- **title** (string, optional): Site title text
+- **logoHref** (string, optional): URL to navigate to when clicking logo
+- **items** (NavItem[], optional): Array of navigation items
+- **onItemClick** (function, optional): Callback when nav item is clicked
+- **palettes** (object, optional): Available color palettes (defaults to ColorPalettes)
+- **palette** (ColorPaletteType, optional): Current color palette
+- **onPaletteChange** (function, optional): Callback when palette changes
+- **currentTheme** (Theme, optional): Current theme (light/dark/system)
+- **toggleTheme** (function, optional): Callback to toggle theme
+- All standard HTML header attributes
+
+## NavItem Structure
+
+Each navigation item can have:
+
+- **href** (string, optional): Link URL
+- **label** (string, optional): Display text
+- **icon** (ComponentType, optional): Icon component
+- **active** (boolean, optional): Whether item is currently active
+- **description** (string, optional): Description text for sub-items
+- **subItems** (NavSubItem[], optional): Nested navigation items
+- **main** (object, optional): Featured content in dropdown with heading, description, icon, href, and footer
+
+## Basic Usage
+
+```tsx
+import { Navbar } from "@enotion/components";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+function Example() {
+  return (
+    <Navbar
+      title="My Site"
+      items={navItems}
+    />
+  );
+}
+```
+
+## With Theme Toggle
+
+```tsx
+import { Navbar } from "@enotion/components";
+import { useState } from "react";
+
+function Example() {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
+  return (
+    <Navbar
+      title="My Site"
+      currentTheme={theme}
+      toggleTheme={toggleTheme}
+      items={navItems}
+    />
+  );
+}
+```
+
+## With Palette Selector
+
+```tsx
+import { Navbar } from "@enotion/components";
+import { useState } from "react";
+
+function Example() {
+  const [palette, setPalette] = useState("default");
+
+  return (
+    <Navbar
+      title="My Site"
+      palette={palette}
+      onPaletteChange={setPalette}
+      items={navItems}
+    />
+  );
+}
+```
+
+## With Sub-Items
+
+```tsx
+import { Navbar } from "@enotion/components";
+import { Icons } from "@enotion/core";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  {
+    label: "Products",
+    icon: Icons.Package,
+    subItems: [
+      {
+        label: "Web Apps",
+        description: "Build modern web applications",
+        icon: Icons.Globe,
+      },
+      {
+        label: "Mobile Apps",
+        description: "Create mobile experiences",
+        icon: Icons.Phone,
+      },
+    ],
+    main: {
+      heading: "Featured",
+      description: "Check out our latest product",
+      icon: Icons.Star,
+      href: "/featured",
+    },
+  },
+];
+
+function Example() {
+  return <Navbar title="My Site" items={navItems} />;
+}
+```
+
+## With Logo
+
+```tsx
+import { Navbar } from "@enotion/components";
+
+function Example() {
+  return (
+    <Navbar
+      logo={<img src="/logo.png" alt="Logo" />}
+      title="My Site"
+      logoHref="/"
+      items={navItems}
+    />
+  );
+}
+```
+
+## Responsive Behavior
+
+The Navbar automatically adapts to screen size:
+
+- **Desktop (≥768px)**: Horizontal menu with dropdown popovers for items with sub-items
+- **Mobile (below 768px)**: Hamburger menu icon that opens a mobile drawer with all navigation
+
+## Styling
+
+The component uses extensive CSS custom properties for theming:
+
+- **--navbar-background**: Background color
+- **--navbar-foreground**: Text color
+- **--navbar-border**: Border color
+- **--navbar-accent**: Accent color for highlights
+- **--navbar-muted**: Muted color for less prominent elements
+- **--navbar-primary**: Primary color for active states
+
+The navbar includes:
+
+- Sticky positioning at top of viewport
+- Backdrop blur effect
+- Border bottom for separation
+- Responsive padding
+- Container with max-width for large screens
+
+## Navigation Item Click Handling
+
+```tsx
+import { Navbar } from "@enotion/components";
+
+function Example() {
+  const handleItemClick = (item) => {
+    console.log("Clicked:", item.label);
+    if (item.href) {
+      // Navigate to href
+      window.location.href = item.href;
+    }
+  };
+
+  return (
+    <Navbar
+      items={navItems}
+      onItemClick={handleItemClick}
+    />
+  );
+}
+```
+
+## Accessibility
+
+The component includes proper ARIA attributes:
+
+- **aria-label** on navigation elements
+- **aria-hidden** on decorative icons
+- **role="dialog"** on popovers (via Popover component)
+- Semantic HTML (header, nav, ul/li structure)

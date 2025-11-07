@@ -1,0 +1,458 @@
+import { useState } from "react";
+import { AnimatedModal, Button } from "@enotion/components";
+
+# AnimatedModal
+
+- [Import](#import)
+- [Setup](#setup)
+- [Basic Usage](#basic-usage)
+- [Props](#props)
+- [Animation Configuration](#animation-configuration)
+- [Examples](#examples)
+  - [Fade Animation (Default)](#fade-animation-default)
+  - [Scale Animation](#scale-animation)
+  - [Slide Animation](#slide-animation)
+  - [With Color Palette](#with-color-palette)
+- [Custom Animations](#custom-animations)
+- [Features](#features)
+  - [Automatic Close Button](#automatic-close-button)
+  - [Backdrop Click](#backdrop-click)
+  - [Escape Key](#escape-key)
+  - [Layout Integration](#layout-integration)
+- [How It Works](#how-it-works)
+- [Accessibility](#accessibility)
+  - [Enhanced Accessibility](#enhanced-accessibility)
+- [See Also](#see-also)
+
+An animated modal component that integrates with the layout context system for smooth enter/exit animations.
+
+## Import
+
+```tsx
+import { AnimatedModal } from "@enotion/components";
+import { LayoutContextProvider } from "@enotion/core/contexts";
+```
+
+## Setup
+
+The AnimatedModal requires the **LayoutContextProvider** to be present in your component tree:
+
+```tsx
+import { LayoutContextProvider, LayoutRenderer } from "@enotion/core/contexts";
+
+function App() {
+  return (
+    <LayoutContextProvider>
+      <YourApp />
+      <LayoutRenderer />
+    </LayoutContextProvider>
+  );
+}
+```
+
+## Basic Usage
+
+```tsx
+import { useState } from "react";
+import { AnimatedModal } from "@enotion/components";
+
+function MyComponent() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      <AnimatedModal
+        modalId="my-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <h2>Animated Modal</h2>
+        <p>This modal has smooth animations!</p>
+      </AnimatedModal>
+    </>
+  );
+}
+```
+
+export const BasicAnimatedModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" palette="monochrome" className="-invert-50" onClick={() => setIsOpen(true)}>Open Modal</Button>
+      <AnimatedModal
+        modalId="my-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        palette="default"
+      >
+        <h2>Animated Modal</h2>
+        <p>This modal has smooth animations!</p>
+        <p className="text-sm mt-2">Click <kbd className="font-bold font-mono">ESC</kbd> to quickly close.</p>
+      </AnimatedModal>
+    </>
+  );
+};
+
+<BasicAnimatedModalExample />
+
+## Props
+
+```typescript
+interface AnimatedModalProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  palette?: ColorPaletteType;
+  modalId: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  animationConfig?: {
+    enter?: string;
+    exit?: string;
+    duration?: number;
+  };
+}
+```
+
+### modalId
+- **Type:** **string**
+- **Required:** Yes
+- Unique identifier for the modal in the layout system
+
+### isOpen
+- **Type:** **boolean**
+- **Default:** **false**
+- Controls visibility of the modal
+
+### children
+- **Type:** **ReactNode**
+- **Required:** Yes
+- Content to display inside the modal
+
+### onClose
+- **Type:** **() => void**
+- **Default:** **undefined**
+- Callback when modal should close
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for styling
+
+### animationConfig
+- **Type:** **AnimationConfig**
+- **Default:** **\{ enter: "animate-fadeIn", exit: "animate-fadeOut", duration: 300 }**
+- Animation configuration for enter/exit animations
+
+## Animation Configuration
+
+```typescript
+interface AnimationConfig {
+  enter?: string;   // CSS class for enter animation
+  exit?: string;    // CSS class for exit animation
+  duration?: number; // Animation duration in milliseconds
+}
+```
+
+## Examples
+
+### Fade Animation (Default)
+
+```tsx
+<AnimatedModal
+  modalId="fade-modal"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  palette="dark"
+>
+  <h2>Fade Modal</h2>
+  <p>Uses default fade in/out animation.</p>
+</AnimatedModal>
+```
+
+export const FadeAnimatedModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" palette="monochrome" className="-invert-50" onClick={() => setIsOpen(true)}>Open Fade Modal</Button>
+      <AnimatedModal
+        palette="dark"
+        modalId="fade-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <h2>Fade Modal</h2>
+        <p>Uses default fade in/out animation.</p>
+      </AnimatedModal>
+    </>
+  );
+};
+
+<FadeAnimatedModalExample />
+
+### Scale Animation
+
+```tsx
+<AnimatedModal
+  modalId="scale-modal"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  animationConfig={{
+    enter: "animate-scaleIn",
+    exit: "animate-scaleOut",
+    duration: 250
+  }}
+>
+  <h2>Scale Modal</h2>
+  <p>Scales in and out smoothly.</p>
+</AnimatedModal>
+```
+
+export const ScaleAnimatedModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" palette="monochrome" className="-invert-50" onClick={() => setIsOpen(true)}>Open Scale Modal</Button>
+      <AnimatedModal
+        modalId="scale-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        animationConfig={{
+          enter: "animate-scaleIn",
+          exit: "animate-scaleOut",
+          duration: 250
+        }}
+      >
+        <h2>Scale Modal</h2>
+        <p>Scales in and out smoothly.</p>
+      </AnimatedModal>
+    </>
+  );
+};
+
+<ScaleAnimatedModalExample />
+
+### Slide Animation
+
+```tsx
+<AnimatedModal
+  modalId="slide-modal"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  animationConfig={{
+    enter: "animate-slideUp",
+    exit: "animate-slideDown",
+    duration: 300
+  }}
+>
+  <h2>Slide Modal</h2>
+  <p>Slides up on open, down on close.</p>
+</AnimatedModal>
+```
+
+export const SlideAnimatedModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" palette="monochrome" className="-invert-50" onClick={() => setIsOpen(true)}>Open Slide Modal</Button>
+      <AnimatedModal
+        modalId="slide-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        animationConfig={{
+          enter: "animate-slideUp",
+          exit: "animate-slideDown",
+          duration: 300
+        }}
+      >
+        <h2>Slide Modal</h2>
+        <p>Slides up on open, down on close.</p>
+      </AnimatedModal>
+    </>
+  );
+};
+
+<SlideAnimatedModalExample />
+
+### With Color Palette
+
+```tsx
+<AnimatedModal
+  modalId="themed-modal"
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  palette="dark"
+  animationConfig={{
+    enter: "animate-fadeIn",
+    exit: "animate-fadeOut",
+    duration: 300
+  }}
+>
+  <h2>Dark Theme Modal</h2>
+  <p>Styled with the dark palette.</p>
+</AnimatedModal>
+```
+
+export const ThemedAnimatedModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button variant="secondary" palette="monochrome" className="-invert-50" onClick={() => setIsOpen(true)}>Open Themed Modal</Button>
+      <AnimatedModal
+        modalId="themed-modal"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        palette="dark"
+        animationConfig={{
+          enter: "animate-fadeIn",
+          exit: "animate-fadeOut",
+          duration: 300
+        }}
+      >
+        <h2>Dark Theme Modal</h2>
+        <p>Styled with the dark palette.</p>
+      </AnimatedModal>
+    </>
+  );
+};
+
+<ThemedAnimatedModalExample />
+
+
+## Custom Animations
+
+Define your own animation classes:
+
+```css
+/* styles.css */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.animate-scaleIn {
+  animation: scaleIn 300ms ease-out;
+}
+
+.animate-scaleOut {
+  animation: scaleOut 300ms ease-in;
+}
+```
+
+Then use them:
+
+```tsx
+<AnimatedModal
+  modalId="custom-modal"
+  isOpen={isOpen}
+  onClose={onClose}
+  animationConfig={{
+    enter: "animate-scaleIn",
+    exit: "animate-scaleOut",
+    duration: 300
+  }}
+>
+  {/* Content */}
+</AnimatedModal>
+```
+
+## Features
+
+### Automatic Close Button
+
+The modal includes a close button in the top-right corner (if **onClose** is provided).
+
+### Backdrop Click
+
+Clicking the backdrop closes the modal (if **onClose** is provided).
+
+### Escape Key
+
+Pressing Escape closes the modal (if **onClose** is provided).
+
+### Layout Integration
+
+The modal is managed through the layout system, allowing:
+- Z-index management
+- Animation control
+- Global modal state
+- Priority handling
+
+## How It Works
+
+The AnimatedModal:
+1. Registers itself with the layout context
+2. Shows/hides based on **isOpen** prop
+3. Applies enter/exit animations
+4. Renders through **LayoutRenderer**
+5. Manages keyboard and click events
+
+```tsx
+// Simplified internal flow
+useEffect(() => {
+  registerElement({
+    id: modalId,
+    content: modalContent,
+    zIndex: 1000,
+    position: "fixed",
+    animation: animationConfig
+  });
+
+  if (isOpen) {
+    showElement(modalId);
+  } else {
+    hideElement(modalId);
+  }
+}, [isOpen]);
+```
+
+## Accessibility
+
+The AnimatedModal:
+- Uses proper ARIA attributes (**role="dialog"**, **aria-modal="true"**)
+- Supports keyboard navigation (**Escape** to close)
+- Provides focus management
+- Includes accessible close button with **aria-label**
+
+### Enhanced Accessibility
+
+```tsx
+<AnimatedModal
+  modalId="accessible-modal"
+  isOpen={isOpen}
+  onClose={onClose}
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <h2 id="modal-title">Important Notice</h2>
+  <p id="modal-description">Please read the following information.</p>
+</AnimatedModal>
+```
+
+## See Also
+
+- [Modal](/packages/components/modal) - Base modal component
+- [layout context](/packages/core/layout-context) - Layout system used internally
+- [useAnimatedModals](/packages/hooks/use-animated-modals) - Hook for managing animated modals
+- [Button](/packages/components/button) - Button component

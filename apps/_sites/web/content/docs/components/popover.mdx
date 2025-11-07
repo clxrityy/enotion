@@ -1,0 +1,118 @@
+# Popover
+
+A floating container component triggered by click, with outside click detection and keyboard handling.
+
+## Features
+
+- Click-triggered floating content
+- Automatic outside click detection
+- Escape key to close
+- Positioning control
+- Palette support for theming
+- Accessible with ARIA attributes
+- CSS custom properties for border and shadow
+
+## Props
+
+The Popover component accepts the following props:
+
+- **children** (ReactNode, required): Trigger element that opens the popover
+- **popoverContent** (ReactNode, required): Content to display in the popover
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- **className** (string, optional): Additional CSS classes for the popover container
+- All standard div HTML attributes
+
+## Basic Usage
+
+```tsx
+import { Popover } from "@enotion/components";
+
+function Example() {
+  return (
+    <Popover
+      popoverContent={
+        <div>
+          <p>Popover content here</p>
+        </div>
+      }
+    >
+      <button>Click me</button>
+    </Popover>
+  );
+}
+```
+
+## With Custom Styling
+
+```tsx
+import { Popover } from "@enotion/components";
+
+function Example() {
+  return (
+    <Popover
+      className="w-64 p-4"
+      palette="monochrome"
+      popoverContent={
+        <div>
+          <h3>Title</h3>
+          <p>Description text</p>
+        </div>
+      }
+    >
+      <button>Open Menu</button>
+    </Popover>
+  );
+}
+```
+
+## Navigation Menu
+
+```tsx
+import { Popover } from "@enotion/components";
+
+function Example() {
+  return (
+    <Popover
+      popoverContent={
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+      }
+    >
+      <button>Menu</button>
+    </Popover>
+  );
+}
+```
+
+## Behavior
+
+The component manages its open/closed state internally:
+
+1. Clicking the trigger element opens the popover
+2. Clicking outside the popover closes it (via useOutsideClick hook)
+3. Pressing Escape key closes the popover
+4. Popover is positioned absolutely relative to its container
+
+## Accessibility
+
+The component includes proper ARIA attributes:
+
+- **role="dialog"** on the popover container
+- **aria-modal="true"** when open
+- **aria-hidden="true"** when closed
+
+## Styling
+
+Uses CSS custom properties for theming:
+
+- **--popover-border**: Border color from palette
+- **--popover-shadow**: Shadow color from palette
+- **--popover-background**: Background color from palette
+- **--popover-foreground**: Text color from palette
+
+The popover container has a subtle shadow and border for visual separation from the page content.

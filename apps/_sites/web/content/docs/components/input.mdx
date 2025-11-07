@@ -1,0 +1,251 @@
+# Input
+
+A customizable input component with color palette integration for consistent theming.
+
+## Import
+
+```tsx
+import { Input } from "@enotion/components";
+```
+
+## Basic Usage
+
+```tsx
+<Input placeholder="Enter text" />
+```
+
+## With Color Palette
+
+```tsx
+<Input
+  placeholder="Email address"
+  type="email"
+  palette="dark"
+/>
+```
+
+## Props
+
+```typescript
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  palette?: ColorPaletteType;
+}
+```
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for styling
+
+All standard HTML input attributes are supported.
+
+## Input Types
+
+```tsx
+{/* Text */}
+<Input type="text" placeholder="Enter text" />
+
+{/* Email */}
+<Input type="email" placeholder="Email address" />
+
+{/* Password */}
+<Input type="password" placeholder="Password" />
+
+{/* Number */}
+<Input type="number" placeholder="Age" />
+
+{/* Date */}
+<Input type="date" />
+
+{/* Time */}
+<Input type="time" />
+
+{/* Search */}
+<Input type="search" placeholder="Search..." />
+```
+
+## CSS Custom Properties
+
+When using a palette, the component sets:
+
+- **--input-border-color** - Default border color
+- **--input-focus-border-color** - Border color on focus
+- **--input-background-color** - Background color
+- **--input-text-color** - Text color
+- **--input-placeholder-color** - Placeholder text color (60% opacity)
+- **--input-disabled-background-color** - Background when disabled (10% opacity)
+
+## Examples
+
+### Form Group
+
+```tsx
+<div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+  <Input
+    type="text"
+    placeholder="Full Name"
+    palette="dark"
+  />
+  <Input
+    type="email"
+    placeholder="Email"
+    palette="dark"
+  />
+  <Input
+    type="password"
+    placeholder="Password"
+    palette="dark"
+  />
+</div>
+```
+
+### With Label
+
+```tsx
+<div>
+  <label htmlFor="username">Username</label>
+  <Input
+    id="username"
+    type="text"
+    placeholder="Enter username"
+    palette="dark"
+  />
+</div>
+```
+
+### Controlled Input
+
+```tsx
+import { useState } from "react";
+
+function MyForm() {
+  const [value, setValue] = useState("");
+
+  return (
+    <Input
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      placeholder="Controlled input"
+      palette="softBeach"
+    />
+  );
+}
+```
+
+### With Validation
+
+```tsx
+import { useState } from "react";
+
+function ValidatedInput() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const validate = (value: string) => {
+    if (!value.includes("@")) {
+      setError("Invalid email");
+    } else {
+      setError("");
+    }
+  };
+
+  return (
+    <div>
+      <Input
+        type="email"
+        value={email}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          validate(e.target.value);
+        }}
+        palette="dark"
+        style={{ borderColor: error ? 'red' : undefined }}
+      />
+      {error && <span style={{ color: 'red' }}>{error}</span>}
+    </div>
+  );
+}
+```
+
+### Disabled State
+
+```tsx
+<Input
+  placeholder="Disabled input"
+  disabled
+  palette="monochrome"
+/>
+```
+
+### Required Field
+
+```tsx
+<Input
+  type="email"
+  placeholder="Email (required)"
+  required
+  palette="dark"
+/>
+```
+
+### With Min/Max
+
+```tsx
+<Input
+  type="number"
+  min={0}
+  max={100}
+  placeholder="Enter value 0-100"
+  palette="softBeach"
+/>
+```
+
+### Custom Styling
+
+```tsx
+<Input
+  placeholder="Custom styled"
+  palette="dark"
+  style={{
+    borderRadius: '20px',
+    padding: '12px 16px',
+    fontSize: '16px'
+  }}
+/>
+```
+
+## Accessibility
+
+The Input component:
+- Supports all standard HTML input attributes
+- Works with labels via **id** and **htmlFor**
+- Supports **required**, **disabled**, **readonly** attributes
+- Respects **aria-*** attributes for enhanced accessibility
+- Provides proper color contrast with palette integration
+
+### Accessibility Example
+
+```tsx
+<div>
+  <label htmlFor="accessible-input">
+    Email Address
+    <span aria-label="required">*</span>
+  </label>
+  <Input
+    id="accessible-input"
+    type="email"
+    required
+    aria-required="true"
+    aria-describedby="email-hint"
+    palette="dark"
+  />
+  <span id="email-hint">We'll never share your email.</span>
+</div>
+```
+
+## See Also
+
+- [Button](/packages/components/button) - Button component
+- [Card](/packages/components/card) - Card container
+- [Search](/packages/components/search) - Search component with Input
+- [colors](/packages/core/colors) - Color palette system

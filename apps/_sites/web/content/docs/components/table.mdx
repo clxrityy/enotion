@@ -1,0 +1,263 @@
+import { Table } from "@enotion/components";
+
+# Table
+
+A responsive table component with theming, striping, borders, and mobile-friendly layouts.
+
+## Features
+
+- Responsive horizontal scrolling by default
+- Optional mobile-stacked layout
+- Striped rows for better readability
+- Hover effects on rows
+- Border variants
+- Palette-based theming
+- Sticky header cells
+- Accessible with proper ARIA attributes
+- Custom scrollbar styling
+
+## Props
+
+The Table component accepts the following props:
+
+- **rows** (array, optional): Array of row objects with title and items
+- **striped** (boolean, optional): Enable alternating row colors (default: false)
+- **bordered** (boolean, optional): Add borders around cells (default: false)
+- **hover** (boolean, optional): Enable row hover effects (default: false)
+- **responsive** (boolean, optional): Enable horizontal scrolling wrapper (default: true)
+- **stackOnMobile** (boolean, optional): Stack table as cards on mobile (default: false)
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- All standard table HTML attributes
+
+## Row Structure
+
+Each row object has:
+- **title** (string): The header cell content
+- **items** (ReactNode[]): Array of cell contents
+
+## Basic Usage
+
+```tsx
+import { Table } from "@enotion/components";
+
+const rows = [
+  {
+    title: "Feature",
+    items: ["Description", "Status"]
+  },
+  {
+    title: "Responsive",
+    items: ["Horizontal scrolling", "Enabled"]
+  },
+  {
+    title: "Theming",
+    items: ["Palette support", "Enabled"]
+  }
+];
+
+function Example() {
+  return <Table rows={rows} />;
+}
+```
+
+## Striped Table
+
+```tsx
+import { Table } from "@enotion/components";
+
+function Example() {
+  return (
+    <Table
+      rows={rows}
+      striped
+    />
+  );
+}
+```
+
+## Bordered with Hover
+
+```tsx
+import { Table } from "@enotion/components";
+
+function Example() {
+  return (
+    <Table
+      rows={rows}
+      bordered
+      hover
+    />
+  );
+}
+```
+
+## Mobile-Stacked Layout
+
+```tsx
+import { Table } from "@enotion/components";
+
+function Example() {
+  return (
+    <Table
+      rows={rows}
+      stackOnMobile
+    />
+  );
+}
+```
+
+## With Palette
+
+```tsx
+import { Table } from "@enotion/components";
+
+function Example() {
+  return (
+    <Table
+      rows={rows}
+      palette="monochrome"
+      striped
+      hover
+    />
+  );
+}
+```
+
+## Full Featured
+
+```tsx
+import { Table } from "@enotion/components";
+
+function Example() {
+  return (
+    <Table
+      rows={rows}
+      striped
+      bordered
+      hover
+      responsive
+      stackOnMobile
+      palette="solarized"
+    />
+  );
+}
+```
+
+## With React Nodes
+
+```tsx
+import { Table } from "@enotion/components";
+
+const rows = [
+  {
+    title: "Component",
+    items: [
+      <strong>Button</strong>,
+      <span>Primary action</span>,
+      <code>enabled</code>
+    ]
+  },
+  {
+    title: "Input",
+    items: [
+      <strong>TextField</strong>,
+      <span>Text input</span>,
+      <code>enabled</code>
+    ]
+  }
+];
+
+function Example() {
+  return <Table rows={rows} />;
+}
+```
+
+## API Reference
+
+<Table
+  rows={[
+    {
+      title: "rows",
+      items: ["array", "[]", "Array of row objects with title and items"]
+    },
+    {
+      title: "striped",
+      items: ["boolean", "false", "Alternate row background colors"]
+    },
+    {
+      title: "bordered",
+      items: ["boolean", "false", "Add borders to cells"]
+    },
+    {
+      title: "hover",
+      items: ["boolean", "false", "Enable hover effects on rows"]
+    },
+    {
+      title: "responsive",
+      items: ["boolean", "true", "Wrap in scrollable container"]
+    },
+    {
+      title: "stackOnMobile",
+      items: ["boolean", "false", "Stack table as cards on mobile"]
+    },
+    {
+      title: "palette",
+      items: ["ColorPaletteType", "undefined", "Color palette for theming"]
+    }
+  ]}
+  striped
+  bordered
+  hover
+/>
+
+## Responsive Behavior
+
+The Table component adapts to different screen sizes:
+
+- **Desktop (≥1024px)**: Full table layout with all features
+- **Tablet (768px-1024px)**: Reduced padding and font sizes
+- **Mobile (≤768px with stackOnMobile)**: Transforms into stacked card layout
+- **Mobile (≤480px)**: Further reduced spacing and scrollbar size
+
+## Mobile Stacked Layout
+
+When stackOnMobile is enabled on mobile devices:
+
+- Table header becomes card heading
+- Each row becomes a card
+- Cells stack vertically
+- Better readability on small screens
+- Touch-friendly spacing
+
+## Styling
+
+The component uses CSS custom properties:
+
+- **--table-foreground**: Text color
+- **--table-background**: Background color
+- **--table-border**: Border color
+- **--table-accent**: Header background color
+- **--table-muted**: Secondary colors
+- **--table-hover**: Hover state color
+- **--table-striped**: Striped row color
+- **--table-text-on-accent**: Text color on accent background
+
+## Accessibility
+
+The Table component includes:
+
+- **scope="row"** on header cells
+- Semantic table structure (table, tbody, tr, th, td)
+- Proper color contrast from palettes
+- Keyboard navigation support
+- Screen reader friendly markup
+
+## Use Cases
+
+- Data tables
+- Feature comparisons
+- API documentation
+- Pricing tables
+- Status dashboards
+- Product specifications
+- Configuration displays

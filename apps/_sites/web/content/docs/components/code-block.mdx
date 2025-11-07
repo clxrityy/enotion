@@ -1,0 +1,324 @@
+# CodeBlock
+
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [Props](#props)
+- [Supported Languages](#supported-languages)
+- [Token Types](#token-types)
+- [Examples](#examples)
+  - [With Line Numbers](#with-line-numbers)
+  - [Highlighting Specific Lines](#highlighting-specific-lines)
+  - [With Color Palette](#with-color-palette)
+  - [Light Theme](#light-theme)
+  - [HTML/JSX](#htmljsx)
+  - [CSS](#css)
+  - [JSON](#json)
+  - [Installation Commands](#installation-commands)
+  - [Custom Styling](#custom-styling)
+- [Styling](#styling)
+  - [Default Styles](#default-styles)
+  - [Theme Colors](#theme-colors)
+- [Accessibility](#accessibility)
+- [Performance](#performance)
+
+A feature-rich code block component with syntax highlighting, line numbers, line highlighting, and theme support.
+
+---
+
+## Import
+
+```tsx
+import { CodeBlock } from "@enotion/components";
+```
+
+## Basic Usage
+
+```tsx
+<CodeBlock language="typescript">
+{`function hello() {
+  console.log("Hello, world!");
+}`}
+</CodeBlock>
+```
+
+## Props
+
+```typescript
+interface CodeBlockProps {
+  children: string;
+  palette?: ColorPaletteType;
+  theme?: "light" | "dark";
+  language?: string;
+  showLineNumbers?: boolean;
+  highlightLines?: number[];
+  className?: string;
+  style?: CSSProperties;
+}
+```
+
+### children
+- **Type:** **string**
+- **Required:** Yes
+- The code content to display
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for token colors
+
+### theme
+- **Type:** **"light" | "dark"**
+- **Default:** **"dark"**
+- Theme for syntax highlighting colors (used when no palette provided)
+
+### language
+- **Type:** **string**
+- **Default:** **"typescript"**
+- Programming language for syntax highlighting
+
+### showLineNumbers
+- **Type:** **boolean**
+- **Default:** **false**
+- Whether to show line numbers
+
+### highlightLines
+- **Type:** **number[]**
+- **Default:** **[]**
+- Array of line numbers to highlight (1-indexed)
+
+## Supported Languages
+
+The CodeBlock component uses a custom tokenizer that works with:
+- JavaScript/TypeScript
+- JSX/TSX
+- HTML
+- CSS
+- JSON
+- And other C-style syntax languages
+
+## Token Types
+
+The syntax highlighter recognizes:
+- **Keywords**: **const**, **let**, **function**, **return**, **if**, **else**, etc.
+- **Strings**: Single and double quoted strings
+- **Comments**: Single-line (**//**) and multi-line (**/* */**)
+- **Numbers**: Integer and decimal numbers
+- **Functions**: Function names followed by parentheses
+- **Operators**: **+**, **-**, **\***, **/**, **=**, **===**, etc.
+- **Booleans**: **true**, **false**, **null**, **undefined**
+- **Tags**: HTML/JSX tags
+- **Attributes**: HTML/JSX attributes
+- **Class Names**: CSS class names
+
+## Examples
+
+### With Line Numbers
+
+```tsx
+<CodeBlock
+  language="typescript"
+  showLineNumbers
+>
+{`const greet = (name: string) => {
+  return \`Hello, \${name}!\`;
+};
+
+greet("World");`}
+</CodeBlock>
+```
+
+### Highlighting Specific Lines
+
+```tsx
+<CodeBlock
+  language="javascript"
+  showLineNumbers
+  highlightLines={[2, 4]}
+>
+{`function calculate(a, b) {
+  const sum = a + b; // This line is highlighted
+  const product = a * b;
+  return { sum, product }; // This line is highlighted
+}`}
+</CodeBlock>
+```
+
+### With Color Palette
+
+```tsx
+<CodeBlock
+  palette="dark"
+  showLineNumbers
+  language="typescript"
+>
+{`interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const user: User = {
+  id: 1,
+  name: "John Doe",
+  email: "john@example.com"
+};`}
+</CodeBlock>
+```
+
+### Light Theme
+
+```tsx
+<CodeBlock
+  theme="light"
+  showLineNumbers
+  language="javascript"
+>
+{`const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+console.log(doubled);`}
+</CodeBlock>
+```
+
+### HTML/JSX
+
+```tsx
+<CodeBlock
+  language="jsx"
+  showLineNumbers
+  palette="softBeach"
+>
+{`function App() {
+  return (
+    <div className="container">
+      <h1>Hello World</h1>
+      <p>Welcome to my app!</p>
+    </div>
+  );
+}`}
+</CodeBlock>
+```
+
+### CSS
+
+```tsx
+<CodeBlock
+  language="css"
+  showLineNumbers
+>
+{`.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}`}
+</CodeBlock>
+```
+
+### JSON
+
+```tsx
+<CodeBlock
+  language="json"
+  showLineNumbers
+  highlightLines={[3, 4]}
+>
+{`{
+  "name": "my-package",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.0.0"
+  }
+}`}
+</CodeBlock>
+```
+
+### Installation Commands
+
+```tsx
+<CodeBlock language="bash">
+{`npm install @enotion/components`}
+</CodeBlock>
+```
+
+### Custom Styling
+
+```tsx
+<CodeBlock
+  language="typescript"
+  showLineNumbers
+  className="my-code-block"
+  style={{
+    borderRadius: '12px',
+    fontSize: '14px',
+    maxHeight: '400px'
+  }}
+>
+{`// Your code here`}
+</CodeBlock>
+```
+
+## Styling
+
+### Default Styles
+
+The component includes:
+- Custom scrollbar styling
+- Responsive font sizes
+- Proper padding and spacing
+- Overflow handling
+
+### Theme Colors
+
+**Dark Theme (default):**
+- Background: **#1e1e1e**
+- Keywords: **#569cd6** (blue, bold)
+- Strings: **#ce9178** (orange)
+- Comments: **#6a9955** (green, italic)
+- Functions: **#dcdcaa** (yellow)
+- Numbers: **#b5cea8** (light green)
+
+**Light Theme:**
+- Background: **#f5f5f5**
+- Keywords: **#0000ff** (blue, bold)
+- Strings: **#a31515** (red)
+- Comments: **#008000** (green, italic)
+- Functions: **#795e26** (brown)
+- Numbers: **#098658** (green)
+
+## Accessibility
+
+The CodeBlock component:
+- Uses semantic **\<pre>** and **\<code>** elements
+- Provides proper contrast ratios
+- Supports keyboard scrolling
+- Can be enhanced with ARIA labels
+
+```tsx
+<CodeBlock
+  language="typescript"
+  showLineNumbers
+  aria-label="TypeScript code example"
+  role="region"
+>
+{`// Your code`}
+</CodeBlock>
+```
+
+## Performance
+
+The component:
+- Tokenizes code on render
+- Handles large code blocks efficiently
+- Uses memoization for token colors
+- Optimized for responsive rendering
+
+## See Also
+
+- [Card](/packages/components/card) - Container component
+- [colors](/packages/core/colors) - Color palette system
+- [cn](/packages/core/cn) - Class name utility used internally

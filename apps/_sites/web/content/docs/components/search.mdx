@@ -1,0 +1,308 @@
+# Search
+
+A powerful search component that filters data and displays results with custom rendering.
+
+## Import
+
+```tsx
+import { Search } from "@enotion/components";
+```
+
+## Basic Usage
+
+```tsx
+interface Item {
+  id: number;
+  name: string;
+}
+
+const data: Item[] = [
+  { id: 1, name: 'Apple' },
+  { id: 2, name: 'Banana' },
+  { id: 3, name: 'Orange' },
+];
+
+<Search
+  data={data}
+  searchKey="name"
+  render={(item) => <div>{item.name}</div>}
+/>
+```
+
+## Props
+
+```typescript
+interface SearchProps<T> extends HTMLAttributes<HTMLDivElement> {
+  data: T[];
+  searchKey: keyof T | (keyof T)[];
+  render: (item: T, index: number) => React.ReactNode;
+  palette?: ColorPaletteType;
+  placeholder?: string;
+  showItemsWhenQueryEmpty?: boolean;
+}
+```
+
+### data
+- **Type:** **T[]**
+- **Required:** Yes
+- Array of data objects to search
+
+### searchKey
+- **Type:** **keyof T | (keyof T)[]**
+- **Required:** Yes
+- Object key(s) to search within
+
+### render
+- **Type:** **(item: T, index: number) => ReactNode**
+- **Required:** Yes
+- Function to render each search result
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for styling
+
+### placeholder
+- **Type:** **string**
+- **Default:** **"Search..."**
+- Input placeholder text
+
+### showItemsWhenQueryEmpty
+- **Type:** **boolean**
+- **Default:** **true**
+- Whether to show all items when search is empty
+
+## Examples
+
+### Single Search Key
+
+```tsx
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const users: User[] = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+  { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
+];
+
+<Search
+  data={users}
+  searchKey="name"
+  placeholder="Search users..."
+  palette="dark"
+  render={(user) => (
+    <div>
+      <strong>{user.name}</strong>
+      <p>{user.email}</p>
+    </div>
+  )}
+/>
+```
+
+### Multiple Search Keys
+
+```tsx
+<Search
+  data={users}
+  searchKey={["name", "email"]}
+  placeholder="Search by name or email..."
+  palette="softBeach"
+  render={(user) => (
+    <div>
+      <h3>{user.name}</h3>
+      <span>{user.email}</span>
+    </div>
+  )}
+/>
+```
+
+### Hide Results When Empty
+
+```tsx
+<Search
+  data={products}
+  searchKey="title"
+  showItemsWhenQueryEmpty={false}
+  placeholder="Start typing to search..."
+  render={(product) => (
+    <div>
+      <h4>{product.title}</h4>
+      <p>${product.price}</p>
+    </div>
+  )}
+/>
+```
+
+### Complex Rendering
+
+```tsx
+interface Article {
+  id: number;
+  title: string;
+  author: string;
+  date: string;
+  excerpt: string;
+}
+
+<Search
+  data={articles}
+  searchKey={["title", "author", "excerpt"]}
+  palette="dark"
+  render={(article, index) => (
+    <div className="article-result">
+      <div className="article-header">
+        <h3>{article.title}</h3>
+        <span className="article-meta">
+          By {article.author} • {article.date}
+        </span>
+      </div>
+      <p className="article-excerpt">{article.excerpt}</p>
+      <a href={`/articles/${article.id}`}>Read more →</a>
+    </div>
+  )}
+/>
+```
+
+### With Custom Styling
+
+```tsx
+<Search
+  data={items}
+  searchKey="name"
+  palette="monochrome"
+  className="my-search"
+  style={{ maxWidth: '600px', margin: '0 auto' }}
+  render={(item) => (
+    <div style={{ padding: '1rem' }}>
+      {item.name}
+    </div>
+  )}
+/>
+```
+
+### Nested Object Search
+
+```tsx
+interface Product {
+  id: number;
+  details: {
+    name: string;
+    category: string;
+  };
+}
+
+const products: Product[] = [
+  { id: 1, details: { name: 'Laptop', category: 'Electronics' } },
+  { id: 2, details: { name: 'Desk', category: 'Furniture' } },
+];
+
+// Note: searchKey works with top-level keys
+// For nested searching, flatten your data or use a custom filter
+<Search
+  data={products.map(p => ({ ...p, name: p.details.name }))}
+  searchKey="name"
+  render={(product) => (
+    <div>
+      <strong>{product.details.name}</strong>
+      <span>{product.details.category}</span>
+    </div>
+  )}
+/>
+```
+
+## Features
+
+### Automatic Filtering
+
+The component uses the **useSearch** hook internally to filter data in real-time as the user types.
+
+### Card Wrapping
+
+Each search result is automatically wrapped in a **Card** component with the same palette.
+
+### Responsive Design
+
+The search input and results are responsive and work well on all screen sizes.
+
+## Styling
+
+The Search component renders:
+1. An `Input` component for the search query
+2. A `Card` component for each result
+
+Both inherit the specified `palette` for consistent theming.
+
+## How It Works
+
+```tsx
+// Internally uses useSearch hook
+const { query, setQuery, filteredData } = useSearch<T>(data, searchKey);
+
+// Displays Input
+<Input
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+  palette={palette}
+/>
+
+// Maps over filtered results
+{filteredData.map((item, index) => (
+  <Card palette={palette}>
+    {render(item, index)}
+  </Card>
+))}
+```
+
+## Accessibility
+
+The Search component:
+- Uses semantic form elements
+- Supports keyboard navigation
+- Provides proper input labeling via placeholder
+- Can be enhanced with ARIA labels
+
+```tsx
+<Search
+  data={data}
+  searchKey="name"
+  placeholder="Search items"
+  aria-label="Search through items"
+  render={(item) => <div>{item.name}</div>}
+/>
+```
+
+## Performance Tips
+
+For large datasets:
+1. Consider pagination
+2. Implement debouncing
+3. Use virtual scrolling for many results
+
+```tsx
+import { useState, useEffect } from "react";
+
+function DebouncedSearch() {
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Update search
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [debouncedQuery]);
+
+  return <Search data={filteredData} />;
+}
+```
+
+## See Also
+
+- [Input](/packages/components/input) - Input component used internally
+- [Card](/packages/components/card) - Card wrapper for results
+- [useSearch](/packages/hooks/use-search) - Search hook used internally
+- [colors](/packages/core/colors) - Color palette system

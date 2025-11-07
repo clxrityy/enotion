@@ -1,0 +1,92 @@
+# Wrapper
+
+A simple layout wrapper component with palette support for consistent theming.
+
+## Features
+
+- Full viewport width and height
+- Palette-based background and foreground colors
+- Overflow control for contained layouts
+- Zero default margin and padding
+- Extends all standard div attributes
+
+## Props
+
+The Wrapper component accepts the following props:
+
+- **children** (ReactNode, optional): Content to wrap
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- All standard div HTML attributes
+
+## Basic Usage
+
+```tsx
+import { Wrapper } from "@enotion/components";
+
+function Example() {
+  return (
+    <Wrapper>
+      <h1>Page Content</h1>
+      <p>Your application content here</p>
+    </Wrapper>
+  );
+}
+```
+
+## With Palette
+
+```tsx
+import { Wrapper } from "@enotion/components";
+
+function Example() {
+  return (
+    <Wrapper palette="dark">
+      <div>Dark themed content</div>
+    </Wrapper>
+  );
+}
+```
+
+## Full Application Wrapper
+
+```tsx
+import { Wrapper } from "@enotion/components";
+
+function App() {
+  return (
+    <Wrapper palette="solarized">
+      <Header />
+      <main>
+        <Content />
+      </main>
+      <Footer />
+    </Wrapper>
+  );
+}
+```
+
+## Styling
+
+The component applies the following default styles:
+
+- **backgroundColor**: From palette background color
+- **color**: From palette foreground color
+- **margin**: 0
+- **padding**: 0
+- **maxHeight**: 100vh
+- **overflow**: clip
+- **maxWidth**: 100vw
+
+Additional styles can be provided via the style prop and will be merged with defaults.
+
+## Use Cases
+
+- Root application wrapper
+- Page-level containers
+- Section backgrounds
+- Full-screen layouts
+- Themed content areas
+
+## Notes
+
+The component uses overflow: clip to prevent content from exceeding viewport bounds. If you need scrollable content, consider wrapping inner content in a separate scrollable container or override the overflow style.

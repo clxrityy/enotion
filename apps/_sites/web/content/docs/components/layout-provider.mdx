@@ -1,0 +1,144 @@
+# LayoutProvider
+
+A comprehensive provider that combines layout context, theme management, and rendering.
+
+## Features
+
+- Combines LayoutContextProvider and Provider functionality
+- Renders LayoutRenderer for layout element management
+- Supports theme and palette management
+- Notification system integration
+- Automatic layout element positioning and animation
+- Requires layout animations CSS import
+
+## Props
+
+The LayoutProvider component accepts the following props:
+
+- **children** (ReactNode, optional): Child components to render
+- **palette** (ColorPaletteType, optional): Color palette for theming
+- **theme** (Theme, optional): Theme mode (system, light, or dark)
+- **notificationOptions** (object, optional): Options for NotificationProvider
+- All standard HTML attributes (passed to LayoutRenderer)
+
+## Basic Usage
+
+```tsx
+import { LayoutProvider } from "@enotion/components";
+import "@enotion/core/index.css"; // Required for animations
+
+function App() {
+  return (
+    <LayoutProvider>
+      <YourApp />
+    </LayoutProvider>
+  );
+}
+```
+
+## With Theme and Palette
+
+```tsx
+import { LayoutProvider } from "@enotion/components";
+import "@enotion/core/index.css";
+
+function App() {
+  return (
+    <LayoutProvider palette="solarized" theme="dark">
+      <YourApp />
+    </LayoutProvider>
+  );
+}
+```
+
+## With Notification Options
+
+```tsx
+import { LayoutProvider } from "@enotion/components";
+import "@enotion/core/index.css";
+
+function App() {
+  return (
+    <LayoutProvider
+      palette="monochrome"
+      notificationOptions={{
+        position: "bottom-right",
+        duration: 5000,
+      }}
+    >
+      <YourApp />
+    </LayoutProvider>
+  );
+}
+```
+
+## CSS Import Requirement
+
+The LayoutProvider requires animation CSS to be imported for proper layout rendering:
+
+```tsx
+import "@enotion/core/index.css";
+```
+
+This import provides the necessary animations for layout elements, modals, and transitions.
+
+## Context Hierarchy
+
+The LayoutProvider establishes the following context hierarchy:
+
+1. **LayoutContextProvider**: Manages layout elements, groups, and positioning
+2. **Provider**: Manages theme, palette, and notifications
+3. **LayoutRenderer**: Renders all registered layout elements
+
+This structure ensures that:
+
+- Layout elements can be registered from anywhere in the component tree
+- Theme and palette are available to all components
+- Layout elements render with proper theming
+- Notifications work within the layout system
+
+## Use Cases
+
+- Applications using AnimatedModal or layout-based overlays
+- Multi-theme applications with layout management
+- Apps requiring centralized modal/overlay rendering
+- Applications with complex layout element orchestration
+
+## Layout System Integration
+
+When using LayoutProvider, you can use the layout context to manage elements:
+
+```tsx
+import { LayoutProvider } from "@enotion/components";
+import { useLayoutContext } from "@enotion/core";
+import "@enotion/core/index.css";
+
+function MyComponent() {
+  const { addElement, removeElement } = useLayoutContext();
+
+  const showOverlay = () => {
+    addElement({
+      id: "my-overlay",
+      element: <div>Overlay content</div>,
+      group: "overlays",
+    });
+  };
+
+  return <button onClick={showOverlay}>Show Overlay</button>;
+}
+
+function App() {
+  return (
+    <LayoutProvider palette="solarized">
+      <MyComponent />
+    </LayoutProvider>
+  );
+}
+```
+
+## Related Components
+
+- **Provider**: For theme/palette without layout management
+- **AnimatedModal**: Uses layout system for rendering
+- **LayoutContextProvider**: Lower-level layout context
+- **LayoutRenderer**: Renders layout elements

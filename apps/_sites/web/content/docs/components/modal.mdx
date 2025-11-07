@@ -1,0 +1,233 @@
+# Modal
+
+A dialog component that displays content in an overlay, with automatic backdrop, escape key handling, and scroll prevention.
+
+## Import
+
+```tsx
+import { Modal } from "@enotion/components";
+```
+
+## Basic Usage
+
+```tsx
+import { useState } from "react";
+import { Modal } from "@enotion/components";
+
+function MyComponent() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <h2>Modal Title</h2>
+        <p>This is the modal content.</p>
+        <button onClick={() => setIsOpen(false)}>Close</button>
+      </Modal>
+    </>
+  );
+}
+```
+
+## Props
+
+```typescript
+interface ModalProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  palette?: ColorPaletteType;
+  isOpen: boolean;
+  onClose?: () => void;
+}
+```
+
+### isOpen
+- **Type:** **boolean**
+- **Required:** Yes
+- Controls visibility of the modal
+
+### children
+- **Type:** **ReactNode**
+- **Required:** Yes
+- Content to display inside the modal
+
+### onClose
+- **Type:** **() => void**
+- **Default:** **undefined**
+- Callback when modal should close (triggered by backdrop click or Escape key)
+
+### palette
+- **Type:** **ColorPaletteType**
+- **Default:** **undefined**
+- Color palette for styling
+
+## Features
+
+### Automatic Backdrop
+
+The modal automatically creates a semi-transparent backdrop overlay.
+
+### Escape Key Handling
+
+Press **Escape** to close the modal (if **onClose** is provided).
+
+### Outside Click Detection
+
+Clicking the backdrop closes the modal (if **onClose** is provided).
+
+### Body Scroll Prevention
+
+When the modal is open, body scrolling is disabled to prevent background interaction.
+
+### Responsive Sizing
+
+The modal content is constrained to:
+- Max width: 90vw
+- Max height: 90vh
+- Min width: 300px
+- Scrollable overflow
+
+## Examples
+
+### Confirmation Dialog
+
+```tsx
+<Modal isOpen={showConfirm} onClose={() => setShowConfirm(false)} palette="dark">
+  <h2>Confirm Action</h2>
+  <p>Are you sure you want to proceed?</p>
+  <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+    <Button variant="success" onClick={handleConfirm}>
+      Yes
+    </Button>
+    <Button variant="danger" onClick={() => setShowConfirm(false)}>
+      Cancel
+    </Button>
+  </div>
+</Modal>
+```
+
+### Form Modal
+
+```tsx
+<Modal isOpen={showForm} onClose={() => setShowForm(false)} palette="softBeach">
+  <h2>Create Account</h2>
+  <form onSubmit={handleSubmit}>
+    <Input placeholder="Email" type="email" />
+    <Input placeholder="Password" type="password" />
+    <Button type="submit" variant="primary">
+      Sign Up
+    </Button>
+  </form>
+</Modal>
+```
+
+### Info Modal (No Close Callback)
+
+```tsx
+<Modal isOpen={showInfo}>
+  <h2>Loading...</h2>
+  <p>Please wait while we process your request.</p>
+</Modal>
+```
+
+### Large Content Modal
+
+```tsx
+<Modal isOpen={showContent} onClose={() => setShowContent(false)}>
+  <h2>Terms and Conditions</h2>
+  <div style={{ maxHeight: '60vh', overflow: 'auto' }}>
+    <p>Long content goes here...</p>
+    {/* ... more content ... */}
+  </div>
+  <Button onClick={() => setShowContent(false)}>
+    Close
+  </Button>
+</Modal>
+```
+
+### Custom Styled Modal
+
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  palette="dark"
+  style={{
+    borderRadius: '20px',
+    padding: '2rem',
+    minWidth: '500px'
+  }}
+>
+  <h2>Custom Styled Modal</h2>
+  <p>With custom border radius and padding.</p>
+</Modal>
+```
+
+## Styling
+
+### Default Styles
+
+```css
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  min-width: 300px;
+}
+```
+
+### With Palette
+
+When a palette is applied:
+- Background color from **palette.background**
+- Text color from **palette.foreground**
+- Border from **palette.border**
+- Box shadow with **palette.accent** at 15% opacity
+
+## Accessibility
+
+The Modal component:
+- Uses proper ARIA attributes for dialogs
+- Supports keyboard navigation (Escape to close)
+- Prevents body scroll when open
+- Provides focus management through backdrop interaction
+- Can be enhanced with additional ARIA labels via props
+
+### Recommended Enhancements
+
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={onClose}
+  role="dialog"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <h2 id="modal-title">Modal Title</h2>
+  <p id="modal-description">Modal description for screen readers.</p>
+</Modal>
+```
+
+## See Also
+
+- [AnimatedModal](/packages/components/animated-modal) - Modal with animations
+- [Button](/packages/components/button) - Button component
+- [Card](/packages/components/card) - Card component
+- [useOutsideClick](/packages/hooks/use-outside-click) - Hook used internally
