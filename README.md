@@ -1,5 +1,8 @@
 # enotion <img src="logo.svg" alt="enotion" width="28px" />
 
+> [!NOTE]
+> BETA RELEASE - This project is currently in beta. APIs and features may change before the stable release.
+
 <img alt="enotion" src="./banner.png" width="350" />
 
 A turborepo containing a collection of React hooks and shared configurations for building dynamic, contextual, responsive, and interactive web applications.
