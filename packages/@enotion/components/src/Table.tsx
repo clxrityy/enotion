@@ -1,4 +1,10 @@
-import { adjustHexColorOpacity, blendHexColors, cn, ColorPalettes, ColorPaletteType } from "@enotion/core";
+import {
+  adjustHexColorOpacity,
+  blendHexColors,
+  cn,
+  ColorPalettes,
+  ColorPaletteType,
+} from "@enotion/core";
 import { CSSProperties, ReactNode, TableHTMLAttributes, useId } from "react";
 import "./styles/table.css";
 
@@ -34,8 +40,7 @@ export const Table = ({
   className,
   style,
   ...props
-}: TableProps
-) => {
+}: TableProps) => {
   const colors = palette ? ColorPalettes[palette] : undefined;
   const tableId = useId();
 
@@ -48,27 +53,41 @@ export const Table = ({
         hover && "enotion-table-hover",
         stackOnMobile && "enotion-table-stack-mobile",
         "shadow",
-        className
+        className,
       )}
-      style={{
-        "--table-foreground": colors?.foreground,
-        "--table-background": colors?.background,
-        "--table-border": adjustHexColorOpacity(colors?.border || colors?.foreground || "#000000", 0.65),
-        "--table-accent": adjustHexColorOpacity(colors?.accent || colors?.foreground || "#000000", 0.1),
-        "--table-muted": colors?.muted,
-        "--table-hover": colors ? blendHexColors(colors.background, colors.accent, 0.15) : undefined,
-        "--table-striped": colors ? adjustHexColorOpacity(colors.muted || colors.accent, 0.15) : undefined,
-        "--table-text-on-accent": colors ? blendHexColors(colors.accent, colors.foreground, 0.9) : undefined,
-        ...style,
-      } as CSSProperties}
+      style={
+        {
+          "--table-foreground": colors?.foreground,
+          "--table-background": colors?.background,
+          "--table-border": adjustHexColorOpacity(
+            colors?.border || colors?.foreground || "#000000",
+            0.65,
+          ),
+          "--table-accent": adjustHexColorOpacity(
+            colors?.accent || colors?.foreground || "#000000",
+            0.1,
+          ),
+          "--table-muted": colors?.muted,
+          "--table-hover": colors
+            ? blendHexColors(colors.background, colors.accent, 0.15)
+            : undefined,
+          "--table-striped": colors
+            ? adjustHexColorOpacity(colors.muted || colors.accent, 0.15)
+            : undefined,
+          "--table-text-on-accent": colors
+            ? blendHexColors(colors.accent, colors.foreground, 0.9)
+            : undefined,
+          ...style,
+        } as CSSProperties
+      }
       {...props}
     >
       <tbody>
-        {rows.map((row, rowIdx) => (
-          <tr key={`${tableId}-row-${rowIdx}`}>
+        {rows.map((row) => (
+          <tr key={`${tableId}-row`}>
             <th scope="row">{row.title}</th>
-            {row.items.map((item, itemIdx) => (
-              <td key={`${tableId}-cell-${rowIdx}-${itemIdx}`}>{item}</td>
+            {row.items.map((item) => (
+              <td key={`${tableId}-cell`}>{item}</td>
             ))}
           </tr>
         ))}
@@ -78,12 +97,8 @@ export const Table = ({
 
   // Wrap in responsive container if enabled
   if (responsive) {
-    return (
-      <div className="enotion-table-responsive">
-        {tableElement}
-      </div>
-    );
+    return <div className="enotion-table-responsive">{tableElement}</div>;
   }
 
   return tableElement;
-}
+};

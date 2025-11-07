@@ -1,8 +1,10 @@
 import { Icons } from "../../constants";
 import { orderAlphabetically } from "../../utils/alphabetical";
-import { ComponentsPackageExtraContent, CorePackageExtraContent } from "./components";
+import {
+  ComponentsPackageExtraContent,
+  CorePackageExtraContent,
+} from "./components";
 import { DocPackage } from "./types";
-
 
 const { Core, Hooks, Components, Server, Notifications } = Icons;
 
@@ -264,7 +266,8 @@ const packagesRaw: DocPackage[] = [
     slug: "notify",
     icon: Notifications,
     description: "Notification system for displaying alerts and messages",
-    extraContent: "Provides a flexible and customizable notification system for React applications. Make sure to wrap your application with the NotifyProvider to enable notifications, or use the default Provider/LayoutProvider from @enotion/components which includes it.",
+    extraContent:
+      "Provides a flexible and customizable notification system for React applications. Make sure to wrap your application with the NotifyProvider to enable notifications, or use the default Provider/LayoutProvider from @enotion/components which includes it.",
     modules: [
       {
         name: "useNotify",
@@ -284,7 +287,8 @@ const packagesRaw: DocPackage[] = [
     name: "@enotion/server",
     slug: "server",
     icon: Server,
-    extraContent: "These utilities are designed for server-side use only and should not be imported into client-side code to avoid bundling unnecessary dependencies.",
+    extraContent:
+      "These utilities are designed for server-side use only and should not be imported into client-side code to avoid bundling unnecessary dependencies.",
     description: "Server-side utilities and middleware for enotion",
     modules: [
       {
@@ -383,6 +387,8 @@ const packagesRaw: DocPackage[] = [
 const modulesInAlphabeticalOrder = packagesRaw.map((pkg) => ({
   ...pkg,
   modules: orderAlphabetically(pkg.modules),
-}))
+}));
 
-export const packages: DocPackage[] = orderAlphabetically(modulesInAlphabeticalOrder);
+export const packages: DocPackage[] = orderAlphabetically(
+  modulesInAlphabeticalOrder,
+);

@@ -6,23 +6,33 @@ import { CSSProperties } from "react";
 import { Logo } from "./components";
 import { CodeBlock, CopyButton, Table } from "@enotion/components";
 
-
 export default function Home() {
   const { palette } = useColorPalette();
 
   const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
-  const pkgRows: { title: string, items: string[] }[] = [];
+  const pkgRows: { title: string; items: string[] }[] = [];
 
   for (const pkg of packages) {
+    const installCmd = `npm i ${pkg.name}`;
 
-    const installCmd = `npm i ${pkg.name}`
-
-    const Snippet = () => <div className="relative flex items-stretch flex-row-reverse justify-start w-max"><CodeBlock palette={palette} language="zsh" key={pkg.slug} className="text-xs">
-      {installCmd}
-    </CodeBlock>
-      <CopyButton palette={palette} content={installCmd} className="absolute" />
-    </div>;
+    const Snippet = () => (
+      <div className="relative flex items-stretch flex-row-reverse justify-start w-max">
+        <CodeBlock
+          palette={palette}
+          language="zsh"
+          key={pkg.slug}
+          className="text-xs"
+        >
+          {installCmd}
+        </CodeBlock>
+        <CopyButton
+          palette={palette}
+          content={installCmd}
+          className="absolute"
+        />
+      </div>
+    );
 
     pkgRows.push({
       title: pkg.name,
@@ -53,8 +63,9 @@ export default function Home() {
     >
       <div className="flex flex-col items-stretch gap-1 max-w-lg">
         <p className="text-sm sm:text-base md:text-lg xl:text-2xl text-muted-foreground tracking-wide">
-          <b className="font-mono">enotion</b> is an open-source collection of packages to build responsive and accessible web applications
-          with ease.
+          <b className="font-mono">enotion</b> is an open-source collection of
+          packages to build responsive and accessible web applications with
+          ease.
         </p>
         <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
           <Logo palette={palette} />
@@ -69,8 +80,7 @@ export default function Home() {
         >
           Show Modal
         </Button> */}
-        <Table palette={palette} responsive striped bordered rows={pkgRows}
-        />
+        <Table palette={palette} responsive striped bordered rows={pkgRows} />
       </div>
 
       {/* <div className="border p-4 rounded">

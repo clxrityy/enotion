@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.enotion-code-block>* {
+.enotion-code-block > * {
   display: block;
   font-family: inherit;
   line-height: inherit;

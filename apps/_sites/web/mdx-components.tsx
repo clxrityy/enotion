@@ -45,13 +45,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     //   <h3 className="text-xl font-medium my-3">{children}</h3>
     // ),
     pre: ({ children }) => <div className="my-4">{children}</div>,
-    code: ({ children }) => (
-      <CodeBlock className="my-4">
-        {children}
-      </CodeBlock>
-    ),
+    code: ({ children }) => <CodeBlock className="my-4">{children}</CodeBlock>,
     ul: ({ children }) => (
-      <ul className="list-disc mb-4 list-inside space-y-1 ml-4 mt-1">{children}</ul>
+      <ul className="list-disc mb-4 list-inside space-y-1 ml-4 mt-1">
+        {children}
+      </ul>
     ),
     ol: ({ children }) => (
       <ol className="list-decimal list-inside mb-4 space-y-1">{children}</ol>
@@ -64,36 +62,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     table: ({ children }) => (
       <section className="mdx-table-wrapper">
-        <table className="mdx-table">
-          {children}
-        </table>
+        <table className="mdx-table">{children}</table>
       </section>
     ),
-    thead: ({ children }) => (
-      <thead>
-        {children}
-      </thead>
-    ),
-    tbody: ({ children }) => (
-      <tbody>
-        {children}
-      </tbody>
-    ),
-    th: ({ children }) => (
-      <th>
-        {children}
-      </th>
-    ),
-    td: ({ children }) => (
-      <td>
-        {children}
-      </td>
-    ),
-    tr: ({ children }) => (
-      <tr>
-        {children}
-      </tr>
-    ),
+    thead: ({ children }) => <thead>{children}</thead>,
+    tbody: ({ children }) => <tbody>{children}</tbody>,
+    th: ({ children }) => <th>{children}</th>,
+    td: ({ children }) => <td>{children}</td>,
+    tr: ({ children }) => <tr>{children}</tr>,
     hr: () => <hr className="my-6 border" />,
     ...components,
   };

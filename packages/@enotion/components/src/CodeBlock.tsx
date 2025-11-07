@@ -271,7 +271,10 @@ export function CodeBlock({
     flexShrink: 0,
   };
   return (
-    <section className={cn(`enotion-code-block`, className)} style={codeBlockStyle}>
+    <section
+      className={cn(`enotion-code-block`, className)}
+      style={codeBlockStyle}
+    >
       <code>
         {lineTokens.map((lineTokenArray, lineIdx) => {
           const lineNum = lineIdx + 1;

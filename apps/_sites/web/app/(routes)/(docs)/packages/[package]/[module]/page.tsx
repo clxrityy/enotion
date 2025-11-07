@@ -38,7 +38,7 @@ export default async function PackageModulePage({
     process.cwd(),
     "content/docs",
     slugs.package,
-    `${slugs.module}.mdx`
+    `${slugs.module}.mdx`,
   );
 
   const hasMdx = fs.existsSync(mdxPath);

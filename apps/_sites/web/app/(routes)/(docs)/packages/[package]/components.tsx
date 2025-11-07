@@ -39,24 +39,31 @@ export function PackageOverview({ package: pkg }: { package: DocPackage }) {
         <h1 className="text-4xl font-bold mb-2">{pkg.name}</h1>
         <p className="text-lg text-(--foreground-accent)">{pkg.description}</p>
       </div>
-      {
-        pkg.extraContent && (
-          <Card palette={palette} style={{
-            backgroundColor: adjustHexColorOpacity(colors?.info || "", 0.25) || undefined,
+      {pkg.extraContent && (
+        <Card
+          palette={palette}
+          style={{
+            backgroundColor:
+              adjustHexColorOpacity(colors?.info || "", 0.25) || undefined,
             borderColor: colors?.info || undefined,
-            color: blendHexColors(colors?.info || "", colors?.foreground || "", 0.6) || undefined,
+            color:
+              blendHexColors(
+                colors?.info || "",
+                colors?.foreground || "",
+                0.6,
+              ) || undefined,
             borderLeftWidth: "0.25rem",
             borderLeftStyle: "solid",
-          }}>
-            <div className="p-6 md:inline-flex flex flex-col items-center gap-4">
-              <span>
-                <Icons.Info size={33} />
-              </span>
-              {pkg.extraContent}
-            </div>
-          </Card>
-        )
-      }
+          }}
+        >
+          <div className="p-6 md:inline-flex flex flex-col items-center gap-4">
+            <span>
+              <Icons.Info size={33} />
+            </span>
+            {pkg.extraContent}
+          </div>
+        </Card>
+      )}
       {/* Installation */}
       <Card palette={palette}>
         <div className="p-6">

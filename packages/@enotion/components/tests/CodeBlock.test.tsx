@@ -51,7 +51,10 @@ function sayHello() {
     // Should have line number spans
     const lineNumberSpans = container.querySelectorAll("span");
     const hasLineNumbers = Array.from(lineNumberSpans).some(
-      (span) => span.textContent === "1" || span.textContent === "2" || span.textContent === "3",
+      (span) =>
+        span.textContent === "1" ||
+        span.textContent === "2" ||
+        span.textContent === "3",
     );
     expect(hasLineNumbers).toBe(true);
     expect(lines?.length).toBeGreaterThan(0);

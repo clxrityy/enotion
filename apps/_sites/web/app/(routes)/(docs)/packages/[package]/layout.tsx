@@ -20,10 +20,6 @@ export async function generateMetadata({
   };
 }
 
-export default function PackageLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function PackageLayout({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }

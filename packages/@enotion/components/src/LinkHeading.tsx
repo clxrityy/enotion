@@ -9,7 +9,6 @@ export interface LinkHeadingProps {
   className?: string;
 }
 
-
 export function LinkHeading({
   level,
   children,
@@ -19,16 +18,21 @@ export function LinkHeading({
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
 
   return (
-    <Link palette={palette} href={`#${typeof children === "string" ? children.toLowerCase().replaceAll(/\s+/g, "-") : ""}`}>
-      <Tag className={cn(
-        "group flex items-center gap-2 scroll-mt-20",
-        className
-      )} id={typeof children === "string" ? children.toLowerCase().replaceAll(/\s+/g, "-") : undefined}>
-        <span>
-          {children}
-        </span>
+    <Link
+      palette={palette}
+      href={`#${typeof children === "string" ? children.toLowerCase().replaceAll(/\s+/g, "-") : ""}`}
+    >
+      <Tag
+        className={cn("group flex items-center gap-2 scroll-mt-20", className)}
+        id={
+          typeof children === "string"
+            ? children.toLowerCase().replaceAll(/\s+/g, "-")
+            : undefined
+        }
+      >
+        <span>{children}</span>
         <Icons.Hash className="opacity-0 group-hover:opacity-100 transition-opacity" />
       </Tag>
     </Link>
-  )
+  );
 }

@@ -7,9 +7,7 @@ export function Provider({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <LayoutProvider>
       <LayoutRenderer />
-      <div className="absolute w-screen h-screen z-0 *:z-10">
-        {children}
-      </div>
+      <div className="absolute w-screen h-screen z-0 *:z-10">{children}</div>
     </LayoutProvider>
   );
 }

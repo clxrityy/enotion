@@ -77,7 +77,9 @@ describe("Table", () => {
           title: "Components",
           items: [
             <span key="1">Span Element</span>,
-            <button key="2" type="button">Button Element</button>,
+            <button key="2" type="button">
+              Button Element
+            </button>,
             <div key="3">Div Element</div>,
           ],
         },
@@ -189,7 +191,9 @@ describe("Table", () => {
     it("should apply text-on-accent color variable when palette is provided", () => {
       render(<Table rows={mockRows} palette="dark" />);
       const table = document.querySelector("table");
-      expect(table?.style.getPropertyValue("--table-text-on-accent")).toBeTruthy();
+      expect(
+        table?.style.getPropertyValue("--table-text-on-accent"),
+      ).toBeTruthy();
     });
 
     it("should not apply palette colors when palette is not provided", () => {
@@ -205,7 +209,7 @@ describe("Table", () => {
           rows={mockRows}
           palette="monochrome"
           style={{ marginTop: "20px" }}
-        />
+        />,
       );
       const table = document.querySelector("table");
       expect(table?.style.marginTop).toBe("20px");
@@ -272,9 +276,7 @@ describe("Table", () => {
 
   describe("Edge Cases", () => {
     it("should handle rows with no items", () => {
-      const emptyItemRows = [
-        { title: "Empty Row", items: [] },
-      ];
+      const emptyItemRows = [{ title: "Empty Row", items: [] }];
       render(<Table rows={emptyItemRows} />);
       expect(screen.getByText("Empty Row")).toBeInTheDocument();
       const cells = document.querySelectorAll("td");
@@ -304,18 +306,14 @@ describe("Table", () => {
     });
 
     it("should handle null as item", () => {
-      const rowsWithNull = [
-        { title: "Row", items: [null, "text", null] },
-      ];
+      const rowsWithNull = [{ title: "Row", items: [null, "text", null] }];
       render(<Table rows={rowsWithNull} />);
       const cells = document.querySelectorAll("td");
       expect(cells).toHaveLength(3);
     });
 
     it("should handle numeric items", () => {
-      const numericRows = [
-        { title: "Numbers", items: [1, 2, 3, 4.5, 0] },
-      ];
+      const numericRows = [{ title: "Numbers", items: [1, 2, 3, 4.5, 0] }];
       render(<Table rows={numericRows} />);
       expect(screen.getByText("1")).toBeInTheDocument();
       expect(screen.getByText("2")).toBeInTheDocument();
@@ -324,9 +322,7 @@ describe("Table", () => {
     });
 
     it("should handle boolean items", () => {
-      const booleanRows = [
-        { title: "Booleans", items: [true, false] },
-      ];
+      const booleanRows = [{ title: "Booleans", items: [true, false] }];
       render(<Table rows={booleanRows} />);
       const cells = document.querySelectorAll("td");
       expect(cells).toHaveLength(2);
@@ -341,7 +337,9 @@ describe("Table", () => {
     });
 
     it("should render table directly when responsive is false", () => {
-      const { container } = render(<Table rows={mockRows} responsive={false} />);
+      const { container } = render(
+        <Table rows={mockRows} responsive={false} />,
+      );
       const wrapper = container.querySelector(".enotion-table-responsive");
       const table = container.querySelector("table");
       expect(wrapper).not.toBeInTheDocument();
@@ -370,7 +368,7 @@ describe("Table", () => {
           className="custom-class"
           style={{ margin: "10px" }}
           aria-label="Full featured table"
-        />
+        />,
       );
       const table = document.querySelector("table");
       expect(table).toHaveClass("enotion-table");
