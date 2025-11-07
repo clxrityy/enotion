@@ -1,0 +1,51 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+# Required for OIDC trusted publishing
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+
+      - name: Update npm for trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Publish packages
+        run: |
+          # Publish in dependency order
+          for package in packages/@enotion/{config,core,hooks,notify,server,components}; do
+            if [ -d "$package" ]; then
+              echo "Publishing $package..."
+              cd "$package"
+              npm publish --access public
+              cd -
+            fi
+          done
