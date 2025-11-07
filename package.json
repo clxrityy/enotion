@@ -13,7 +13,7 @@
     "versions": "chmod +x ./scripts/version.sh && ./scripts/version.sh",
     "start": "turbo run start",
     "up-deps": "pnpm up --latest --recursive",
-    "release": "pnpm --filter @enotion/server publish --access public && pnpm --filter @enotion/notify publish --access public"
+    "release": "pnpm --filter @enotion/notify publish --access public"
   },
   "author": {
     "name": "MJ Anglin",
