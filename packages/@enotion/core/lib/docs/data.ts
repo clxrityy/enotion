@@ -1,11 +1,12 @@
 import { Icons } from "../../constants";
+import { orderAlphabetically } from "../../utils/alphabetical";
 import { ComponentsPackageExtraContent, CorePackageExtraContent } from "./components";
 import { DocPackage } from "./types";
 
 
 const { Core, Hooks, Components, Server, Notifications } = Icons;
 
-export const packages: DocPackage[] = [
+const packagesRaw: DocPackage[] = [
   {
     name: "@enotion/core",
     slug: "core",
@@ -14,10 +15,22 @@ export const packages: DocPackage[] = [
     icon: Core,
     modules: [
       {
+        name: "alphabetical",
+        slug: "alphabetical",
+        description: "Utility for ordering items alphabetically",
+        tag: "utility",
+      },
+      {
         name: "cn",
         slug: "cn",
         description: "Utility for merging class names",
         tag: "utility",
+      },
+      {
+        name: "createContextFactory",
+        slug: "create-context-factory",
+        description: "Factory for creating React contexts",
+        tag: "context",
       },
       {
         name: "colors",
@@ -25,12 +38,6 @@ export const packages: DocPackage[] = [
         description:
           "Color manipulation utilities, palette types and interfaces",
         tag: ["utility", "constant"],
-      },
-      {
-        name: "createContextFactory",
-        slug: "create-context-factory",
-        description: "Factory for creating React contexts",
-        tag: ["utility", "context"],
       },
       {
         name: "layout",
@@ -372,3 +379,10 @@ export const packages: DocPackage[] = [
     ],
   },
 ];
+
+const modulesInAlphabeticalOrder = packagesRaw.map((pkg) => ({
+  ...pkg,
+  modules: orderAlphabetically(pkg.modules),
+}))
+
+export const packages: DocPackage[] = orderAlphabetically(modulesInAlphabeticalOrder);

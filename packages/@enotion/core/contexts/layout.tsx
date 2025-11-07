@@ -3,7 +3,7 @@
 // the idea is to have a context that manages layout elements, their visibility, and provides methods to show/hide/toggle them
 
 import { useState, useEffect, type ReactNode, HTMLAttributes } from "react";
-import { createContextFactory } from "../utils";
+import { createContextFactory } from "./createContextFactory";
 
 /**
  * AnimationConfig - Configuration for element animations.
@@ -112,22 +112,22 @@ export interface LayoutContextState {
 export const initialLayoutContextState: LayoutContextState = {
   elements: new Map(),
   groups: new Map(),
-  registerElement: () => {},
-  unregisterElement: () => {},
-  updateElement: () => {},
-  showElement: () => {},
-  hideElement: () => {},
-  toggleElement: () => {},
+  registerElement: () => { },
+  unregisterElement: () => { },
+  updateElement: () => { },
+  showElement: () => { },
+  hideElement: () => { },
+  toggleElement: () => { },
   getElementById: () => undefined,
   getVisibleElements: () => [],
   isElementVisible: () => false,
-  createGroup: () => {},
-  removeGroup: () => {},
-  addElementToGroup: () => {},
-  removeElementFromGroup: () => {},
-  showGroup: () => {},
-  hideGroup: () => {},
-  evaluateConditionals: () => {},
+  createGroup: () => { },
+  removeGroup: () => { },
+  addElementToGroup: () => { },
+  removeElementFromGroup: () => { },
+  showGroup: () => { },
+  hideGroup: () => { },
+  evaluateConditionals: () => { },
 };
 
 const useLayoutContextState = (): LayoutContextState => {

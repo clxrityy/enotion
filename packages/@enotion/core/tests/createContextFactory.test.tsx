@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import { createContextFactory } from "../utils/createContextFactory";
+import { createContextFactory } from "../contexts/createContextFactory";
 
 describe("useContextFactory", () => {
   it("should create a context with the initial state", () => {

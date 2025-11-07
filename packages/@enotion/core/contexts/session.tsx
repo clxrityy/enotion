@@ -2,7 +2,7 @@
 // to manage user session state across the application
 
 import { ReactNode, useState } from "react";
-import { createContextFactory } from "../utils";
+import { createContextFactory } from "./createContextFactory";
 import { initialLayoutContextState, LayoutContextState } from "./layout";
 import { ColorPalette, ColorPalettes } from "../constants";
 
@@ -22,10 +22,10 @@ const initialSessionContextState: SessionContextState = {
   layoutState: undefined,
   palettes: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setLayoutState: (state: LayoutContextState) => {},
-  setPalettes: (palettes: typeof ColorPalettes) => {},
-  addPalette: (palette: ColorPalette, name: string) => {},
-  removePalette: (name: string) => {},
+  setLayoutState: (state: LayoutContextState) => { },
+  setPalettes: (palettes: typeof ColorPalettes) => { },
+  addPalette: (palette: ColorPalette, name: string) => { },
+  removePalette: (name: string) => { },
 };
 
 const useSessionContextState = (): SessionContextState => {
