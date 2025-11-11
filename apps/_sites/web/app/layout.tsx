@@ -7,6 +7,26 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "enotion",
   description: "A turbo-powered monorepo for building modern web applications.",
+  openGraph: {
+    title: "enotion",
+    description: "A turbo-powered monorepo for building modern web applications.",
+    url: "https://enotion-beta.vercel.app/",
+    siteName: "enotion",
+    type: "website",
+    locale: "en-US",
+  },
+  twitter: {
+    card: "summary",
+    title: "enotion",
+    description: "A turbo-powered monorepo for building modern web applications.",
+    creator: "@yourclxrity",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon-16x16.png",
+  },
+  manifest: "https://enotion-beta.vercel.app/site.webmanifest",
 };
 
 const mulish = Mulish({
