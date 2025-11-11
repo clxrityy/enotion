@@ -53,6 +53,11 @@ const items: NavItem[] = [
       },
     ],
   },
+  {
+    label: "GitHub",
+    href: "https://github.com/clxrityy/enotion",
+    icon: Icons.Github,
+  }
 ];
 export default function Layout({
   children,
