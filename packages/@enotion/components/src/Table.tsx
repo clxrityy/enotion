@@ -52,7 +52,7 @@ export const Table = ({
         bordered && "enotion-table-bordered",
         hover && "enotion-table-hover",
         stackOnMobile && "enotion-table-stack-mobile",
-        "shadow",
+        "shadow scroll-smooth",
         className,
       )}
       style={

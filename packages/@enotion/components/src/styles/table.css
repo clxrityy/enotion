@@ -42,11 +42,15 @@
 .enotion-table td {
   padding: 0.75rem 1rem;
   border: 1px solid var(--table-border, transparent);
-  text-align: left;
-  vertical-align: middle;
-  word-wrap: break-word;
+  text-align: start;
+  vertical-align: auto;
+  word-wrap: normal;
   overflow-wrap: break-word;
   border-radius: 3px;
+}
+
+.enotion-table td {
+  min-width: 250px;
 }
 
 .enotion-table th {
@@ -54,9 +58,13 @@
   color: var(--table-text-on-accent);
   font-weight: 600;
   white-space: nowrap;
-  position: sticky;
+  position: relative;
   left: 0;
   z-index: 1;
+  min-width: 120px;
+  max-width: 200px;
+  overflow: scroll;
+  text-overflow: ellipsis;
 }
 
 /* Hover effect */
@@ -145,6 +153,7 @@
 
 /* Tablet responsiveness */
 @media (max-width: 1024px) and (min-width: 769px) {
+
   .enotion-table th,
   .enotion-table td {
     padding: 0.625rem 0.875rem;
@@ -154,6 +163,7 @@
 
 /* Small mobile devices */
 @media (max-width: 480px) {
+
   .enotion-table th,
   .enotion-table td {
     padding: 0.5rem 0.75rem;
