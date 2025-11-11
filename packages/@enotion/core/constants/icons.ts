@@ -21,6 +21,7 @@ import {
   TbLayoutSidebarRightCollapseFilled,
   TbHash,
 } from "react-icons/tb";
+import { FaGithub } from "react-icons/fa";
 
 export const Icons = {
   Menu: MdMenu,
@@ -46,4 +47,5 @@ export const Icons = {
   PackageOpen: LuPackageOpen,
   Package: LuPackage,
   Hash: TbHash,
+  Github: FaGithub,
 };
