@@ -1,13 +1,14 @@
 "use client";
 
-import { ColorPalettes, packages } from "@enotion/core";
+import { adjustHexColorOpacity, ColorPalettes, packages } from "@enotion/core";
 import { useColorPalette } from "@enotion/hooks";
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { Logo } from "./components";
-import { CodeBlock, CopyButton, Table } from "@enotion/components";
+import { Button, Card, CodeBlock, CopyButton, Select, SkeletonWrapper, Table } from "@enotion/components";
 
 export default function Home() {
-  const { palette } = useColorPalette();
+  const { palette, setPalette } = useColorPalette();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
@@ -17,19 +18,19 @@ export default function Home() {
     const installCmd = `npm i ${pkg.name}`;
 
     const Snippet = () => (
-      <div className="relative flex items-stretch flex-row-reverse justify-start w-max">
+      <div className="relative flex items-stretch flex-row-reverse justify-stretch w-full lg:w-[75%] mr-2 pr-2 h-fit scroll-smooth overflow-scroll">
         <CodeBlock
           palette={palette}
           language="zsh"
           key={pkg.slug}
-          className="text-xs"
+          className="text-xs w-full min-w-[200px] md:text-sm lg:text-base"
         >
           {installCmd}
         </CodeBlock>
         <CopyButton
           palette={palette}
           content={installCmd}
-          className="absolute"
+          className="absolute inset-y-0 right-0"
         />
       </div>
     );
@@ -42,7 +43,7 @@ export default function Home() {
 
   return (
     <div
-      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10"
+      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10 w-full overflow-y-auto overflow-x-hidden"
       style={
         {
           "--muted": colors?.muted,
@@ -61,18 +62,24 @@ export default function Home() {
         } as CSSProperties
       }
     >
-      <div className="flex flex-col items-stretch gap-1 max-w-lg">
-        <p className="text-sm sm:text-base md:text-lg xl:text-2xl text-muted-foreground tracking-wide">
-          <b className="font-mono">enotion</b> is an open-source collection of
-          packages to build responsive and accessible web applications with
-          ease.
-        </p>
-        <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
-          <Logo palette={palette} />
-        </span>
-      </div>
+      <Card palette={palette} className="p-6 max-w-3xl mx-auto shadow-lg rounded-lg" style={{
+        border: `0.75px solid ${adjustHexColorOpacity(colors?.border || "", 0.75)}`
+      }}>
+        <div className="flex flex-col-reverse md:flex-row items-stretch gap-1 max-w-lg">
+          <p className="text-sm md:text-base lg:text-lg xl:text-2xl text-muted-foreground tracking-wide">
+            <b className="font-mono">enotion</b> is an open-source collection of
+            packages to build responsive and accessible web applications with
+            ease.
+          </p>
+          <div className="mx-auto">
+            <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
+              <Logo palette={palette} />
+            </span>
+          </div>
+        </div>
+      </Card>
 
-      <div className="flex gap-4">
+      <div className="flex gap-10 flex-col w-full items-center">
         {/* <Button
           palette={palette}
           variant="default"
@@ -80,7 +87,55 @@ export default function Home() {
         >
           Show Modal
         </Button> */}
-        <Table palette={palette} responsive striped bordered rows={pkgRows} />
+        <div className="flex flex-col sm:flex-row items-center h-full">
+          <div className="flex flex-col gap-6 w-full mx-auto items-center">
+            <div className="flex flex-col sm:flex-row max-w-md items-center gap-2">
+              <label
+                htmlFor="palette-select"
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-foreground"
+              >
+                Change the current color palette:
+              </label>
+              <Select
+                palette={palette}
+                options={Object.keys(ColorPalettes).map((key) => ({
+                  label: key.charAt(0).toUpperCase() + key.slice(1),
+                  value: key,
+                }))}
+                style={{
+                  boxShadow: `0 0 6px ${adjustHexColorOpacity(
+                    colors?.primary || "#000000",
+                    0.25,
+                  )}, 0 0 12px ${adjustHexColorOpacity(
+                    colors?.secondary || "#000000",
+                    0.15,
+                  )}`,
+                  padding: "0.75rem 1rem",
+                }}
+                className="text-inherit"
+                value={palette}
+                onChange={(e) => setPalette(e.target.value as keyof typeof ColorPalettes)}
+              />
+            </div>
+            <Button palette={palette} onClick={() => setIsLoading(!isLoading)}>
+              {isLoading ? "Stop Loading" : "Start Loading"}
+            </Button>
+          </div>
+        </div>
+        <div className="w-screen flex items-center justify-center mx-auto">
+          <SkeletonWrapper isLoading={isLoading} palette={palette} className="w-full h-full" style={{}}>
+
+            <div className="max-w-lg md:max-w-2xl lg:max-w-5xl w-full mx-auto h-full">
+              <Table palette={palette} responsive striped bordered rows={pkgRows} hidden={isLoading} className="shadow-inner" />
+              {
+                isLoading && (pkgRows.map(() => (
+                  <div className="w-20 h-12 mb-4 rounded-md bg-muted animate-pulse"></div>
+                )))
+              }
+            </div>
+
+          </SkeletonWrapper>
+        </div>
       </div>
 
       {/* <div className="border p-4 rounded">
