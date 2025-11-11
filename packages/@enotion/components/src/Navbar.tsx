@@ -161,7 +161,7 @@ export const Navbar = ({
                                 className={cn(
                                   "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors bg-(--navbar-muted)/10",
                                   item.active &&
-                                  "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                    "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                 )}
                               >
                                 {Icon && (
@@ -215,7 +215,7 @@ export const Navbar = ({
                                         className={cn(
                                           "flex w-full items-start gap-2 rounded-md px-2 py-1.5 text-xs transition-colors hover:bg-(--navbar-muted)/50 hover:invert-25 hover:saturate-105 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left focus:outline-(--navbar-primary)/75",
                                           subItem.active &&
-                                          "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
+                                            "border-(--navbar-primary) border-2 text-(--navbar-primary)/90",
                                         )}
                                       >
                                         <div className="flex flex-col gap-0.5">
@@ -223,7 +223,6 @@ export const Navbar = ({
                                             {SubIcon && (
                                               <SubIcon
                                                 size={14}
-
                                                 aria-hidden={true}
                                               />
                                             )}
@@ -259,15 +258,10 @@ export const Navbar = ({
                             className={cn(
                               "flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline",
                               item.active &&
-                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                             )}
                           >
-                            {Icon && (
-                              <Icon
-                                size={16}
-                                aria-hidden={true}
-                              />
-                            )}
+                            {Icon && <Icon size={16} aria-hidden={true} />}
                             <span>{item.label}</span>
                           </button>
                         </li>
@@ -362,7 +356,7 @@ export const Navbar = ({
                                             className={cn(
                                               "flex w-full flex-col items-start gap-1 rounded-md px-3 py-2 text-sm transition-colors hover:bg-(--navbar-muted)/75 hover:text-(--navbar-foreground) cursor-pointer no-underline text-left",
                                               subItem.active &&
-                                              "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
+                                                "bg-(--navbar-muted)/20 text-(--navbar-primary)/90",
                                             )}
                                           >
                                             <div className="flex items-center gap-2">
@@ -396,12 +390,7 @@ export const Navbar = ({
                                 item.active && "bg-(--navbar-muted)/20",
                               )}
                             >
-                              {Icon && (
-                                <Icon
-                                  size={16}
-                                  aria-hidden={true}
-                                />
-                              )}
+                              {Icon && <Icon size={16} aria-hidden={true} />}
                               <span>{item.label}</span>
                               <Icons.Selector size={16} aria-hidden={true} />
                             </span>
@@ -424,12 +413,7 @@ export const Navbar = ({
                             item.active && "bg-(--navbar-muted)/20",
                           )}
                         >
-                          {Icon && (
-                            <Icon
-                              size={16}
-                              aria-hidden={true}
-                            />
-                          )}
+                          {Icon && <Icon size={16} aria-hidden={true} />}
                           <span>{item.label}</span>
                         </button>
                       </li>

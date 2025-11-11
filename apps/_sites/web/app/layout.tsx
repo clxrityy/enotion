@@ -9,7 +9,8 @@ export const metadata: Metadata = {
   description: "A turbo-powered monorepo for building modern web applications.",
   openGraph: {
     title: "enotion",
-    description: "A turbo-powered monorepo for building modern web applications.",
+    description:
+      "A turbo-powered monorepo for building modern web applications.",
     url: "https://enotion-beta.vercel.app/",
     siteName: "enotion",
     type: "website",
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "enotion",
-    description: "A turbo-powered monorepo for building modern web applications.",
+    description:
+      "A turbo-powered monorepo for building modern web applications.",
     creator: "@yourclxrity",
   },
   icons: {

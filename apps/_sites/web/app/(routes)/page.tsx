@@ -4,7 +4,15 @@ import { adjustHexColorOpacity, ColorPalettes, packages } from "@enotion/core";
 import { useColorPalette } from "@enotion/hooks";
 import { CSSProperties, useState } from "react";
 import { Logo } from "./components";
-import { Button, Card, CodeBlock, CopyButton, Select, SkeletonWrapper, Table } from "@enotion/components";
+import {
+  Button,
+  Card,
+  CodeBlock,
+  CopyButton,
+  Select,
+  SkeletonWrapper,
+  Table,
+} from "@enotion/components";
 
 export default function Home() {
   const { palette, setPalette } = useColorPalette();
@@ -62,9 +70,13 @@ export default function Home() {
         } as CSSProperties
       }
     >
-      <Card palette={palette} className="p-6 max-w-3xl mx-auto shadow-lg rounded-lg" style={{
-        border: `0.75px solid ${adjustHexColorOpacity(colors?.border || "", 0.75)}`
-      }}>
+      <Card
+        palette={palette}
+        className="p-6 max-w-3xl mx-auto shadow-lg rounded-lg"
+        style={{
+          border: `0.75px solid ${adjustHexColorOpacity(colors?.border || "", 0.75)}`,
+        }}
+      >
         <div className="flex flex-col-reverse md:flex-row items-stretch gap-1 max-w-lg">
           <p className="text-sm md:text-base lg:text-lg xl:text-2xl text-muted-foreground tracking-wide">
             <b className="font-mono">enotion</b> is an open-source collection of
@@ -114,7 +126,9 @@ export default function Home() {
                 }}
                 className="text-inherit"
                 value={palette}
-                onChange={(e) => setPalette(e.target.value as keyof typeof ColorPalettes)}
+                onChange={(e) =>
+                  setPalette(e.target.value as keyof typeof ColorPalettes)
+                }
               />
             </div>
             <Button palette={palette} onClick={() => setIsLoading(!isLoading)}>
@@ -123,17 +137,30 @@ export default function Home() {
           </div>
         </div>
         <div className="w-screen flex items-center justify-center mx-auto">
-          <SkeletonWrapper isLoading={isLoading} palette={palette} className="w-full h-full" style={{}}>
-
+          <SkeletonWrapper
+            isLoading={isLoading}
+            palette={palette}
+            className="w-full h-full"
+            style={{}}
+          >
             <div className="max-w-lg md:max-w-2xl lg:max-w-5xl w-full mx-auto h-full">
-              <Table palette={palette} responsive striped bordered rows={pkgRows} hidden={isLoading} className="shadow-inner" />
-              {
-                isLoading && (pkgRows.map(() => (
-                  <div className="w-20 h-12 mb-4 rounded-md bg-muted animate-pulse"></div>
-                )))
-              }
+              <Table
+                palette={palette}
+                responsive
+                striped
+                bordered
+                rows={pkgRows}
+                hidden={isLoading}
+                className="shadow-inner"
+              />
+              {isLoading &&
+                pkgRows.map((pkg) => (
+                  <div
+                    key={pkg.title}
+                    className="w-20 h-12 mb-4 rounded-md bg-muted animate-pulse"
+                  />
+                ))}
             </div>
-
           </SkeletonWrapper>
         </div>
       </div>
