@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <div
-      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10 w-full overflow-y-auto overflow-x-hidden"
+      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10 w-full overflow-y-auto"
       style={
         {
           "--muted": colors?.muted,
@@ -91,7 +91,7 @@ export default function Home() {
         </div>
       </Card>
 
-      <div className="flex gap-10 flex-col w-full items-center">
+      <div className="flex gap-10 flex-col w-full items-center w-full">
         {/* <Button
           palette={palette}
           variant="default"
@@ -140,7 +140,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="w-screen flex items-center justify-center mx-auto">
+        <div className="w-full flex items-center justify-center mx-auto">
           <SkeletonWrapper
             isLoading={isLoading}
             palette={palette}

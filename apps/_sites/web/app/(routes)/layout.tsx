@@ -70,8 +70,8 @@ export default function Layout({
   return (
     <main
       className={cn(
-        "text-inherit w-screen h-screen relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete",
-        palette === "monochrome" && "saturate-[200] -bg-conic-30 grayscale",
+        "text-inherit w-fit md:w-full h-full relative flex flex-col overflow-y-scroll scroll-smooth transition-discrete z-20",
+        palette === "monochrome" && "saturate-[180] -bg-conic-30 grayscale",
       )}
     >
       <Navbar
