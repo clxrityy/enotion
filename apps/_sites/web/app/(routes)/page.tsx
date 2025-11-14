@@ -131,7 +131,11 @@ export default function Home() {
                 }
               />
             </div>
-            <Button palette={palette} onClick={() => setIsLoading(!isLoading)} className="flex items-center justify-center text-sm sm:text-base md:text-lg lg:text-xl">
+            <Button
+              palette={palette}
+              onClick={() => setIsLoading(!isLoading)}
+              className="flex items-center justify-center text-sm sm:text-base md:text-lg lg:text-xl"
+            >
               {isLoading ? "Stop Loading" : "Start Loading"}
             </Button>
           </div>
