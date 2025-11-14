@@ -1,6 +1,27 @@
+import { Link } from "@enotion/components";
+
 # Link
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Palette](#with-palette)
+  - [External Link](#external-link)
+- [Styling](#styling)
+- [Use Cases](#use-cases)
+- [See Also](#see-also)
+
 A styled anchor component with palette support and CSS custom properties.
+
+---
+
+## Import
+
+```tsx
+import { Link } from "@enotion/components";
+```
 
 ## Features
 
@@ -33,7 +54,18 @@ function Example() {
 }
 ```
 
-## With Palette
+<div className="flex gap-4 flex-col">
+  <Link href="#" palette="dark">
+    Visit our website
+  </Link>
+  <Link href="#" palette="monochrome">
+    Monochrome link
+  </Link>
+</div>
+
+## Examples
+
+### With Palette
 
 ```tsx
 import { Link } from "@enotion/components";
@@ -82,3 +114,15 @@ These properties are automatically populated from the selected color palette, en
 - Footer links
 - External resource references
 - Call-to-action links
+
+## See Also
+
+- [Button](/packages/components/button) - Button component
+- [Navbar](/packages/components/navbar) - Navigation component
+- [colors](/packages/core/colors) - Color palette system
+
+## See Also
+
+- [Button](/packages/components/button) - Button component
+- [Navbar](/packages/components/navbar) - Navigation component
+- [colors](/packages/core/colors) - Color palette system

@@ -1,6 +1,28 @@
+import { Input } from "@enotion/components";
+
 # Input
 
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [With Color Palette](#with-color-palette)
+- [Props](#props)
+- [Input Types](#input-types)
+- [CSS Custom Properties](#css-custom-properties)
+- [Examples](#examples)
+  - [Form Group](#form-group)
+  - [With Label](#with-label)
+  - [Controlled Input](#controlled-input)
+  - [With Validation](#with-validation)
+  - [Disabled State](#disabled-state)
+  - [Required Field](#required-field)
+  - [With Min/Max](#with-minmax)
+  - [Custom Styling](#custom-styling)
+- [Accessibility](#accessibility)
+- [See Also](#see-also)
+
 A customizable input component with color palette integration for consistent theming.
+
+---
 
 ## Import
 
@@ -14,6 +36,8 @@ import { Input } from "@enotion/components";
 <Input placeholder="Enter text" />
 ```
 
+<Input placeholder="Enter text" palette="dark" />
+
 ## With Color Palette
 
 ```tsx
@@ -23,6 +47,12 @@ import { Input } from "@enotion/components";
   palette="dark"
 />
 ```
+
+<Input
+  placeholder="Email address"
+  type="email"
+  palette="dark"
+/>
 
 ## Props
 

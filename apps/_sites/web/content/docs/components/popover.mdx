@@ -1,6 +1,28 @@
+import { Popover, Button } from "@enotion/components";
+
 # Popover
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Custom Styling](#with-custom-styling)
+  - [Navigation Menu](#navigation-menu)
+- [Behavior](#behavior)
+- [Accessibility](#accessibility)
+- [Styling](#styling)
+- [See Also](#see-also)
+
 A floating container component triggered by click, with outside click detection and keyboard handling.
+
+---
+
+## Import
+
+```tsx
+import { Popover } from "@enotion/components";
+```
 
 ## Features
 
@@ -42,7 +64,23 @@ function Example() {
 }
 ```
 
-## With Custom Styling
+<Popover
+  palette="dark"
+  popoverContent={
+    <div className="p-4">
+      <p className="font-semibold mb-2">Popover Content</p>
+      <p className="text-sm">Click outside or press ESC to close</p>
+    </div>
+  }
+>
+  <Button variant="secondary" palette="monochrome" className="-invert-50">
+    Click me
+  </Button>
+</Popover>
+
+## Examples
+
+### With Custom Styling
 
 ```tsx
 import { Popover } from "@enotion/components";
@@ -89,6 +127,23 @@ function Example() {
 }
 ```
 
+<Popover
+  palette="dark"
+  popoverContent={
+    <nav className="p-4">
+      <ul className="flex flex-col gap-2">
+        <li><a href="#" className="hover:underline">Home</a></li>
+        <li><a href="#" className="hover:underline">About</a></li>
+        <li><a href="#" className="hover:underline">Contact</a></li>
+      </ul>
+    </nav>
+  }
+>
+  <Button variant="primary" palette="dark">
+    Menu
+  </Button>
+</Popover>
+
 ## Behavior
 
 The component manages its open/closed state internally:
@@ -116,3 +171,9 @@ Uses CSS custom properties for theming:
 - **--popover-foreground**: Text color from palette
 
 The popover container has a subtle shadow and border for visual separation from the page content.
+
+## See Also
+
+- [Modal](/packages/components/modal) - Modal dialog component
+- [Button](/packages/components/button) - Button component
+- [useOutsideClick](/packages/hooks/use-outside-click) - Hook used internally

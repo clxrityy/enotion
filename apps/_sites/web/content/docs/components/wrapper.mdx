@@ -1,6 +1,28 @@
+import { Wrapper } from "@enotion/components";
+
 # Wrapper
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Palette](#with-palette)
+  - [Full Application Wrapper](#full-application-wrapper)
+- [Styling](#styling)
+- [Use Cases](#use-cases)
+- [Notes](#notes)
+- [See Also](#see-also)
+
 A simple layout wrapper component with palette support for consistent theming.
+
+---
+
+## Import
+
+```tsx
+import { Wrapper } from "@enotion/components";
+```
 
 ## Features
 
@@ -33,7 +55,18 @@ function Example() {
 }
 ```
 
-## With Palette
+<div className="border rounded overflow-hidden" style={{ height: '200px' }}>
+  <Wrapper palette="dark">
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-2">Page Content</h1>
+      <p>Your application content here</p>
+    </div>
+  </Wrapper>
+</div>
+
+## Examples
+
+### With Palette
 
 ```tsx
 import { Wrapper } from "@enotion/components";
@@ -90,3 +123,9 @@ Additional styles can be provided via the style prop and will be merged with def
 ## Notes
 
 The component uses overflow: clip to prevent content from exceeding viewport bounds. If you need scrollable content, consider wrapping inner content in a separate scrollable container or override the overflow style.
+
+## See Also
+
+- [Provider](/packages/components/provider) - Context provider component
+- [Card](/packages/components/card) - Card container component
+- [colors](/packages/core/colors) - Color palette system

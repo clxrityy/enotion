@@ -1,6 +1,34 @@
+import { Navbar } from "@enotion/components";
+import { Icons } from "@enotion/core/constants";
+import { useState } from "react";
+
 # Navbar
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [NavItem Structure](#navitem-structure)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Theme Toggle](#with-theme-toggle)
+  - [With Palette Selector](#with-palette-selector)
+  - [With Sub-Items](#with-sub-items)
+  - [With Logo](#with-logo)
+- [Responsive Behavior](#responsive-behavior)
+- [Styling](#styling)
+- [Navigation Item Click Handling](#navigation-item-click-handling)
+- [Accessibility](#accessibility)
+- [See Also](#see-also)
+
 A responsive navigation bar with theme toggling, palette selection, and dropdown menus.
+
+---
+
+## Import
+
+```tsx
+import { Navbar } from "@enotion/components";
+```
 
 ## Features
 
@@ -64,7 +92,29 @@ function Example() {
 }
 ```
 
-## With Theme Toggle
+export const BasicNavbarExample = () => {
+  const navItems = [
+    { label: "Home", href: "#" },
+    { label: "About", href: "#" },
+    { label: "Contact", href: "#" },
+  ];
+
+  return (
+    <div className="border rounded">
+      <Navbar
+        title="My Site"
+        items={navItems}
+        palette="dark"
+      />
+    </div>
+  );
+};
+
+<BasicNavbarExample />
+
+## Examples
+
+### With Theme Toggle
 
 ```tsx
 import { Navbar } from "@enotion/components";
@@ -219,3 +269,10 @@ The component includes proper ARIA attributes:
 - **aria-hidden** on decorative icons
 - **role="dialog"** on popovers (via Popover component)
 - Semantic HTML (header, nav, ul/li structure)
+
+## See Also
+
+- [Link](/packages/components/link) - Link component
+- [Button](/packages/components/button) - Button component
+- [Popover](/packages/components/popover) - Popover used for dropdowns
+- [Select](/packages/components/select) - Select component for palette picker

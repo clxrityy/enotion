@@ -1,6 +1,31 @@
+import { Modal, Button } from "@enotion/components";
+import { useState } from "react";
+import { Icons } from "@enotion/core/constants";
+
 # Modal
 
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [Props](#props)
+- [Features](#features)
+  - [Automatic Backdrop](#automatic-backdrop)
+  - [Escape Key Handling](#escape-key-handling)
+  - [Outside Click Detection](#outside-click-detection)
+  - [Body Scroll Prevention](#body-scroll-prevention)
+  - [Responsive Sizing](#responsive-sizing)
+- [Examples](#examples)
+  - [Confirmation Dialog](#confirmation-dialog)
+  - [Form Modal](#form-modal)
+  - [Info Modal](#info-modal-no-close-callback)
+  - [Large Content Modal](#large-content-modal)
+  - [Custom Styled Modal](#custom-styled-modal)
+- [Styling](#styling)
+- [Accessibility](#accessibility)
+- [See Also](#see-also)
+
 A dialog component that displays content in an overlay, with automatic backdrop, escape key handling, and scroll prevention.
+
+---
 
 ## Import
 
@@ -29,6 +54,27 @@ function MyComponent() {
   );
 }
 ```
+
+export const BasicModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)} variant="secondary" palette="monochrome" className="-invert-50">
+        Open Modal
+      </Button>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} palette="dark">
+        <h2 className="text-xl font-bold mb-4">Modal Title</h2>
+        <p className="mb-4">This is the modal content.</p>
+        <Button onClick={() => setIsOpen(false)} variant="primary" palette="dark" className="text-sm w-full">
+          <Icons.Close className="inline-block" />
+        </Button>
+      </Modal>
+    </>
+  );
+};
+
+<BasicModalExample />
 
 ## Props
 

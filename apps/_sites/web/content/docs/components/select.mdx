@@ -1,6 +1,29 @@
+import { Select } from "@enotion/components";
+import { useState } from "react";
+
 # Select
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [Controlled Component](#controlled-component)
+  - [With Palette](#with-palette)
+  - [With Default Selection](#with-default-selection)
+- [Styling](#styling)
+- [Use Cases](#use-cases)
+- [See Also](#see-also)
+
 A dropdown select component with comprehensive theming and palette support.
+
+---
+
+## Import
+
+```tsx
+import { Select } from "@enotion/components";
+```
 
 ## Features
 
@@ -39,7 +62,23 @@ function Example() {
 }
 ```
 
-## Controlled Component
+export const BasicSelectExample = () => {
+  const options = [
+    { value: "apple", label: "Apple" },
+    { value: "banana", label: "Banana" },
+    { value: "orange", label: "Orange" },
+  ];
+
+  return (
+    <Select options={options} palette="dark" />
+  );
+};
+
+<BasicSelectExample />
+
+## Examples
+
+### Controlled Component
 
 ```tsx
 import { Select } from "@enotion/components";

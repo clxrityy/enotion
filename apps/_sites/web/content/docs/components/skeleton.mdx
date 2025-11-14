@@ -1,6 +1,35 @@
+import { Skeleton, SkeletonWrapper } from "@enotion/components";
+import { useState } from "react";
+
 # Skeleton
 
+- [Import](#import)
+- [Components](#components)
+- [SkeletonWrapper](#skeletonwrapper)
+  - [Props](#skeletonwrapper-props)
+  - [Basic Usage](#skeletonwrapper-basic-usage)
+  - [With Custom Skeleton](#with-custom-skeleton)
+  - [Multiple Children](#multiple-children)
+- [Skeleton](#skeleton-1)
+  - [Props](#skeleton-props)
+  - [Basic Usage](#skeleton-basic-usage)
+  - [With Reference Element](#with-reference-element)
+  - [Custom Styling](#custom-styling)
+  - [Card Loading State](#card-loading-state)
+- [Animation](#animation)
+- [Styling](#styling)
+- [Accessibility](#accessibility)
+- [See Also](#see-also)
+
 Loading placeholder components with automatic sizing and animation.
+
+---
+
+## Import
+
+```tsx
+import { Skeleton, SkeletonWrapper } from "@enotion/components";
+```
 
 ## Components
 
@@ -40,6 +69,26 @@ function Example({ isLoading }) {
   );
 }
 ```
+
+export const SkeletonWrapperExample = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <button onClick={() => setIsLoading(!isLoading)} className="px-4 py-2 bg-blue-500 text-white rounded">
+        Toggle Loading
+      </button>
+      <SkeletonWrapper isLoading={isLoading} palette="dark">
+        <div className="card p-4">
+          <h2>Content Title</h2>
+          <p>This is some content that will be replaced with skeleton when loading.</p>
+        </div>
+      </SkeletonWrapper>
+    </div>
+  );
+};
+
+<SkeletonWrapperExample />
 
 ### With Custom Skeleton
 
@@ -101,6 +150,12 @@ function Example() {
   );
 }
 ```
+
+<div className="flex flex-col gap-4">
+  <Skeleton width={200} height={40} palette="dark" />
+  <Skeleton width="100%" height={60} palette="dark" />
+  <Skeleton width={150} height={150} borderRadius="50%" palette="dark" />
+</div>
 
 ### With Reference Element
 

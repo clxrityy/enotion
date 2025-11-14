@@ -1,6 +1,31 @@
+import { Provider, Button } from "@enotion/components";
+import { useState } from "react";
+
 # Provider
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Theme Management](#with-theme-management)
+  - [With Notification Options](#with-notification-options)
+- [Behavior](#behavior)
+- [Palette Injection](#palette-injection)
+- [Use Cases](#use-cases)
+- [Theme Options](#theme-options)
+- [CSS Import](#css-import)
+- [See Also](#see-also)
+
 A combined context provider for theme, color palette, and notifications.
+
+---
+
+## Import
+
+```tsx
+import { Provider } from "@enotion/components";
+```
 
 ## Features
 
@@ -35,7 +60,23 @@ function App() {
 }
 ```
 
-## With Theme Management
+export const BasicProviderExample = () => {
+  return (
+    <Provider palette="dark" theme="dark">
+      <div className="p-6 border rounded">
+        <h3 className="text-lg font-bold mb-2">Provided Content</h3>
+        <p className="mb-4">This content is wrapped in a Provider with dark palette.</p>
+        <Button variant="primary">Themed Button</Button>
+      </div>
+    </Provider>
+  );
+};
+
+<BasicProviderExample />
+
+## Examples
+
+### With Theme Management
 
 ```tsx
 import { Provider } from "@enotion/components";
@@ -118,3 +159,10 @@ When no palette is specified, the Provider uses a default palette based on the t
 ## CSS Import
 
 The Provider automatically imports notification styles. Ensure your build system supports CSS imports from node_modules.
+
+## See Also
+
+- [LayoutProvider](/packages/components/layout-provider) - Provider with layout context
+- [useColorPalette](/packages/hooks/use-color-palette) - Hook for palette context
+- [useTheme](/packages/hooks/use-theme) - Hook for theme context
+- [colors](/packages/core/colors) - Color palette system

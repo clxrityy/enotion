@@ -60,6 +60,27 @@ function Example() {
 }
 ```
 
+export const BasicTableExample = () => {
+  const rows = [
+    {
+      title: "Feature",
+      items: ["Description", "Status"]
+    },
+    {
+      title: "Responsive",
+      items: ["Horizontal scrolling", "Enabled"]
+    },
+    {
+      title: "Theming",
+      items: ["Palette support", "Enabled"]
+    }
+  ];
+
+  return <Table rows={rows} palette="dark" />;
+};
+
+<BasicTableExample />
+
 ## Striped Table
 
 ```tsx
@@ -74,6 +95,18 @@ function Example() {
   );
 }
 ```
+
+export const StripedTableExample = () => {
+  const rows = [
+    { title: "Row 1", items: ["Data A", "Data B"] },
+    { title: "Row 2", items: ["Data C", "Data D"] },
+    { title: "Row 3", items: ["Data E", "Data F"] },
+  ];
+
+  return <Table rows={rows} striped palette="dark" />;
+};
+
+<StripedTableExample />
 
 ## Bordered with Hover
 

@@ -1,3 +1,5 @@
+import { CodeBlock } from "@enotion/components";
+
 # CodeBlock
 
 - [Import](#import)
@@ -20,6 +22,7 @@
   - [Theme Colors](#theme-colors)
 - [Accessibility](#accessibility)
 - [Performance](#performance)
+- [See Also](#see-also)
 
 A feature-rich code block component with syntax highlighting, line numbers, line highlighting, and theme support.
 
@@ -40,6 +43,12 @@ import { CodeBlock } from "@enotion/components";
 }`}
 </CodeBlock>
 ```
+
+<CodeBlock language="typescript" palette="dark">
+{`function hello() {
+  console.log("Hello, world!");
+}`}
+</CodeBlock>
 
 ## Props
 
@@ -127,6 +136,18 @@ greet("World");`}
 </CodeBlock>
 ```
 
+<CodeBlock
+  language="typescript"
+  showLineNumbers
+  palette="dark"
+>
+{`const greet = (name: string) => {
+  return \`Hello, \${name}!\`;
+};
+
+greet("World");`}
+</CodeBlock>
+
 ### Highlighting Specific Lines
 
 ```tsx
@@ -142,6 +163,19 @@ greet("World");`}
 }`}
 </CodeBlock>
 ```
+
+<CodeBlock
+  language="javascript"
+  showLineNumbers
+  highlightLines={[2, 4]}
+  palette="dark"
+>
+{`function calculate(a, b) {
+  const sum = a + b; // This line is highlighted
+  const product = a * b;
+  return { sum, product }; // This line is highlighted
+}`}
+</CodeBlock>
 
 ### With Color Palette
 

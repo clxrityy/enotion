@@ -1,6 +1,28 @@
+import { Search } from "@enotion/components";
+import { useState } from "react";
+
 # Search
 
+- [Import](#import)
+- [Basic Usage](#basic-usage)
+- [Props](#props)
+- [Examples](#examples)
+  - [Single Search Key](#single-search-key)
+  - [Multiple Search Keys](#multiple-search-keys)
+  - [Hide Results When Empty](#hide-results-when-empty)
+  - [Complex Rendering](#complex-rendering)
+  - [With Custom Styling](#with-custom-styling)
+  - [Nested Object Search](#nested-object-search)
+- [Features](#features)
+- [Styling](#styling)
+- [How It Works](#how-it-works)
+- [Accessibility](#accessibility)
+- [Performance Tips](#performance-tips)
+- [See Also](#see-also)
+
 A powerful search component that filters data and displays results with custom rendering.
+
+---
 
 ## Import
 
@@ -28,6 +50,29 @@ const data: Item[] = [
   render={(item) => <div>{item.name}</div>}
 />
 ```
+
+export const BasicSearchExample = () => {
+  const data = [
+    { id: 1, name: 'Apple' },
+    { id: 2, name: 'Banana' },
+    { id: 3, name: 'Orange' },
+    { id: 4, name: 'Grapes' },
+    { id: 5, name: 'Strawberry' },
+  ];
+
+  return (
+    <Search
+      data={data}
+      searchKey="name"
+      palette="dark"
+      render={(item) => (
+        <div className="font-semibold">{item.name}</div>
+      )}
+    />
+  );
+};
+
+<BasicSearchExample />
 
 ## Props
 

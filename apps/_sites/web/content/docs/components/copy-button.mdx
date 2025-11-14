@@ -1,6 +1,27 @@
+import { CopyButton } from "@enotion/components";
+
 # CopyButton
 
+- [Import](#import)
+- [Features](#features)
+- [Props](#props)
+- [Basic Usage](#basic-usage)
+- [Examples](#examples)
+  - [With Callbacks](#with-callbacks)
+  - [With Palette](#with-palette)
+- [Behavior](#behavior)
+- [Styling](#styling)
+- [See Also](#see-also)
+
 A button component that copies content to the clipboard and provides visual feedback.
+
+---
+
+## Import
+
+```tsx
+import { CopyButton } from "@enotion/components";
+```
 
 ## Features
 
@@ -33,7 +54,14 @@ function Example() {
 }
 ```
 
-## With Callbacks
+<div className="flex gap-4">
+  <CopyButton content="Hello, world!" palette="dark" />
+  <CopyButton content="Copy this text" palette="monochrome" />
+</div>
+
+## Examples
+
+### With Callbacks
 
 ```tsx
 import { CopyButton } from "@enotion/components";
@@ -64,6 +92,11 @@ function Example() {
 }
 ```
 
+<CopyButton
+  content="Styled content"
+  palette="softBeach"
+/>
+
 ## Behavior
 
 The component uses the useClipboard hook to handle clipboard operations. When clicked:
@@ -82,3 +115,9 @@ The component uses inline styles with CSS custom properties derived from the sel
 - Foreground color adapts to palette foreground
 - Hover and focus states use palette accent colors
 - Border uses palette border color
+
+## See Also
+
+- [Button](/packages/components/button) - Button component
+- [CodeBlock](/packages/components/code-block) - Often used together for code copying
+- [useClipboard](/packages/hooks/use-clipboard) - Hook used internally
