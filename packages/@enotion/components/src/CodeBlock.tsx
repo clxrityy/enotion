@@ -132,7 +132,7 @@ function getTokenColor(
   const tokenColorMap = {
     keyword: colors.primary,
     string: colors.success || colors.accent,
-    comment: adjustHexColorOpacity(colors.muted, 0.7),
+    comment: adjustHexColorOpacity(colors.highlight, 0.75),
     number: colors.warning || colors.accent,
     function: blendHexColors(colors.primary, colors.accent, 0.6),
     operator: colors.accent,
