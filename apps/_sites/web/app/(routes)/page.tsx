@@ -131,7 +131,7 @@ export default function Home() {
                 }
               />
             </div>
-            <Button palette={palette} onClick={() => setIsLoading(!isLoading)}>
+            <Button palette={palette} onClick={() => setIsLoading(!isLoading)} className="flex items-center justify-center text-sm sm:text-base md:text-lg lg:text-xl">
               {isLoading ? "Stop Loading" : "Start Loading"}
             </Button>
           </div>
@@ -143,7 +143,7 @@ export default function Home() {
             className="w-full h-full"
             style={{}}
           >
-            <div className="max-w-lg md:max-w-2xl lg:max-w-5xl w-full mx-auto h-full">
+            <div className="max-w-xl md:max-w-2xl lg:max-w-5xl w-full h-full lg:mx-auto">
               <Table
                 palette={palette}
                 responsive
