@@ -1,5 +1,7 @@
 # `@enotion/core`
 
+[View documentation](https://enotion-beta.vercel.app/packages/core)
+
 Contains core functionalities and utilities used across other `@enotion` packages. Fully tested and written in TypeScript for type safety and reliability.
 
 ## Features
