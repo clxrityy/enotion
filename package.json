@@ -12,7 +12,8 @@
     "clean": "turbo run clean",
     "versions": "chmod +x ./scripts/version.sh && ./scripts/version.sh",
     "start": "turbo run start",
-    "up-deps": "pnpm up --latest --recursive"
+    "up-deps": "pnpm up --latest --recursive",
+    "precommit": "pnpm test && pnpm build && pnpm lint && pnpm format"
   },
   "author": {
     "name": "MJ Anglin",
