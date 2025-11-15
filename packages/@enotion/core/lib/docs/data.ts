@@ -110,12 +110,12 @@ const packagesRaw: DocPackage[] = [
         description: "Hook for preloading resources",
         tag: "hook",
       },
-      {
-        name: "useScreenSize",
-        slug: "use-screen-size",
-        description: "Hook for tracking the size of the viewport",
-        tag: "hook",
-      },
+      // {
+      //   name: "useScreenSize",
+      //   slug: "use-screen-size",
+      //   description: "Hook for tracking the size of the viewport",
+      //   tag: "hook",
+      // },
       {
         name: "useScript",
         slug: "use-script",

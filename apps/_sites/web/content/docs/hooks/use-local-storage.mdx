@@ -1,0 +1,174 @@
+import { Button, Input, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+
+## Overview
+
+The **useLocalStorage** hook is a custom React hook that provides a way to manage state that is synchronized with the browser's localStorage. It automatically persists state changes to localStorage and retrieves the stored value on component mount.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useLocalStorage } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Default", "Description"] },
+  { title: "`key`", items: ["`string`", "Required", "The key under which the value is stored in localStorage"] },
+  { title: "`initialValue`", items: ["`T`", "`undefined`", "The initial value to use if there is no value in localStorage"] }
+]} />
+
+## Return Value
+
+Returns a tuple with the following elements:
+
+<Table rows={[
+  { title: "Index", items: ["Type", "Description"] },
+  { title: "`[0]`", items: ["`T`", "The current stored value"] },
+  { title: "`[1]`", items: ["`(action: T | ((prevState: T) => T)) => void`", "Setter function to update the value"] },
+  { title: "`[2]`", items: ["`() => void`", "Function to remove the value from localStorage"] },
+  { title: "`[3]`", items: ["`Error | null`", "Any error that occurred during operations"] }
+]} />
+
+## Examples
+
+### Basic String Storage
+
+```tsx
+"use client";
+import { useLocalStorage } from "@enotion/hooks";
+import { Input, Button } from "@enotion/components";
+
+function NameStorage() {
+  const [name, setName, removeName, error] = useLocalStorage('userName', 'Guest');
+
+  return (
+    <div>
+      <Input
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Enter your name"
+      />
+      <Button onClick={removeName}>Clear Name</Button>
+      <p>Hello, {name}!</p>
+    </div>
+  );
+}
+```
+
+### Counter with localStorage
+
+```tsx
+"use client";
+import { useLocalStorage } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function Counter() {
+  const [count, setCount, removeCount] = useLocalStorage('counter', 0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <Button onClick={() => setCount(prev => prev + 1)}>
+        Increment
+      </Button>
+      <Button onClick={() => setCount(prev => prev - 1)}>
+        Decrement
+      </Button>
+      <Button onClick={removeCount}>Reset</Button>
+    </div>
+  );
+}
+```
+
+### Object Storage
+
+```tsx
+"use client";
+import { useLocalStorage } from "@enotion/hooks";
+
+interface UserPreferences {
+  theme: 'light' | 'dark';
+  fontSize: number;
+  notifications: boolean;
+}
+
+function PreferencesManager() {
+  const [preferences, setPreferences, removePreferences, error] =
+    useLocalStorage<UserPreferences>('userPreferences', {
+      theme: 'light',
+      fontSize: 16,
+      notifications: true
+    });
+
+  const updateTheme = (theme: 'light' | 'dark') => {
+    setPreferences(prev => ({ ...prev, theme }));
+  };
+
+  return (
+    <div>
+      <p>Theme: {preferences.theme}</p>
+      <button onClick={() => updateTheme('dark')}>Dark Mode</button>
+      <button onClick={() => updateTheme('light')}>Light Mode</button>
+      {error && <p>Error: {error.message}</p>}
+    </div>
+  );
+}
+```
+
+### Array Storage
+
+```tsx
+"use client";
+import { useLocalStorage } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function TodoList() {
+  const [todos, setTodos, removeTodos] = useLocalStorage<string[]>('todos', []);
+
+  const addTodo = (todo: string) => {
+    setTodos(prev => [...prev, todo]);
+  };
+
+  const removeTodo = (index: number) => {
+    setTodos(prev => prev.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>
+            {todo}
+            <Button onClick={() => removeTodo(index)}>Remove</Button>
+          </li>
+        ))}
+      </ul>
+      <Button onClick={removeTodos}>Clear All</Button>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- Values are automatically serialized to JSON when stored and deserialized when retrieved
+- The hook handles SSR scenarios by initializing after hydration
+- Error handling is built-in and accessible through the fourth return value
+- Changes to localStorage are immediately reflected in the component state
+- The setter function supports both direct values and updater functions (like **useState**)

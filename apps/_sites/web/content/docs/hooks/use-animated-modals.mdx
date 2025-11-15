@@ -1,0 +1,298 @@
+import { Button, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useAnimatedModals** hook provides methods to register and display modals with animations within a layout context. It leverages the **useLayoutContext** hook to interact with the layout system and must be used within a **LayoutProvider**.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks @enotion/components @enotion/core
+```
+
+## Usage
+
+First, wrap your application with the **LayoutProvider**:
+
+```tsx
+import { LayoutProvider } from "@enotion/components";
+
+function App() {
+  return (
+    <LayoutProvider>
+      {/* Your app components */}
+    </LayoutProvider>
+  );
+}
+```
+
+Then use the hook in any child component:
+
+```tsx
+import { useAnimatedModals } from "@enotion/hooks";
+
+function MyComponent() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-fadeIn",
+      exit: "animate-fadeOut",
+      duration: 300
+    }
+  });
+
+  return (
+    <button onClick={() => showModal("my-modal", <div>Modal Content</div>)}>
+      Open Modal
+    </button>
+  );
+}
+```
+
+## Parameters
+
+The hook accepts an object with the following properties:
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "`animationConfig`", items: ["`AnimationConfig`", "Optional configuration for modal animations"] }
+]} />
+
+### AnimationConfig
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Default", "Description"] },
+  { title: "`enter`", items: ["`string`", "`\"animate-fadeIn\"`", "CSS class for enter animation"] },
+  { title: "`exit`", items: ["`string`", "`\"animate-fadeOut\"`", "CSS class for exit animation"] },
+  { title: "`duration`", items: ["`number`", "`300`", "Animation duration in milliseconds"] }
+]} />
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "`showModal`", items: ["`(modalId: string, content: ReactNode) => void`", "Function to register and display a modal"] }
+]} />
+
+## Examples
+
+### Basic Modal
+
+```tsx
+"use client";
+import { useAnimatedModals } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function BasicModal() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-fadeIn",
+      exit: "animate-fadeOut",
+      duration: 300
+    }
+  });
+
+  const openModal = () => {
+    showModal("welcome-modal", (
+      <div className="p-6 bg-white rounded-lg shadow-xl">
+        <h2 className="text-2xl font-bold mb-4">Welcome!</h2>
+        <p>This is a simple animated modal.</p>
+      </div>
+    ));
+  };
+
+  return <Button onClick={openModal}>Open Modal</Button>;
+}
+```
+
+### Slide-Up Animation
+
+```tsx
+"use client";
+import { useAnimatedModals } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function SlideUpModal() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-slideInUp",
+      exit: "animate-slideOutDown",
+      duration: 500
+    }
+  });
+
+  const openModal = () => {
+    showModal("slide-modal", (
+      <div className="p-6 bg-white rounded-t-lg shadow-xl max-w-md w-full">
+        <h2 className="text-xl font-bold mb-4">Bottom Sheet</h2>
+        <p className="mb-4">This modal slides up from the bottom!</p>
+        <Button>Close</Button>
+      </div>
+    ));
+  };
+
+  return <Button onClick={openModal}>Show Bottom Sheet</Button>;
+}
+```
+
+### Confirmation Dialog
+
+```tsx
+"use client";
+import { useAnimatedModals } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function ConfirmationDialog() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-scaleIn",
+      exit: "animate-scaleOut",
+      duration: 200
+    }
+  });
+
+  const handleDelete = () => {
+    showModal("confirm-delete", (
+      <div className="p-6 bg-white rounded-lg shadow-xl max-w-sm">
+        <h2 className="text-lg font-bold mb-2">Confirm Delete</h2>
+        <p className="text-gray-600 mb-4">
+          Are you sure you want to delete this item? This action cannot be undone.
+        </p>
+        <div className="flex gap-2 justify-end">
+          <Button variant="secondary">Cancel</Button>
+          <Button variant="destructive">Delete</Button>
+        </div>
+      </div>
+    ));
+  };
+
+  return <Button onClick={handleDelete}>Delete Item</Button>;
+}
+```
+
+### Form Modal
+
+```tsx
+"use client";
+import { useAnimatedModals } from "@enotion/hooks";
+import { Button, Input } from "@enotion/components";
+import { useState } from "react";
+
+function FormModal() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-fadeIn",
+      exit: "animate-fadeOut",
+      duration: 300
+    }
+  });
+
+  const openForm = () => {
+    showModal("contact-form", (
+      <div className="p-6 bg-white rounded-lg shadow-xl max-w-md w-full">
+        <h2 className="text-xl font-bold mb-4">Contact Us</h2>
+        <form className="space-y-4">
+          <div>
+            <label>Name</label>
+            <Input placeholder="Your name" />
+          </div>
+          <div>
+            <label>Email</label>
+            <Input type="email" placeholder="your@email.com" />
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea
+              className="w-full p-2 border rounded"
+              rows={4}
+              placeholder="Your message..."
+            />
+          </div>
+          <Button type="submit" className="w-full">Send Message</Button>
+        </form>
+      </div>
+    ));
+  };
+
+  return <Button onClick={openForm}>Contact Us</Button>;
+}
+```
+
+### Image Preview Modal
+
+```tsx
+"use client";
+import { useAnimatedModals } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function ImageGallery() {
+  const { showModal } = useAnimatedModals({
+    animationConfig: {
+      enter: "animate-zoomIn",
+      exit: "animate-zoomOut",
+      duration: 400
+    }
+  });
+
+  const openImage = (imageSrc: string) => {
+    showModal("image-preview", (
+      <div className="max-w-4xl max-h-[90vh] overflow-auto">
+        <img
+          src={imageSrc}
+          alt="Preview"
+          className="w-full h-auto rounded-lg shadow-2xl"
+        />
+      </div>
+    ));
+  };
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      <img
+        src="/image1.jpg"
+        alt="Thumbnail"
+        onClick={() => openImage("/image1.jpg")}
+        className="cursor-pointer hover:opacity-80"
+      />
+      {/* More images... */}
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+import { ReactNode } from "react";
+import { AnimationConfig } from "@enotion/core";
+
+export interface UseAnimatedModalsOptions {
+  animationConfig?: AnimationConfig;
+}
+
+interface AnimationConfig {
+  enter: string;  // CSS animation class for entering
+  exit: string;   // CSS animation class for exiting
+  duration: number; // Duration in milliseconds
+}
+```
+
+## Notes
+
+- **Requires LayoutProvider**: This hook must be used within a component wrapped by **LayoutProvider** from **@enotion/components**
+- Animation classes should be defined in your CSS/Tailwind configuration
+- The modal is automatically positioned as **fixed** with a **zIndex** of 1000
+- Each modal is identified by a unique **modalId**
+- The same **modalId** can be reused to update the modal content
+- Default animation is fade in/out if no config is provided

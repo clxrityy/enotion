@@ -1,0 +1,232 @@
+import { Button, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+
+## Overview
+
+The **usePreload** hook is designed to facilitate preloading of resources or data when a user hovers over a specific element. It ensures that the preload action is only triggered once, preventing redundant calls.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { usePreload } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "**callback**", items: ["`() => Promise<unknown>`", "A function that returns a promise to be executed on hover"] }
+]} />
+
+## Return Value
+
+Returns an object with an optional **onMouseOverCapture** event handler:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "**onMouseOverCapture**", items: ["`MouseEventHandler<HTMLElement> | undefined`", "Event handler to trigger the preload (removed after first execution)"] }
+]} />
+
+## Examples
+
+### Preload Component
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function PreloadExample() {
+  const importComponent = () => import('./HeavyComponent');
+  const preloadProps = usePreload(importComponent);
+
+  return (
+    <Button {...preloadProps}>
+      Hover to Preload Component
+    </Button>
+  );
+}
+```
+
+### Preload Route Data
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+import Link from "next/link";
+
+function NavigationLink() {
+  const preloadRouteData = async () => {
+    const data = await fetch('/api/route-data');
+    return data.json();
+  };
+
+  const preloadProps = usePreload(preloadRouteData);
+
+  return (
+    <Link href="/route" {...preloadProps}>
+      Navigate to Route
+    </Link>
+  );
+}
+```
+
+### Preload Image
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+
+function ImageCard() {
+  const preloadImage = () => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = reject;
+      img.src = '/large-image.jpg';
+    });
+  };
+
+  const preloadProps = usePreload(preloadImage);
+
+  return (
+    <div {...preloadProps} className="card">
+      <img src="/thumbnail.jpg" alt="Preview" />
+      <p>Hover to preload full image</p>
+    </div>
+  );
+}
+```
+
+### Preload API Data
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function DataFetchButton() {
+  const preloadData = async () => {
+    const response = await fetch('/api/user-data');
+    const data = await response.json();
+    // Cache the data
+    return data;
+  };
+
+  const preloadProps = usePreload(preloadData);
+
+  return (
+    <Button {...preloadProps}>
+      View Profile (Hover to Preload)
+    </Button>
+  );
+}
+```
+
+### Preload Multiple Resources
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+
+function MultiResourcePreload() {
+  const preloadResources = async () => {
+    await Promise.all([
+      import('./Component1'),
+      import('./Component2'),
+      fetch('/api/data').then(r => r.json()),
+    ]);
+  };
+
+  const preloadProps = usePreload(preloadResources);
+
+  return (
+    <div {...preloadProps} className="preview-card">
+      <h3>Dashboard</h3>
+      <p>Hover to preload dashboard resources</p>
+    </div>
+  );
+}
+```
+
+### Preload Video
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+
+function VideoPlayer() {
+  const preloadVideo = () => {
+    return new Promise((resolve, reject) => {
+      const video = document.createElement('video');
+      video.onloadeddata = resolve;
+      video.onerror = reject;
+      video.src = '/video.mp4';
+      video.load();
+    });
+  };
+
+  const preloadProps = usePreload(preloadVideo);
+
+  return (
+    <div {...preloadProps} className="video-container">
+      <div className="thumbnail">
+        <img src="/video-thumbnail.jpg" alt="Video thumbnail" />
+        <p>Hover to preload video</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Preload Font
+
+```tsx
+"use client";
+import { usePreload } from "@enotion/hooks";
+
+function CustomFontText() {
+  const preloadFont = async () => {
+    const font = new FontFace(
+      'CustomFont',
+      'url(/fonts/custom-font.woff2)'
+    );
+    await font.load();
+    document.fonts.add(font);
+  };
+
+  const preloadProps = usePreload(preloadFont);
+
+  return (
+    <div {...preloadProps}>
+      <p style={{ fontFamily: 'CustomFont, sans-serif' }}>
+        Hover to preload custom font
+      </p>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- The preload is triggered on the first hover only
+- Uses **onMouseOverCapture** for early event capture
+- The event handler is removed after the first successful preload
+- Prevents redundant network requests or resource loading
+- Works with any promise-returning function
+- Ideal for optimizing user experience by loading resources before they're needed
+- Does not handle loading states - consider combining with state management for UI feedback

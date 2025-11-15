@@ -1,0 +1,288 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useScript** hook allows you to dynamically load external JavaScript files into your React application. It manages the script's loading state and provides options for customization, such as async loading, defer attribute, and callback functions for load and error events.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useScript } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "**src**", items: ["`string`", "The source URL of the script to load"] },
+  { title: "**options**", items: ["`UseScriptOptions`", "Optional configuration options for loading the script"] }
+]} />
+
+### UseScriptOptions
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Default", "Description"] },
+  { title: "**async**", items: ["`boolean`", "`true`", "Whether to load the script asynchronously"] },
+  { title: "**defer**", items: ["`boolean`", "`false`", "Whether to load the script with defer attribute"] },
+  { title: "**type**", items: ["`ScriptType`", "`undefined`", "The type of the script"] },
+  { title: "**position**", items: ["`\"head\" | \"body\"`", "`\"head\"`", "Where to insert the script in the document"] },
+  { title: "**attributionSrc**", items: ["`string`", "`undefined`", "Attribution source attribute"] },
+  { title: "**onLoad**", items: ["`() => void`", "`undefined`", "Callback function called when the script is loaded"] },
+  { title: "**onError**", items: ["`(error: ErrorEvent) => void`", "`undefined`", "Callback function called if an error occurs"] }
+]} />
+
+## Return Value
+
+Returns a boolean indicating whether the script has been successfully loaded:
+
+<Table rows={[
+  { title: "Type", items: ["Description"] },
+  { title: "`boolean`", items: ["**true** if the script is loaded, **false** otherwise"] }
+]} />
+
+## Examples
+
+### Basic Script Loading
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+
+function AnalyticsComponent() {
+  const isLoaded = useScript("https://www.google-analytics.com/analytics.js");
+
+  return (
+    <div>
+      <p>Analytics script {isLoaded ? 'loaded' : 'loading...'}</p>
+    </div>
+  );
+}
+```
+
+### Load Script with Callbacks
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+import { useState } from "react";
+
+function ScriptWithCallbacks() {
+  const [status, setStatus] = useState("loading");
+
+  const isLoaded = useScript("https://example.com/sdk.js", {
+    onLoad: () => {
+      setStatus("loaded");
+      console.log("Script loaded successfully!");
+    },
+    onError: (error) => {
+      setStatus("error");
+      console.error("Failed to load script:", error);
+    },
+  });
+
+  return (
+    <div>
+      <p>Script status: {status}</p>
+    </div>
+  );
+}
+```
+
+### Load Module Script
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+
+function ModuleLoader() {
+  const isLoaded = useScript("https://example.com/module.js", {
+    type: "module",
+    async: true,
+  });
+
+  return (
+    <div>
+      <p>Module {isLoaded ? 'ready' : 'loading...'}</p>
+    </div>
+  );
+}
+```
+
+### Load Script in Body
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+
+function BodyScriptLoader() {
+  const isLoaded = useScript("https://example.com/script.js", {
+    position: "body",
+    defer: true,
+  });
+
+  return (
+    <div>
+      <p>Body script {isLoaded ? 'loaded' : 'loading...'}</p>
+    </div>
+  );
+}
+```
+
+### Google Maps Integration
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+import { useEffect } from "react";
+
+function GoogleMapsComponent() {
+  const isLoaded = useScript(
+    **https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY**,
+    {
+      async: true,
+      onLoad: () => console.log("Google Maps loaded"),
+    }
+  );
+
+  useEffect(() => {
+    if (isLoaded && window.google) {
+      // Initialize map
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+  }, [isLoaded]);
+
+  return <div id="map" style={{ width: '100%', height: '400px' }} />;
+}
+```
+
+### Stripe Integration
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+import { useEffect, useState } from "react";
+
+function StripePayment() {
+  const [stripe, setStripe] = useState(null);
+
+  const isLoaded = useScript("https://js.stripe.com/v3/", {
+    onLoad: () => {
+      if (window.Stripe) {
+        setStripe(window.Stripe('YOUR_PUBLISHABLE_KEY'));
+      }
+    },
+  });
+
+  return (
+    <div>
+      {isLoaded && stripe ? (
+        <div>Stripe is ready!</div>
+      ) : (
+        <div>Loading payment processor...</div>
+      )}
+    </div>
+  );
+}
+```
+
+### Facebook Pixel
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+import { useEffect } from "react";
+
+function FacebookPixel() {
+  const isLoaded = useScript("https://connect.facebook.net/en_US/fbevents.js", {
+    async: true,
+    onLoad: () => {
+      if (window.fbq) {
+        window.fbq('init', 'YOUR_PIXEL_ID');
+        window.fbq('track', 'PageView');
+      }
+    },
+  });
+
+  return null; // This component doesn't render anything
+}
+```
+
+### Conditional Script Loading
+
+```tsx
+"use client";
+import { useScript } from "@enotion/hooks";
+import { useState } from "react";
+
+function ConditionalScriptLoader() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  const isLoaded = useScript(
+    shouldLoad ? "https://example.com/script.js" : "",
+    {
+      onLoad: () => console.log("Script loaded on demand"),
+    }
+  );
+
+  return (
+    <div>
+      <button onClick={() => setShouldLoad(true)}>
+        Load Script
+      </button>
+      {isLoaded && <p>Script is now loaded!</p>}
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export type ScriptType =
+  | "importmap"
+  | "module"
+  | "speculationrules"
+  | "text/javascript"
+  | "application/javascript"
+  | "application/ecmascript"
+  | "module-shim";
+
+export interface UseScriptOptions
+  extends Omit<ComponentProps<"script">, "onError"> {
+  async?: boolean;
+  defer?: boolean;
+  type?: ScriptType;
+  position?: "head" | "body";
+  attributionSrc?: string;
+  onLoad?: () => void;
+  onError?: (error: ErrorEvent) => void;
+}
+```
+
+## Notes
+
+- The hook checks if a script with the same src is already loaded to avoid duplicates
+- Scripts are marked with a **data-loaded** attribute to track loading state
+- The script element is only created once per unique src URL
+- Automatic cleanup of event listeners when the component unmounts
+- If the src changes, a new script will be loaded
+- The hook works in SSR environments by checking for the presence of the src parameter

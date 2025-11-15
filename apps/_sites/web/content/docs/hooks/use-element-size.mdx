@@ -1,0 +1,194 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+
+## Overview
+
+The **useElementSize** hook measures the size of a referenced HTML element. It uses the ResizeObserver API to listen for size changes and updates the measurements accordingly.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useElementSize } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "**ref**", items: ["`RefObject<HTMLElement | null>`", "RefObject pointing to the element to measure"] }
+]} />
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "**width**", items: ["`number`", "The width of the element in pixels"] },
+  { title: "**height**", items: ["`number`", "The height of the element in pixels"] },
+  { title: "**borderRadius**", items: ["`string`", "The computed border-radius CSS value"] }
+]} />
+
+## Examples
+
+### Display Element Dimensions
+
+```tsx
+"use client";
+import { useElementSize } from "@enotion/hooks";
+import { useRef } from "react";
+
+function MeasuredBox() {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const size = useElementSize(boxRef);
+
+  return (
+    <div>
+      <div ref={boxRef} className="resize overflow-auto">
+        Resize me!
+      </div>
+      <p>Width: {size.width}px</p>
+      <p>Height: {size.height}px</p>
+      <p>Border Radius: {size.borderRadius}</p>
+    </div>
+  );
+}
+```
+
+### Responsive Component
+
+```tsx
+"use client";
+import { useElementSize } from "@enotion/hooks";
+import { useRef } from "react";
+
+function ResponsiveCard() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const { width } = useElementSize(cardRef);
+
+  const isSmall = width < 300;
+  const isMedium = width >= 300 && width < 500;
+  const isLarge = width >= 500;
+
+  return (
+    <div ref={cardRef} className="card">
+      <h2>Responsive Card</h2>
+      <p>
+        Current size: {isSmall && "Small"}
+        {isMedium && "Medium"}
+        {isLarge && "Large"}
+      </p>
+      <p>Width: {width}px</p>
+    </div>
+  );
+}
+```
+
+### Dynamic Font Scaling
+
+```tsx
+"use client";
+import { useElementSize } from "@enotion/hooks";
+import { useRef } from "react";
+
+function ScalableText() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { width } = useElementSize(containerRef);
+
+  const fontSize = Math.max(12, Math.min(width / 10, 48));
+
+  return (
+    <div ref={containerRef} className="container">
+      <h1 style={{ fontSize: **${fontSize}px** }}>
+        Responsive Heading
+      </h1>
+      <p>Container width: {width}px</p>
+      <p>Font size: {fontSize.toFixed(0)}px</p>
+    </div>
+  );
+}
+```
+
+### Image Aspect Ratio Calculator
+
+```tsx
+"use client";
+import { useElementSize } from "@enotion/hooks";
+import { useRef } from "react";
+
+function ImageInfo() {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const { width, height } = useElementSize(imageRef);
+
+  const aspectRatio = width && height ? (width / height).toFixed(2) : "N/A";
+
+  return (
+    <div>
+      <img
+        ref={imageRef}
+        src="/example.jpg"
+        alt="Example"
+        style={{ maxWidth: '100%', height: 'auto' }}
+      />
+      <div>
+        <p>Dimensions: {width} × {height}px</p>
+        <p>Aspect Ratio: {aspectRatio}</p>
+      </div>
+    </div>
+  );
+}
+```
+
+### Grid Layout Manager
+
+```tsx
+"use client";
+import { useElementSize } from "@enotion/hooks";
+import { useRef } from "react";
+
+function GridManager() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const { width } = useElementSize(gridRef);
+
+  const columns = width < 600 ? 1 : width < 900 ? 2 : 3;
+
+  return (
+    <div ref={gridRef}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: **repeat(${columns}, 1fr)**,
+        gap: '1rem'
+      }}>
+        <div className="card">Item 1</div>
+        <div className="card">Item 2</div>
+        <div className="card">Item 3</div>
+        <div className="card">Item 4</div>
+      </div>
+      <p>Current columns: {columns}</p>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- Uses the ResizeObserver API to efficiently detect size changes
+- Automatically updates when the element is resized
+- Returns initial size on mount
+- Cleans up the observer when the component unmounts
+- Returns **0** for width and height if the element is not yet mounted
+- The **borderRadius** value is retrieved from computed styles

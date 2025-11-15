@@ -1,0 +1,218 @@
+import { Button, Select, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Context](#context)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useColorPalette** hook provides access to the color palette context created by the **ColorPaletteProvider**. It allows components to access and modify the current color palette and automatically persists the preference to localStorage.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks @enotion/core
+```
+
+## Usage
+
+First, wrap your application with the **ColorPaletteProvider**:
+
+```tsx
+import { ColorPaletteProvider } from "@enotion/hooks";
+
+function App() {
+  return (
+    <ColorPaletteProvider>
+      {/* Your app components */}
+    </ColorPaletteProvider>
+  );
+}
+```
+
+Then use the hook in any child component:
+
+```tsx
+import { useColorPalette } from "@enotion/hooks";
+
+function MyComponent() {
+  const { palette, setPalette, getAllPalettes } = useColorPalette();
+
+  return (
+    <div>
+      <p>Current palette: {palette}</p>
+      <button onClick={() => setPalette('ocean')}>Ocean Theme</button>
+    </div>
+  );
+}
+```
+
+## Context
+
+The **ColorPaletteProvider** component must wrap any components that use the **useColorPalette** hook. It handles:
+
+- Persisting palette preference to localStorage
+- Detecting system color scheme preferences
+- Applying palette changes to the document root
+- Preventing SSR hydration mismatches
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "**palette**", items: ["`ColorPaletteType | undefined`", "The current color palette"] },
+  { title: "**setPalette**", items: ["`(palette: ColorPaletteType) => void`", "Function to update the palette"] },
+  { title: "**getAllPalettes**", items: ["`() => typeof ColorPalettes`", "Function to get all available palettes"] }
+]} />
+
+## Examples
+
+### Basic Palette Selector
+
+```tsx
+"use client";
+import { useColorPalette } from "@enotion/hooks";
+import { Select } from "@enotion/components";
+
+function PaletteSelector() {
+  const { palette, setPalette, getAllPalettes } = useColorPalette();
+  const palettes = getAllPalettes();
+
+  return (
+    <div>
+      <p>Current palette: {palette}</p>
+      <Select
+        value={palette || 'default'}
+        onChange={(e) => setPalette(e.target.value)}
+        options={Object.keys(palettes).map(key => ({
+          label: key,
+          value: key
+        }))}
+      />
+    </div>
+  );
+}
+```
+
+### Palette Preview Cards
+
+```tsx
+"use client";
+import { useColorPalette } from "@enotion/hooks";
+
+function PalettePreview() {
+  const { palette, setPalette, getAllPalettes } = useColorPalette();
+  const palettes = getAllPalettes();
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {Object.entries(palettes).map(([key, colors]) => (
+        <button
+          key={key}
+          onClick={() => setPalette(key)}
+          className={palette === key ? 'ring-2 ring-primary' : ''}
+        >
+          <p>{key}</p>
+          <div className="flex gap-1">
+            {Object.values(colors).map((color, i) => (
+              <div
+                key={i}
+                style={{ backgroundColor: color }}
+                className="w-8 h-8"
+              />
+            ))}
+          </div>
+        </button>
+      ))}
+    </div>
+  );
+}
+```
+
+### Dynamic Palette Button Group
+
+```tsx
+"use client";
+import { useColorPalette } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function PaletteButtons() {
+  const { palette, setPalette, getAllPalettes } = useColorPalette();
+  const palettes = getAllPalettes();
+
+  return (
+    <div className="flex gap-2">
+      {Object.keys(palettes).map(key => (
+        <Button
+          key={key}
+          onClick={() => setPalette(key)}
+          variant={palette === key ? 'default' : 'secondary'}
+        >
+          {key}
+        </Button>
+      ))}
+    </div>
+  );
+}
+```
+
+### Conditional Styling with Palette
+
+```tsx
+"use client";
+import { useColorPalette } from "@enotion/hooks";
+
+function ThemedComponent() {
+  const { palette, getAllPalettes } = useColorPalette();
+  const palettes = getAllPalettes();
+
+  const currentColors = palette ? palettes[palette] : palettes.default;
+
+  return (
+    <div style={{ backgroundColor: currentColors.primary }}>
+      <h1 style={{ color: currentColors.text }}>
+        Themed with {palette} palette
+      </h1>
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+import { ColorPalettes } from "@enotion/core/constants";
+
+export type ColorPaletteType = keyof typeof ColorPalettes;
+
+export interface ColorPaletteContext {
+  palette: ColorPaletteType | undefined;
+  setPalette: (palette: ColorPaletteType) => void;
+  getAllPalettes: () => typeof ColorPalettes;
+}
+```
+
+## Available Palettes
+
+The available color palettes are defined in **@enotion/core/constants**. Each palette includes colors for:
+
+- Primary, secondary, tertiary colors
+- Background and foreground colors
+- Text and muted text colors
+- Border, accent, and highlight colors
+
+## Notes
+
+- The palette preference is automatically saved to localStorage with the key **"color-palette"**
+- The palette is applied to **document.documentElement** as a **data-palette** attribute
+- SSR-safe: prevents hydration mismatches by handling client-side initialization
+- Respects system color scheme preferences on initial load
+- All color values are accessible via CSS custom properties once applied

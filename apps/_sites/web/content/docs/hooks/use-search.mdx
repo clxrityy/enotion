@@ -1,0 +1,222 @@
+import { Input, Button, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+
+## Overview
+
+The **useSearch** hook is a custom React hook that provides search functionality over a dataset. It filters data based on a search query and supports searching across single or multiple keys in objects.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useSearch } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "`data`", items: ["`T[]`", "The array of data objects to be searched"] },
+  { title: "`searchKey`", items: ["`keyof T | (keyof T)[]`", "The key(s) of the object to perform the search on"] }
+]} />
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "`query`", items: ["`string`", "The current search query"] },
+  { title: "`setQuery`", items: ["`(query: string) => void`", "Function to update the search query"] },
+  { title: "`filteredData`", items: ["`T[]`", "The filtered array of data matching the search query"] }
+]} />
+
+## Examples
+
+### Basic Search on Single Key
+
+```tsx
+"use client";
+import { useSearch } from "@enotion/hooks";
+import { Input } from "@enotion/components";
+
+interface Fruit {
+  id: number;
+  name: string;
+  color: string;
+}
+
+function FruitSearch() {
+  const data: Fruit[] = [
+    { id: 1, name: 'Apple', color: 'Red' },
+    { id: 2, name: 'Banana', color: 'Yellow' },
+    { id: 3, name: 'Orange', color: 'Orange' },
+  ];
+
+  const { query, setQuery, filteredData } = useSearch(data, 'name');
+
+  return (
+    <div>
+      <Input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search fruits..."
+      />
+      <ul>
+        {filteredData.map(fruit => (
+          <li key={fruit.id}>{fruit.name} - {fruit.color}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Search Across Multiple Keys
+
+```tsx
+"use client";
+import { useSearch } from "@enotion/hooks";
+import { Input } from "@enotion/components";
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+}
+
+function UserSearch() {
+  const data: User[] = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
+  ];
+
+  const { query, setQuery, filteredData } = useSearch(data, ['name', 'email', 'role']);
+
+  return (
+    <div>
+      <Input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search users..."
+      />
+      <ul>
+        {filteredData.map(user => (
+          <li key={user.id}>
+            {user.name} - {user.email} ({user.role})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+### Product Search with Categories
+
+```tsx
+"use client";
+import { useSearch } from "@enotion/hooks";
+import { Input } from "@enotion/components";
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+}
+
+function ProductSearch() {
+  const products: Product[] = [
+    { id: 1, name: 'Laptop', category: 'Electronics', price: 999 },
+    { id: 2, name: 'Desk Chair', category: 'Furniture', price: 199 },
+    { id: 3, name: 'Monitor', category: 'Electronics', price: 299 },
+    { id: 4, name: 'Keyboard', category: 'Electronics', price: 79 },
+  ];
+
+  const { query, setQuery, filteredData } = useSearch(products, ['name', 'category']);
+
+  return (
+    <div>
+      <Input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search products..."
+      />
+      <div>
+        {filteredData.map(product => (
+          <div key={product.id}>
+            <h3>{product.name}</h3>
+            <p>{product.category} - ${product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### Search with Clear Button
+
+```tsx
+"use client";
+import { useSearch } from "@enotion/hooks";
+import { Input, Button } from "@enotion/components";
+
+interface Item {
+  id: number;
+  title: string;
+  description: string;
+}
+
+function SearchWithClear() {
+  const data: Item[] = [
+    { id: 1, title: 'Item One', description: 'First item' },
+    { id: 2, title: 'Item Two', description: 'Second item' },
+  ];
+
+  const { query, setQuery, filteredData } = useSearch(data, 'title');
+
+  return (
+    <div>
+      <div style={{ display: 'flex', gap: '8px' }}>
+        <Input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search..."
+        />
+        <Button onClick={() => setQuery('')}>Clear</Button>
+      </div>
+      <p>Found {filteredData.length} results</p>
+      <ul>
+        {filteredData.map(item => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- Search is case-insensitive
+- The search matches any part of the string (substring matching)
+- When searching multiple keys, an item is included if any of the specified keys match
+- The filtered data is computed on every render when the query or data changes
+- Empty queries return all data
+- All values are converted to strings for comparison

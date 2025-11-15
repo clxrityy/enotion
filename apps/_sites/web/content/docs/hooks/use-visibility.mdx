@@ -1,0 +1,292 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useVisibility** hook utilizes the Intersection Observer API to monitor the visibility of a specified DOM element. It accepts a reference to the target element, an optional parent selector or reference to define the observation root, intersection observer options, and a flag to always consider the element as visible.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useVisibility } from "@enotion/hooks";
+```
+
+## Parameters
+
+The hook accepts an object with the following properties:
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "`elementRef`", items: ["`RefObject<HTMLElement | null>`", "A reference to the DOM element to be observed"] },
+  { title: "`parentSelector`", items: ["`string | RefObject<HTMLElement | null>`", "Optional CSS selector or RefObject for the parent element to use as the root"] },
+  { title: "`intersectionOptions`", items: ["`IntersectionObserverInit`", "Optional IntersectionObserver options"] },
+  { title: "`alwaysVisible`", items: ["`boolean`", "If true, the hook will always return true"] }
+]} />
+
+### IntersectionObserverInit Options
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Default", "Description"] },
+  { title: "`rootMargin`", items: ["`string`", "`\"3px\"`", "Margin around the root"] },
+  { title: "`threshold`", items: ["`number | number[]`", "`0`", "Percentage of visibility required to trigger"] }
+]} />
+
+## Return Value
+
+Returns a boolean indicating whether the element is visible:
+
+<Table rows={[
+  { title: "Type", items: ["Description"] },
+  { title: "`boolean`", items: ["**true** if the element is visible, **false** otherwise"] }
+]} />
+
+## Examples
+
+### Basic Visibility Detection
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function VisibilityExample() {
+  const elementRef = useRef(null);
+  const isVisible = useVisibility({ elementRef });
+
+  return (
+    <div>
+      <div style={{ height: '100vh' }}>Scroll down...</div>
+      <div ref={elementRef}>
+        {isVisible ? 'I am visible!' : 'I am not visible'}
+      </div>
+    </div>
+  );
+}
+```
+
+### Lazy Loading Images
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function LazyImage({ src, alt }: { src: string; alt: string }) {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const isVisible = useVisibility({ elementRef: imageRef });
+
+  return (
+    <img
+      ref={imageRef}
+      src={isVisible ? src : '/placeholder.jpg'}
+      alt={alt}
+      loading="lazy"
+    />
+  );
+}
+```
+
+### Trigger Animation on Scroll
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function AnimateOnScroll() {
+  const cardRef = useRef(null);
+  const isVisible = useVisibility({ elementRef: cardRef });
+
+  return (
+    <div
+      ref={cardRef}
+      className={`card transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
+      <h2>Animated Content</h2>
+      <p>This fades in when scrolled into view</p>
+    </div>
+  );
+}
+```
+
+### Infinite Scroll Trigger
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef, useState, useEffect } from "react";
+
+function InfiniteScroll() {
+  const [items, setItems] = useState([1, 2, 3, 4, 5]);
+  const loaderRef = useRef(null);
+  const isVisible = useVisibility({ elementRef: loaderRef });
+
+  useEffect(() => {
+    if (isVisible) {
+      // Load more items
+      setItems(prev => [...prev, ...Array(5).fill(0).map((_, i) => prev.length + i + 1)]);
+    }
+  }, [isVisible]);
+
+  return (
+    <div>
+      {items.map(item => (
+        <div key={item} className="item">Item {item}</div>
+      ))}
+      <div ref={loaderRef}>
+        {isVisible && <p>Loading more...</p>}
+      </div>
+    </div>
+  );
+}
+```
+
+### Custom Threshold
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function CustomThreshold() {
+  const elementRef = useRef(null);
+  const isVisible = useVisibility({
+    elementRef,
+    intersectionOptions: {
+      threshold: 0.5, // Element must be 50% visible
+      rootMargin: "0px",
+    },
+  });
+
+  return (
+    <div ref={elementRef} className={isVisible ? 'highlighted' : ''}>
+      This is highlighted when 50% visible
+    </div>
+  );
+}
+```
+
+### Track Multiple Elements
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function MultipleElements() {
+  const ref1 = useRef(null);
+  const ref2 = useRef(null);
+  const ref3 = useRef(null);
+
+  const isVisible1 = useVisibility({ elementRef: ref1 });
+  const isVisible2 = useVisibility({ elementRef: ref2 });
+  const isVisible3 = useVisibility({ elementRef: ref3 });
+
+  return (
+    <div>
+      <div ref={ref1} style={{ height: '100vh' }}>
+        Section 1 {isVisible1 && '(Visible)'}
+      </div>
+      <div ref={ref2} style={{ height: '100vh' }}>
+        Section 2 {isVisible2 && '(Visible)'}
+      </div>
+      <div ref={ref3} style={{ height: '100vh' }}>
+        Section 3 {isVisible3 && '(Visible)'}
+      </div>
+    </div>
+  );
+}
+```
+
+### Visibility with Parent Container
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef } from "react";
+
+function ScrollableContainer() {
+  const containerRef = useRef(null);
+  const itemRef = useRef(null);
+
+  const isVisible = useVisibility({
+    elementRef: itemRef,
+    parentSelector: containerRef,
+  });
+
+  return (
+    <div ref={containerRef} style={{ height: '300px', overflow: 'auto' }}>
+      <div style={{ height: '800px' }}>
+        <div style={{ marginTop: '400px' }} ref={itemRef}>
+          {isVisible ? 'Visible in container' : 'Not visible'}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+### Analytics Tracking
+
+```tsx
+"use client";
+import { useVisibility } from "@enotion/hooks";
+import { useRef, useEffect } from "react";
+
+function AnalyticsSection({ sectionName }: { sectionName: string }) {
+  const sectionRef = useRef(null);
+  const isVisible = useVisibility({ elementRef: sectionRef });
+
+  useEffect(() => {
+    if (isVisible) {
+      // Track section view
+      console.log(**Section "${sectionName}" is now visible**);
+      // analytics.track('section_view', { section: sectionName });
+    }
+  }, [isVisible, sectionName]);
+
+  return (
+    <section ref={sectionRef}>
+      <h2>{sectionName}</h2>
+      <p>Content for {sectionName}</p>
+    </section>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export interface UseVisibilityOptions {
+  elementRef: RefObject<HTMLElement | null>;
+  parentSelector?: string | RefObject<HTMLElement | null>;
+  intersectionOptions?: IntersectionObserverInit;
+  alwaysVisible?: boolean;
+}
+```
+
+## Notes
+
+- Uses the Intersection Observer API for efficient visibility detection
+- The element is observed only once (watching ref prevents multiple observers)
+- If **alwaysVisible** is true, the hook always returns true without observing
+- The observer uses the parent element or specified selector as the observation root
+- Default threshold is 0, meaning any pixel of the element triggers visibility
+- Default rootMargin is "3px" for a small buffer zone

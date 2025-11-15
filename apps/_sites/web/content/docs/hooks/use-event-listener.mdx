@@ -1,0 +1,151 @@
+import { Button, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useEventListener** hook is a custom React hook that simplifies the process of adding and removing event listeners to DOM elements. It ensures that the event listener is properly added when the component mounts and removed when it unmounts or when dependencies change.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useEventListener } from "@enotion/hooks";
+```
+
+## Parameters
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Default", "Description"] },
+  { title: "**eventName**", items: ["`EventName`", "Required", "Name of the event to listen for (e.g., 'click', 'resize')"] },
+  { title: "**handler**", items: ["`(event: EventType) => void`", "Required", "Callback function to handle the event"] },
+  { title: "**element**", items: ["`HTMLElement | Window | Document`", "`window`", "The target element to attach the event listener to"] },
+  { title: "**options**", items: ["`boolean | AddEventListenerOptions`", "`undefined`", "Optional options for addEventListener (e.g., capture, once, passive)"] }
+]} />
+
+## Return Value
+
+This hook does not return any value.
+
+## Examples
+
+### Basic Window Resize Listener
+
+```tsx
+"use client";
+import { useEventListener } from "@enotion/hooks";
+import { useState } from "react";
+
+function ResizeExample() {
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  useEventListener('resize', (event) => {
+    setDimensions({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  });
+
+  return (
+    <div>
+      <p>Width: {dimensions.width}px</p>
+      <p>Height: {dimensions.height}px</p>
+    </div>
+  );
+}
+```
+
+### Click Listener on Specific Element
+
+```tsx
+"use client";
+import { useEventListener } from "@enotion/hooks";
+import { useRef, useState } from "react";
+
+function ClickExample() {
+  const [clicks, setClicks] = useState(0);
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEventListener('click', () => {
+    setClicks(prev => prev + 1);
+  }, divRef.current || window);
+
+  return (
+    <div>
+      <div ref={divRef}>
+        Click anywhere in this box
+      </div>
+      <p>Total clicks: {clicks}</p>
+    </div>
+  );
+}
+```
+
+### Keyboard Event Listener
+
+```tsx
+"use client";
+import { useEventListener } from "@enotion/hooks";
+import { useState } from "react";
+
+function KeyboardExample() {
+  const [lastKey, setLastKey] = useState('');
+
+  useEventListener('keydown', (event) => {
+    setLastKey(event.key);
+  });
+
+  return (
+    <div>
+      <p>Last key pressed: {lastKey}</p>
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export type EventName = keyof GlobalEventHandlersEventMap;
+
+export type EventType = Omit<
+  | Event
+  | MouseEvent
+  | TouchEvent
+  | KeyboardEvent
+  | FocusEvent
+  | UIEvent
+  | PointerEvent
+  | WheelEvent
+  | AnimationEvent
+  | TransitionEvent
+  | CompositionEvent
+  | InputEvent
+  | DragEvent
+  | ClipboardEvent
+  | MediaQueryListEvent
+  | MessageEvent
+  | PopStateEvent
+  | StorageEvent
+  | HashChangeEvent
+  | ProgressEvent
+  | ErrorEvent,
+  never
+>;
+```

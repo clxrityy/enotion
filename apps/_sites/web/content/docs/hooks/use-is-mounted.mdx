@@ -1,0 +1,308 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Return Value](#return-value)
+- [Examples](#examples)
+
+## Overview
+
+The **useIsMounted** hook is useful for avoiding state updates on unmounted components. It returns a function that can be called to check if the component is still mounted before performing state updates, especially in async operations.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useIsMounted } from "@enotion/hooks";
+```
+
+## Return Value
+
+Returns a function that returns a boolean:
+
+<Table rows={[
+  { title: "Type", items: ["Description"] },
+  { title: "`() => boolean`", items: ["Function that returns **true** if the component is mounted, **false** otherwise"] }
+]} />
+
+## Examples
+
+### Basic Usage with Fetch
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    fetchData().then(result => {
+      if (isMounted()) {
+        setData(result);
+      }
+    });
+  }, []);
+
+  return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
+}
+```
+
+### Prevent Memory Leaks
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function UserProfile({ userId }: { userId: string }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(**/api/users/${userId}**)
+      .then(res => res.json())
+      .then(data => {
+        if (isMounted()) {
+          setUser(data);
+          setLoading(false);
+        }
+      })
+      .catch(error => {
+        if (isMounted()) {
+          console.error(error);
+          setLoading(false);
+        }
+      });
+  }, [userId]);
+
+  if (loading) return <div>Loading...</div>;
+  return <div>{user?.name}</div>;
+}
+```
+
+### With Async/Await
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function AsyncComponent() {
+  const [result, setResult] = useState(null);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const response = await fetch('/api/data');
+      const data = await response.json();
+
+      if (isMounted()) {
+        setResult(data);
+      }
+    };
+
+    loadData();
+  }, []);
+
+  return <div>{result?.message}</div>;
+}
+```
+
+### Delayed State Update
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState } from "react";
+
+function DelayedMessage() {
+  const [message, setMessage] = useState('');
+  const isMounted = useIsMounted();
+
+  const showMessage = () => {
+    setTimeout(() => {
+      if (isMounted()) {
+        setMessage('This message appears after 3 seconds!');
+      }
+    }, 3000);
+  };
+
+  return (
+    <div>
+      <button onClick={showMessage}>Show Message</button>
+      <p>{message}</p>
+    </div>
+  );
+}
+```
+
+### Image Loading
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function ImageLoader({ src }: { src: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    const img = new Image();
+
+    img.onload = () => {
+      if (isMounted()) {
+        setLoaded(true);
+      }
+    };
+
+    img.onerror = () => {
+      if (isMounted()) {
+        setError(true);
+      }
+    };
+
+    img.src = src;
+  }, [src]);
+
+  if (error) return <div>Failed to load image</div>;
+  if (!loaded) return <div>Loading image...</div>;
+
+  return <img src={src} alt="Loaded" />;
+}
+```
+
+### WebSocket Connection
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function RealtimeData() {
+  const [messages, setMessages] = useState<string[]>([]);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    const ws = new WebSocket('wss://example.com/socket');
+
+    ws.onmessage = (event) => {
+      if (isMounted()) {
+        setMessages(prev => [...prev, event.data]);
+      }
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
+
+  return (
+    <ul>
+      {messages.map((msg, i) => (
+        <li key={i}>{msg}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Form Submission
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState } from "react";
+
+function ContactForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const isMounted = useIsMounted();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        body: new FormData(e.target as HTMLFormElement),
+      });
+
+      if (isMounted()) {
+        setSuccess(true);
+        setSubmitting(false);
+      }
+    } catch (error) {
+      if (isMounted()) {
+        setSubmitting(false);
+      }
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input name="email" type="email" required />
+      <button type="submit" disabled={submitting}>
+        {submitting ? 'Sending...' : 'Submit'}
+      </button>
+      {success && <p>Message sent successfully!</p>}
+    </form>
+  );
+}
+```
+
+### Polling Data
+
+```tsx
+"use client";
+import { useIsMounted } from "@enotion/hooks";
+import { useState, useEffect } from "react";
+
+function PollingComponent() {
+  const [data, setData] = useState(null);
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    const poll = async () => {
+      const response = await fetch('/api/status');
+      const result = await response.json();
+
+      if (isMounted()) {
+        setData(result);
+      }
+    };
+
+    const interval = setInterval(poll, 5000);
+    poll(); // Initial fetch
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return <div>Status: {data?.status}</div>;
+}
+```
+
+## Notes
+
+- Prevents "Can't perform a React state update on an unmounted component" warnings
+- Useful for async operations (fetch, setTimeout, setInterval, WebSocket, etc.)
+- The returned function is stable and doesn't change between renders
+- Returns **false** after the component unmounts
+- Should be called before any state updates in async callbacks
+- Does not prevent the async operation itself, only the state update

@@ -1,0 +1,219 @@
+import { Button, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useOutsideClick** hook detects clicks outside of a specified element. It's commonly used for closing dropdown menus, modals, popovers, and other UI elements when clicking outside their boundaries.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useOutsideClick } from "@enotion/hooks";
+```
+
+## Parameters
+
+The hook accepts an object with the following properties:
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "**ref**", items: ["`RefObject<HTMLElement | Element | null>`", "RefObject pointing to the element to detect outside clicks for"] },
+  { title: "**callback**", items: ["`(event: MouseEvent | TouchEvent) => void`", "Callback function to be invoked when an outside click is detected"] }
+]} />
+
+## Return Value
+
+This hook does not return any value.
+
+## Examples
+
+### Close Dropdown Menu
+
+```tsx
+"use client";
+import { useOutsideClick } from "@enotion/hooks";
+import { useRef, useState } from "react";
+import { Button } from "@enotion/components";
+
+function DropdownMenu() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useOutsideClick({
+    ref: dropdownRef,
+    callback: () => setIsOpen(false),
+  });
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(!isOpen)}>
+        Toggle Menu
+      </Button>
+      {isOpen && (
+        <div ref={dropdownRef}>
+          <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Modal Dialog
+
+```tsx
+"use client";
+import { useOutsideClick } from "@enotion/hooks";
+import { useRef, useState } from "react";
+import { Button } from "@enotion/components";
+
+function Modal() {
+  const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
+
+  useOutsideClick({
+    ref: modalRef,
+    callback: () => setShowModal(false),
+  });
+
+  return (
+    <div>
+      <Button onClick={() => setShowModal(true)}>Open Modal</Button>
+      {showModal && (
+        <div className="modal-overlay">
+          <div ref={modalRef} className="modal-content">
+            <h2>Modal Title</h2>
+            <p>Click outside to close</p>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### User Profile Popover
+
+```tsx
+"use client";
+import { useOutsideClick } from "@enotion/hooks";
+import { useRef, useState } from "react";
+import { Button } from "@enotion/components";
+
+function UserProfilePopover() {
+  const [isVisible, setIsVisible] = useState(false);
+  const popoverRef = useRef(null);
+
+  useOutsideClick({
+    ref: popoverRef,
+    callback: () => setIsVisible(false),
+  });
+
+  return (
+    <div className="relative">
+      <Button onClick={() => setIsVisible(!isVisible)}>
+        Profile
+      </Button>
+      {isVisible && (
+        <div ref={popoverRef} className="absolute right-0 mt-2 w-64">
+          <div className="bg-white shadow-lg rounded-lg p-4">
+            <h3>User Profile</h3>
+            <p>Username: john_doe</p>
+            <p>Email: john@example.com</p>
+            <Button>Edit Profile</Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+### Search Suggestions
+
+```tsx
+"use client";
+import { useOutsideClick } from "@enotion/hooks";
+import { Input } from "@enotion/components";
+import { useRef, useState } from "react";
+
+function SearchWithSuggestions() {
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [query, setQuery] = useState("");
+  const containerRef = useRef(null);
+
+  const suggestions = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+
+  useOutsideClick({
+    ref: containerRef,
+    callback: () => setShowSuggestions(false),
+  });
+
+  return (
+    <div ref={containerRef} className="relative">
+      <Input
+        value={query}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          setShowSuggestions(true);
+        }}
+        placeholder="Search..."
+      />
+      {showSuggestions && query && (
+        <div className="absolute w-full bg-white border rounded shadow-lg mt-1">
+          {suggestions
+            .filter(s => s.toLowerCase().includes(query.toLowerCase()))
+            .map((suggestion, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  setQuery(suggestion);
+                  setShowSuggestions(false);
+                }}
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+              >
+                {suggestion}
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export interface UseOutsideClickOptions {
+  ref: RefObject<HTMLElement | Element | null>;
+  callback: (event: MouseEvent | TouchEvent) => void;
+}
+```
+
+## Notes
+
+- Listens for both **mousedown** and **touchstart** events for better mobile support
+- The callback is only triggered when clicking outside the referenced element
+- Event listeners are automatically cleaned up when the component unmounts
+- The hook uses a ref to store the callback, preventing unnecessary re-renders
+- Works with any HTML element that can be referenced with a React ref

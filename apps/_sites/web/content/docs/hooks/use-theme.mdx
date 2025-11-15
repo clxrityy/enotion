@@ -1,0 +1,191 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Context](#context)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useTheme** hook provides access to the theme context created by **ThemeProvider**. It allows components to access and modify the current theme (light or dark mode) and automatically persists the preference to localStorage.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+First, wrap your application with the **ThemeProvider**:
+
+```tsx
+import { ThemeProvider } from "@enotion/hooks";
+
+function App() {
+  return (
+    <ThemeProvider>
+      {/* Your app components */}
+    </ThemeProvider>
+  );
+}
+```
+
+Then use the hook in any child component:
+
+```tsx
+import { useTheme } from "@enotion/hooks";
+
+function MyComponent() {
+  const { theme, setTheme, toggle } = useTheme();
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <button onClick={toggle}>Toggle Theme</button>
+    </div>
+  );
+}
+```
+
+## Context
+
+The **ThemeProvider** component must wrap any components that use the **useTheme** hook. It handles:
+
+- Persisting theme preference to localStorage
+- Detecting system theme preferences
+- Applying theme changes to the document root
+- Preventing SSR hydration mismatches
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "`theme`", items: ["`Theme`", "The current theme ('light' or 'dark')"] },
+  { title: "`setTheme`", items: ["`(theme: Theme) => Theme`", "Function to update the theme"] },
+  { title: "`toggle`", items: ["`() => void`", "Function to toggle between light and dark themes"] }
+]} />
+
+## Examples
+
+### Basic Theme Toggle
+
+```tsx
+"use client";
+import { useTheme } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+
+  return (
+    <div>
+      <p>Current theme: {theme}</p>
+      <Button onClick={toggle}>
+        Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
+      </Button>
+    </div>
+  );
+}
+```
+
+### Theme Selector
+
+```tsx
+"use client";
+import { useTheme } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function ThemeSelector() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <div>
+      <Button
+        onClick={() => setTheme('light')}
+        variant={theme === 'light' ? 'default' : 'secondary'}
+      >
+        Light Mode
+      </Button>
+      <Button
+        onClick={() => setTheme('dark')}
+        variant={theme === 'dark' ? 'default' : 'secondary'}
+      >
+        Dark Mode
+      </Button>
+    </div>
+  );
+}
+```
+
+### Conditional Rendering Based on Theme
+
+```tsx
+"use client";
+import { useTheme } from "@enotion/hooks";
+
+function ThemedComponent() {
+  const { theme } = useTheme();
+
+  return (
+    <div>
+      {theme === 'dark' ? (
+        <img src="/logo-dark.png" alt="Logo" />
+      ) : (
+        <img src="/logo-light.png" alt="Logo" />
+      )}
+      <p>Viewing in {theme} mode</p>
+    </div>
+  );
+}
+```
+
+### Theme-Aware Styling
+
+```tsx
+"use client";
+import { useTheme } from "@enotion/hooks";
+
+function ThemedCard() {
+  const { theme } = useTheme();
+
+  const styles = {
+    backgroundColor: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+    color: theme === 'dark' ? '#ffffff' : '#000000',
+  };
+
+  return (
+    <div style={styles}>
+      <h2>Themed Content</h2>
+      <p>This card adapts to the current theme.</p>
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export type Theme = "light" | "dark";
+
+export interface ThemeContext {
+  theme: Theme;
+  setTheme: (theme: Theme) => Theme;
+  toggle: () => void;
+}
+```
+
+## Notes
+
+- The theme preference is automatically saved to localStorage with the key **"theme"**
+- The hook respects system theme preferences via **prefers-color-scheme**
+- The theme is applied to **document.documentElement** as a **data-theme** attribute
+- SSR-safe: prevents hydration mismatches by handling client-side initialization
+- The **toggle** function alternates between 'light' and 'dark' themes

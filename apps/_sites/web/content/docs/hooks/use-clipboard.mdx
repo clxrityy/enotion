@@ -1,0 +1,220 @@
+import { Button, Input, Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useClipboard** hook provides functionality to copy text to the clipboard using the modern Clipboard API. It handles success and error states and provides optional callbacks for copy operations.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useClipboard } from "@enotion/hooks";
+```
+
+## Parameters
+
+The hook accepts an object with the following properties:
+
+<Table
+  rows={[
+    {
+      title: "onCopy",
+      items: ["(text: string) => void", "Optional callback invoked after a successful copy operation"]
+    },
+    {
+      title: "onError",
+      items: ["(error: Error) => void", "Optional callback invoked if an error occurs during the copy operation"]
+    }
+  ]}
+  striped
+  bordered
+/>
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table
+  rows={[
+    {
+      title: "isCopied",
+      items: ["boolean", "Indicates whether the last copy operation was successful"]
+    },
+    {
+      title: "copy",
+      items: ["(text: string) => Promise<void>", "Function to copy text to the clipboard"]
+    },
+    {
+      title: "clipboard",
+      items: ["Clipboard | null", "The clipboard object if available"]
+    }
+  ]}
+  striped
+  bordered
+/>
+
+## Examples
+
+### Basic Copy Button
+
+```tsx
+"use client";
+import { useClipboard } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function CopyButton() {
+  const { isCopied, copy } = useClipboard({
+    onCopy: (text) => console.log(**Copied: ${text}**),
+    onError: (error) => console.error(**Copy failed: ${error.message}**),
+  });
+
+  return (
+    <Button onClick={() => copy("Hello, World!")}>
+      {isCopied ? 'Copied!' : 'Copy Text'}
+    </Button>
+  );
+}
+```
+
+### Copy Input Value
+
+```tsx
+"use client";
+import { useClipboard } from "@enotion/hooks";
+import { Button, Input } from "@enotion/components";
+import { useState } from "react";
+
+function CopyInput() {
+  const [text, setText] = useState("");
+  const { isCopied, copy } = useClipboard({});
+
+  return (
+    <div>
+      <Input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Enter text to copy"
+      />
+      <Button onClick={() => copy(text)}>
+        {isCopied ? 'Copied!' : 'Copy'}
+      </Button>
+    </div>
+  );
+}
+```
+
+### Code Snippet Copy
+
+```tsx
+"use client";
+import { useClipboard } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+
+function CodeSnippet() {
+  const codeSnippet = **const hello = "world";**;
+  const { isCopied, copy } = useClipboard({});
+
+  return (
+    <div>
+      <pre>
+        <code>{codeSnippet}</code>
+      </pre>
+      <Button onClick={() => copy(codeSnippet)}>
+        {isCopied ? 'Copied!' : 'Copy Code'}
+      </Button>
+    </div>
+  );
+}
+```
+
+### Copy with Callbacks
+
+```tsx
+"use client";
+import { useClipboard } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+import { useState } from "react";
+
+function CopyWithFeedback() {
+  const [message, setMessage] = useState("");
+
+  const { isCopied, copy } = useClipboard({
+    onCopy: (text) => {
+      setMessage(**Successfully copied: ${text}**);
+      setTimeout(() => setMessage(""), 3000);
+    },
+    onError: (error) => {
+      setMessage(**Error: ${error.message}**);
+      setTimeout(() => setMessage(""), 3000);
+    },
+  });
+
+  return (
+    <div>
+      <Button onClick={() => copy("Important data")}>
+        Copy Data
+      </Button>
+      {message && <p>{message}</p>}
+    </div>
+  );
+}
+```
+
+### Copy URL Share Button
+
+```tsx
+"use client";
+import { useClipboard } from "@enotion/hooks";
+import { Button } from "@enotion/components";
+import { useEffect, useState } from "react";
+
+function ShareButton() {
+  const [url, setUrl] = useState("");
+  const { isCopied, copy } = useClipboard({});
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setUrl(window.location.href);
+    }
+  }, []);
+
+  return (
+    <Button onClick={() => copy(url)}>
+      {isCopied ? 'Link Copied!' : 'Share Page'}
+    </Button>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+export interface UseClipboardProps {
+  onCopy?: (text: string) => void;
+  onError?: (error: Error) => void;
+}
+```
+
+## Notes
+
+- Uses the modern Clipboard API (**navigator.clipboard**)
+- Requires a secure context (HTTPS or localhost)
+- Automatically checks for Clipboard API support
+- Returns an error if the Clipboard API is not available
+- The **isCopied** state does not automatically reset (you can manage this with a timeout if needed)
+- Callbacks are optional and can be used for custom feedback or error handling

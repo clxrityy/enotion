@@ -1,0 +1,299 @@
+import { Table } from "@enotion/components";
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Return Value](#return-value)
+- [Examples](#examples)
+- [Type Definitions](#type-definitions)
+
+## Overview
+
+The **useSVG** hook is a custom React hook that allows you to load and manipulate SVG files dynamically. It fetches SVG content from a URL and provides options to customize stroke and fill colors.
+
+## Installation
+
+```bash
+pnpm add @enotion/hooks
+```
+
+## Usage
+
+```tsx
+import { useSVG } from "@enotion/hooks";
+```
+
+## Parameters
+
+The hook accepts an object with the following properties:
+
+<Table rows={[
+  { title: "Parameter", items: ["Type", "Description"] },
+  { title: "**src**", items: ["`string`", "URL or path to the SVG file"] },
+  { title: "**strokeColor**", items: ["`string`", "Optional stroke color to apply to all stroke attributes"] },
+  { title: "**fillColor**", items: ["`string`", "Optional fill color to apply to all fill attributes"] },
+  { title: "**...svgProps**", items: ["`SVGProps<SVGSVGElement>`", "Any other valid SVG element props (width, height, className, etc.)"] }
+]} />
+
+## Return Value
+
+Returns an object with the following properties:
+
+<Table rows={[
+  { title: "Property", items: ["Type", "Description"] },
+  { title: "**svgContent**", items: ["`string | null`", "The SVG content as a string, or null if not yet loaded"] },
+  { title: "**error**", items: ["`Error | null`", "Any error that occurred during loading"] },
+  { title: "**svgProps**", items: ["`SVGProps<SVGSVGElement>`", "The SVG props passed to the hook"] }
+]} />
+
+## Examples
+
+### Basic SVG Loading
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+function BasicSVG() {
+  const { svgContent, error } = useSVG({
+    src: '/icons/star.svg',
+    width: 24,
+    height: 24,
+  });
+
+  if (error) return <p>Failed to load SVG</p>;
+  if (!svgContent) return <p>Loading...</p>;
+
+  return <div dangerouslySetInnerHTML={{ __html: svgContent }} />;
+}
+```
+
+### Custom Colors
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+function ColoredIcon() {
+  const { svgContent, error } = useSVG({
+    src: '/icons/heart.svg',
+    strokeColor: '#ff0000',
+    fillColor: '#ff6b6b',
+    width: 32,
+    height: 32,
+  });
+
+  if (error) return <div>Error loading icon</div>;
+  if (!svgContent) return <div>Loading icon...</div>;
+
+  return <div dangerouslySetInnerHTML={{ __html: svgContent }} />;
+}
+```
+
+### Dynamic Theme Colors
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+import { useTheme } from "@enotion/hooks";
+
+function ThemedIcon() {
+  const { theme } = useTheme();
+
+  const { svgContent } = useSVG({
+    src: '/icons/menu.svg',
+    strokeColor: theme === 'dark' ? '#ffffff' : '#000000',
+    fillColor: theme === 'dark' ? '#ffffff' : '#000000',
+    width: 24,
+    height: 24,
+  });
+
+  return svgContent ? (
+    <div dangerouslySetInnerHTML={{ __html: svgContent }} />
+  ) : null;
+}
+```
+
+### Icon Button Component
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+interface IconButtonProps {
+  icon: string;
+  onClick: () => void;
+  color?: string;
+}
+
+function IconButton({ icon, onClick, color = '#000' }: IconButtonProps) {
+  const { svgContent } = useSVG({
+    src: **/icons/${icon}.svg**,
+    strokeColor: color,
+    fillColor: color,
+    width: 20,
+    height: 20,
+  });
+
+  return (
+    <button onClick={onClick} className="icon-button">
+      {svgContent && <div dangerouslySetInnerHTML={{ __html: svgContent }} />}
+    </button>
+  );
+}
+```
+
+### Loading State
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+function IconWithLoading() {
+  const { svgContent, error, svgProps } = useSVG({
+    src: '/icons/logo.svg',
+    width: 48,
+    height: 48,
+  });
+
+  if (error) {
+    return (
+      <div className="icon-error">
+        Failed to load icon: {error.message}
+      </div>
+    );
+  }
+
+  if (!svgContent) {
+    return (
+      <div
+        className="icon-skeleton"
+        style={{ width: svgProps.width, height: svgProps.height }}
+      >
+        Loading...
+      </div>
+    );
+  }
+
+  return <div dangerouslySetInnerHTML={{ __html: svgContent }} />;
+}
+```
+
+### SVG Map Marker
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+function MapMarker({ color, size }: { color: string; size: number }) {
+  const { svgContent } = useSVG({
+    src: '/icons/marker.svg',
+    fillColor: color,
+    width: size,
+    height: size,
+  });
+
+  return svgContent ? (
+    <div
+      className="map-marker"
+      dangerouslySetInnerHTML={{ __html: svgContent }}
+    />
+  ) : null;
+}
+
+// Usage
+function Map() {
+  return (
+    <div className="map">
+      <MapMarker color="#ff0000" size={32} />
+      <MapMarker color="#00ff00" size={32} />
+      <MapMarker color="#0000ff" size={32} />
+    </div>
+  );
+}
+```
+
+### Animated Icon
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+import { useState } from "react";
+
+function AnimatedIcon() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const { svgContent } = useSVG({
+    src: '/icons/arrow.svg',
+    strokeColor: isHovered ? '#ff6b6b' : '#333333',
+    width: 24,
+    height: 24,
+    className: 'transition-all duration-300',
+  });
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      dangerouslySetInnerHTML={{ __html: svgContent || '' }}
+    />
+  );
+}
+```
+
+### Social Media Icons
+
+```tsx
+"use client";
+import { useSVG } from "@enotion/hooks";
+
+function SocialIcon({ platform }: { platform: string }) {
+  const { svgContent } = useSVG({
+    src: **/icons/social/${platform}.svg**,
+    fillColor: '#1da1f2', // Brand color
+    width: 24,
+    height: 24,
+  });
+
+  return (
+    <a href={**https://${platform}.com**} className="social-link">
+      {svgContent && <div dangerouslySetInnerHTML={{ __html: svgContent }} />}
+    </a>
+  );
+}
+
+function SocialLinks() {
+  return (
+    <div className="social-icons">
+      <SocialIcon platform="twitter" />
+      <SocialIcon platform="github" />
+      <SocialIcon platform="linkedin" />
+    </div>
+  );
+}
+```
+
+## Type Definitions
+
+```tsx
+import { SVGProps } from "react";
+
+export interface UseSVGOptions extends SVGProps<SVGSVGElement> {
+  src: string;
+  strokeColor?: string;
+  fillColor?: string;
+}
+```
+
+## Notes
+
+- The hook fetches the SVG file and returns it as a string
+- Color manipulation replaces ALL stroke/fill attributes in the SVG
+- Uses **replaceAll** to modify colors, which affects every matching attribute
+- The SVG content should be rendered using **dangerouslySetInnerHTML**
+- If the SVG file fails to load, the error is captured and returned
+- The hook re-fetches if the **src**, **strokeColor**, or **fillColor** changes
+- SVG props like **width**, **height**, and **className** are passed through but must be applied manually
