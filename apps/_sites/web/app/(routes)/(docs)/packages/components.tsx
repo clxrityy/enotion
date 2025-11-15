@@ -95,11 +95,17 @@ export function DocLayout({ children }: DocLayoutProps) {
                       }
                       setCurrentPackage(pkg.slug);
                     }}
-                    className="w-full"
+                    onTouchStart={(e) => {
+                      if (e.currentTarget.contains(e.currentTarget)) {
+                        return;
+                      }
+                      setCurrentPackage(pkg.slug);
+                    }}
+                    className=""
                   >
                     <span
                       className={cn(
-                        "flex flex-row justify-around items-center px-3 py-2 rounded text-sm w-full",
+                        "flex flex-row justify-between items-center px-3 py-2 rounded text-sm w-full",
                         currentPackage === pkg.slug
                           ? "bg-(--active-color) font-semibold"
                           : "",
@@ -110,16 +116,17 @@ export function DocLayout({ children }: DocLayoutProps) {
                         className={`
                         `}
                       >
-                        {pkg.name}
+                        {pkg.name.split("/")[1] || ""}
                       </Link>
                       <Button
+                        className="absolute w-16 right-8 z-30 cursor-pointer"
                         onClick={() => {
                           setCurrentPackage((prev) => {
                             if (prev.length > 0 && prev !== pkg.slug) {
                               return "";
                             }
 
-                            return prev;
+                            return pkg.slug;
                           });
                         }}
                       >
@@ -321,9 +328,9 @@ export const PackagesComponent = () => {
             }
             key={pkg.slug}
             className={cn(
-              "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[1.042] hover:border hover:border-(--active-color)/25",
+              "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[0.95] hover:border hover:border-(--active-color)/25 duration-500 ease-linear",
               active === pkg.name &&
-                "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
             )}
           >
             <h3 className="font-semibold text-lg mb-2">
