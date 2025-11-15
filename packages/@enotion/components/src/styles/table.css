@@ -44,13 +44,14 @@
   border: 1px solid var(--table-border, transparent);
   text-align: start;
   vertical-align: auto;
-  word-wrap: normal;
+  word-wrap: break-word;
   overflow-wrap: break-word;
   border-radius: 3px;
 }
 
 .enotion-table td {
-  min-width: 250px;
+  min-width: 150px;
+  max-width: 300px;
 }
 
 .enotion-table th {
@@ -58,13 +59,11 @@
   color: var(--table-text-on-accent);
   font-weight: 600;
   white-space: nowrap;
-  position: relative;
+  position: sticky;
   left: 0;
-  z-index: 1;
-  min-width: 120px;
+  z-index: 2;
+  min-width: 100px;
   max-width: 200px;
-  overflow: scroll;
-  text-overflow: ellipsis;
 }
 
 /* Hover effect */
@@ -153,22 +152,58 @@
 
 /* Tablet responsiveness */
 @media (max-width: 1024px) and (min-width: 769px) {
+
   .enotion-table th,
   .enotion-table td {
     padding: 0.625rem 0.875rem;
     font-size: 0.8125rem;
+    min-width: 120px;
+  }
+
+  .enotion-table th {
+    min-width: 80px;
+    max-width: 150px;
   }
 }
 
 /* Small mobile devices */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+
   .enotion-table th,
   .enotion-table td {
     padding: 0.5rem 0.75rem;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
+    min-width: 100px;
+  }
+
+  .enotion-table th {
+    min-width: 70px;
+    max-width: 120px;
+    font-size: 0.75rem;
   }
 
   .enotion-table-responsive::-webkit-scrollbar {
     height: 6px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+
+  .enotion-table th,
+  .enotion-table td {
+    padding: 0.5rem 0.625rem;
+    font-size: 0.7rem;
+    min-width: 80px;
+  }
+
+  .enotion-table th {
+    min-width: 60px;
+    max-width: 100px;
+    font-size: 0.7rem;
+  }
+
+  .enotion-table-responsive::-webkit-scrollbar {
+    height: 4px;
   }
 }
