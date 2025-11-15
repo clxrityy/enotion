@@ -1,6 +1,7 @@
 "use client";
 
 import { adjustHexColorOpacity, ColorPalettes, packages } from "@enotion/core";
+import { Icons } from "@enotion/core/constants";
 import { useColorPalette } from "@enotion/hooks";
 import { CSSProperties, useState } from "react";
 import { Logo } from "./components";
@@ -13,10 +14,12 @@ import {
   SkeletonWrapper,
   Table,
 } from "@enotion/components";
+import Link from "next/link";
 
 export default function Home() {
   const { palette, setPalette } = useColorPalette();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
 
@@ -44,7 +47,7 @@ export default function Home() {
     );
 
     pkgRows.push({
-      title: pkg.name,
+      title: pkg.name.split("/")[1] || "",
       items: [pkg.description, Snippet()] as string[],
     });
   }
@@ -70,26 +73,44 @@ export default function Home() {
         } as CSSProperties
       }
     >
-      <Card
-        palette={palette}
-        className="p-6 max-w-3xl mx-auto shadow-lg rounded-lg"
-        style={{
-          border: `0.75px solid ${adjustHexColorOpacity(colors?.border || "", 0.75)}`,
-        }}
-      >
-        <div className="flex flex-col-reverse md:flex-row items-stretch gap-1 max-w-lg">
-          <p className="text-sm md:text-base lg:text-lg xl:text-2xl text-muted-foreground tracking-wide">
-            <b className="font-mono">enotion</b> is an open-source collection of
-            packages to build responsive and accessible web applications with
-            ease.
-          </p>
-          <div className="mx-auto">
-            <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
-              <Logo palette={palette} />
-            </span>
+      <div className="flex flex-col lg:flex-row gap-5 items-center justify-center w-full">
+        <Card
+          palette={palette}
+          className="p-6 max-w-3xl mx-auto shadow-lg rounded-lg"
+          style={{
+            border: `0.75px solid ${adjustHexColorOpacity(colors?.border || "", 0.75)}`,
+          }}
+        >
+          <div className="flex flex-col-reverse md:flex-row items-stretch gap-1 max-w-lg">
+            <p className="text-sm md:text-base lg:text-lg xl:text-2xl text-muted-foreground tracking-wide">
+              <b className="font-mono">enotion</b> is an open-source collection of
+              packages to build responsive and accessible web applications with
+              ease.
+            </p>
+            <div className="mx-auto">
+              <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
+                <Logo palette={palette} />
+              </span>
+            </div>
           </div>
-        </div>
-      </Card>
+        </Card>
+        <Button onMouseLeave={() => setIsHovered(!isHovered)} onMouseEnter={() => setIsHovered(!isHovered)} palette={palette} variant="outline" className="transition-transform duration-500 ease-linear">
+          <Link
+            aria-label="All packages"
+            href="/packages"
+            style={{
+              color: "var(--foreground)"
+            }}
+            className="transition-transform"
+          >
+            {
+              !isHovered ? (
+                <Icons.Package size={75} />
+              ) : <Icons.PackageOpen size={75} />
+            }
+          </Link>
+        </Button>
+      </div>
 
       <div className="flex gap-10 flex-col w-full items-center w-full">
         {/* <Button
@@ -140,30 +161,32 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <div className="w-full flex items-center justify-center mx-auto">
+        <div className="w-full flex items-center justify-center">
           <SkeletonWrapper
             isLoading={isLoading}
             palette={palette}
             className="w-full h-full"
             style={{}}
           >
-            <div className="max-w-xl md:max-w-2xl lg:max-w-5xl w-full h-full lg:mx-auto">
-              <Table
-                palette={palette}
-                responsive
-                striped
-                bordered
-                rows={pkgRows}
-                hidden={isLoading}
-                className="shadow-inner"
-              />
-              {isLoading &&
-                pkgRows.map((pkg) => (
-                  <div
-                    key={pkg.title}
-                    className="w-20 h-12 mb-4 rounded-md bg-muted animate-pulse"
-                  />
-                ))}
+            <div className="w-full flex items-center justify-center">
+              <div className="max-w-xl md:max-w-2xl lg:max-w-5xl w-full h-full lg:mx-auto">
+                <Table
+                  palette={palette}
+                  responsive
+                  striped
+                  bordered
+                  rows={pkgRows}
+                  hidden={isLoading}
+                  className="shadow-inner"
+                />
+                {isLoading &&
+                  pkgRows.map((pkg) => (
+                    <div
+                      key={pkg.title}
+                      className="w-20 h-12 mb-4 rounded-md bg-muted animate-pulse"
+                    />
+                  ))}
+              </div>
             </div>
           </SkeletonWrapper>
         </div>
