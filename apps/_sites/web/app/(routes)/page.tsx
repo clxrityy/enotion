@@ -51,7 +51,7 @@ export default function Home() {
 
   return (
     <div
-      className="p-8 h-[calc(100vh-4rem)] flex flex-col gap-10 w-full overflow-y-auto"
+      className="p-8 h-screen md:h-[calc(100vh-4rem)] flex flex-col gap-10 w-full overflow-y-auto"
       style={
         {
           "--muted": colors?.muted,
