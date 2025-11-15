@@ -152,7 +152,6 @@
 
 /* Tablet responsiveness */
 @media (max-width: 1024px) and (min-width: 769px) {
-
   .enotion-table th,
   .enotion-table td {
     padding: 0.625rem 0.875rem;
@@ -168,7 +167,6 @@
 
 /* Small mobile devices */
 @media (max-width: 768px) {
-
   .enotion-table th,
   .enotion-table td {
     padding: 0.5rem 0.75rem;
@@ -189,7 +187,6 @@
 
 /* Extra small devices */
 @media (max-width: 480px) {
-
   .enotion-table th,
   .enotion-table td {
     padding: 0.5rem 0.625rem;

@@ -83,9 +83,9 @@ export default function Home() {
         >
           <div className="flex flex-col-reverse md:flex-row items-stretch gap-1 max-w-lg">
             <p className="text-sm md:text-base lg:text-lg xl:text-2xl text-muted-foreground tracking-wide">
-              <b className="font-mono">enotion</b> is an open-source collection of
-              packages to build responsive and accessible web applications with
-              ease.
+              <b className="font-mono">enotion</b> is an open-source collection
+              of packages to build responsive and accessible web applications
+              with ease.
             </p>
             <div className="mx-auto">
               <span className="animate-spin-slower duration-1000 transition-transform w-9 h-3 m-6 rounded-full saturate-150 backdrop-blur-lg flex items-center justify-center">
@@ -94,20 +94,26 @@ export default function Home() {
             </div>
           </div>
         </Card>
-        <Button onMouseLeave={() => setIsHovered(!isHovered)} onMouseEnter={() => setIsHovered(!isHovered)} palette={palette} variant="outline" className="transition-transform duration-500 ease-linear">
+        <Button
+          onMouseLeave={() => setIsHovered(!isHovered)}
+          onMouseEnter={() => setIsHovered(!isHovered)}
+          palette={palette}
+          variant="outline"
+          className="transition-transform duration-500 ease-linear"
+        >
           <Link
             aria-label="All packages"
             href="/packages"
             style={{
-              color: "var(--foreground)"
+              color: "var(--foreground)",
             }}
             className="transition-transform"
           >
-            {
-              !isHovered ? (
-                <Icons.Package size={75} />
-              ) : <Icons.PackageOpen size={75} />
-            }
+            {!isHovered ? (
+              <Icons.Package size={75} />
+            ) : (
+              <Icons.PackageOpen size={75} />
+            )}
           </Link>
         </Button>
       </div>

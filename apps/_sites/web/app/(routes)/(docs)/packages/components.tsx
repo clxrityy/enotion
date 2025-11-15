@@ -330,7 +330,7 @@ export const PackagesComponent = () => {
             className={cn(
               "cursor-pointer p-6 hover:shadow-lg transition-transform rounded-md hover:scale-[0.95] hover:border hover:border-(--active-color)/25 duration-500 ease-linear",
               active === pkg.name &&
-              "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
+                "bg-(--active-color)/2.5 border-[1.5px] border-(--active-color)",
             )}
           >
             <h3 className="font-semibold text-lg mb-2">
