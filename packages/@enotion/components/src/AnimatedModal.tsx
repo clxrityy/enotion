@@ -84,7 +84,7 @@ export const AnimatedModal = ({
       }
     };
 
-    const handleBackdropClick = (e: React.MouseEvent) => {
+    const handleBackdropClick = (_e: React.MouseEvent) => {
       if (onClose) {
         onClose();
       }
@@ -100,6 +100,14 @@ export const AnimatedModal = ({
       }
     };
 
+    const defaultBackdropColor = "rgba(0, 0, 0, 0.5)";
+    const backdropColor = palette
+      ? (adjustHexColorOpacity(
+          ColorPalettes[palette]?.background ?? "#000000",
+          0.5,
+        ) ?? defaultBackdropColor)
+      : defaultBackdropColor;
+
     const modalContent = (
       <div
         role="dialog"
@@ -110,9 +118,7 @@ export const AnimatedModal = ({
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: palette
-            ? adjustHexColorOpacity(ColorPalettes[palette]!.background, 0.5)!
-            : "rgba(0, 0, 0, 0.5)",
+          backgroundColor: backdropColor,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -124,6 +130,7 @@ export const AnimatedModal = ({
         {...props}
       >
         <div
+          role="presentation"
           onClick={handleContentClick}
           onKeyDown={(e) => e.stopPropagation()}
         >

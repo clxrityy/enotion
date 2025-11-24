@@ -447,8 +447,7 @@ export const Navbar = ({
             <Select
               value={palette}
               onChange={(e) =>
-                onPaletteChange &&
-                onPaletteChange(e.target.value as ColorPaletteType)
+                onPaletteChange?.(e.target.value as ColorPaletteType)
               }
               options={Object.keys(palettes).map((paletteKey) => ({
                 label: paletteKey.charAt(0).toUpperCase() + paletteKey.slice(1),

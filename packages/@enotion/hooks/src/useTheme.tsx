@@ -35,10 +35,11 @@ export interface ThemeContext {
 
 const initialThemeContext: ThemeContext = {
   theme: "light",
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: (theme: Theme) => theme,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  toggle: () => {},
+  // noop - will be replaced by provider
+  toggle: () => {
+    /* noop */
+  },
 };
 
 // Create a simple context without the factory pattern

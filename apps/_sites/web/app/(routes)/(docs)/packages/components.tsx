@@ -27,7 +27,7 @@ export function DocLayout({ children }: DocLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
   const { palette } = useColorPalette();
 
-  const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
+  const colors = palette ? ColorPalettes[palette] : ColorPalettes.default;
 
   return (
     <div
