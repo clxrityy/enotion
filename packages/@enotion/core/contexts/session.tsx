@@ -22,10 +22,10 @@ const initialSessionContextState: SessionContextState = {
   layoutState: undefined,
   palettes: undefined,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setLayoutState: (state: LayoutContextState) => {},
-  setPalettes: (palettes: typeof ColorPalettes) => {},
-  addPalette: (palette: ColorPalette, name: string) => {},
-  removePalette: (name: string) => {},
+  setLayoutState: (_state: LayoutContextState) => {},
+  setPalettes: (_palettes: typeof ColorPalettes) => {},
+  addPalette: (_palette: ColorPalette, _name: string) => {},
+  removePalette: (_name: string) => {},
 };
 
 const useSessionContextState = (): SessionContextState => {

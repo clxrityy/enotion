@@ -216,7 +216,7 @@ const useLayoutContextState = (): LayoutContextState => {
             for (const elementId of group.elements) {
               if (elementId !== id) {
                 const otherElement = newMap.get(elementId);
-                if (otherElement && otherElement.visible) {
+                if (otherElement?.visible) {
                   const hiddenElement = { ...otherElement, visible: false };
                   newMap.set(elementId, hiddenElement);
                   otherElement.onVisibilityChange?.(false);

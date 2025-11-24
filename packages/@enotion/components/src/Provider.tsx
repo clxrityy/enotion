@@ -48,7 +48,7 @@ export const Provider = ({
   ...props
 }: Readonly<ProviderProps>) => {
   const defaultPalette =
-    theme === "dark" ? ColorPalettes["dark"] : ColorPalettes["default"];
+    theme === "dark" ? ColorPalettes.dark : ColorPalettes.default;
   const color = palette ? ColorPalettes[palette] : defaultPalette;
 
   const injectColorPaletteToChildren = (children: ReactNode): ReactNode => {

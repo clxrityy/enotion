@@ -52,7 +52,7 @@ function TestComponent() {
         onClick={() => {
           if (state.notifications.length > 0) {
             act(() => {
-              dismissNotification(state.notifications[0]!.id);
+              dismissNotification(state.notifications[0]?.id);
             });
           }
         }}

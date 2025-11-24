@@ -21,7 +21,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const colors = palette ? ColorPalettes[palette] : ColorPalettes["default"];
+  const colors = palette ? ColorPalettes[palette] : ColorPalettes.default;
 
   const pkgRows: { title: string; items: string[] }[] = [];
 

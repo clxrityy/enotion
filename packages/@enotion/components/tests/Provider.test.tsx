@@ -53,7 +53,7 @@ describe("Provider Component", () => {
       </Provider>,
     );
     const button = getByRole("button", { name: /test button/i });
-    const defaultPalette = ColorPalettes["default"];
+    const defaultPalette = ColorPalettes.default;
     const primaryColor = defaultPalette?.primary;
 
     if (!primaryColor) {

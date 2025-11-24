@@ -41,7 +41,9 @@ export function NotificationItem({
   const startTimer = () => {
     if (notification.duration === Infinity) return;
 
-    clearTimeout(timerRef.current!);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
     startTimeRef.current = Date.now();
 
     timerRef.current = setTimeout(() => {
@@ -58,7 +60,9 @@ export function NotificationItem({
         0,
         remainingTimeRef.current - elapsedTime,
       );
-      clearTimeout(timerRef.current!);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     }
   };
 
