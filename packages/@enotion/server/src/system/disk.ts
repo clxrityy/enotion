@@ -1,5 +1,9 @@
 // Disk information utilities
-import { execAsync } from "../utils/index.js";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { resolve } from "node:path";
+
+const execFileAsync = promisify(execFile);
 
 /** Disk usage information interface */
 export interface DiskInfo {
@@ -13,6 +17,26 @@ export interface DiskInfo {
   mountedOn: string;
 }
 
+/**
+ * Validates a filesystem path to prevent command injection.
+ * @param path The path to validate
+ * @returns The validated and resolved absolute path
+ * @throws Error if path is invalid
+ */
+function validatePath(path: string): string {
+  // Reject paths containing null bytes (could be used for injection)
+  if (path.includes("\0")) {
+    throw new Error("Invalid path: contains null bytes");
+  }
+  // Resolve to absolute path to normalize
+  const resolved = resolve(path);
+  // Also check the resolved path for null bytes (defensive)
+  if (resolved.includes("\0")) {
+    throw new Error("Invalid path: contains null bytes");
+  }
+  return resolved;
+}
+
 /** Get disk usage information.
  * @param path The filesystem path to check (default is root '/')
  * @returns {Promise<DiskInfo>} A promise that resolves to disk usage information.
@@ -23,19 +47,31 @@ export interface DiskInfo {
  */
 export async function diskUsage(path = "/"): Promise<DiskInfo> {
   const platform = process.platform;
-  let cmd = "";
+
+  // Validate and sanitize the path to prevent command injection
+  const safePath = validatePath(path);
 
   // Use POSIX format (-P) with 1K blocks (-k) to align columns across Linux and macOS
-  if (platform === "linux" || platform === "darwin") {
-    cmd = `df -P -k "${path}" | tail -1`;
-  } else {
+  if (platform !== "linux" && platform !== "darwin") {
     throw new Error("Unsupported platform");
   }
 
-  const { stdout } = await execAsync(cmd);
+  // Use execFile instead of exec to avoid shell injection vulnerabilities
+  const { stdout } = await execFileAsync("df", ["-P", "-k", safePath]);
+
   // POSIX df -P columns: Filesystem 1024-blocks Used Available Capacity Mounted on
+  // The output includes a header line, so we need to skip it and use the last data line
+  const lines = stdout.trim().split("\n");
+  if (lines.length < 2) {
+    throw new Error("Unexpected df output format");
+  }
+  // Get the last line (data line, skip header)
+  const dataLine = lines[lines.length - 1];
+  if (!dataLine) {
+    throw new Error("Unexpected df output format");
+  }
   // Split line but keep potential spaces in mount point by joining tail tokens
-  const tokens = stdout.trim().split(/\s+/);
+  const tokens = dataLine.trim().split(/\s+/);
   if (tokens.length < 6) {
     throw new Error("Unexpected df output format");
   }
