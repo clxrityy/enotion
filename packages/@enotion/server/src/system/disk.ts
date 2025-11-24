@@ -67,6 +67,9 @@ export async function diskUsage(path = "/"): Promise<DiskInfo> {
   }
   // Get the last line (data line, skip header)
   const dataLine = lines[lines.length - 1];
+  if (!dataLine) {
+    throw new Error("Unexpected df output format");
+  }
   // Split line but keep potential spaces in mount point by joining tail tokens
   const tokens = dataLine.trim().split(/\s+/);
   if (tokens.length < 6) {
