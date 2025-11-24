@@ -50,9 +50,10 @@ function TestComponent() {
       <button
         type="button"
         onClick={() => {
-          if (state.notifications.length > 0) {
+          const firstNotification = state.notifications[0];
+          if (firstNotification) {
             act(() => {
-              dismissNotification(state.notifications[0]?.id);
+              dismissNotification(firstNotification.id);
             });
           }
         }}
